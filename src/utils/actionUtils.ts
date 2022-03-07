@@ -82,6 +82,9 @@ export function getInputS3ClientConfig(): S3ClientConfig | undefined {
     if (!s3BucketName) {
         return undefined
     }
+    
+    core.info(process.env);
+    core.info(core.getInput(Inputs.AWSAccessKeyId) ? "static creds" : "dynamic creds");
 
     const credentials = core.getInput(Inputs.AWSAccessKeyId) ? {
         credentials: {
