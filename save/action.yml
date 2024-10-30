@@ -15,6 +15,10 @@ inputs:
     description: 'An optional boolean when enabled, allows windows runners to save caches that can be restored on other platforms'
     default: 'false'
     required: false
+  prune-m2-before-save:
+    description: 'Wheter to remove older packages from m2-repository before saving cache in S3'
+    required: false
+    default: 'false'
 runs:
   using: 'node16'
   main: '../dist/save-only/index.js'

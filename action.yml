@@ -52,6 +52,10 @@ inputs:
     description: 'Whether to force path style URLs for S3 objects.'
     required: false
     default: 'false'
+  prune-m2-before-save:
+    description: 'Wheter to remove older packages from m2-repository before saving cache in S3'
+    required: false
+    default: 'false'
 outputs:
   cache-hit:
     description: 'A boolean value to indicate an exact match was found for the primary key'

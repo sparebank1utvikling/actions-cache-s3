@@ -4,6 +4,7 @@ import * as core from "@actions/core";
 import { Events, Inputs, State } from "./constants";
 import { IStateProvider } from "./stateProvider";
 import * as utils from "./utils/actionUtils";
+import { filterM2Repo } from './filterM2repo'
 
 // Catch and log any unhandled exceptions.  These exceptions can leak out of the uploadChunk method in
 // @actions/toolkit when a failed upload closes the file descriptor causing any in-process reads to
@@ -54,6 +55,11 @@ async function saveImpl(stateProvider: IStateProvider): Promise<number | void> {
         let s3BucketName = core.getInput(Inputs.AWSS3Bucket);
         if (s3BucketName.endsWith(".amazonaws.com")) {
             s3BucketName = s3BucketName.split(".")[0];
+        }
+
+        const pruneCache = core.getInput(Inputs.PruneM2BeforeSave);
+        if (pruneCache === "true") {
+            await filterM2Repo();
         }
 
         const s3config = utils.getInputS3ClientConfig();
