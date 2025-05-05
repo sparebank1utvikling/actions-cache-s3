@@ -1,15 +1,7 @@
-import * as cache from "@actions/cache";
 import * as core from "@actions/core";
 import { S3ClientConfig } from "@aws-sdk/client-s3";
 
 import { Inputs, RefKey } from "../constants";
-
-export function isGhes(): boolean {
-    const ghUrl = new URL(
-        process.env["GITHUB_SERVER_URL"] || "https://github.com"
-    );
-    return ghUrl.hostname.toUpperCase() !== "GITHUB.COM";
-}
 
 export function isExactKeyMatch(key: string, cacheKey?: string): boolean {
     return !!(
@@ -62,28 +54,19 @@ export function getInputAsBool(
 }
 
 export function isCacheFeatureAvailable(): boolean {
-    if (cache.isFeatureAvailable()) {
-        return true;
-    }
-
-    if (isGhes()) {
-        logWarning(
-            `Cache action is only supported on GHES version >= 3.5. If you are on version >=3.5 Please check with GHES admin if Actions cache service is enabled or not.
-Otherwise please upgrade to GHES version >= 3.5 and If you are also using Github Connect, please unretire the actions/cache namespace before upgrade (see https://docs.github.com/en/enterprise-server@3.5/admin/github-actions/managing-access-to-actions-from-githubcom/enabling-automatic-access-to-githubcom-actions-using-github-connect#automatic-retirement-of-namespaces-for-actions-accessed-on-githubcom)`
-        );
-        return false;
-    }
-
+    // TODO: Check if we have access to s3
+    return true;
+ 
     logWarning(
         "An internal error has occurred in cache backend. Please check https://www.githubstatus.com/ for any ongoing issue in actions."
     );
     return false;
 }
 
-export function getInputS3ClientConfig(): S3ClientConfig | undefined {
+export function getInputS3ClientConfig(): S3ClientConfig {
     const s3BucketName = core.getInput(Inputs.AWSS3Bucket);
     if (!s3BucketName) {
-        return undefined;
+        throw new Error("S3 bucket name is required.");
     }
 
     const credentials = core.getInput(Inputs.AWSAccessKeyId)

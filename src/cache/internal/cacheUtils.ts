@@ -162,10 +162,11 @@ export function getCacheVersion(
   return crypto.createHash('sha256').update(components.join('|')).digest('hex')
 }
 
-export function getRuntimeToken(): string {
-  const token = process.env['ACTIONS_RUNTIME_TOKEN']
-  if (!token) {
-    throw new Error('Unable to get the ACTIONS_RUNTIME_TOKEN env variable')
+export async function isZstdInstalled(): Promise<boolean> {
+  try {
+    await io.which('zstd', true);
+    return true;
+  } catch (error) {
+    return false;
   }
-  return token
 }

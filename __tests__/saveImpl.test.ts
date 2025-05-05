@@ -1,4 +1,4 @@
-import * as cache from "@actions/cache";
+import * as cache from "../src/cache";
 import * as core from "@actions/core";
 
 import { Events, Inputs, RefKey } from "../src/constants";
@@ -8,7 +8,7 @@ import * as actionUtils from "../src/utils/actionUtils";
 import * as testUtils from "../src/utils/testUtils";
 
 jest.mock("@actions/core");
-jest.mock("@actions/cache");
+jest.mock("../src/cache");
 jest.mock("../src/utils/actionUtils");
 
 beforeAll(() => {
@@ -58,11 +58,6 @@ beforeEach(() => {
     jest.restoreAllMocks();
     process.env[Events.Key] = Events.Push;
     process.env[RefKey] = "refs/heads/feature-branch";
-
-    jest.spyOn(actionUtils, "isGhes").mockImplementation(() => false);
-    jest.spyOn(actionUtils, "isCacheFeatureAvailable").mockImplementation(
-        () => true
-    );
 });
 
 afterEach(() => {
@@ -118,64 +113,6 @@ test("save without AC available should no-op", async () => {
     await run(new StateProvider());
 
     expect(saveCacheMock).toHaveBeenCalledTimes(0);
-});
-
-test("save on ghes without AC available should no-op", async () => {
-    jest.spyOn(actionUtils, "isGhes").mockImplementation(() => true);
-    jest.spyOn(actionUtils, "isCacheFeatureAvailable").mockImplementation(
-        () => false
-    );
-
-    const saveCacheMock = jest.spyOn(cache, "saveCache");
-
-    await run(new StateProvider());
-
-    expect(saveCacheMock).toHaveBeenCalledTimes(0);
-});
-
-test("save on GHES with AC available", async () => {
-    jest.spyOn(actionUtils, "isGhes").mockImplementation(() => true);
-    const failedMock = jest.spyOn(core, "setFailed");
-
-    const primaryKey = "Linux-node-bb828da54c148048dd17899ba9fda624811cfb43";
-    const savedCacheKey = "Linux-node-";
-
-    jest.spyOn(core, "getState")
-        // Cache Entry State
-        .mockImplementationOnce(() => {
-            return savedCacheKey;
-        })
-        // Cache Key State
-        .mockImplementationOnce(() => {
-            return primaryKey;
-        });
-
-    const inputPath = "node_modules";
-    testUtils.setInput(Inputs.Path, inputPath);
-    testUtils.setInput(Inputs.UploadChunkSize, "4000000");
-
-    const cacheId = 4;
-    const saveCacheMock = jest
-        .spyOn(cache, "saveCache")
-        .mockImplementationOnce(() => {
-            return Promise.resolve(cacheId);
-        });
-
-    await run(new StateProvider());
-
-    expect(saveCacheMock).toHaveBeenCalledTimes(1);
-    expect(saveCacheMock).toHaveBeenCalledWith(
-        [inputPath],
-        primaryKey,
-        {
-            uploadChunkSize: 4000000
-        },
-        false,
-        undefined,
-        ""
-    );
-
-    expect(failedMock).toHaveBeenCalledTimes(0);
 });
 
 test("save with exact match returns early", async () => {

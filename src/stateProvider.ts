@@ -20,7 +20,7 @@ class StateProviderBase implements IStateProvider {
         return undefined;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setState = (key: string, value: string) => {};
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -3,7 +3,6 @@ import * as io from '@actions/io'
 import {existsSync, writeFileSync} from 'fs'
 import * as path from 'path'
 import * as utils from './cacheUtils'
-import {ArchiveTool} from './contracts'
 import {
   CompressionMethod,
   SystemTarPathOnWindows,
@@ -13,6 +12,11 @@ import {
 } from './constants'
 
 const IS_WINDOWS = process.platform === 'win32'
+
+export interface ArchiveTool {
+  path: string
+  type: string
+}
 
 // Returns tar path and type: BSD or GNU
 async function getTarPath(): Promise<ArchiveTool> {
@@ -254,7 +258,7 @@ async function execCommands(commands: string[], cwd?: string): Promise<void> {
       })
     } catch (error) {
       throw new Error(
-        `${command.split(' ')[0]} failed with error: ${error?.message}`
+        `${command.split(' ')[0]} failed with error: ${(error as Error)?.message}`
       )
     }
   }

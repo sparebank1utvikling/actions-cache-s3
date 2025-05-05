@@ -1,4 +1,4 @@
-import * as cache from "@actions/cache";
+import * as cache from "../src/cache";
 import * as core from "@actions/core";
 
 import { Events, RefKey } from "../src/constants";
@@ -40,11 +40,6 @@ beforeEach(() => {
     jest.restoreAllMocks();
     process.env[Events.Key] = Events.Push;
     process.env[RefKey] = "refs/heads/feature-branch";
-
-    jest.spyOn(actionUtils, "isGhes").mockImplementation(() => false);
-    jest.spyOn(actionUtils, "isCacheFeatureAvailable").mockImplementation(
-        () => true
-    );
 });
 
 afterEach(() => {

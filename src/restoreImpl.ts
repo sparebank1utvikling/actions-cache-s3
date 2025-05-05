@@ -1,4 +1,4 @@
-import * as cache from "@actions/cache";
+import { restoreCache } from "cache";
 import * as core from "@actions/core";
 
 import { Events, Inputs, Outputs, State } from "./constants";
@@ -41,20 +41,16 @@ export async function restoreImpl(
         }
         const s3config = utils.getInputS3ClientConfig();
 
-        const enableCrossOsArchive = utils.getInputAsBool(
-            Inputs.EnableCrossOsArchive
-        );
         const failOnCacheMiss = utils.getInputAsBool(Inputs.FailOnCacheMiss);
         const lookupOnly = utils.getInputAsBool(Inputs.LookupOnly);
 
-        const cacheKey = await cache.restoreCache(
+        const cacheKey = await restoreCache(
             cachePaths.slice(),
             primaryKey,
-            restoreKeys,
-            { lookupOnly: lookupOnly },
-            enableCrossOsArchive,
             s3config,
-            s3BucketName
+            s3BucketName,
+            restoreKeys,
+            { lookupOnly: lookupOnly }
         );
 
         if (!cacheKey) {

@@ -1,4 +1,4 @@
-import * as cache from "@actions/cache";
+import * as cache from "../src/cache";
 import * as core from "@actions/core";
 
 import { Events, Inputs, RefKey } from "../src/constants";
@@ -41,11 +41,6 @@ beforeEach(() => {
     jest.restoreAllMocks();
     process.env[Events.Key] = Events.Push;
     process.env[RefKey] = "refs/heads/feature-branch";
-
-    jest.spyOn(actionUtils, "isGhes").mockImplementation(() => false);
-    jest.spyOn(actionUtils, "isCacheFeatureAvailable").mockImplementation(
-        () => true
-    );
 });
 
 afterEach(() => {
@@ -68,7 +63,6 @@ test("restore with invalid event outputs warning", async () => {
 });
 
 test("restore without AC available should no-op", async () => {
-    jest.spyOn(actionUtils, "isGhes").mockImplementation(() => false);
     jest.spyOn(actionUtils, "isCacheFeatureAvailable").mockImplementation(
         () => false
     );
@@ -81,65 +75,6 @@ test("restore without AC available should no-op", async () => {
     expect(restoreCacheMock).toHaveBeenCalledTimes(0);
     expect(setCacheHitOutputMock).toHaveBeenCalledTimes(1);
     expect(setCacheHitOutputMock).toHaveBeenCalledWith("cache-hit", "false");
-});
-
-test("restore on GHES without AC available should no-op", async () => {
-    jest.spyOn(actionUtils, "isGhes").mockImplementation(() => true);
-    jest.spyOn(actionUtils, "isCacheFeatureAvailable").mockImplementation(
-        () => false
-    );
-
-    const restoreCacheMock = jest.spyOn(cache, "restoreCache");
-    const setCacheHitOutputMock = jest.spyOn(core, "setOutput");
-
-    await restoreImpl(new StateProvider());
-
-    expect(restoreCacheMock).toHaveBeenCalledTimes(0);
-    expect(setCacheHitOutputMock).toHaveBeenCalledTimes(1);
-    expect(setCacheHitOutputMock).toHaveBeenCalledWith("cache-hit", "false");
-});
-
-test("restore on GHES with AC available ", async () => {
-    jest.spyOn(actionUtils, "isGhes").mockImplementation(() => true);
-    const path = "node_modules";
-    const key = "node-test";
-    testUtils.setInputs({
-        path: path,
-        key,
-        enableCrossOsArchive: false
-    });
-
-    const infoMock = jest.spyOn(core, "info");
-    const failedMock = jest.spyOn(core, "setFailed");
-    const stateMock = jest.spyOn(core, "saveState");
-    const setCacheHitOutputMock = jest.spyOn(core, "setOutput");
-    const restoreCacheMock = jest
-        .spyOn(cache, "restoreCache")
-        .mockImplementationOnce(() => {
-            return Promise.resolve(key);
-        });
-
-    await restoreImpl(new StateProvider());
-
-    expect(restoreCacheMock).toHaveBeenCalledTimes(1);
-    expect(restoreCacheMock).toHaveBeenCalledWith(
-        [path],
-        key,
-        [],
-        {
-            lookupOnly: false
-        },
-        false,
-        undefined,
-        ""
-    );
-
-    expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
-    expect(setCacheHitOutputMock).toHaveBeenCalledTimes(1);
-    expect(setCacheHitOutputMock).toHaveBeenCalledWith("cache-hit", "true");
-
-    expect(infoMock).toHaveBeenCalledWith(`Cache restored from key: ${key}`);
-    expect(failedMock).toHaveBeenCalledTimes(0);
 });
 
 test("restore with no path should fail", async () => {

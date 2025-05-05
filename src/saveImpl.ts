@@ -1,4 +1,4 @@
-import * as cache from "@actions/cache";
+import {saveCache} from "./cache";
 import * as core from "@actions/core";
 
 import { Events, Inputs, State } from "./constants";
@@ -13,10 +13,6 @@ process.on("uncaughtException", e => utils.logWarning(e.message));
 async function saveImpl(stateProvider: IStateProvider): Promise<number | void> {
     let cacheId = -1;
     try {
-        if (!utils.isCacheFeatureAvailable()) {
-            return;
-        }
-
         if (!utils.isValidEvent()) {
             utils.logWarning(
                 `Event Validation Error: The event type ${
@@ -57,18 +53,16 @@ async function saveImpl(stateProvider: IStateProvider): Promise<number | void> {
         }
 
         const s3config = utils.getInputS3ClientConfig();
+        if (!utils.isCacheFeatureAvailable()) {
+            return;
+        }
 
-        const enableCrossOsArchive = utils.getInputAsBool(
-            Inputs.EnableCrossOsArchive
-        );
-
-        cacheId = await cache.saveCache(
+        cacheId = await saveCache(
             cachePaths.slice(),
             primaryKey,
-            { uploadChunkSize: utils.getInputAsInt(Inputs.UploadChunkSize) },
-            enableCrossOsArchive,
             s3config,
-            s3BucketName
+            s3BucketName,
+            { uploadChunkSize: utils.getInputAsInt(Inputs.UploadChunkSize) }
         );
 
         if (cacheId != -1) {
