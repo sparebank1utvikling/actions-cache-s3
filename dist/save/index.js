@@ -66323,7 +66323,6 @@ function saveCache(paths, key, s3Options, s3BucketName, options) {
 function saveCacheS3(paths, key, s3Options, s3BucketName, options) {
     return __awaiter(this, void 0, void 0, function* () {
         const compressionMethod = yield utils.getCompressionMethod();
-        const cacheId = -1;
         const cachePaths = yield utils.resolvePaths(paths);
         core.debug("Cache Paths:");
         core.debug(`${JSON.stringify(cachePaths)}`);
@@ -66345,7 +66344,7 @@ function saveCacheS3(paths, key, s3Options, s3BucketName, options) {
             if (archiveFileSize > fileSizeLimit && !(0, config_1.isGhes)()) {
                 throw new Error(`Cache size of ~${Math.round(archiveFileSize / (1024 * 1024))} MB (${archiveFileSize} B) is over the 10GB limit, not saving cache.`);
             }
-            core.debug(`Saving Cache (ID: ${cacheId})`);
+            core.debug(`Saving Cache (key: ${key})`);
             yield cacheClient.saveCache(archivePath, key, s3Options, s3BucketName, options);
         }
         catch (error) {
@@ -66369,7 +66368,7 @@ function saveCacheS3(paths, key, s3Options, s3BucketName, options) {
                 core.debug(`Failed to delete archive: ${error}`);
             }
         }
-        return cacheId;
+        return 1;
     });
 }
 
@@ -67447,7 +67446,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const cache = __importStar(__nccwpck_require__(4810));
+const cache_1 = __nccwpck_require__(4810);
 const core = __importStar(__nccwpck_require__(2186));
 const constants_1 = __nccwpck_require__(9042);
 const utils = __importStar(__nccwpck_require__(6850));
@@ -67486,10 +67485,11 @@ function saveImpl(stateProvider) {
                 s3BucketName = s3BucketName.split(".")[0];
             }
             const s3config = utils.getInputS3ClientConfig();
-            if (!utils.isCacheFeatureAvailable()) {
-                return;
-            }
-            cacheId = yield cache.saveCache(cachePaths.slice(), primaryKey, s3config, s3BucketName, { uploadChunkSize: utils.getInputAsInt(constants_1.Inputs.UploadChunkSize) });
+            // if (!utils.isCacheFeatureAvailable()) {
+            //     return;
+            // }
+            console.log("about to save cache");
+            cacheId = yield (0, cache_1.saveCache)(cachePaths.slice(), primaryKey, s3config, s3BucketName, { uploadChunkSize: utils.getInputAsInt(constants_1.Inputs.UploadChunkSize) });
             if (cacheId != -1) {
                 core.info(`Cache saved with key: ${primaryKey}`);
             }
@@ -67673,10 +67673,7 @@ function getInputAsBool(name, options) {
     return result.toLowerCase() === "true";
 }
 function isCacheFeatureAvailable() {
-    // TODO: Check if we have access to s3
     return true;
-    logWarning("An internal error has occurred in cache backend. Please check https://www.githubstatus.com/ for any ongoing issue in actions.");
-    return false;
 }
 function getInputS3ClientConfig() {
     const s3BucketName = core.getInput(constants_1.Inputs.AWSS3Bucket);
@@ -67699,6 +67696,7 @@ function getInputS3ClientConfig() {
             ? core.getBooleanInput(constants_1.Inputs.AWSS3BucketEndpoint)
             : false, forcePathStyle: core.getBooleanInput(constants_1.Inputs.AWSS3ForcePathStyle) });
     core.debug("Enable S3 backend mode.");
+    s3config.logger = console;
     return s3config;
 }
 

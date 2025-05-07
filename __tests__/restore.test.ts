@@ -6,7 +6,7 @@ import { restoreRun } from "../src/restoreImpl";
 import * as actionUtils from "../src/utils/actionUtils";
 import * as testUtils from "../src/utils/testUtils";
 
-jest.mock("../src/utils/actionUtils");
+//jest.mock("../src/utils/actionUtils");
 
 beforeAll(() => {
     jest.spyOn(actionUtils, "isExactKeyMatch").mockImplementation(
@@ -72,13 +72,12 @@ test("restore with no cache found", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
+        expect.objectContaining({"credentials": expect.any(Object)}),
+        "tmp-cache-bucket",
         [],
         {
             lookupOnly: false
         },
-        false,
-        undefined,
-        ""
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
@@ -117,13 +116,12 @@ test("restore with restore keys and no cache found", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
+        expect.objectContaining({"credentials": expect.any(Object)}),
+        "tmp-cache-bucket",
         [restoreKey],
         {
             lookupOnly: false
         },
-        false,
-        undefined,
-        ""
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
@@ -161,13 +159,12 @@ test("restore with cache found for key", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
+        expect.objectContaining({"credentials": expect.any(Object)}),
+        "tmp-cache-bucket",
         [],
         {
             lookupOnly: false
         },
-        false,
-        undefined,
-        ""
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
@@ -198,7 +195,7 @@ test("restore with cache found for restore key", async () => {
     const setCacheHitOutputMock = jest.spyOn(core, "setOutput");
     const restoreCacheMock = jest
         .spyOn(cache, "restoreCache")
-        .mockImplementationOnce(() => {
+        .mockImplementation(() => {
             return Promise.resolve(restoreKey);
         });
 
@@ -208,13 +205,12 @@ test("restore with cache found for restore key", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
+        expect.objectContaining({"credentials": expect.any(Object)}),
+        "tmp-cache-bucket",
         [restoreKey],
         {
             lookupOnly: false
         },
-        false,
-        undefined,
-        ""
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
@@ -255,13 +251,12 @@ test("Fail restore when fail on cache miss is enabled and primary + restore keys
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
+        expect.objectContaining({"credentials": expect.any(Object)}),
+        "tmp-cache-bucket",
         [restoreKey],
         {
             lookupOnly: false
         },
-        false,
-        undefined,
-        ""
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
@@ -300,13 +295,12 @@ test("restore when fail on cache miss is enabled and primary key doesn't match r
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
+        expect.objectContaining({"credentials": expect.any(Object)}),
+        "tmp-cache-bucket",
         [restoreKey],
         {
             lookupOnly: false
         },
-        false,
-        undefined,
-        ""
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
@@ -348,13 +342,12 @@ test("restore with fail on cache miss disabled and no cache found", async () => 
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
+        expect.objectContaining({"credentials": expect.any(Object)}),
+        "tmp-cache-bucket",
         [restoreKey],
         {
             lookupOnly: false
         },
-        false,
-        undefined,
-        ""
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);

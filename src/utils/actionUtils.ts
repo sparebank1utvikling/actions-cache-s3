@@ -54,13 +54,7 @@ export function getInputAsBool(
 }
 
 export function isCacheFeatureAvailable(): boolean {
-    // TODO: Check if we have access to s3
     return true;
- 
-    logWarning(
-        "An internal error has occurred in cache backend. Please check https://www.githubstatus.com/ for any ongoing issue in actions."
-    );
-    return false;
 }
 
 export function getInputS3ClientConfig(): S3ClientConfig {
@@ -68,6 +62,7 @@ export function getInputS3ClientConfig(): S3ClientConfig {
     if (!s3BucketName) {
         throw new Error("S3 bucket name is required.");
     }
+
 
     const credentials = core.getInput(Inputs.AWSAccessKeyId)
         ? {
@@ -96,6 +91,6 @@ export function getInputS3ClientConfig(): S3ClientConfig {
     } as S3ClientConfig;
 
     core.debug("Enable S3 backend mode.");
-
+    s3config.logger = console;
     return s3config;
 }

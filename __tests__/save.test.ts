@@ -101,12 +101,12 @@ test("save with valid inputs uploads a cache", async () => {
     expect(saveCacheMock).toHaveBeenCalledWith(
         [inputPath],
         primaryKey,
+        undefined,
+        "",
         {
             uploadChunkSize: 4000000
         },
-        false,
-        undefined,
-        ""
+
     );
 
     expect(failedMock).toHaveBeenCalledTimes(0);
