@@ -16,7 +16,6 @@ jest.spyOn(core, "warning").mockImplementation(console.warn);
 jest.spyOn(core, "error").mockImplementation(console.error);
 jest.spyOn(core, "debug").mockImplementation(console.debug);
 
-
 beforeAll(() => {
     jest.spyOn(core, "getInput").mockImplementation((name, options) => {
         return jest.requireActual("@actions/core").getInput(name, options);
@@ -91,7 +90,7 @@ test("save with no primary key in state outputs warning", async () => {
 
     const savedCacheKey = "Linux-node-bb828da54c148048dd17899ba9fda624811cfb43";
     setupMockedState(savedCacheKey, "");
-    
+
     const saveCacheMock = jest.spyOn(cache, "saveCache");
 
     await run(new StateProvider());
@@ -194,7 +193,7 @@ test("save with large cache outputs warning", async () => {
 });
 
 test.skip("save with reserve cache failure outputs warning", async () => {
-    // TODO: Not implemented 
+    // TODO: Not implemented
     const logWarningMock = jest.spyOn(actionUtils, "logWarning");
     const failedMock = jest.spyOn(core, "setFailed");
 
@@ -228,7 +227,6 @@ test.skip("save with reserve cache failure outputs warning", async () => {
         {
             uploadChunkSize: undefined
         }
-        
     );
 
     expect(logWarningMock).toHaveBeenCalledWith(
@@ -265,7 +263,7 @@ test("save with server error outputs warning", async () => {
         //expect.anything(),
         undefined,
         "",
-        {uploadChunkSize: undefined}
+        { uploadChunkSize: undefined }
     );
 
     expect(logWarningMock).toHaveBeenCalledTimes(1);
@@ -303,7 +301,7 @@ test("save with valid inputs uploads a cache", async () => {
         "",
         {
             uploadChunkSize: 4000000
-        },
+        }
     );
 
     expect(failedMock).toHaveBeenCalledTimes(0);
@@ -311,15 +309,15 @@ test("save with valid inputs uploads a cache", async () => {
 
 function setupMockedState(savedCacheKey: string, primaryKey: string) {
     jest.spyOn(core, "getState")
-    // Cache Entry State
-    .mockImplementation((key: string) => {
-        if (key === "CACHE_RESULT") {
-            return savedCacheKey;
-        }
-        if (key === "CACHE_KEY") {
-            return primaryKey;
-        }
-        console.log(`Unexpected key: ${key}`);
-        throw new Error(`Unexpected key: ${key}`);
-    })
+        // Cache Entry State
+        .mockImplementation((key: string) => {
+            if (key === "CACHE_RESULT") {
+                return savedCacheKey;
+            }
+            if (key === "CACHE_KEY") {
+                return primaryKey;
+            }
+            console.log(`Unexpected key: ${key}`);
+            throw new Error(`Unexpected key: ${key}`);
+        });
 }

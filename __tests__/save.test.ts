@@ -79,17 +79,17 @@ test("save with valid inputs uploads a cache", async () => {
     const savedCacheKey = "Linux-node-";
 
     jest.spyOn(core, "getState")
-    // Cache Entry State
-    .mockImplementation((key: string) => {
-        if (key === "CACHE_RESULT") {
-            return savedCacheKey;
-        }
-        if (key === "CACHE_KEY") {
-            return primaryKey;
-        }
-        console.log(`Unexpected key: ${key}`);
-        throw new Error(`Unexpected key: ${key}`);
-    })
+        // Cache Entry State
+        .mockImplementation((key: string) => {
+            if (key === "CACHE_RESULT") {
+                return savedCacheKey;
+            }
+            if (key === "CACHE_KEY") {
+                return primaryKey;
+            }
+            console.log(`Unexpected key: ${key}`);
+            throw new Error(`Unexpected key: ${key}`);
+        });
 
     const inputPath = "node_modules";
     testUtils.setInput(Inputs.Path, inputPath);
@@ -112,8 +112,7 @@ test("save with valid inputs uploads a cache", async () => {
         "",
         {
             uploadChunkSize: 4000000
-        },
-
+        }
     );
 
     expect(failedMock).toHaveBeenCalledTimes(0);

@@ -121,7 +121,7 @@ test("restore with too many keys should fail", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
-        expect.objectContaining({"credentials": expect.any(Object)}),
+        expect.objectContaining({ credentials: expect.any(Object) }),
         "tmp-cache-bucket",
         restoreKeys,
         {
@@ -148,12 +148,12 @@ test("restore with large key should fail", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
-        expect.objectContaining({"credentials": expect.any(Object)}),
+        expect.objectContaining({ credentials: expect.any(Object) }),
         "tmp-cache-bucket",
         [],
         {
             lookupOnly: false
-        },
+        }
     );
     expect(failedMock).toHaveBeenCalledWith(
         `Key Validation Error: ${key} cannot be larger than 512 characters.`
@@ -175,12 +175,12 @@ test("restore with invalid key should fail", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
-        expect.objectContaining({"credentials": expect.any(Object)}),
+        expect.objectContaining({ credentials: expect.any(Object) }),
         "tmp-cache-bucket",
         [],
         {
             lookupOnly: false
-        },
+        }
     );
     expect(failedMock).toHaveBeenCalledWith(
         `Key Validation Error: ${key} cannot contain commas.`
@@ -211,12 +211,12 @@ test("restore with no cache found", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
-        expect.objectContaining({"credentials": expect.any(Object)}),
+        expect.objectContaining({ credentials: expect.any(Object) }),
         "tmp-cache-bucket",
         [],
         {
             lookupOnly: false
-        },
+        }
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
@@ -253,12 +253,12 @@ test("restore with restore keys and no cache found", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
-        expect.objectContaining({"credentials": expect.any(Object)}),
+        expect.objectContaining({ credentials: expect.any(Object) }),
         "tmp-cache-bucket",
         [restoreKey],
         {
             lookupOnly: false
-        },
+        }
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
@@ -294,12 +294,12 @@ test("restore with cache found for key", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
-        expect.objectContaining({"credentials": expect.any(Object)}),
+        expect.objectContaining({ credentials: expect.any(Object) }),
         "tmp-cache-bucket",
         [],
         {
             lookupOnly: false
-        },
+        }
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
@@ -337,12 +337,12 @@ test("restore with cache found for restore key", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
-        expect.objectContaining({"credentials": expect.any(Object)}),
+        expect.objectContaining({ credentials: expect.any(Object) }),
         "tmp-cache-bucket",
         [restoreKey],
         {
             lookupOnly: false
-        },
+        }
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
@@ -360,7 +360,7 @@ test("restore with lookup-only set", async () => {
     testUtils.setInputs({
         path: path,
         key,
-        lookupOnly: true,
+        lookupOnly: true
     });
 
     const infoMock = jest.spyOn(core, "info");
@@ -379,13 +379,12 @@ test("restore with lookup-only set", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
-        expect.objectContaining({"credentials": expect.any(Object)}),
+        expect.objectContaining({ credentials: expect.any(Object) }),
         "tmp-cache-bucket",
         [],
         {
             lookupOnly: true
-        },
-
+        }
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
