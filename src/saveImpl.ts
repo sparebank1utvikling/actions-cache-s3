@@ -53,9 +53,9 @@ async function saveImpl(stateProvider: IStateProvider): Promise<number | void> {
         }
 
         const s3config = utils.getInputS3ClientConfig();
-        if (!utils.isCacheFeatureAvailable()) {
+        /*if (!utils.isCacheFeatureAvailable()) {
             return;
-        }
+        }*/
 
         cacheId = await saveCache(
             cachePaths.slice(),

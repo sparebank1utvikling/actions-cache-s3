@@ -9,6 +9,10 @@ import * as testUtils from "../src/utils/testUtils";
 jest.mock("@actions/core");
 jest.mock("../src/cache");
 jest.mock("../src/utils/actionUtils");
+jest.spyOn(core, "info").mockImplementation(console.log);
+jest.spyOn(core, "warning").mockImplementation(console.warn);
+jest.spyOn(core, "error").mockImplementation(console.error);
+jest.spyOn(core, "debug").mockImplementation(console.debug);
 
 beforeAll(() => {
     jest.spyOn(core, "getInput").mockImplementation((name, options) => {
@@ -75,14 +79,17 @@ test("save with valid inputs uploads a cache", async () => {
     const savedCacheKey = "Linux-node-";
 
     jest.spyOn(core, "getState")
-        // Cache Entry State
-        .mockImplementationOnce(() => {
-            return primaryKey;
-        })
-        // Cache Key State
-        .mockImplementationOnce(() => {
+    // Cache Entry State
+    .mockImplementation((key: string) => {
+        if (key === "CACHE_RESULT") {
             return savedCacheKey;
-        });
+        }
+        if (key === "CACHE_KEY") {
+            return primaryKey;
+        }
+        console.log(`Unexpected key: ${key}`);
+        throw new Error(`Unexpected key: ${key}`);
+    })
 
     const inputPath = "node_modules";
     testUtils.setInput(Inputs.Path, inputPath);
