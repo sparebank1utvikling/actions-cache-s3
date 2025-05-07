@@ -27,8 +27,8 @@ export function setInputs(input: CacheInput): void {
     setInput(Inputs.AWSS3BucketEndpoint, "false");
     setInput(Inputs.AWSS3ForcePathStyle, "false");
     setInput(Inputs.AWSRegion, "eu-north-1");
-    setInput(Inputs.AWSAccessKeyId, "admin");
-    setInput(Inputs.AWSSecretAccessKey, "password");
+    setInput(Inputs.AWSAccessKeyId, "LSIAQAAAAAAVNCBMPNSG");
+    setInput(Inputs.AWSSecretAccessKey, "LSIAQAAAAAAVNCBMPNSG");
     input.restoreKeys &&
         setInput(Inputs.RestoreKeys, input.restoreKeys.join("\n"));
     input.enableCrossOsArchive !== undefined &&

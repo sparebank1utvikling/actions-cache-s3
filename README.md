@@ -1,8 +1,10 @@
-# whywaita/actions-cache-s3
+# sparebank1utvikling/actions-cache-s3
 
-`whywaita/actions-cache-s3` is a forked Action from [@actions/cache](https://github.com/actions/cache).
+`sparebank1utvikling/actions-cache-S3` is a forked Action from [whywaita/actions-cache-s3](https://github.com/whywaita/actions-cache-s3) which is a fork of [@actions/cache](https://github.com/actions/cache).
 
-This Action provides Amazon Web Services S3 backend (and compatible software) for @actions/cache.
+!> This fork has diverged from the upstream repositories. actions-cache-s3 previously relied heavily on the official cache action in the hopes of having support for s3 storage backend merged into the native cache action. This action now only supports s3 as a cache backend.
+
+This Action provides Amazon Web Services S3 backend (and compatible software) as a replacement for @actions/cache.
 
 It supports assuming credentials from `aws-actions/configure-aws-credentials` directly from `env`, or you can supply them through inputs.
 
@@ -10,7 +12,7 @@ It supports assuming credentials from `aws-actions/configure-aws-credentials` di
 
 ```yaml
 - name: Cache multiple paths
-  uses: whywaita/actions-cache-s3@v2
+  uses: sparebank1utvikling/actions-cache-s3@v4
   with:
     path: |
       ~/cache
@@ -28,7 +30,8 @@ It supports assuming credentials from `aws-actions/configure-aws-credentials` di
     aws-s3-force-path-style: true                       # Optional
 ```
 
-Please see [actions.yml](https://github.com/whywaita/actions-cache-s3/blob/main/action.yml) about input parameters.
+Please see [actions.yml](https://github.com/sparebank1utvikling/actions-cache-s3/blob/main/action.yml) about input parameters.
+
 # Cache action
 
 This action allows caching dependencies and build outputs to improve workflow execution time.
@@ -37,13 +40,19 @@ This action allows caching dependencies and build outputs to improve workflow ex
 >* [Restore action](./restore/README.md)
 >* [Save action](./save/README.md)
 
-[![Tests](https://github.com/actions/cache/actions/workflows/workflow.yml/badge.svg)](https://github.com/actions/cache/actions/workflows/workflow.yml)
+[![Tests](https://github.com/actions/cache/actions/workflows/workflow.yml/badge.svg)](https://github.com/sparebank1utvikling/actions-cache-s3/actions/workflows/workflow.yml)
 
 ## Documentation
 
 See ["Caching dependencies to speed up workflows"](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows).
 
 ## What's New
+
+### v4
+* Breaking change: Support for github actions cache (github.com) has been removed.
+* Removed save-only and restore-only actions
+* Technical: Embedded forked actions toolkit for s3 in the codebase
+* Switching default runtime to node20 (node22 not supported by actions) 
 
 ### v3
 
@@ -117,14 +126,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Cache Primes
       id: cache-primes
-      uses: actions/cache@v3
+      uses: sparebank1utvikling/actions-cache-S3@v4
       with:
         path: prime-numbers
         key: ${{ runner.os }}-primes
+        aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET_NAME }}
+        aws-region: us-east-1
 
     - name: Generate Prime Numbers
       if: steps.cache-primes.outputs.cache-hit != 'true'
@@ -148,27 +159,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Restore cached Primes
       id: cache-primes-restore
-      uses: actions/cache/restore@v3
+      uses: sparebank1utvikling/actions-cache-S3/restore@v4
       with:
         path: |
           path/to/dependencies
           some/other/dependencies
         key: ${{ runner.os }}-primes
+        aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET_NAME }}
+        aws-region: us-east-1
     .
     . //intermediate workflow steps
     .
     - name: Save Primes
       id: cache-primes-save
-      uses: actions/cache/save@v3
+      uses: sparebank1utvikling/actions-cache-S3/save@v4
       with:
         path: |
           path/to/dependencies
           some/other/dependencies
         key: ${{ steps.cache-primes-restore.outputs.cache-primary-key }}
+        aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET_NAME }}
+        aws-region: us-east-1
 ```
 
 > **Note**
@@ -217,7 +232,7 @@ A cache key can include any of the contexts, functions, literals, and operators 
 For example, using the [`hashFiles`](https://docs.github.com/en/actions/learn-github-actions/expressions#hashfiles) function allows you to create a new cache when dependencies change.
 
 ```yaml
-  - uses: actions/cache@v3
+  - uses: sparebank1utvikling/actions-cache-S3@v4
     with:
       path: |
         path/to/dependencies
@@ -235,7 +250,7 @@ Additionally, you can use arbitrary command output in a cache key, such as a dat
       echo "date=$(/bin/date -u "+%Y%m%d")" >> $GITHUB_OUTPUT
     shell: bash
 
-  - uses: actions/cache@v3
+  - uses: sparebank1utvikling/actions-cache-S3@v4
     with:
       path: path/to/dependencies
       key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-${{ hashFiles('**/lockfiles') }}
@@ -257,9 +272,9 @@ Example:
 
 ```yaml
 steps:
-  - uses: actions/checkout@v3
+  - uses: actions/checkout@v4
 
-  - uses: actions/cache@v3
+  - uses: sparebank1utvikling/actions-cache-S3@v4
     id: cache
     with:
       path: path/to/dependencies
@@ -287,14 +302,16 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Cache Primes
         id: cache-primes
-        uses: actions/cache@v3
+        uses: sparebank1utvikling/actions-cache-S3@v4
         with:
           path: prime-numbers
           key: primes
+          aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET_NAME }}
+          aws-region: us-east-1
 
       - name: Generate Prime Numbers
         if: steps.cache-primes.outputs.cache-hit != 'true'
@@ -302,10 +319,12 @@ jobs:
 
       - name: Cache Numbers
         id: cache-numbers
-        uses: actions/cache@v3
+        uses: sparebank1utvikling/actions-cache-S3@v4
         with:
           path: numbers
           key: primes
+          aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET_NAME }}
+          aws-region: us-east-1
 
       - name: Generate Numbers
         if: steps.cache-numbers.outputs.cache-hit != 'true'
@@ -314,14 +333,16 @@ jobs:
   build-windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Cache Primes
         id: cache-primes
-        uses: actions/cache@v3
+        uses: sparebank1utvikling/actions-cache-S3@v4
         with:
           path: prime-numbers
           key: primes
+          aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET_NAME }}
+          aws-region: us-east-1
 
       - name: Generate Prime Numbers
         if: steps.cache-primes.outputs.cache-hit != 'true'
@@ -346,7 +367,7 @@ Please note that Windows environment variables (like `%LocalAppData%`) will NOT 
 
 ## Contributing
 
-We would love for you to contribute to `actions/cache`. Pull requests are welcome! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+We would love for you to contribute to `sparebank1utvikling/actions-cache-S3`. Pull requests are welcome! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
 
 ## License
 

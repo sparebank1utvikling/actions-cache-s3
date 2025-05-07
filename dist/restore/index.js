@@ -66238,8 +66238,7 @@ function restoreCacheS3(paths, primaryKey, s3Options, s3BucketName, restoreKeys,
     return __awaiter(this, void 0, void 0, function* () {
         restoreKeys = restoreKeys || [];
         const keys = [primaryKey, ...restoreKeys];
-        core.debug("Resolved Keys:");
-        core.debug(JSON.stringify(keys));
+        core.debug("Resolved Keys:" + JSON.stringify(keys));
         if (keys.length > 10) {
             throw new ValidationError(`Key Validation Error: Keys are limited to a maximum of 10.`);
         }
@@ -66323,6 +66322,7 @@ function saveCache(paths, key, s3Options, s3BucketName, options) {
 function saveCacheS3(paths, key, s3Options, s3BucketName, options) {
     return __awaiter(this, void 0, void 0, function* () {
         const compressionMethod = yield utils.getCompressionMethod();
+        const cacheId = -1;
         const cachePaths = yield utils.resolvePaths(paths);
         core.debug("Cache Paths:");
         core.debug(`${JSON.stringify(cachePaths)}`);
@@ -66344,7 +66344,7 @@ function saveCacheS3(paths, key, s3Options, s3BucketName, options) {
             if (archiveFileSize > fileSizeLimit && !(0, config_1.isGhes)()) {
                 throw new Error(`Cache size of ~${Math.round(archiveFileSize / (1024 * 1024))} MB (${archiveFileSize} B) is over the 10GB limit, not saving cache.`);
             }
-            core.debug(`Saving Cache (key: ${key})`);
+            core.debug(`Saving Cache (ID: ${cacheId})`);
             yield cacheClient.saveCache(archivePath, key, s3Options, s3BucketName, options);
         }
         catch (error) {
@@ -66368,7 +66368,7 @@ function saveCacheS3(paths, key, s3Options, s3BucketName, options) {
                 core.debug(`Failed to delete archive: ${error}`);
             }
         }
-        return 1;
+        return cacheId;
     });
 }
 
@@ -66492,6 +66492,7 @@ function getCacheEntry(keys, paths, s3Options, s3BucketName) {
             }
             let response;
             try {
+                core.debug(`ListObjectsV2CommandInput: ${JSON.stringify(param)}`);
                 response = yield s3client.send(new client_s3_1.ListObjectsV2Command(param));
             }
             catch (e) {
@@ -66501,7 +66502,7 @@ function getCacheEntry(keys, paths, s3Options, s3BucketName) {
                 if (contents.length != 0) {
                     break;
                 }
-                throw new Error(`Cannot found object in bucket ${s3BucketName}`);
+                throw new Error(`Cannot find objects in bucket ${s3BucketName}`);
             }
             core.debug(`Found objects ${response.Contents.length}`);
             const found = response.Contents.find((content) => content.Key === primaryKey);
@@ -67427,7 +67428,6 @@ function restoreImpl(stateProvider) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             if (!utils.isCacheFeatureAvailable()) {
-                console.log("hest");
                 core.setOutput(constants_1.Outputs.CacheHit, "false");
                 return;
             }

@@ -101,9 +101,7 @@ async function restoreCacheS3(
     restoreKeys = restoreKeys || [];
     const keys = [primaryKey, ...restoreKeys];
 
-    core.debug("Resolved Keys:");
-    core.debug(JSON.stringify(keys));
-
+    core.debug("Resolved Keys:" + JSON.stringify(keys));
     if (keys.length > 10) {
         throw new ValidationError(
             `Key Validation Error: Keys are limited to a maximum of 10.`

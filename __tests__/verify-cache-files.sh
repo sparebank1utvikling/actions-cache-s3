@@ -19,6 +19,8 @@ if [ -z "$GITHUB_RUN_ID" ]; then
   exit 1
 fi
 
+find "$path"
+
 # Verify file exists
 file="$path/test-file.txt"
 echo "Checking for $file"

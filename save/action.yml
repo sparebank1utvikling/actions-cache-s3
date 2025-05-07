@@ -11,9 +11,36 @@ inputs:
   upload-chunk-size:
     description: 'The chunk size used to split up large files during upload, in bytes'
     required: false
+  aws-s3-bucket:
+    description: 'An AWS S3 bucket to save cache'
+    required: true
+  aws-access-key-id:
+    description: 'An AWS access key id to access the bucket'
+    required: false
+  aws-secret-access-key:
+    description: 'An AWS secret access key to access the bucket'
+    required: false
+  aws-session-token:
+    description: 'An AWS session token to access the bucket'
+    required: false
+  aws-region:
+    description: 'An AWS region where the bucket is located'
+    required: false
+  aws-endpoint:
+    description: 'An endpoint of AWS S3 (for compatible software)'
+    required: false
+  aws-s3-bucket-endpoint:
+    description: 'Whether to use the bucket name as the endpoint for this request.'
+    required: false
+    default: 'true'
+  aws-s3-force-path-style:
+    description: 'Whether to force path style URLs for S3 objects.'
+    required: false
+    default: 'false'
+
 runs:
-  using: 'node16'
-  main: '../dist/save-only/index.js'
+  using: 'node20'
+  main: '../dist/save/index.js'
 branding:
   icon: 'archive'
   color: 'gray-dark'
