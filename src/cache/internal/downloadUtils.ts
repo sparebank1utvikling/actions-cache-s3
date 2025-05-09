@@ -4,6 +4,7 @@ import * as stream from 'stream'
 import * as util from 'util'
 
 import {GetObjectCommand, S3Client, S3ClientConfig} from '@aws-sdk/client-s3'
+import { Timer } from './timeUtils'
 
 /**
  * Download the cache using the AWS S3.  Only call this method if the use S3.
@@ -19,25 +20,32 @@ export async function downloadCacheStorageS3(
   s3Options: S3ClientConfig,
   s3BucketName: string
  ): Promise<void> {
+   const timer = new Timer(`Download from S3 bucket ${s3BucketName}`)
    const s3client = new S3Client(s3Options)
    const param = {
      Bucket: s3BucketName,
      Key: key,
    }
  
-   const response = await s3client.send(new GetObjectCommand(param))
-   if (!response.Body) {
-     throw new Error(
-       `Incomplete download. response.Body is undefined from S3.`
-     )
+   try {
+     const response = await s3client.send(new GetObjectCommand(param))
+     if (!response.Body) {
+       timer.stop()
+       throw new Error(
+         `Incomplete download. response.Body is undefined from S3.`
+       )
+     }
+    
+     const fileStream = fs.createWriteStream(archivePath)
+    
+     const pipeline = util.promisify(stream.pipeline)
+     await pipeline(response.Body as stream.Readable, fileStream)
+     timer.stop()
+   } catch (error) {
+     timer.stop()
+     throw error
    }
- 
-   const fileStream = fs.createWriteStream(archivePath)
- 
-   const pipeline = util.promisify(stream.pipeline)
-   await pipeline(response.Body as stream.Readable, fileStream)
  
    return
  }
- 
- 
+

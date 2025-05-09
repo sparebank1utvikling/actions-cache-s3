@@ -6,6 +6,7 @@ import { isGhes } from "./cache/internal/config";
 import { DownloadOptions, UploadOptions } from "./cache/options";
 import { createTar, extractTar, listTar } from "./cache/internal/tar";
 import { S3ClientConfig } from "@aws-sdk/client-s3";
+import { Timer } from "./cache/internal/timeUtils";
 
 export class ValidationError extends Error {
     constructor(message: string) {
@@ -63,12 +64,13 @@ export async function restoreCache(
     restoreKeys?: string[],
     options?: DownloadOptions
 ): Promise<string | undefined> {
+    const timer = new Timer("Restore cache operation");
     core.debug(`Cache service version: s3`);
 
     checkPaths(paths);
 
     core.debug(`Using S3 bucket: ${s3BucketName}`);
-    return await restoreCacheS3(
+    const result = await restoreCacheS3(
         paths,
         primaryKey,
         s3Options,
@@ -76,6 +78,9 @@ export async function restoreCache(
         restoreKeys,
         options
     );
+
+    timer.stop();
+    return result;
 }
 
 /**
@@ -195,11 +200,20 @@ export async function saveCache(
     s3BucketName: string,
     options?: UploadOptions
 ): Promise<number> {
+    const timer = new Timer("Save cache operation");
     core.debug(`Cache service version: s3`);
     checkPaths(paths);
     checkKey(key);
     core.debug(`Using S3 bucket: ${s3BucketName}`);
-    return await saveCacheS3(paths, key, s3Options, s3BucketName, options);
+    const result = await saveCacheS3(
+        paths,
+        key,
+        s3Options,
+        s3BucketName,
+        options
+    );
+    timer.stop();
+    return result;
 }
 
 /**

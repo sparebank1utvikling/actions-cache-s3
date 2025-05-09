@@ -66174,6 +66174,7 @@ const utils = __importStar(__nccwpck_require__(4912));
 const cacheClient = __importStar(__nccwpck_require__(1008));
 const config_1 = __nccwpck_require__(7693);
 const tar_1 = __nccwpck_require__(6623);
+const timeUtils_1 = __nccwpck_require__(9717);
 class ValidationError extends Error {
     constructor(message) {
         super(message);
@@ -66216,10 +66217,13 @@ function checkKey(key) {
  */
 function restoreCache(paths, primaryKey, s3Options, s3BucketName, restoreKeys, options) {
     return __awaiter(this, void 0, void 0, function* () {
+        const timer = new timeUtils_1.Timer("Restore cache operation");
         core.debug(`Cache service version: s3`);
         checkPaths(paths);
         core.debug(`Using S3 bucket: ${s3BucketName}`);
-        return yield restoreCacheS3(paths, primaryKey, s3Options, s3BucketName, restoreKeys, options);
+        const result = yield restoreCacheS3(paths, primaryKey, s3Options, s3BucketName, restoreKeys, options);
+        timer.stop();
+        return result;
     });
 }
 /**
@@ -66303,11 +66307,14 @@ function restoreCacheS3(paths, primaryKey, s3Options, s3BucketName, restoreKeys,
  */
 function saveCache(paths, key, s3Options, s3BucketName, options) {
     return __awaiter(this, void 0, void 0, function* () {
+        const timer = new timeUtils_1.Timer("Save cache operation");
         core.debug(`Cache service version: s3`);
         checkPaths(paths);
         checkKey(key);
         core.debug(`Using S3 bucket: ${s3BucketName}`);
-        return yield saveCacheS3(paths, key, s3Options, s3BucketName, options);
+        const result = yield saveCacheS3(paths, key, s3Options, s3BucketName, options);
+        timer.stop();
+        return result;
     });
 }
 /**
@@ -66430,6 +66437,7 @@ const core = __importStar(__nccwpck_require__(2186));
 const utils = __importStar(__nccwpck_require__(4912));
 const downloadUtils_1 = __nccwpck_require__(1945);
 const uploadUtils_1 = __nccwpck_require__(3108);
+const timeUtils_1 = __nccwpck_require__(9717);
 const client_s3_1 = __nccwpck_require__(9250);
 function searchRestoreKeyEntry(notPrimaryKey, entries) {
     for (const k of notPrimaryKey) {
@@ -66477,6 +66485,7 @@ function _searchRestoreKeyEntry(notPrimaryKey, entries) {
 }
 function getCacheEntry(keys, paths, s3Options, s3BucketName) {
     return __awaiter(this, void 0, void 0, function* () {
+        const timer = new timeUtils_1.Timer(`List objects in S3 bucket ${s3BucketName}`);
         const primaryKey = keys[0];
         const s3client = new client_s3_1.S3Client(s3Options);
         let contents = new Array();
@@ -66492,21 +66501,24 @@ function getCacheEntry(keys, paths, s3Options, s3BucketName) {
             }
             let response;
             try {
-                core.debug(`ListObjectsV2CommandInput: ${JSON.stringify(param)}`);
+                //core.debug(`ListObjectsV2CommandInput: ${JSON.stringify(param)}`)
                 response = yield s3client.send(new client_s3_1.ListObjectsV2Command(param));
             }
             catch (e) {
+                timer.stop();
                 throw new Error(`Error from S3: ${e}`);
             }
             if (!response.Contents) {
                 if (contents.length != 0) {
                     break;
                 }
+                timer.stop();
                 throw new Error(`Cannot find objects in bucket ${s3BucketName}`);
             }
             core.debug(`Found objects ${response.Contents.length}`);
             const found = response.Contents.find((content) => content.Key === primaryKey);
             if (found && found.LastModified) {
+                timer.stop();
                 return {
                     cacheKey: primaryKey,
                     creationTime: found.LastModified.toString(),
@@ -66530,12 +66542,14 @@ function getCacheEntry(keys, paths, s3Options, s3BucketName) {
         const notPrimaryKey = keys.slice(1);
         const found = searchRestoreKeyEntry(notPrimaryKey, contents);
         if (found != null && found.LastModified) {
+            timer.stop();
             return {
                 cacheKey: found.Key,
                 creationTime: found.LastModified.toString(),
                 archiveLocation: "https://s3.amazonaws.com/" // dummy
             };
         }
+        timer.stop();
         return null;
     });
 }
@@ -66921,6 +66935,7 @@ const fs = __importStar(__nccwpck_require__(7147));
 const stream = __importStar(__nccwpck_require__(2781));
 const util = __importStar(__nccwpck_require__(3837));
 const client_s3_1 = __nccwpck_require__(9250);
+const timeUtils_1 = __nccwpck_require__(9717);
 /**
  * Download the cache using the AWS S3.  Only call this method if the use S3.
  *
@@ -66931,18 +66946,27 @@ const client_s3_1 = __nccwpck_require__(9250);
  */
 function downloadCacheStorageS3(key, archivePath, s3Options, s3BucketName) {
     return __awaiter(this, void 0, void 0, function* () {
+        const timer = new timeUtils_1.Timer(`Download from S3 bucket ${s3BucketName}`);
         const s3client = new client_s3_1.S3Client(s3Options);
         const param = {
             Bucket: s3BucketName,
             Key: key,
         };
-        const response = yield s3client.send(new client_s3_1.GetObjectCommand(param));
-        if (!response.Body) {
-            throw new Error(`Incomplete download. response.Body is undefined from S3.`);
+        try {
+            const response = yield s3client.send(new client_s3_1.GetObjectCommand(param));
+            if (!response.Body) {
+                timer.stop();
+                throw new Error(`Incomplete download. response.Body is undefined from S3.`);
+            }
+            const fileStream = fs.createWriteStream(archivePath);
+            const pipeline = util.promisify(stream.pipeline);
+            yield pipeline(response.Body, fileStream);
+            timer.stop();
         }
-        const fileStream = fs.createWriteStream(archivePath);
-        const pipeline = util.promisify(stream.pipeline);
-        yield pipeline(response.Body, fileStream);
+        catch (error) {
+            timer.stop();
+            throw error;
+        }
         return;
     });
 }
@@ -67006,6 +67030,7 @@ const io = __importStar(__nccwpck_require__(7436));
 const fs_1 = __nccwpck_require__(7147);
 const path = __importStar(__nccwpck_require__(1017));
 const utils = __importStar(__nccwpck_require__(4912));
+const timeUtils_1 = __nccwpck_require__(9717);
 const constants_1 = __nccwpck_require__(3297);
 const IS_WINDOWS = process.platform === 'win32';
 // Returns tar path and type: BSD or GNU
@@ -67211,29 +67236,95 @@ function execCommands(commands, cwd) {
 // List the contents of a tar
 function listTar(archivePath, compressionMethod) {
     return __awaiter(this, void 0, void 0, function* () {
+        const timer = new timeUtils_1.Timer('List tar contents');
         const commands = yield getCommands(compressionMethod, 'list', archivePath);
         yield execCommands(commands);
+        timer.stop();
     });
 }
 // Extract a tar
 function extractTar(archivePath, compressionMethod) {
     return __awaiter(this, void 0, void 0, function* () {
+        const timer = new timeUtils_1.Timer('Extract tar');
         // Create directory to extract tar into
         const workingDirectory = getWorkingDirectory();
         yield io.mkdirP(workingDirectory);
         const commands = yield getCommands(compressionMethod, 'extract', archivePath);
         yield execCommands(commands);
+        timer.stop();
     });
 }
 // Create a tar
 function createTar(archiveFolder, sourceDirectories, compressionMethod) {
     return __awaiter(this, void 0, void 0, function* () {
+        const timer = new timeUtils_1.Timer('Create tar');
         // Write source directories to manifest.txt to avoid command length limits
         (0, fs_1.writeFileSync)(path.join(archiveFolder, constants_1.ManifestFilename), sourceDirectories.join('\n'));
         const commands = yield getCommands(compressionMethod, 'create');
         yield execCommands(commands, archiveFolder);
+        timer.stop();
     });
 }
+
+
+/***/ }),
+
+/***/ 9717:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Timer = void 0;
+const core = __importStar(__nccwpck_require__(2186));
+class Timer {
+    constructor(operationName) {
+        this.startTime = Date.now();
+        this.name = operationName;
+        core.debug(`Starting operation: ${operationName}`);
+    }
+    stop() {
+        const endTime = Date.now();
+        const duration = endTime - this.startTime;
+        const seconds = (duration / 1000).toFixed(2);
+        core.info(`Operation '${this.name}' completed in ${seconds}s`);
+        return duration;
+    }
+}
+exports.Timer = Timer;
 
 
 /***/ }),
@@ -67291,8 +67382,10 @@ const client_s3_1 = __nccwpck_require__(9250);
 const core = __importStar(__nccwpck_require__(2186));
 const lib_storage_1 = __nccwpck_require__(3087);
 const fs = __importStar(__nccwpck_require__(7147));
+const timeUtils_1 = __nccwpck_require__(9717);
 function uploadFileS3(s3options, s3BucketName, archivePath, key, concurrency, maxChunkSize) {
     return __awaiter(this, void 0, void 0, function* () {
+        const timer = new timeUtils_1.Timer(`Upload to S3 bucket ${s3BucketName}`);
         core.debug(`Start upload to S3 (bucket: ${s3BucketName})`);
         const fileStream = fs.createReadStream(archivePath);
         try {
@@ -67310,8 +67403,10 @@ function uploadFileS3(s3options, s3BucketName, archivePath, key, concurrency, ma
                 core.debug(`Uploading chunk progress: ${JSON.stringify(progress)}`);
             });
             yield parallelUpload.done();
+            timer.stop();
         }
         catch (error) {
+            timer.stop();
             throw new Error(`Cache upload failed because ${error}`);
         }
         return;

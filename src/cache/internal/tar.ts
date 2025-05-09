@@ -3,6 +3,7 @@ import * as io from '@actions/io'
 import {existsSync, writeFileSync} from 'fs'
 import * as path from 'path'
 import * as utils from './cacheUtils'
+import { Timer } from './timeUtils'
 import {
   CompressionMethod,
   SystemTarPathOnWindows,
@@ -269,8 +270,10 @@ export async function listTar(
   archivePath: string,
   compressionMethod: CompressionMethod
 ): Promise<void> {
+  const timer = new Timer('List tar contents')
   const commands = await getCommands(compressionMethod, 'list', archivePath)
   await execCommands(commands)
+  timer.stop()
 }
 
 // Extract a tar
@@ -278,11 +281,13 @@ export async function extractTar(
   archivePath: string,
   compressionMethod: CompressionMethod
 ): Promise<void> {
+  const timer = new Timer('Extract tar')
   // Create directory to extract tar into
   const workingDirectory = getWorkingDirectory()
   await io.mkdirP(workingDirectory)
   const commands = await getCommands(compressionMethod, 'extract', archivePath)
   await execCommands(commands)
+  timer.stop()
 }
 
 // Create a tar
@@ -291,6 +296,7 @@ export async function createTar(
   sourceDirectories: string[],
   compressionMethod: CompressionMethod
 ): Promise<void> {
+  const timer = new Timer('Create tar')
   // Write source directories to manifest.txt to avoid command length limits
   writeFileSync(
     path.join(archiveFolder, ManifestFilename),
@@ -298,4 +304,5 @@ export async function createTar(
   )
   const commands = await getCommands(compressionMethod, 'create')
   await execCommands(commands, archiveFolder)
+  timer.stop()
 }
