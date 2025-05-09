@@ -4,6 +4,7 @@ import * as utils from './cacheUtils'
 import { downloadCacheStorageS3 } from './downloadUtils'
 import { uploadFileS3 } from './uploadUtils'
 import { UploadOptions } from '../options'
+import { Timer } from './timeUtils'
 
 import {
   ListObjectsV2Command,
@@ -92,6 +93,7 @@ export async function getCacheEntry(
   s3Options: S3ClientConfig,
   s3BucketName: string
 ): Promise<ArtifactCacheEntry | null> {
+  const timer = new Timer(`List objects in S3 bucket ${s3BucketName}`)
   const primaryKey = keys[0]
 
   const s3client = new S3Client(s3Options)
@@ -112,15 +114,17 @@ export async function getCacheEntry(
 
     let response: ListObjectsV2CommandOutput
     try {
-      core.debug(`ListObjectsV2CommandInput: ${JSON.stringify(param)}`)
+      //core.debug(`ListObjectsV2CommandInput: ${JSON.stringify(param)}`)
       response = await s3client.send(new ListObjectsV2Command(param))
     } catch (e) {
+      timer.stop()
       throw new Error(`Error from S3: ${e}`)
     }
     if (!response.Contents) {
       if (contents.length != 0) {
         break
       }
+      timer.stop()
       throw new Error(`Cannot find objects in bucket ${s3BucketName}`)
     }
     core.debug(`Found objects ${response.Contents.length}`)
@@ -129,6 +133,7 @@ export async function getCacheEntry(
       (content: _Object) => content.Key === primaryKey
     )
     if (found && found.LastModified) {
+      timer.stop()
       return {
         cacheKey: primaryKey,
         creationTime: found.LastModified.toString(),
@@ -157,6 +162,7 @@ export async function getCacheEntry(
   const notPrimaryKey = keys.slice(1)
   const found = searchRestoreKeyEntry(notPrimaryKey, contents)
   if (found != null && found.LastModified) {
+    timer.stop()
     return {
       cacheKey: found.Key,
       creationTime: found.LastModified.toString(),
@@ -164,6 +170,7 @@ export async function getCacheEntry(
     }
   }
 
+  timer.stop()
   return null
 }
 

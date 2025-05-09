@@ -6,6 +6,7 @@ import {
 import * as core from '@actions/core'
 import {Progress, Upload} from '@aws-sdk/lib-storage'
 import * as fs from 'fs'
+import { Timer } from './timeUtils'
 
 export async function uploadFileS3(
   s3options: S3ClientConfig,
@@ -15,6 +16,7 @@ export async function uploadFileS3(
   concurrency: number,
   maxChunkSize: number
 ): Promise<void> {
+  const timer = new Timer(`Upload to S3 bucket ${s3BucketName}`)
   core.debug(`Start upload to S3 (bucket: ${s3BucketName})`)
   
 
@@ -38,7 +40,9 @@ export async function uploadFileS3(
     })
 
     await parallelUpload.done()
+    timer.stop()
   } catch (error) {
+    timer.stop()
     throw new Error(`Cache upload failed because ${error}`)
   }
 
