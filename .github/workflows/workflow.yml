@@ -83,7 +83,7 @@ jobs:
 
       with:
         key: test-${{ runner.os }}-${{ github.run_id }}
-        path: |
+        path: |-
           test-cache
           ~/test-cache
         aws-s3-bucket: tmp-cache-bucket
@@ -140,7 +140,7 @@ jobs:
       uses: ./save
       with:
         key: test-${{ runner.os }}-${{ github.run_id }}
-        path: |
+        path: |-
           test-cache
           ~/test-cache
         aws-s3-bucket: tmp-cache-bucket
@@ -165,7 +165,7 @@ jobs:
       uses: ./restore
       with:
         key: test-${{ runner.os }}-${{ github.run_id }}
-        path: |
+        path: |-
           test-cache
           ~/test-cache
         aws-s3-bucket: tmp-cache-bucket

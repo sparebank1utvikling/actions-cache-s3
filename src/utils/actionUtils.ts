@@ -80,6 +80,18 @@ export function getInputS3ClientConfig(): S3ClientConfig {
           }
         : null;
 
+    let logger = {
+        log: () => {},
+        debug: () => {},
+        info: () => {},
+        trace: () => {},
+        warn: console.warn,
+        error: console.error,
+    };
+    if (core.isDebug()) {
+        logger = console;
+    }
+
     const s3config = {
         ...credentials,
         region: core.getInput(Inputs.AWSRegion) || process.env["AWS_REGION"],
@@ -87,10 +99,9 @@ export function getInputS3ClientConfig(): S3ClientConfig {
         bucketEndpoint: core.getInput(Inputs.AWSEndpoint)
             ? core.getBooleanInput(Inputs.AWSS3BucketEndpoint)
             : false,
-        forcePathStyle: core.getBooleanInput(Inputs.AWSS3ForcePathStyle)
+        forcePathStyle: core.getBooleanInput(Inputs.AWSS3ForcePathStyle),
+        logger: logger,
     } as S3ClientConfig;
-
     core.debug("Enable S3 backend mode.");
-    s3config.logger = console;
     return s3config;
 }
