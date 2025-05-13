@@ -67794,11 +67794,21 @@ function getInputS3ClientConfig() {
             }
         }
         : null;
+    let logger = {
+        log: () => { },
+        debug: () => { },
+        info: () => { },
+        trace: () => { },
+        warn: console.warn,
+        error: console.error,
+    };
+    if (core.isDebug()) {
+        logger = console;
+    }
     const s3config = Object.assign(Object.assign({}, credentials), { region: core.getInput(constants_1.Inputs.AWSRegion) || process.env["AWS_REGION"], endpoint: core.getInput(constants_1.Inputs.AWSEndpoint) || undefined, bucketEndpoint: core.getInput(constants_1.Inputs.AWSEndpoint)
             ? core.getBooleanInput(constants_1.Inputs.AWSS3BucketEndpoint)
-            : false, forcePathStyle: core.getBooleanInput(constants_1.Inputs.AWSS3ForcePathStyle) });
+            : false, forcePathStyle: core.getBooleanInput(constants_1.Inputs.AWSS3ForcePathStyle), logger: logger });
     core.debug("Enable S3 backend mode.");
-    s3config.logger = console;
     return s3config;
 }
 
