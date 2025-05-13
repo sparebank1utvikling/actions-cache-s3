@@ -21,6 +21,14 @@ interface CacheInput {
 export function setInputs(input: CacheInput): void {
     setInput(Inputs.Path, input.path);
     setInput(Inputs.Key, input.key);
+    // TODO: add types to CacheInput
+    setInput(Inputs.AWSS3Bucket, "tmp-cache-bucket");
+    setInput(Inputs.AWSEndpoint, "http://127.0.0.1:4566");
+    setInput(Inputs.AWSS3BucketEndpoint, "false");
+    setInput(Inputs.AWSS3ForcePathStyle, "false");
+    setInput(Inputs.AWSRegion, "eu-north-1");
+    setInput(Inputs.AWSAccessKeyId, "LSIAQAAAAAAVNCBMPNSG");
+    setInput(Inputs.AWSSecretAccessKey, "LSIAQAAAAAAVNCBMPNSG");
     input.restoreKeys &&
         setInput(Inputs.RestoreKeys, input.restoreKeys.join("\n"));
     input.enableCrossOsArchive !== undefined &&

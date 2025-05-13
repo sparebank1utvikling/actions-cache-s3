@@ -1,4 +1,4 @@
-import * as cache from "@actions/cache";
+import * as cache from "../src/cache";
 import * as core from "@actions/core";
 
 import { Events, Inputs, RefKey } from "../src/constants";
@@ -7,8 +7,12 @@ import * as actionUtils from "../src/utils/actionUtils";
 import * as testUtils from "../src/utils/testUtils";
 
 jest.mock("@actions/core");
-jest.mock("@actions/cache");
+jest.mock("../src/cache");
 jest.mock("../src/utils/actionUtils");
+jest.spyOn(core, "info").mockImplementation(console.log);
+jest.spyOn(core, "warning").mockImplementation(console.warn);
+jest.spyOn(core, "error").mockImplementation(console.error);
+jest.spyOn(core, "debug").mockImplementation(console.debug);
 
 beforeAll(() => {
     jest.spyOn(core, "getInput").mockImplementation((name, options) => {
@@ -60,11 +64,6 @@ beforeAll(() => {
 beforeEach(() => {
     process.env[Events.Key] = Events.Push;
     process.env[RefKey] = "refs/heads/feature-branch";
-
-    jest.spyOn(actionUtils, "isGhes").mockImplementation(() => false);
-    jest.spyOn(actionUtils, "isCacheFeatureAvailable").mockImplementation(
-        () => true
-    );
 });
 
 afterEach(() => {
@@ -81,12 +80,15 @@ test("save with valid inputs uploads a cache", async () => {
 
     jest.spyOn(core, "getState")
         // Cache Entry State
-        .mockImplementationOnce(() => {
-            return primaryKey;
-        })
-        // Cache Key State
-        .mockImplementationOnce(() => {
-            return savedCacheKey;
+        .mockImplementation((key: string) => {
+            if (key === "CACHE_RESULT") {
+                return savedCacheKey;
+            }
+            if (key === "CACHE_KEY") {
+                return primaryKey;
+            }
+            console.log(`Unexpected key: ${key}`);
+            throw new Error(`Unexpected key: ${key}`);
         });
 
     const inputPath = "node_modules";
@@ -106,12 +108,11 @@ test("save with valid inputs uploads a cache", async () => {
     expect(saveCacheMock).toHaveBeenCalledWith(
         [inputPath],
         primaryKey,
+        undefined,
+        "",
         {
             uploadChunkSize: 4000000
-        },
-        false,
-        undefined,
-        ""
+        }
     );
 
     expect(failedMock).toHaveBeenCalledTimes(0);

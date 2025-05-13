@@ -1,4 +1,4 @@
-import * as cache from "@actions/cache";
+import * as cache from "../src/cache";
 import * as core from "@actions/core";
 
 import { Events, Inputs, RefKey } from "../src/constants";
@@ -7,7 +7,12 @@ import { StateProvider } from "../src/stateProvider";
 import * as actionUtils from "../src/utils/actionUtils";
 import * as testUtils from "../src/utils/testUtils";
 
-jest.mock("../src/utils/actionUtils");
+//jest.mock("../src/utils/actionUtils");
+
+jest.spyOn(core, "info").mockImplementation(console.log);
+jest.spyOn(core, "warning").mockImplementation(console.warn);
+jest.spyOn(core, "error").mockImplementation(console.error);
+jest.spyOn(core, "debug").mockImplementation(console.debug);
 
 beforeAll(() => {
     jest.spyOn(actionUtils, "isExactKeyMatch").mockImplementation(
@@ -41,11 +46,6 @@ beforeEach(() => {
     jest.restoreAllMocks();
     process.env[Events.Key] = Events.Push;
     process.env[RefKey] = "refs/heads/feature-branch";
-
-    jest.spyOn(actionUtils, "isGhes").mockImplementation(() => false);
-    jest.spyOn(actionUtils, "isCacheFeatureAvailable").mockImplementation(
-        () => true
-    );
 });
 
 afterEach(() => {
@@ -68,7 +68,6 @@ test("restore with invalid event outputs warning", async () => {
 });
 
 test("restore without AC available should no-op", async () => {
-    jest.spyOn(actionUtils, "isGhes").mockImplementation(() => false);
     jest.spyOn(actionUtils, "isCacheFeatureAvailable").mockImplementation(
         () => false
     );
@@ -81,65 +80,6 @@ test("restore without AC available should no-op", async () => {
     expect(restoreCacheMock).toHaveBeenCalledTimes(0);
     expect(setCacheHitOutputMock).toHaveBeenCalledTimes(1);
     expect(setCacheHitOutputMock).toHaveBeenCalledWith("cache-hit", "false");
-});
-
-test("restore on GHES without AC available should no-op", async () => {
-    jest.spyOn(actionUtils, "isGhes").mockImplementation(() => true);
-    jest.spyOn(actionUtils, "isCacheFeatureAvailable").mockImplementation(
-        () => false
-    );
-
-    const restoreCacheMock = jest.spyOn(cache, "restoreCache");
-    const setCacheHitOutputMock = jest.spyOn(core, "setOutput");
-
-    await restoreImpl(new StateProvider());
-
-    expect(restoreCacheMock).toHaveBeenCalledTimes(0);
-    expect(setCacheHitOutputMock).toHaveBeenCalledTimes(1);
-    expect(setCacheHitOutputMock).toHaveBeenCalledWith("cache-hit", "false");
-});
-
-test("restore on GHES with AC available ", async () => {
-    jest.spyOn(actionUtils, "isGhes").mockImplementation(() => true);
-    const path = "node_modules";
-    const key = "node-test";
-    testUtils.setInputs({
-        path: path,
-        key,
-        enableCrossOsArchive: false
-    });
-
-    const infoMock = jest.spyOn(core, "info");
-    const failedMock = jest.spyOn(core, "setFailed");
-    const stateMock = jest.spyOn(core, "saveState");
-    const setCacheHitOutputMock = jest.spyOn(core, "setOutput");
-    const restoreCacheMock = jest
-        .spyOn(cache, "restoreCache")
-        .mockImplementationOnce(() => {
-            return Promise.resolve(key);
-        });
-
-    await restoreImpl(new StateProvider());
-
-    expect(restoreCacheMock).toHaveBeenCalledTimes(1);
-    expect(restoreCacheMock).toHaveBeenCalledWith(
-        [path],
-        key,
-        [],
-        {
-            lookupOnly: false
-        },
-        false,
-        undefined,
-        ""
-    );
-
-    expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
-    expect(setCacheHitOutputMock).toHaveBeenCalledTimes(1);
-    expect(setCacheHitOutputMock).toHaveBeenCalledWith("cache-hit", "true");
-
-    expect(infoMock).toHaveBeenCalledWith(`Cache restored from key: ${key}`);
-    expect(failedMock).toHaveBeenCalledTimes(0);
 });
 
 test("restore with no path should fail", async () => {
@@ -181,13 +121,12 @@ test("restore with too many keys should fail", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
+        expect.objectContaining({ credentials: expect.any(Object) }),
+        "tmp-cache-bucket",
         restoreKeys,
         {
             lookupOnly: false
-        },
-        false,
-        undefined,
-        ""
+        }
     );
     expect(failedMock).toHaveBeenCalledWith(
         `Key Validation Error: Keys are limited to a maximum of 10.`
@@ -209,13 +148,12 @@ test("restore with large key should fail", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
+        expect.objectContaining({ credentials: expect.any(Object) }),
+        "tmp-cache-bucket",
         [],
         {
             lookupOnly: false
-        },
-        false,
-        undefined,
-        ""
+        }
     );
     expect(failedMock).toHaveBeenCalledWith(
         `Key Validation Error: ${key} cannot be larger than 512 characters.`
@@ -237,13 +175,12 @@ test("restore with invalid key should fail", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
+        expect.objectContaining({ credentials: expect.any(Object) }),
+        "tmp-cache-bucket",
         [],
         {
             lookupOnly: false
-        },
-        false,
-        undefined,
-        ""
+        }
     );
     expect(failedMock).toHaveBeenCalledWith(
         `Key Validation Error: ${key} cannot contain commas.`
@@ -274,13 +211,12 @@ test("restore with no cache found", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
+        expect.objectContaining({ credentials: expect.any(Object) }),
+        "tmp-cache-bucket",
         [],
         {
             lookupOnly: false
-        },
-        false,
-        undefined,
-        ""
+        }
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
@@ -317,13 +253,12 @@ test("restore with restore keys and no cache found", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
+        expect.objectContaining({ credentials: expect.any(Object) }),
+        "tmp-cache-bucket",
         [restoreKey],
         {
             lookupOnly: false
-        },
-        false,
-        undefined,
-        ""
+        }
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
@@ -359,13 +294,12 @@ test("restore with cache found for key", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
+        expect.objectContaining({ credentials: expect.any(Object) }),
+        "tmp-cache-bucket",
         [],
         {
             lookupOnly: false
-        },
-        false,
-        undefined,
-        ""
+        }
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
@@ -403,13 +337,12 @@ test("restore with cache found for restore key", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
+        expect.objectContaining({ credentials: expect.any(Object) }),
+        "tmp-cache-bucket",
         [restoreKey],
         {
             lookupOnly: false
-        },
-        false,
-        undefined,
-        ""
+        }
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);
@@ -446,13 +379,12 @@ test("restore with lookup-only set", async () => {
     expect(restoreCacheMock).toHaveBeenCalledWith(
         [path],
         key,
+        expect.objectContaining({ credentials: expect.any(Object) }),
+        "tmp-cache-bucket",
         [],
         {
             lookupOnly: true
-        },
-        false,
-        undefined,
-        ""
+        }
     );
 
     expect(stateMock).toHaveBeenCalledWith("CACHE_KEY", key);

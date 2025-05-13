@@ -1,4 +1,3 @@
-import * as cache from "@actions/cache";
 import * as core from "@actions/core";
 
 import { Events, RefKey } from "../src/constants";
@@ -6,7 +5,7 @@ import * as actionUtils from "../src/utils/actionUtils";
 import * as testUtils from "../src/utils/testUtils";
 
 jest.mock("@actions/core");
-jest.mock("@actions/cache");
+jest.mock("../src/cache");
 
 beforeAll(() => {
     jest.spyOn(core, "getInput").mockImplementation((name, options) => {
@@ -17,24 +16,6 @@ beforeAll(() => {
 afterEach(() => {
     delete process.env[Events.Key];
     delete process.env[RefKey];
-});
-
-test("isGhes returns true if server url is not github.com", () => {
-    try {
-        process.env["GITHUB_SERVER_URL"] = "http://example.com";
-        expect(actionUtils.isGhes()).toBe(true);
-    } finally {
-        process.env["GITHUB_SERVER_URL"] = undefined;
-    }
-});
-
-test("isGhes returns false when server url is github.com", () => {
-    try {
-        process.env["GITHUB_SERVER_URL"] = "http://github.com";
-        expect(actionUtils.isGhes()).toBe(false);
-    } finally {
-        process.env["GITHUB_SERVER_URL"] = undefined;
-    }
 });
 
 test("isExactKeyMatch with undefined cache key returns false", () => {
@@ -192,42 +173,4 @@ test("getInputAsBool throws if required and value missing", () => {
     expect(() =>
         actionUtils.getInputAsBool("undefined2", { required: true })
     ).toThrowError();
-});
-
-test("isCacheFeatureAvailable for ac enabled", () => {
-    jest.spyOn(cache, "isFeatureAvailable").mockImplementation(() => true);
-
-    expect(actionUtils.isCacheFeatureAvailable()).toBe(true);
-});
-
-test("isCacheFeatureAvailable for ac disabled on GHES", () => {
-    jest.spyOn(cache, "isFeatureAvailable").mockImplementation(() => false);
-
-    const message = `Cache action is only supported on GHES version >= 3.5. If you are on version >=3.5 Please check with GHES admin if Actions cache service is enabled or not.
-Otherwise please upgrade to GHES version >= 3.5 and If you are also using Github Connect, please unretire the actions/cache namespace before upgrade (see https://docs.github.com/en/enterprise-server@3.5/admin/github-actions/managing-access-to-actions-from-githubcom/enabling-automatic-access-to-githubcom-actions-using-github-connect#automatic-retirement-of-namespaces-for-actions-accessed-on-githubcom)`;
-    const infoMock = jest.spyOn(core, "info");
-
-    try {
-        process.env["GITHUB_SERVER_URL"] = "http://example.com";
-        expect(actionUtils.isCacheFeatureAvailable()).toBe(false);
-        expect(infoMock).toHaveBeenCalledWith(`[warning]${message}`);
-    } finally {
-        delete process.env["GITHUB_SERVER_URL"];
-    }
-});
-
-test("isCacheFeatureAvailable for ac disabled on dotcom", () => {
-    jest.spyOn(cache, "isFeatureAvailable").mockImplementation(() => false);
-
-    const message =
-        "An internal error has occurred in cache backend. Please check https://www.githubstatus.com/ for any ongoing issue in actions.";
-    const infoMock = jest.spyOn(core, "info");
-
-    try {
-        process.env["GITHUB_SERVER_URL"] = "http://github.com";
-        expect(actionUtils.isCacheFeatureAvailable()).toBe(false);
-        expect(infoMock).toHaveBeenCalledWith(`[warning]${message}`);
-    } finally {
-        delete process.env["GITHUB_SERVER_URL"];
-    }
 });
