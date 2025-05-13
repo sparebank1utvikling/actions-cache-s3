@@ -66784,7 +66784,7 @@ function getGnuTarPathOnWindows() {
 }
 function assertDefined(name, value) {
     if (value === undefined) {
-        throw Error(`Expected ${name} but value was undefiend`);
+        throw Error(`Expected ${name} but value was undefined`);
     }
     return value;
 }
