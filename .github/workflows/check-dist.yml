@@ -13,5 +13,6 @@ on:
 
 jobs:
   call-check-dist:
+    if: github.event.pull_request.user.login != 'dependabot[bot]'
     name: Check dist/
     uses: actions/reusable-workflows/.github/workflows/check-dist.yml@main

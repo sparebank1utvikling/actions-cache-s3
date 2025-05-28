@@ -35,3 +35,8 @@ jobs:
         git commit -m "dependabot dist" || echo "No changes to commit" && exit 0
         git push
 
+  call-check-dist:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    needs: build
+    name: Check dist/
+    uses: actions/reusable-workflows/.github/workflows/check-dist.yml@main
