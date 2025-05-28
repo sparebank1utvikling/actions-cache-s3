@@ -1,0 +1,37 @@
+name: dependabot-dist
+
+on:
+  pull_request:
+    paths:
+      - '**.js'
+      - '**.ts'
+      - '**.json'
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write    
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'sparebank1utvikling/actions-cache-s3'
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setup Node.js 22.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22.x
+        cache: npm
+    - run: npm ci
+    - name: Build
+      run: npm run build
+    - name: Commit and push dist/
+      run: |
+        git config --global user.name "dependabot[bot]"
+        git config --global user.email "dependabot[bot]@users.noreply.github.com"
+        git add dist/
+        git commit -m "dependabot dist" || echo "No changes to commit" && exit 0
+        git push
+
