@@ -31,7 +31,8 @@ export async function uploadFileS3(
       params: {
         Bucket: s3BucketName,
         Key: key,
-        Body: fileStream
+        Body: fileStream,
+        ChecksumAlgorithm: 'SHA256'
       }
     })
 

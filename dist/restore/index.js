@@ -67433,7 +67433,8 @@ function uploadFileS3(s3options, s3BucketName, archivePath, key, concurrency, ma
                 params: {
                     Bucket: s3BucketName,
                     Key: key,
-                    Body: fileStream
+                    Body: fileStream,
+                    ChecksumAlgorithm: 'SHA256'
                 }
             });
             parallelUpload.on('httpUploadProgress', (progress) => {
