@@ -1,5 +1,6 @@
 import * as core from "@actions/core";
 import { S3ClientConfig } from "@aws-sdk/client-s3";
+import "@aws-sdk/crc64-nvme-crt"
 
 import { Inputs, RefKey } from "../constants";
 

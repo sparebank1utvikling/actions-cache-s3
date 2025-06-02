@@ -18196,6 +18196,1481 @@ var loadRestXmlErrorCode = /* @__PURE__ */ __name((output, data) => {
 
 /***/ }),
 
+/***/ 7520:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.ts
+var index_exports = {};
+__export(index_exports, {
+  CrtCrc64Nvme: () => CrtCrc64Nvme
+});
+module.exports = __toCommonJS(index_exports);
+var import_middleware_flexible_checksums = __nccwpck_require__(8114);
+
+// src/CrtCrc64Nvme.ts
+var import_crt_loader = __nccwpck_require__(5505);
+var import_util_utf8 = __nccwpck_require__(2567);
+var CrtCrc64Nvme = class {
+  static {
+    __name(this, "CrtCrc64Nvme");
+  }
+  checksum = new DataView(new ArrayBuffer(8));
+  update(data) {
+    this.checksum = import_crt_loader.checksums.crc64nvme(data, this.checksum);
+  }
+  async digest() {
+    return (0, import_util_utf8.toUint8Array)(this.checksum);
+  }
+  reset() {
+    this.checksum = new DataView(new ArrayBuffer(8));
+  }
+};
+
+// src/index.ts
+import_middleware_flexible_checksums.crc64NvmeCrtContainer.CrtCrc64Nvme = CrtCrc64Nvme;
+// Annotate the CommonJS export names for ESM import in node:
+
+0 && (0);
+
+
+
+/***/ }),
+
+/***/ 1074:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __nccwpck_require__(1860);
+tslib_1.__exportStar(__nccwpck_require__(4082), exports);
+tslib_1.__exportStar(__nccwpck_require__(1309), exports);
+tslib_1.__exportStar(__nccwpck_require__(4478), exports);
+
+
+/***/ }),
+
+/***/ 4082:
+/***/ ((module) => {
+
+"use strict";
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/submodules/client/index.ts
+var index_exports = {};
+__export(index_exports, {
+  emitWarningIfUnsupportedVersion: () => emitWarningIfUnsupportedVersion,
+  setCredentialFeature: () => setCredentialFeature,
+  setFeature: () => setFeature,
+  state: () => state
+});
+module.exports = __toCommonJS(index_exports);
+
+// src/submodules/client/emitWarningIfUnsupportedVersion.ts
+var state = {
+  warningEmitted: false
+};
+var emitWarningIfUnsupportedVersion = /* @__PURE__ */ __name((version) => {
+  if (version && !state.warningEmitted && parseInt(version.substring(1, version.indexOf("."))) < 18) {
+    state.warningEmitted = true;
+    process.emitWarning(
+      `NodeDeprecationWarning: The AWS SDK for JavaScript (v3) will
+no longer support Node.js 16.x on January 6, 2025.
+
+To continue receiving updates to AWS services, bug fixes, and security
+updates please upgrade to a supported Node.js LTS version.
+
+More information can be found at: https://a.co/74kJMmI`
+    );
+  }
+}, "emitWarningIfUnsupportedVersion");
+
+// src/submodules/client/setCredentialFeature.ts
+function setCredentialFeature(credentials, feature, value) {
+  if (!credentials.$source) {
+    credentials.$source = {};
+  }
+  credentials.$source[feature] = value;
+  return credentials;
+}
+__name(setCredentialFeature, "setCredentialFeature");
+
+// src/submodules/client/setFeature.ts
+function setFeature(context, feature, value) {
+  if (!context.__aws_sdk_context) {
+    context.__aws_sdk_context = {
+      features: {}
+    };
+  } else if (!context.__aws_sdk_context.features) {
+    context.__aws_sdk_context.features = {};
+  }
+  context.__aws_sdk_context.features[feature] = value;
+}
+__name(setFeature, "setFeature");
+// Annotate the CommonJS export names for ESM import in node:
+0 && (0);
+
+
+/***/ }),
+
+/***/ 1309:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/submodules/httpAuthSchemes/index.ts
+var index_exports = {};
+__export(index_exports, {
+  AWSSDKSigV4Signer: () => AWSSDKSigV4Signer,
+  AwsSdkSigV4ASigner: () => AwsSdkSigV4ASigner,
+  AwsSdkSigV4Signer: () => AwsSdkSigV4Signer,
+  NODE_AUTH_SCHEME_PREFERENCE_OPTIONS: () => NODE_AUTH_SCHEME_PREFERENCE_OPTIONS,
+  NODE_SIGV4A_CONFIG_OPTIONS: () => NODE_SIGV4A_CONFIG_OPTIONS,
+  getBearerTokenEnvKey: () => getBearerTokenEnvKey,
+  resolveAWSSDKSigV4Config: () => resolveAWSSDKSigV4Config,
+  resolveAwsSdkSigV4AConfig: () => resolveAwsSdkSigV4AConfig,
+  resolveAwsSdkSigV4Config: () => resolveAwsSdkSigV4Config,
+  validateSigningProperties: () => validateSigningProperties
+});
+module.exports = __toCommonJS(index_exports);
+
+// src/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4Signer.ts
+var import_protocol_http2 = __nccwpck_require__(2356);
+
+// src/submodules/httpAuthSchemes/utils/getDateHeader.ts
+var import_protocol_http = __nccwpck_require__(2356);
+var getDateHeader = /* @__PURE__ */ __name((response) => import_protocol_http.HttpResponse.isInstance(response) ? response.headers?.date ?? response.headers?.Date : void 0, "getDateHeader");
+
+// src/submodules/httpAuthSchemes/utils/getSkewCorrectedDate.ts
+var getSkewCorrectedDate = /* @__PURE__ */ __name((systemClockOffset) => new Date(Date.now() + systemClockOffset), "getSkewCorrectedDate");
+
+// src/submodules/httpAuthSchemes/utils/isClockSkewed.ts
+var isClockSkewed = /* @__PURE__ */ __name((clockTime, systemClockOffset) => Math.abs(getSkewCorrectedDate(systemClockOffset).getTime() - clockTime) >= 3e5, "isClockSkewed");
+
+// src/submodules/httpAuthSchemes/utils/getUpdatedSystemClockOffset.ts
+var getUpdatedSystemClockOffset = /* @__PURE__ */ __name((clockTime, currentSystemClockOffset) => {
+  const clockTimeInMs = Date.parse(clockTime);
+  if (isClockSkewed(clockTimeInMs, currentSystemClockOffset)) {
+    return clockTimeInMs - Date.now();
+  }
+  return currentSystemClockOffset;
+}, "getUpdatedSystemClockOffset");
+
+// src/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4Signer.ts
+var throwSigningPropertyError = /* @__PURE__ */ __name((name, property) => {
+  if (!property) {
+    throw new Error(`Property \`${name}\` is not resolved for AWS SDK SigV4Auth`);
+  }
+  return property;
+}, "throwSigningPropertyError");
+var validateSigningProperties = /* @__PURE__ */ __name(async (signingProperties) => {
+  const context = throwSigningPropertyError(
+    "context",
+    signingProperties.context
+  );
+  const config = throwSigningPropertyError("config", signingProperties.config);
+  const authScheme = context.endpointV2?.properties?.authSchemes?.[0];
+  const signerFunction = throwSigningPropertyError(
+    "signer",
+    config.signer
+  );
+  const signer = await signerFunction(authScheme);
+  const signingRegion = signingProperties?.signingRegion;
+  const signingRegionSet = signingProperties?.signingRegionSet;
+  const signingName = signingProperties?.signingName;
+  return {
+    config,
+    signer,
+    signingRegion,
+    signingRegionSet,
+    signingName
+  };
+}, "validateSigningProperties");
+var AwsSdkSigV4Signer = class {
+  static {
+    __name(this, "AwsSdkSigV4Signer");
+  }
+  async sign(httpRequest, identity, signingProperties) {
+    if (!import_protocol_http2.HttpRequest.isInstance(httpRequest)) {
+      throw new Error("The request is not an instance of `HttpRequest` and cannot be signed");
+    }
+    const validatedProps = await validateSigningProperties(signingProperties);
+    const { config, signer } = validatedProps;
+    let { signingRegion, signingName } = validatedProps;
+    const handlerExecutionContext = signingProperties.context;
+    if (handlerExecutionContext?.authSchemes?.length ?? 0 > 1) {
+      const [first, second] = handlerExecutionContext.authSchemes;
+      if (first?.name === "sigv4a" && second?.name === "sigv4") {
+        signingRegion = second?.signingRegion ?? signingRegion;
+        signingName = second?.signingName ?? signingName;
+      }
+    }
+    const signedRequest = await signer.sign(httpRequest, {
+      signingDate: getSkewCorrectedDate(config.systemClockOffset),
+      signingRegion,
+      signingService: signingName
+    });
+    return signedRequest;
+  }
+  errorHandler(signingProperties) {
+    return (error) => {
+      const serverTime = error.ServerTime ?? getDateHeader(error.$response);
+      if (serverTime) {
+        const config = throwSigningPropertyError("config", signingProperties.config);
+        const initialSystemClockOffset = config.systemClockOffset;
+        config.systemClockOffset = getUpdatedSystemClockOffset(serverTime, config.systemClockOffset);
+        const clockSkewCorrected = config.systemClockOffset !== initialSystemClockOffset;
+        if (clockSkewCorrected && error.$metadata) {
+          error.$metadata.clockSkewCorrected = true;
+        }
+      }
+      throw error;
+    };
+  }
+  successHandler(httpResponse, signingProperties) {
+    const dateHeader = getDateHeader(httpResponse);
+    if (dateHeader) {
+      const config = throwSigningPropertyError("config", signingProperties.config);
+      config.systemClockOffset = getUpdatedSystemClockOffset(dateHeader, config.systemClockOffset);
+    }
+  }
+};
+var AWSSDKSigV4Signer = AwsSdkSigV4Signer;
+
+// src/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4ASigner.ts
+var import_protocol_http3 = __nccwpck_require__(2356);
+var AwsSdkSigV4ASigner = class extends AwsSdkSigV4Signer {
+  static {
+    __name(this, "AwsSdkSigV4ASigner");
+  }
+  async sign(httpRequest, identity, signingProperties) {
+    if (!import_protocol_http3.HttpRequest.isInstance(httpRequest)) {
+      throw new Error("The request is not an instance of `HttpRequest` and cannot be signed");
+    }
+    const { config, signer, signingRegion, signingRegionSet, signingName } = await validateSigningProperties(
+      signingProperties
+    );
+    const configResolvedSigningRegionSet = await config.sigv4aSigningRegionSet?.();
+    const multiRegionOverride = (configResolvedSigningRegionSet ?? signingRegionSet ?? [signingRegion]).join(",");
+    const signedRequest = await signer.sign(httpRequest, {
+      signingDate: getSkewCorrectedDate(config.systemClockOffset),
+      signingRegion: multiRegionOverride,
+      signingService: signingName
+    });
+    return signedRequest;
+  }
+};
+
+// src/submodules/httpAuthSchemes/utils/getArrayForCommaSeparatedString.ts
+var getArrayForCommaSeparatedString = /* @__PURE__ */ __name((str) => typeof str === "string" && str.length > 0 ? str.split(",").map((item) => item.trim()) : [], "getArrayForCommaSeparatedString");
+
+// src/submodules/httpAuthSchemes/utils/getBearerTokenEnvKey.ts
+var getBearerTokenEnvKey = /* @__PURE__ */ __name((signingName) => `AWS_BEARER_TOKEN_${signingName.replace(/[\s-]/g, "_").toUpperCase()}`, "getBearerTokenEnvKey");
+
+// src/submodules/httpAuthSchemes/aws_sdk/NODE_AUTH_SCHEME_PREFERENCE_OPTIONS.ts
+var NODE_AUTH_SCHEME_PREFERENCE_ENV_KEY = "AWS_AUTH_SCHEME_PREFERENCE";
+var NODE_AUTH_SCHEME_PREFERENCE_CONFIG_KEY = "auth_scheme_preference";
+var NODE_AUTH_SCHEME_PREFERENCE_OPTIONS = {
+  /**
+   * Retrieves auth scheme preference from environment variables
+   * @param env - Node process environment object
+   * @returns Array of auth scheme strings if preference is set, undefined otherwise
+   */
+  environmentVariableSelector: /* @__PURE__ */ __name((env, options) => {
+    if (options?.signingName) {
+      const bearerTokenKey = getBearerTokenEnvKey(options.signingName);
+      if (bearerTokenKey in env) return ["httpBearerAuth"];
+    }
+    if (!(NODE_AUTH_SCHEME_PREFERENCE_ENV_KEY in env)) return void 0;
+    return getArrayForCommaSeparatedString(env[NODE_AUTH_SCHEME_PREFERENCE_ENV_KEY]);
+  }, "environmentVariableSelector"),
+  /**
+   * Retrieves auth scheme preference from config file
+   * @param profile - Config profile object
+   * @returns Array of auth scheme strings if preference is set, undefined otherwise
+   */
+  configFileSelector: /* @__PURE__ */ __name((profile) => {
+    if (!(NODE_AUTH_SCHEME_PREFERENCE_CONFIG_KEY in profile)) return void 0;
+    return getArrayForCommaSeparatedString(profile[NODE_AUTH_SCHEME_PREFERENCE_CONFIG_KEY]);
+  }, "configFileSelector"),
+  /**
+   * Default auth scheme preference if not specified in environment or config
+   */
+  default: []
+};
+
+// src/submodules/httpAuthSchemes/aws_sdk/resolveAwsSdkSigV4AConfig.ts
+var import_core = __nccwpck_require__(402);
+var import_property_provider = __nccwpck_require__(1238);
+var resolveAwsSdkSigV4AConfig = /* @__PURE__ */ __name((config) => {
+  config.sigv4aSigningRegionSet = (0, import_core.normalizeProvider)(config.sigv4aSigningRegionSet);
+  return config;
+}, "resolveAwsSdkSigV4AConfig");
+var NODE_SIGV4A_CONFIG_OPTIONS = {
+  environmentVariableSelector(env) {
+    if (env.AWS_SIGV4A_SIGNING_REGION_SET) {
+      return env.AWS_SIGV4A_SIGNING_REGION_SET.split(",").map((_) => _.trim());
+    }
+    throw new import_property_provider.ProviderError("AWS_SIGV4A_SIGNING_REGION_SET not set in env.", {
+      tryNextLink: true
+    });
+  },
+  configFileSelector(profile) {
+    if (profile.sigv4a_signing_region_set) {
+      return (profile.sigv4a_signing_region_set ?? "").split(",").map((_) => _.trim());
+    }
+    throw new import_property_provider.ProviderError("sigv4a_signing_region_set not set in profile.", {
+      tryNextLink: true
+    });
+  },
+  default: void 0
+};
+
+// src/submodules/httpAuthSchemes/aws_sdk/resolveAwsSdkSigV4Config.ts
+var import_client = __nccwpck_require__(4082);
+var import_core2 = __nccwpck_require__(402);
+var import_signature_v4 = __nccwpck_require__(5118);
+var resolveAwsSdkSigV4Config = /* @__PURE__ */ __name((config) => {
+  let inputCredentials = config.credentials;
+  let isUserSupplied = !!config.credentials;
+  let resolvedCredentials = void 0;
+  Object.defineProperty(config, "credentials", {
+    set(credentials) {
+      if (credentials && credentials !== inputCredentials && credentials !== resolvedCredentials) {
+        isUserSupplied = true;
+      }
+      inputCredentials = credentials;
+      const memoizedProvider = normalizeCredentialProvider(config, {
+        credentials: inputCredentials,
+        credentialDefaultProvider: config.credentialDefaultProvider
+      });
+      const boundProvider = bindCallerConfig(config, memoizedProvider);
+      if (isUserSupplied && !boundProvider.attributed) {
+        resolvedCredentials = /* @__PURE__ */ __name(async (options) => boundProvider(options).then(
+          (creds) => (0, import_client.setCredentialFeature)(creds, "CREDENTIALS_CODE", "e")
+        ), "resolvedCredentials");
+        resolvedCredentials.memoized = boundProvider.memoized;
+        resolvedCredentials.configBound = boundProvider.configBound;
+        resolvedCredentials.attributed = true;
+      } else {
+        resolvedCredentials = boundProvider;
+      }
+    },
+    get() {
+      return resolvedCredentials;
+    },
+    enumerable: true,
+    configurable: true
+  });
+  config.credentials = inputCredentials;
+  const {
+    // Default for signingEscapePath
+    signingEscapePath = true,
+    // Default for systemClockOffset
+    systemClockOffset = config.systemClockOffset || 0,
+    // No default for sha256 since it is platform dependent
+    sha256
+  } = config;
+  let signer;
+  if (config.signer) {
+    signer = (0, import_core2.normalizeProvider)(config.signer);
+  } else if (config.regionInfoProvider) {
+    signer = /* @__PURE__ */ __name(() => (0, import_core2.normalizeProvider)(config.region)().then(
+      async (region) => [
+        await config.regionInfoProvider(region, {
+          useFipsEndpoint: await config.useFipsEndpoint(),
+          useDualstackEndpoint: await config.useDualstackEndpoint()
+        }) || {},
+        region
+      ]
+    ).then(([regionInfo, region]) => {
+      const { signingRegion, signingService } = regionInfo;
+      config.signingRegion = config.signingRegion || signingRegion || region;
+      config.signingName = config.signingName || signingService || config.serviceId;
+      const params = {
+        ...config,
+        credentials: config.credentials,
+        region: config.signingRegion,
+        service: config.signingName,
+        sha256,
+        uriEscapePath: signingEscapePath
+      };
+      const SignerCtor = config.signerConstructor || import_signature_v4.SignatureV4;
+      return new SignerCtor(params);
+    }), "signer");
+  } else {
+    signer = /* @__PURE__ */ __name(async (authScheme) => {
+      authScheme = Object.assign(
+        {},
+        {
+          name: "sigv4",
+          signingName: config.signingName || config.defaultSigningName,
+          signingRegion: await (0, import_core2.normalizeProvider)(config.region)(),
+          properties: {}
+        },
+        authScheme
+      );
+      const signingRegion = authScheme.signingRegion;
+      const signingService = authScheme.signingName;
+      config.signingRegion = config.signingRegion || signingRegion;
+      config.signingName = config.signingName || signingService || config.serviceId;
+      const params = {
+        ...config,
+        credentials: config.credentials,
+        region: config.signingRegion,
+        service: config.signingName,
+        sha256,
+        uriEscapePath: signingEscapePath
+      };
+      const SignerCtor = config.signerConstructor || import_signature_v4.SignatureV4;
+      return new SignerCtor(params);
+    }, "signer");
+  }
+  const resolvedConfig = Object.assign(config, {
+    systemClockOffset,
+    signingEscapePath,
+    signer
+  });
+  return resolvedConfig;
+}, "resolveAwsSdkSigV4Config");
+var resolveAWSSDKSigV4Config = resolveAwsSdkSigV4Config;
+function normalizeCredentialProvider(config, {
+  credentials,
+  credentialDefaultProvider
+}) {
+  let credentialsProvider;
+  if (credentials) {
+    if (!credentials?.memoized) {
+      credentialsProvider = (0, import_core2.memoizeIdentityProvider)(credentials, import_core2.isIdentityExpired, import_core2.doesIdentityRequireRefresh);
+    } else {
+      credentialsProvider = credentials;
+    }
+  } else {
+    if (credentialDefaultProvider) {
+      credentialsProvider = (0, import_core2.normalizeProvider)(
+        credentialDefaultProvider(
+          Object.assign({}, config, {
+            parentClientConfig: config
+          })
+        )
+      );
+    } else {
+      credentialsProvider = /* @__PURE__ */ __name(async () => {
+        throw new Error(
+          "@aws-sdk/core::resolveAwsSdkSigV4Config - `credentials` not provided and no credentialDefaultProvider was configured."
+        );
+      }, "credentialsProvider");
+    }
+  }
+  credentialsProvider.memoized = true;
+  return credentialsProvider;
+}
+__name(normalizeCredentialProvider, "normalizeCredentialProvider");
+function bindCallerConfig(config, credentialsProvider) {
+  if (credentialsProvider.configBound) {
+    return credentialsProvider;
+  }
+  const fn = /* @__PURE__ */ __name(async (options) => credentialsProvider({ ...options, callerClientConfig: config }), "fn");
+  fn.memoized = credentialsProvider.memoized;
+  fn.configBound = true;
+  return fn;
+}
+__name(bindCallerConfig, "bindCallerConfig");
+// Annotate the CommonJS export names for ESM import in node:
+0 && (0);
+
+
+/***/ }),
+
+/***/ 4478:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/submodules/protocols/index.ts
+var index_exports = {};
+__export(index_exports, {
+  _toBool: () => _toBool,
+  _toNum: () => _toNum,
+  _toStr: () => _toStr,
+  awsExpectUnion: () => awsExpectUnion,
+  loadRestJsonErrorCode: () => loadRestJsonErrorCode,
+  loadRestXmlErrorCode: () => loadRestXmlErrorCode,
+  parseJsonBody: () => parseJsonBody,
+  parseJsonErrorBody: () => parseJsonErrorBody,
+  parseXmlBody: () => parseXmlBody,
+  parseXmlErrorBody: () => parseXmlErrorBody
+});
+module.exports = __toCommonJS(index_exports);
+
+// src/submodules/protocols/coercing-serializers.ts
+var _toStr = /* @__PURE__ */ __name((val) => {
+  if (val == null) {
+    return val;
+  }
+  if (typeof val === "number" || typeof val === "bigint") {
+    const warning = new Error(`Received number ${val} where a string was expected.`);
+    warning.name = "Warning";
+    console.warn(warning);
+    return String(val);
+  }
+  if (typeof val === "boolean") {
+    const warning = new Error(`Received boolean ${val} where a string was expected.`);
+    warning.name = "Warning";
+    console.warn(warning);
+    return String(val);
+  }
+  return val;
+}, "_toStr");
+var _toBool = /* @__PURE__ */ __name((val) => {
+  if (val == null) {
+    return val;
+  }
+  if (typeof val === "number") {
+  }
+  if (typeof val === "string") {
+    const lowercase = val.toLowerCase();
+    if (val !== "" && lowercase !== "false" && lowercase !== "true") {
+      const warning = new Error(`Received string "${val}" where a boolean was expected.`);
+      warning.name = "Warning";
+      console.warn(warning);
+    }
+    return val !== "" && lowercase !== "false";
+  }
+  return val;
+}, "_toBool");
+var _toNum = /* @__PURE__ */ __name((val) => {
+  if (val == null) {
+    return val;
+  }
+  if (typeof val === "boolean") {
+  }
+  if (typeof val === "string") {
+    const num = Number(val);
+    if (num.toString() !== val) {
+      const warning = new Error(`Received string "${val}" where a number was expected.`);
+      warning.name = "Warning";
+      console.warn(warning);
+      return val;
+    }
+    return num;
+  }
+  return val;
+}, "_toNum");
+
+// src/submodules/protocols/json/awsExpectUnion.ts
+var import_smithy_client = __nccwpck_require__(1411);
+var awsExpectUnion = /* @__PURE__ */ __name((value) => {
+  if (value == null) {
+    return void 0;
+  }
+  if (typeof value === "object" && "__type" in value) {
+    delete value.__type;
+  }
+  return (0, import_smithy_client.expectUnion)(value);
+}, "awsExpectUnion");
+
+// src/submodules/protocols/common.ts
+var import_smithy_client2 = __nccwpck_require__(1411);
+var collectBodyString = /* @__PURE__ */ __name((streamBody, context) => (0, import_smithy_client2.collectBody)(streamBody, context).then((body) => context.utf8Encoder(body)), "collectBodyString");
+
+// src/submodules/protocols/json/parseJsonBody.ts
+var parseJsonBody = /* @__PURE__ */ __name((streamBody, context) => collectBodyString(streamBody, context).then((encoded) => {
+  if (encoded.length) {
+    try {
+      return JSON.parse(encoded);
+    } catch (e) {
+      if (e?.name === "SyntaxError") {
+        Object.defineProperty(e, "$responseBodyText", {
+          value: encoded
+        });
+      }
+      throw e;
+    }
+  }
+  return {};
+}), "parseJsonBody");
+var parseJsonErrorBody = /* @__PURE__ */ __name(async (errorBody, context) => {
+  const value = await parseJsonBody(errorBody, context);
+  value.message = value.message ?? value.Message;
+  return value;
+}, "parseJsonErrorBody");
+var loadRestJsonErrorCode = /* @__PURE__ */ __name((output, data) => {
+  const findKey = /* @__PURE__ */ __name((object, key) => Object.keys(object).find((k) => k.toLowerCase() === key.toLowerCase()), "findKey");
+  const sanitizeErrorCode = /* @__PURE__ */ __name((rawValue) => {
+    let cleanValue = rawValue;
+    if (typeof cleanValue === "number") {
+      cleanValue = cleanValue.toString();
+    }
+    if (cleanValue.indexOf(",") >= 0) {
+      cleanValue = cleanValue.split(",")[0];
+    }
+    if (cleanValue.indexOf(":") >= 0) {
+      cleanValue = cleanValue.split(":")[0];
+    }
+    if (cleanValue.indexOf("#") >= 0) {
+      cleanValue = cleanValue.split("#")[1];
+    }
+    return cleanValue;
+  }, "sanitizeErrorCode");
+  const headerKey = findKey(output.headers, "x-amzn-errortype");
+  if (headerKey !== void 0) {
+    return sanitizeErrorCode(output.headers[headerKey]);
+  }
+  if (data && typeof data === "object") {
+    const codeKey = findKey(data, "code");
+    if (codeKey && data[codeKey] !== void 0) {
+      return sanitizeErrorCode(data[codeKey]);
+    }
+    if (data["__type"] !== void 0) {
+      return sanitizeErrorCode(data["__type"]);
+    }
+  }
+}, "loadRestJsonErrorCode");
+
+// src/submodules/protocols/xml/parseXmlBody.ts
+var import_smithy_client3 = __nccwpck_require__(1411);
+var import_fast_xml_parser = __nccwpck_require__(9741);
+var parseXmlBody = /* @__PURE__ */ __name((streamBody, context) => collectBodyString(streamBody, context).then((encoded) => {
+  if (encoded.length) {
+    const parser = new import_fast_xml_parser.XMLParser({
+      attributeNamePrefix: "",
+      htmlEntities: true,
+      ignoreAttributes: false,
+      ignoreDeclaration: true,
+      parseTagValue: false,
+      trimValues: false,
+      tagValueProcessor: /* @__PURE__ */ __name((_, val) => val.trim() === "" && val.includes("\n") ? "" : void 0, "tagValueProcessor")
+    });
+    parser.addEntity("#xD", "\r");
+    parser.addEntity("#10", "\n");
+    let parsedObj;
+    try {
+      parsedObj = parser.parse(encoded, true);
+    } catch (e) {
+      if (e && typeof e === "object") {
+        Object.defineProperty(e, "$responseBodyText", {
+          value: encoded
+        });
+      }
+      throw e;
+    }
+    const textNodeName = "#text";
+    const key = Object.keys(parsedObj)[0];
+    const parsedObjToReturn = parsedObj[key];
+    if (parsedObjToReturn[textNodeName]) {
+      parsedObjToReturn[key] = parsedObjToReturn[textNodeName];
+      delete parsedObjToReturn[textNodeName];
+    }
+    return (0, import_smithy_client3.getValueFromTextNode)(parsedObjToReturn);
+  }
+  return {};
+}), "parseXmlBody");
+var parseXmlErrorBody = /* @__PURE__ */ __name(async (errorBody, context) => {
+  const value = await parseXmlBody(errorBody, context);
+  if (value.Error) {
+    value.Error.message = value.Error.message ?? value.Error.Message;
+  }
+  return value;
+}, "parseXmlErrorBody");
+var loadRestXmlErrorCode = /* @__PURE__ */ __name((output, data) => {
+  if (data?.Error?.Code !== void 0) {
+    return data.Error.Code;
+  }
+  if (data?.Code !== void 0) {
+    return data.Code;
+  }
+  if (output.statusCode == 404) {
+    return "NotFound";
+  }
+}, "loadRestXmlErrorCode");
+// Annotate the CommonJS export names for ESM import in node:
+0 && (0);
+
+
+/***/ }),
+
+/***/ 6803:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getCrc32ChecksumAlgorithmFunction = void 0;
+const tslib_1 = __nccwpck_require__(1860);
+const crc32_1 = __nccwpck_require__(2110);
+const util_1 = __nccwpck_require__(5667);
+const zlib = tslib_1.__importStar(__nccwpck_require__(3106));
+class NodeCrc32 {
+    checksum = 0;
+    update(data) {
+        this.checksum = zlib.crc32(data, this.checksum);
+    }
+    async digest() {
+        return (0, util_1.numToUint8)(this.checksum);
+    }
+    reset() {
+        this.checksum = 0;
+    }
+}
+const getCrc32ChecksumAlgorithmFunction = () => {
+    if (typeof zlib.crc32 === "undefined") {
+        return crc32_1.AwsCrc32;
+    }
+    return NodeCrc32;
+};
+exports.getCrc32ChecksumAlgorithmFunction = getCrc32ChecksumAlgorithmFunction;
+
+
+/***/ }),
+
+/***/ 8114:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.ts
+var index_exports = {};
+__export(index_exports, {
+  CONFIG_REQUEST_CHECKSUM_CALCULATION: () => CONFIG_REQUEST_CHECKSUM_CALCULATION,
+  CONFIG_RESPONSE_CHECKSUM_VALIDATION: () => CONFIG_RESPONSE_CHECKSUM_VALIDATION,
+  ChecksumAlgorithm: () => ChecksumAlgorithm,
+  ChecksumLocation: () => ChecksumLocation,
+  DEFAULT_CHECKSUM_ALGORITHM: () => DEFAULT_CHECKSUM_ALGORITHM,
+  DEFAULT_REQUEST_CHECKSUM_CALCULATION: () => DEFAULT_REQUEST_CHECKSUM_CALCULATION,
+  DEFAULT_RESPONSE_CHECKSUM_VALIDATION: () => DEFAULT_RESPONSE_CHECKSUM_VALIDATION,
+  ENV_REQUEST_CHECKSUM_CALCULATION: () => ENV_REQUEST_CHECKSUM_CALCULATION,
+  ENV_RESPONSE_CHECKSUM_VALIDATION: () => ENV_RESPONSE_CHECKSUM_VALIDATION,
+  NODE_REQUEST_CHECKSUM_CALCULATION_CONFIG_OPTIONS: () => NODE_REQUEST_CHECKSUM_CALCULATION_CONFIG_OPTIONS,
+  NODE_RESPONSE_CHECKSUM_VALIDATION_CONFIG_OPTIONS: () => NODE_RESPONSE_CHECKSUM_VALIDATION_CONFIG_OPTIONS,
+  RequestChecksumCalculation: () => RequestChecksumCalculation,
+  ResponseChecksumValidation: () => ResponseChecksumValidation,
+  crc64NvmeCrtContainer: () => crc64NvmeCrtContainer,
+  flexibleChecksumsMiddleware: () => flexibleChecksumsMiddleware,
+  flexibleChecksumsMiddlewareOptions: () => flexibleChecksumsMiddlewareOptions,
+  getFlexibleChecksumsPlugin: () => getFlexibleChecksumsPlugin,
+  resolveFlexibleChecksumsConfig: () => resolveFlexibleChecksumsConfig
+});
+module.exports = __toCommonJS(index_exports);
+
+// src/constants.ts
+var RequestChecksumCalculation = {
+  /**
+   * When set, a checksum will be calculated for all request payloads of operations
+   * modeled with the {@link httpChecksum} trait where `requestChecksumRequired` is `true`
+   * AND/OR a `requestAlgorithmMember` is modeled.
+   * {@link https://smithy.io/2.0/aws/aws-core.html#aws-protocols-httpchecksum-trait httpChecksum}
+   */
+  WHEN_SUPPORTED: "WHEN_SUPPORTED",
+  /**
+   * When set, a checksum will only be calculated for request payloads of operations
+   * modeled with the {@link httpChecksum} trait where `requestChecksumRequired` is `true`
+   * OR where a `requestAlgorithmMember` is modeled and the user sets it.
+   * {@link https://smithy.io/2.0/aws/aws-core.html#aws-protocols-httpchecksum-trait httpChecksum}
+   */
+  WHEN_REQUIRED: "WHEN_REQUIRED"
+};
+var DEFAULT_REQUEST_CHECKSUM_CALCULATION = RequestChecksumCalculation.WHEN_SUPPORTED;
+var ResponseChecksumValidation = {
+  /**
+   * When set, checksum validation MUST be performed on all response payloads of operations
+   * modeled with the {@link httpChecksum} trait where `responseAlgorithms` is modeled,
+   * except when no modeled checksum algorithms are supported by an SDK.
+   * {@link https://smithy.io/2.0/aws/aws-core.html#aws-protocols-httpchecksum-trait httpChecksum}
+   */
+  WHEN_SUPPORTED: "WHEN_SUPPORTED",
+  /**
+   * When set, checksum validation MUST NOT be performed on response payloads of operations UNLESS
+   * the SDK supports the modeled checksum algorithms AND the user has set the `requestValidationModeMember` to `ENABLED`.
+   * It is currently impossible to model an operation as requiring a response checksum,
+   * but this setting leaves the door open for future updates.
+   */
+  WHEN_REQUIRED: "WHEN_REQUIRED"
+};
+var DEFAULT_RESPONSE_CHECKSUM_VALIDATION = RequestChecksumCalculation.WHEN_SUPPORTED;
+var ChecksumAlgorithm = /* @__PURE__ */ ((ChecksumAlgorithm3) => {
+  ChecksumAlgorithm3["MD5"] = "MD5";
+  ChecksumAlgorithm3["CRC32"] = "CRC32";
+  ChecksumAlgorithm3["CRC32C"] = "CRC32C";
+  ChecksumAlgorithm3["CRC64NVME"] = "CRC64NVME";
+  ChecksumAlgorithm3["SHA1"] = "SHA1";
+  ChecksumAlgorithm3["SHA256"] = "SHA256";
+  return ChecksumAlgorithm3;
+})(ChecksumAlgorithm || {});
+var ChecksumLocation = /* @__PURE__ */ ((ChecksumLocation2) => {
+  ChecksumLocation2["HEADER"] = "header";
+  ChecksumLocation2["TRAILER"] = "trailer";
+  return ChecksumLocation2;
+})(ChecksumLocation || {});
+var DEFAULT_CHECKSUM_ALGORITHM = "CRC32" /* CRC32 */;
+
+// src/stringUnionSelector.ts
+var stringUnionSelector = /* @__PURE__ */ __name((obj, key, union, type) => {
+  if (!(key in obj)) return void 0;
+  const value = obj[key].toUpperCase();
+  if (!Object.values(union).includes(value)) {
+    throw new TypeError(`Cannot load ${type} '${key}'. Expected one of ${Object.values(union)}, got '${obj[key]}'.`);
+  }
+  return value;
+}, "stringUnionSelector");
+
+// src/NODE_REQUEST_CHECKSUM_CALCULATION_CONFIG_OPTIONS.ts
+var ENV_REQUEST_CHECKSUM_CALCULATION = "AWS_REQUEST_CHECKSUM_CALCULATION";
+var CONFIG_REQUEST_CHECKSUM_CALCULATION = "request_checksum_calculation";
+var NODE_REQUEST_CHECKSUM_CALCULATION_CONFIG_OPTIONS = {
+  environmentVariableSelector: /* @__PURE__ */ __name((env) => stringUnionSelector(env, ENV_REQUEST_CHECKSUM_CALCULATION, RequestChecksumCalculation, "env" /* ENV */), "environmentVariableSelector"),
+  configFileSelector: /* @__PURE__ */ __name((profile) => stringUnionSelector(profile, CONFIG_REQUEST_CHECKSUM_CALCULATION, RequestChecksumCalculation, "shared config entry" /* CONFIG */), "configFileSelector"),
+  default: DEFAULT_REQUEST_CHECKSUM_CALCULATION
+};
+
+// src/NODE_RESPONSE_CHECKSUM_VALIDATION_CONFIG_OPTIONS.ts
+var ENV_RESPONSE_CHECKSUM_VALIDATION = "AWS_RESPONSE_CHECKSUM_VALIDATION";
+var CONFIG_RESPONSE_CHECKSUM_VALIDATION = "response_checksum_validation";
+var NODE_RESPONSE_CHECKSUM_VALIDATION_CONFIG_OPTIONS = {
+  environmentVariableSelector: /* @__PURE__ */ __name((env) => stringUnionSelector(env, ENV_RESPONSE_CHECKSUM_VALIDATION, ResponseChecksumValidation, "env" /* ENV */), "environmentVariableSelector"),
+  configFileSelector: /* @__PURE__ */ __name((profile) => stringUnionSelector(profile, CONFIG_RESPONSE_CHECKSUM_VALIDATION, ResponseChecksumValidation, "shared config entry" /* CONFIG */), "configFileSelector"),
+  default: DEFAULT_RESPONSE_CHECKSUM_VALIDATION
+};
+
+// src/crc64-nvme-crt-container.ts
+var crc64NvmeCrtContainer = {
+  CrtCrc64Nvme: null
+};
+
+// src/flexibleChecksumsMiddleware.ts
+var import_core = __nccwpck_require__(1074);
+var import_protocol_http = __nccwpck_require__(2356);
+var import_util_stream = __nccwpck_require__(4252);
+
+// src/types.ts
+var CLIENT_SUPPORTED_ALGORITHMS = [
+  "CRC32" /* CRC32 */,
+  "CRC32C" /* CRC32C */,
+  "CRC64NVME" /* CRC64NVME */,
+  "SHA1" /* SHA1 */,
+  "SHA256" /* SHA256 */
+];
+var PRIORITY_ORDER_ALGORITHMS = [
+  "SHA256" /* SHA256 */,
+  "SHA1" /* SHA1 */,
+  "CRC32" /* CRC32 */,
+  "CRC32C" /* CRC32C */,
+  "CRC64NVME" /* CRC64NVME */
+];
+
+// src/getChecksumAlgorithmForRequest.ts
+var getChecksumAlgorithmForRequest = /* @__PURE__ */ __name((input, { requestChecksumRequired, requestAlgorithmMember, requestChecksumCalculation }) => {
+  if (!requestAlgorithmMember) {
+    return requestChecksumCalculation === RequestChecksumCalculation.WHEN_SUPPORTED || requestChecksumRequired ? DEFAULT_CHECKSUM_ALGORITHM : void 0;
+  }
+  if (!input[requestAlgorithmMember]) {
+    return void 0;
+  }
+  const checksumAlgorithm = input[requestAlgorithmMember];
+  if (!CLIENT_SUPPORTED_ALGORITHMS.includes(checksumAlgorithm)) {
+    throw new Error(
+      `The checksum algorithm "${checksumAlgorithm}" is not supported by the client. Select one of ${CLIENT_SUPPORTED_ALGORITHMS}.`
+    );
+  }
+  return checksumAlgorithm;
+}, "getChecksumAlgorithmForRequest");
+
+// src/getChecksumLocationName.ts
+var getChecksumLocationName = /* @__PURE__ */ __name((algorithm) => algorithm === "MD5" /* MD5 */ ? "content-md5" : `x-amz-checksum-${algorithm.toLowerCase()}`, "getChecksumLocationName");
+
+// src/hasHeader.ts
+var hasHeader = /* @__PURE__ */ __name((header, headers) => {
+  const soughtHeader = header.toLowerCase();
+  for (const headerName of Object.keys(headers)) {
+    if (soughtHeader === headerName.toLowerCase()) {
+      return true;
+    }
+  }
+  return false;
+}, "hasHeader");
+
+// src/hasHeaderWithPrefix.ts
+var hasHeaderWithPrefix = /* @__PURE__ */ __name((headerPrefix, headers) => {
+  const soughtHeaderPrefix = headerPrefix.toLowerCase();
+  for (const headerName of Object.keys(headers)) {
+    if (headerName.toLowerCase().startsWith(soughtHeaderPrefix)) {
+      return true;
+    }
+  }
+  return false;
+}, "hasHeaderWithPrefix");
+
+// src/isStreaming.ts
+var import_is_array_buffer = __nccwpck_require__(8824);
+var isStreaming = /* @__PURE__ */ __name((body) => body !== void 0 && typeof body !== "string" && !ArrayBuffer.isView(body) && !(0, import_is_array_buffer.isArrayBuffer)(body), "isStreaming");
+
+// src/selectChecksumAlgorithmFunction.ts
+var import_crc32c = __nccwpck_require__(1491);
+var import_getCrc32ChecksumAlgorithmFunction = __nccwpck_require__(6803);
+var selectChecksumAlgorithmFunction = /* @__PURE__ */ __name((checksumAlgorithm, config) => {
+  switch (checksumAlgorithm) {
+    case "MD5" /* MD5 */:
+      return config.md5;
+    case "CRC32" /* CRC32 */:
+      return (0, import_getCrc32ChecksumAlgorithmFunction.getCrc32ChecksumAlgorithmFunction)();
+    case "CRC32C" /* CRC32C */:
+      return import_crc32c.AwsCrc32c;
+    case "CRC64NVME" /* CRC64NVME */:
+      if (typeof crc64NvmeCrtContainer.CrtCrc64Nvme !== "function") {
+        throw new Error(
+          `Please check whether you have installed the "@aws-sdk/crc64-nvme-crt" package explicitly. 
+You must also register the package by calling [require("@aws-sdk/crc64-nvme-crt");] or an ESM equivalent such as [import "@aws-sdk/crc64-nvme-crt";]. 
+For more information please go to https://github.com/aws/aws-sdk-js-v3#functionality-requiring-aws-common-runtime-crt`
+        );
+      }
+      return crc64NvmeCrtContainer.CrtCrc64Nvme;
+    case "SHA1" /* SHA1 */:
+      return config.sha1;
+    case "SHA256" /* SHA256 */:
+      return config.sha256;
+    default:
+      throw new Error(`Unsupported checksum algorithm: ${checksumAlgorithm}`);
+  }
+}, "selectChecksumAlgorithmFunction");
+
+// src/stringHasher.ts
+var import_util_utf8 = __nccwpck_require__(2567);
+var stringHasher = /* @__PURE__ */ __name((checksumAlgorithmFn, body) => {
+  const hash = new checksumAlgorithmFn();
+  hash.update((0, import_util_utf8.toUint8Array)(body || ""));
+  return hash.digest();
+}, "stringHasher");
+
+// src/flexibleChecksumsMiddleware.ts
+var flexibleChecksumsMiddlewareOptions = {
+  name: "flexibleChecksumsMiddleware",
+  step: "build",
+  tags: ["BODY_CHECKSUM"],
+  override: true
+};
+var flexibleChecksumsMiddleware = /* @__PURE__ */ __name((config, middlewareConfig) => (next, context) => async (args) => {
+  if (!import_protocol_http.HttpRequest.isInstance(args.request)) {
+    return next(args);
+  }
+  if (hasHeaderWithPrefix("x-amz-checksum-", args.request.headers)) {
+    return next(args);
+  }
+  const { request, input } = args;
+  const { body: requestBody, headers } = request;
+  const { base64Encoder, streamHasher } = config;
+  const { requestChecksumRequired, requestAlgorithmMember } = middlewareConfig;
+  const requestChecksumCalculation = await config.requestChecksumCalculation();
+  const requestAlgorithmMemberName = requestAlgorithmMember?.name;
+  const requestAlgorithmMemberHttpHeader = requestAlgorithmMember?.httpHeader;
+  if (requestAlgorithmMemberName && !input[requestAlgorithmMemberName]) {
+    if (requestChecksumCalculation === RequestChecksumCalculation.WHEN_SUPPORTED || requestChecksumRequired) {
+      input[requestAlgorithmMemberName] = DEFAULT_CHECKSUM_ALGORITHM;
+      if (requestAlgorithmMemberHttpHeader) {
+        headers[requestAlgorithmMemberHttpHeader] = DEFAULT_CHECKSUM_ALGORITHM;
+      }
+    }
+  }
+  const checksumAlgorithm = getChecksumAlgorithmForRequest(input, {
+    requestChecksumRequired,
+    requestAlgorithmMember: requestAlgorithmMember?.name,
+    requestChecksumCalculation
+  });
+  let updatedBody = requestBody;
+  let updatedHeaders = headers;
+  if (checksumAlgorithm) {
+    switch (checksumAlgorithm) {
+      case "CRC32" /* CRC32 */:
+        (0, import_core.setFeature)(context, "FLEXIBLE_CHECKSUMS_REQ_CRC32", "U");
+        break;
+      case "CRC32C" /* CRC32C */:
+        (0, import_core.setFeature)(context, "FLEXIBLE_CHECKSUMS_REQ_CRC32C", "V");
+        break;
+      case "CRC64NVME" /* CRC64NVME */:
+        (0, import_core.setFeature)(context, "FLEXIBLE_CHECKSUMS_REQ_CRC64", "W");
+        break;
+      case "SHA1" /* SHA1 */:
+        (0, import_core.setFeature)(context, "FLEXIBLE_CHECKSUMS_REQ_SHA1", "X");
+        break;
+      case "SHA256" /* SHA256 */:
+        (0, import_core.setFeature)(context, "FLEXIBLE_CHECKSUMS_REQ_SHA256", "Y");
+        break;
+    }
+    const checksumLocationName = getChecksumLocationName(checksumAlgorithm);
+    const checksumAlgorithmFn = selectChecksumAlgorithmFunction(checksumAlgorithm, config);
+    if (isStreaming(requestBody)) {
+      const { getAwsChunkedEncodingStream, bodyLengthChecker } = config;
+      updatedBody = getAwsChunkedEncodingStream(
+        typeof config.requestStreamBufferSize === "number" && config.requestStreamBufferSize >= 8 * 1024 ? (0, import_util_stream.createBufferedReadable)(requestBody, config.requestStreamBufferSize, context.logger) : requestBody,
+        {
+          base64Encoder,
+          bodyLengthChecker,
+          checksumLocationName,
+          checksumAlgorithmFn,
+          streamHasher
+        }
+      );
+      updatedHeaders = {
+        ...headers,
+        "content-encoding": headers["content-encoding"] ? `${headers["content-encoding"]},aws-chunked` : "aws-chunked",
+        "transfer-encoding": "chunked",
+        "x-amz-decoded-content-length": headers["content-length"],
+        "x-amz-content-sha256": "STREAMING-UNSIGNED-PAYLOAD-TRAILER",
+        "x-amz-trailer": checksumLocationName
+      };
+      delete updatedHeaders["content-length"];
+    } else if (!hasHeader(checksumLocationName, headers)) {
+      const rawChecksum = await stringHasher(checksumAlgorithmFn, requestBody);
+      updatedHeaders = {
+        ...headers,
+        [checksumLocationName]: base64Encoder(rawChecksum)
+      };
+    }
+  }
+  const result = await next({
+    ...args,
+    request: {
+      ...request,
+      headers: updatedHeaders,
+      body: updatedBody
+    }
+  });
+  return result;
+}, "flexibleChecksumsMiddleware");
+
+// src/flexibleChecksumsInputMiddleware.ts
+
+var flexibleChecksumsInputMiddlewareOptions = {
+  name: "flexibleChecksumsInputMiddleware",
+  toMiddleware: "serializerMiddleware",
+  relation: "before",
+  tags: ["BODY_CHECKSUM"],
+  override: true
+};
+var flexibleChecksumsInputMiddleware = /* @__PURE__ */ __name((config, middlewareConfig) => (next, context) => async (args) => {
+  const input = args.input;
+  const { requestValidationModeMember } = middlewareConfig;
+  const requestChecksumCalculation = await config.requestChecksumCalculation();
+  const responseChecksumValidation = await config.responseChecksumValidation();
+  switch (requestChecksumCalculation) {
+    case RequestChecksumCalculation.WHEN_REQUIRED:
+      (0, import_core.setFeature)(context, "FLEXIBLE_CHECKSUMS_REQ_WHEN_REQUIRED", "a");
+      break;
+    case RequestChecksumCalculation.WHEN_SUPPORTED:
+      (0, import_core.setFeature)(context, "FLEXIBLE_CHECKSUMS_REQ_WHEN_SUPPORTED", "Z");
+      break;
+  }
+  switch (responseChecksumValidation) {
+    case ResponseChecksumValidation.WHEN_REQUIRED:
+      (0, import_core.setFeature)(context, "FLEXIBLE_CHECKSUMS_RES_WHEN_REQUIRED", "c");
+      break;
+    case ResponseChecksumValidation.WHEN_SUPPORTED:
+      (0, import_core.setFeature)(context, "FLEXIBLE_CHECKSUMS_RES_WHEN_SUPPORTED", "b");
+      break;
+  }
+  if (requestValidationModeMember && !input[requestValidationModeMember]) {
+    if (responseChecksumValidation === ResponseChecksumValidation.WHEN_SUPPORTED) {
+      input[requestValidationModeMember] = "ENABLED";
+    }
+  }
+  return next(args);
+}, "flexibleChecksumsInputMiddleware");
+
+// src/flexibleChecksumsResponseMiddleware.ts
+
+
+// src/getChecksumAlgorithmListForResponse.ts
+var getChecksumAlgorithmListForResponse = /* @__PURE__ */ __name((responseAlgorithms = []) => {
+  const validChecksumAlgorithms = [];
+  for (const algorithm of PRIORITY_ORDER_ALGORITHMS) {
+    if (!responseAlgorithms.includes(algorithm) || !CLIENT_SUPPORTED_ALGORITHMS.includes(algorithm)) {
+      continue;
+    }
+    validChecksumAlgorithms.push(algorithm);
+  }
+  return validChecksumAlgorithms;
+}, "getChecksumAlgorithmListForResponse");
+
+// src/isChecksumWithPartNumber.ts
+var isChecksumWithPartNumber = /* @__PURE__ */ __name((checksum) => {
+  const lastHyphenIndex = checksum.lastIndexOf("-");
+  if (lastHyphenIndex !== -1) {
+    const numberPart = checksum.slice(lastHyphenIndex + 1);
+    if (!numberPart.startsWith("0")) {
+      const number = parseInt(numberPart, 10);
+      if (!isNaN(number) && number >= 1 && number <= 1e4) {
+        return true;
+      }
+    }
+  }
+  return false;
+}, "isChecksumWithPartNumber");
+
+// src/validateChecksumFromResponse.ts
+
+
+// src/getChecksum.ts
+var getChecksum = /* @__PURE__ */ __name(async (body, { checksumAlgorithmFn, base64Encoder }) => base64Encoder(await stringHasher(checksumAlgorithmFn, body)), "getChecksum");
+
+// src/validateChecksumFromResponse.ts
+var validateChecksumFromResponse = /* @__PURE__ */ __name(async (response, { config, responseAlgorithms, logger }) => {
+  const checksumAlgorithms = getChecksumAlgorithmListForResponse(responseAlgorithms);
+  const { body: responseBody, headers: responseHeaders } = response;
+  for (const algorithm of checksumAlgorithms) {
+    const responseHeader = getChecksumLocationName(algorithm);
+    const checksumFromResponse = responseHeaders[responseHeader];
+    if (checksumFromResponse) {
+      let checksumAlgorithmFn;
+      try {
+        checksumAlgorithmFn = selectChecksumAlgorithmFunction(algorithm, config);
+      } catch (error) {
+        if (algorithm === "CRC64NVME" /* CRC64NVME */) {
+          logger?.warn(`Skipping ${"CRC64NVME" /* CRC64NVME */} checksum validation: ${error.message}`);
+          continue;
+        }
+        throw error;
+      }
+      const { base64Encoder } = config;
+      if (isStreaming(responseBody)) {
+        response.body = (0, import_util_stream.createChecksumStream)({
+          expectedChecksum: checksumFromResponse,
+          checksumSourceLocation: responseHeader,
+          checksum: new checksumAlgorithmFn(),
+          source: responseBody,
+          base64Encoder
+        });
+        return;
+      }
+      const checksum = await getChecksum(responseBody, { checksumAlgorithmFn, base64Encoder });
+      if (checksum === checksumFromResponse) {
+        break;
+      }
+      throw new Error(
+        `Checksum mismatch: expected "${checksum}" but received "${checksumFromResponse}" in response header "${responseHeader}".`
+      );
+    }
+  }
+}, "validateChecksumFromResponse");
+
+// src/flexibleChecksumsResponseMiddleware.ts
+var flexibleChecksumsResponseMiddlewareOptions = {
+  name: "flexibleChecksumsResponseMiddleware",
+  toMiddleware: "deserializerMiddleware",
+  relation: "after",
+  tags: ["BODY_CHECKSUM"],
+  override: true
+};
+var flexibleChecksumsResponseMiddleware = /* @__PURE__ */ __name((config, middlewareConfig) => (next, context) => async (args) => {
+  if (!import_protocol_http.HttpRequest.isInstance(args.request)) {
+    return next(args);
+  }
+  const input = args.input;
+  const result = await next(args);
+  const response = result.response;
+  const { requestValidationModeMember, responseAlgorithms } = middlewareConfig;
+  if (requestValidationModeMember && input[requestValidationModeMember] === "ENABLED") {
+    const { clientName, commandName } = context;
+    const isS3WholeObjectMultipartGetResponseChecksum = clientName === "S3Client" && commandName === "GetObjectCommand" && getChecksumAlgorithmListForResponse(responseAlgorithms).every((algorithm) => {
+      const responseHeader = getChecksumLocationName(algorithm);
+      const checksumFromResponse = response.headers[responseHeader];
+      return !checksumFromResponse || isChecksumWithPartNumber(checksumFromResponse);
+    });
+    if (isS3WholeObjectMultipartGetResponseChecksum) {
+      return result;
+    }
+    await validateChecksumFromResponse(response, {
+      config,
+      responseAlgorithms,
+      logger: context.logger
+    });
+  }
+  return result;
+}, "flexibleChecksumsResponseMiddleware");
+
+// src/getFlexibleChecksumsPlugin.ts
+var getFlexibleChecksumsPlugin = /* @__PURE__ */ __name((config, middlewareConfig) => ({
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
+    clientStack.add(flexibleChecksumsMiddleware(config, middlewareConfig), flexibleChecksumsMiddlewareOptions);
+    clientStack.addRelativeTo(
+      flexibleChecksumsInputMiddleware(config, middlewareConfig),
+      flexibleChecksumsInputMiddlewareOptions
+    );
+    clientStack.addRelativeTo(
+      flexibleChecksumsResponseMiddleware(config, middlewareConfig),
+      flexibleChecksumsResponseMiddlewareOptions
+    );
+  }, "applyToStack")
+}), "getFlexibleChecksumsPlugin");
+
+// src/resolveFlexibleChecksumsConfig.ts
+var import_util_middleware = __nccwpck_require__(6324);
+var resolveFlexibleChecksumsConfig = /* @__PURE__ */ __name((input) => {
+  const { requestChecksumCalculation, responseChecksumValidation, requestStreamBufferSize } = input;
+  return Object.assign(input, {
+    requestChecksumCalculation: (0, import_util_middleware.normalizeProvider)(requestChecksumCalculation ?? DEFAULT_REQUEST_CHECKSUM_CALCULATION),
+    responseChecksumValidation: (0, import_util_middleware.normalizeProvider)(responseChecksumValidation ?? DEFAULT_RESPONSE_CHECKSUM_VALIDATION),
+    requestStreamBufferSize: Number(requestStreamBufferSize ?? 0)
+  });
+}, "resolveFlexibleChecksumsConfig");
+// Annotate the CommonJS export names for ESM import in node:
+
+0 && (0);
+
+
+
+/***/ }),
+
+/***/ 8824:
+/***/ ((module) => {
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.ts
+var src_exports = {};
+__export(src_exports, {
+  isArrayBuffer: () => isArrayBuffer
+});
+module.exports = __toCommonJS(src_exports);
+var isArrayBuffer = /* @__PURE__ */ __name((arg) => typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer || Object.prototype.toString.call(arg) === "[object ArrayBuffer]", "isArrayBuffer");
+// Annotate the CommonJS export names for ESM import in node:
+
+0 && (0);
+
+
+
+/***/ }),
+
+/***/ 4993:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.ts
+var src_exports = {};
+__export(src_exports, {
+  fromArrayBuffer: () => fromArrayBuffer,
+  fromString: () => fromString
+});
+module.exports = __toCommonJS(src_exports);
+var import_is_array_buffer = __nccwpck_require__(8824);
+var import_buffer = __nccwpck_require__(181);
+var fromArrayBuffer = /* @__PURE__ */ __name((input, offset = 0, length = input.byteLength - offset) => {
+  if (!(0, import_is_array_buffer.isArrayBuffer)(input)) {
+    throw new TypeError(`The "input" argument must be ArrayBuffer. Received type ${typeof input} (${input})`);
+  }
+  return import_buffer.Buffer.from(input, offset, length);
+}, "fromArrayBuffer");
+var fromString = /* @__PURE__ */ __name((input, encoding) => {
+  if (typeof input !== "string") {
+    throw new TypeError(`The "input" argument must be of type string. Received type ${typeof input} (${input})`);
+  }
+  return encoding ? import_buffer.Buffer.from(input, encoding) : import_buffer.Buffer.from(input);
+}, "fromString");
+// Annotate the CommonJS export names for ESM import in node:
+
+0 && (0);
+
+
+
+/***/ }),
+
+/***/ 2567:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.ts
+var src_exports = {};
+__export(src_exports, {
+  fromUtf8: () => fromUtf8,
+  toUint8Array: () => toUint8Array,
+  toUtf8: () => toUtf8
+});
+module.exports = __toCommonJS(src_exports);
+
+// src/fromUtf8.ts
+var import_util_buffer_from = __nccwpck_require__(4993);
+var fromUtf8 = /* @__PURE__ */ __name((input) => {
+  const buf = (0, import_util_buffer_from.fromString)(input, "utf8");
+  return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength / Uint8Array.BYTES_PER_ELEMENT);
+}, "fromUtf8");
+
+// src/toUint8Array.ts
+var toUint8Array = /* @__PURE__ */ __name((data) => {
+  if (typeof data === "string") {
+    return fromUtf8(data);
+  }
+  if (ArrayBuffer.isView(data)) {
+    return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
+  }
+  return new Uint8Array(data);
+}, "toUint8Array");
+
+// src/toUtf8.ts
+
+var toUtf8 = /* @__PURE__ */ __name((input) => {
+  if (typeof input === "string") {
+    return input;
+  }
+  if (typeof input !== "object" || typeof input.byteOffset !== "number" || typeof input.byteLength !== "number") {
+    throw new Error("@smithy/util-utf8: toUtf8 encoder function only accepts string | Uint8Array.");
+  }
+  return (0, import_util_buffer_from.fromArrayBuffer)(input.buffer, input.byteOffset, input.byteLength).toString("utf8");
+}, "toUtf8");
+// Annotate the CommonJS export names for ESM import in node:
+
+0 && (0);
+
+
+
+/***/ }),
+
 /***/ 5606:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -19439,6 +20914,1082 @@ var index_exports = {};
 module.exports = __toCommonJS(index_exports);
 __reExport(index_exports, __nccwpck_require__(8079), module.exports);
 __reExport(index_exports, __nccwpck_require__(4453), module.exports);
+// Annotate the CommonJS export names for ESM import in node:
+
+0 && (0);
+
+
+
+/***/ }),
+
+/***/ 5505:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.ts
+var index_exports = {};
+module.exports = __toCommonJS(index_exports);
+var import_util_user_agent_node = __nccwpck_require__(8616);
+__reExport(index_exports, __nccwpck_require__(228), module.exports);
+import_util_user_agent_node.crtAvailability.isCrtAvailable = true;
+// Annotate the CommonJS export names for ESM import in node:
+
+0 && (0);
+
+
+
+/***/ }),
+
+/***/ 3536:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __nccwpck_require__(1860);
+tslib_1.__exportStar(__nccwpck_require__(9296), exports);
+tslib_1.__exportStar(__nccwpck_require__(4003), exports);
+tslib_1.__exportStar(__nccwpck_require__(3768), exports);
+
+
+/***/ }),
+
+/***/ 9296:
+/***/ ((module) => {
+
+"use strict";
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/submodules/client/index.ts
+var index_exports = {};
+__export(index_exports, {
+  emitWarningIfUnsupportedVersion: () => emitWarningIfUnsupportedVersion,
+  setCredentialFeature: () => setCredentialFeature,
+  setFeature: () => setFeature,
+  state: () => state
+});
+module.exports = __toCommonJS(index_exports);
+
+// src/submodules/client/emitWarningIfUnsupportedVersion.ts
+var state = {
+  warningEmitted: false
+};
+var emitWarningIfUnsupportedVersion = /* @__PURE__ */ __name((version) => {
+  if (version && !state.warningEmitted && parseInt(version.substring(1, version.indexOf("."))) < 18) {
+    state.warningEmitted = true;
+    process.emitWarning(
+      `NodeDeprecationWarning: The AWS SDK for JavaScript (v3) will
+no longer support Node.js 16.x on January 6, 2025.
+
+To continue receiving updates to AWS services, bug fixes, and security
+updates please upgrade to a supported Node.js LTS version.
+
+More information can be found at: https://a.co/74kJMmI`
+    );
+  }
+}, "emitWarningIfUnsupportedVersion");
+
+// src/submodules/client/setCredentialFeature.ts
+function setCredentialFeature(credentials, feature, value) {
+  if (!credentials.$source) {
+    credentials.$source = {};
+  }
+  credentials.$source[feature] = value;
+  return credentials;
+}
+__name(setCredentialFeature, "setCredentialFeature");
+
+// src/submodules/client/setFeature.ts
+function setFeature(context, feature, value) {
+  if (!context.__aws_sdk_context) {
+    context.__aws_sdk_context = {
+      features: {}
+    };
+  } else if (!context.__aws_sdk_context.features) {
+    context.__aws_sdk_context.features = {};
+  }
+  context.__aws_sdk_context.features[feature] = value;
+}
+__name(setFeature, "setFeature");
+// Annotate the CommonJS export names for ESM import in node:
+0 && (0);
+
+
+/***/ }),
+
+/***/ 4003:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/submodules/httpAuthSchemes/index.ts
+var index_exports = {};
+__export(index_exports, {
+  AWSSDKSigV4Signer: () => AWSSDKSigV4Signer,
+  AwsSdkSigV4ASigner: () => AwsSdkSigV4ASigner,
+  AwsSdkSigV4Signer: () => AwsSdkSigV4Signer,
+  NODE_AUTH_SCHEME_PREFERENCE_OPTIONS: () => NODE_AUTH_SCHEME_PREFERENCE_OPTIONS,
+  NODE_SIGV4A_CONFIG_OPTIONS: () => NODE_SIGV4A_CONFIG_OPTIONS,
+  getBearerTokenEnvKey: () => getBearerTokenEnvKey,
+  resolveAWSSDKSigV4Config: () => resolveAWSSDKSigV4Config,
+  resolveAwsSdkSigV4AConfig: () => resolveAwsSdkSigV4AConfig,
+  resolveAwsSdkSigV4Config: () => resolveAwsSdkSigV4Config,
+  validateSigningProperties: () => validateSigningProperties
+});
+module.exports = __toCommonJS(index_exports);
+
+// src/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4Signer.ts
+var import_protocol_http2 = __nccwpck_require__(2356);
+
+// src/submodules/httpAuthSchemes/utils/getDateHeader.ts
+var import_protocol_http = __nccwpck_require__(2356);
+var getDateHeader = /* @__PURE__ */ __name((response) => import_protocol_http.HttpResponse.isInstance(response) ? response.headers?.date ?? response.headers?.Date : void 0, "getDateHeader");
+
+// src/submodules/httpAuthSchemes/utils/getSkewCorrectedDate.ts
+var getSkewCorrectedDate = /* @__PURE__ */ __name((systemClockOffset) => new Date(Date.now() + systemClockOffset), "getSkewCorrectedDate");
+
+// src/submodules/httpAuthSchemes/utils/isClockSkewed.ts
+var isClockSkewed = /* @__PURE__ */ __name((clockTime, systemClockOffset) => Math.abs(getSkewCorrectedDate(systemClockOffset).getTime() - clockTime) >= 3e5, "isClockSkewed");
+
+// src/submodules/httpAuthSchemes/utils/getUpdatedSystemClockOffset.ts
+var getUpdatedSystemClockOffset = /* @__PURE__ */ __name((clockTime, currentSystemClockOffset) => {
+  const clockTimeInMs = Date.parse(clockTime);
+  if (isClockSkewed(clockTimeInMs, currentSystemClockOffset)) {
+    return clockTimeInMs - Date.now();
+  }
+  return currentSystemClockOffset;
+}, "getUpdatedSystemClockOffset");
+
+// src/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4Signer.ts
+var throwSigningPropertyError = /* @__PURE__ */ __name((name, property) => {
+  if (!property) {
+    throw new Error(`Property \`${name}\` is not resolved for AWS SDK SigV4Auth`);
+  }
+  return property;
+}, "throwSigningPropertyError");
+var validateSigningProperties = /* @__PURE__ */ __name(async (signingProperties) => {
+  const context = throwSigningPropertyError(
+    "context",
+    signingProperties.context
+  );
+  const config = throwSigningPropertyError("config", signingProperties.config);
+  const authScheme = context.endpointV2?.properties?.authSchemes?.[0];
+  const signerFunction = throwSigningPropertyError(
+    "signer",
+    config.signer
+  );
+  const signer = await signerFunction(authScheme);
+  const signingRegion = signingProperties?.signingRegion;
+  const signingRegionSet = signingProperties?.signingRegionSet;
+  const signingName = signingProperties?.signingName;
+  return {
+    config,
+    signer,
+    signingRegion,
+    signingRegionSet,
+    signingName
+  };
+}, "validateSigningProperties");
+var AwsSdkSigV4Signer = class {
+  static {
+    __name(this, "AwsSdkSigV4Signer");
+  }
+  async sign(httpRequest, identity, signingProperties) {
+    if (!import_protocol_http2.HttpRequest.isInstance(httpRequest)) {
+      throw new Error("The request is not an instance of `HttpRequest` and cannot be signed");
+    }
+    const validatedProps = await validateSigningProperties(signingProperties);
+    const { config, signer } = validatedProps;
+    let { signingRegion, signingName } = validatedProps;
+    const handlerExecutionContext = signingProperties.context;
+    if (handlerExecutionContext?.authSchemes?.length ?? 0 > 1) {
+      const [first, second] = handlerExecutionContext.authSchemes;
+      if (first?.name === "sigv4a" && second?.name === "sigv4") {
+        signingRegion = second?.signingRegion ?? signingRegion;
+        signingName = second?.signingName ?? signingName;
+      }
+    }
+    const signedRequest = await signer.sign(httpRequest, {
+      signingDate: getSkewCorrectedDate(config.systemClockOffset),
+      signingRegion,
+      signingService: signingName
+    });
+    return signedRequest;
+  }
+  errorHandler(signingProperties) {
+    return (error) => {
+      const serverTime = error.ServerTime ?? getDateHeader(error.$response);
+      if (serverTime) {
+        const config = throwSigningPropertyError("config", signingProperties.config);
+        const initialSystemClockOffset = config.systemClockOffset;
+        config.systemClockOffset = getUpdatedSystemClockOffset(serverTime, config.systemClockOffset);
+        const clockSkewCorrected = config.systemClockOffset !== initialSystemClockOffset;
+        if (clockSkewCorrected && error.$metadata) {
+          error.$metadata.clockSkewCorrected = true;
+        }
+      }
+      throw error;
+    };
+  }
+  successHandler(httpResponse, signingProperties) {
+    const dateHeader = getDateHeader(httpResponse);
+    if (dateHeader) {
+      const config = throwSigningPropertyError("config", signingProperties.config);
+      config.systemClockOffset = getUpdatedSystemClockOffset(dateHeader, config.systemClockOffset);
+    }
+  }
+};
+var AWSSDKSigV4Signer = AwsSdkSigV4Signer;
+
+// src/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4ASigner.ts
+var import_protocol_http3 = __nccwpck_require__(2356);
+var AwsSdkSigV4ASigner = class extends AwsSdkSigV4Signer {
+  static {
+    __name(this, "AwsSdkSigV4ASigner");
+  }
+  async sign(httpRequest, identity, signingProperties) {
+    if (!import_protocol_http3.HttpRequest.isInstance(httpRequest)) {
+      throw new Error("The request is not an instance of `HttpRequest` and cannot be signed");
+    }
+    const { config, signer, signingRegion, signingRegionSet, signingName } = await validateSigningProperties(
+      signingProperties
+    );
+    const configResolvedSigningRegionSet = await config.sigv4aSigningRegionSet?.();
+    const multiRegionOverride = (configResolvedSigningRegionSet ?? signingRegionSet ?? [signingRegion]).join(",");
+    const signedRequest = await signer.sign(httpRequest, {
+      signingDate: getSkewCorrectedDate(config.systemClockOffset),
+      signingRegion: multiRegionOverride,
+      signingService: signingName
+    });
+    return signedRequest;
+  }
+};
+
+// src/submodules/httpAuthSchemes/utils/getArrayForCommaSeparatedString.ts
+var getArrayForCommaSeparatedString = /* @__PURE__ */ __name((str) => typeof str === "string" && str.length > 0 ? str.split(",").map((item) => item.trim()) : [], "getArrayForCommaSeparatedString");
+
+// src/submodules/httpAuthSchemes/utils/getBearerTokenEnvKey.ts
+var getBearerTokenEnvKey = /* @__PURE__ */ __name((signingName) => `AWS_BEARER_TOKEN_${signingName.replace(/[\s-]/g, "_").toUpperCase()}`, "getBearerTokenEnvKey");
+
+// src/submodules/httpAuthSchemes/aws_sdk/NODE_AUTH_SCHEME_PREFERENCE_OPTIONS.ts
+var NODE_AUTH_SCHEME_PREFERENCE_ENV_KEY = "AWS_AUTH_SCHEME_PREFERENCE";
+var NODE_AUTH_SCHEME_PREFERENCE_CONFIG_KEY = "auth_scheme_preference";
+var NODE_AUTH_SCHEME_PREFERENCE_OPTIONS = {
+  /**
+   * Retrieves auth scheme preference from environment variables
+   * @param env - Node process environment object
+   * @returns Array of auth scheme strings if preference is set, undefined otherwise
+   */
+  environmentVariableSelector: /* @__PURE__ */ __name((env, options) => {
+    if (options?.signingName) {
+      const bearerTokenKey = getBearerTokenEnvKey(options.signingName);
+      if (bearerTokenKey in env) return ["httpBearerAuth"];
+    }
+    if (!(NODE_AUTH_SCHEME_PREFERENCE_ENV_KEY in env)) return void 0;
+    return getArrayForCommaSeparatedString(env[NODE_AUTH_SCHEME_PREFERENCE_ENV_KEY]);
+  }, "environmentVariableSelector"),
+  /**
+   * Retrieves auth scheme preference from config file
+   * @param profile - Config profile object
+   * @returns Array of auth scheme strings if preference is set, undefined otherwise
+   */
+  configFileSelector: /* @__PURE__ */ __name((profile) => {
+    if (!(NODE_AUTH_SCHEME_PREFERENCE_CONFIG_KEY in profile)) return void 0;
+    return getArrayForCommaSeparatedString(profile[NODE_AUTH_SCHEME_PREFERENCE_CONFIG_KEY]);
+  }, "configFileSelector"),
+  /**
+   * Default auth scheme preference if not specified in environment or config
+   */
+  default: []
+};
+
+// src/submodules/httpAuthSchemes/aws_sdk/resolveAwsSdkSigV4AConfig.ts
+var import_core = __nccwpck_require__(402);
+var import_property_provider = __nccwpck_require__(1238);
+var resolveAwsSdkSigV4AConfig = /* @__PURE__ */ __name((config) => {
+  config.sigv4aSigningRegionSet = (0, import_core.normalizeProvider)(config.sigv4aSigningRegionSet);
+  return config;
+}, "resolveAwsSdkSigV4AConfig");
+var NODE_SIGV4A_CONFIG_OPTIONS = {
+  environmentVariableSelector(env) {
+    if (env.AWS_SIGV4A_SIGNING_REGION_SET) {
+      return env.AWS_SIGV4A_SIGNING_REGION_SET.split(",").map((_) => _.trim());
+    }
+    throw new import_property_provider.ProviderError("AWS_SIGV4A_SIGNING_REGION_SET not set in env.", {
+      tryNextLink: true
+    });
+  },
+  configFileSelector(profile) {
+    if (profile.sigv4a_signing_region_set) {
+      return (profile.sigv4a_signing_region_set ?? "").split(",").map((_) => _.trim());
+    }
+    throw new import_property_provider.ProviderError("sigv4a_signing_region_set not set in profile.", {
+      tryNextLink: true
+    });
+  },
+  default: void 0
+};
+
+// src/submodules/httpAuthSchemes/aws_sdk/resolveAwsSdkSigV4Config.ts
+var import_client = __nccwpck_require__(9296);
+var import_core2 = __nccwpck_require__(402);
+var import_signature_v4 = __nccwpck_require__(5118);
+var resolveAwsSdkSigV4Config = /* @__PURE__ */ __name((config) => {
+  let inputCredentials = config.credentials;
+  let isUserSupplied = !!config.credentials;
+  let resolvedCredentials = void 0;
+  Object.defineProperty(config, "credentials", {
+    set(credentials) {
+      if (credentials && credentials !== inputCredentials && credentials !== resolvedCredentials) {
+        isUserSupplied = true;
+      }
+      inputCredentials = credentials;
+      const memoizedProvider = normalizeCredentialProvider(config, {
+        credentials: inputCredentials,
+        credentialDefaultProvider: config.credentialDefaultProvider
+      });
+      const boundProvider = bindCallerConfig(config, memoizedProvider);
+      if (isUserSupplied && !boundProvider.attributed) {
+        resolvedCredentials = /* @__PURE__ */ __name(async (options) => boundProvider(options).then(
+          (creds) => (0, import_client.setCredentialFeature)(creds, "CREDENTIALS_CODE", "e")
+        ), "resolvedCredentials");
+        resolvedCredentials.memoized = boundProvider.memoized;
+        resolvedCredentials.configBound = boundProvider.configBound;
+        resolvedCredentials.attributed = true;
+      } else {
+        resolvedCredentials = boundProvider;
+      }
+    },
+    get() {
+      return resolvedCredentials;
+    },
+    enumerable: true,
+    configurable: true
+  });
+  config.credentials = inputCredentials;
+  const {
+    // Default for signingEscapePath
+    signingEscapePath = true,
+    // Default for systemClockOffset
+    systemClockOffset = config.systemClockOffset || 0,
+    // No default for sha256 since it is platform dependent
+    sha256
+  } = config;
+  let signer;
+  if (config.signer) {
+    signer = (0, import_core2.normalizeProvider)(config.signer);
+  } else if (config.regionInfoProvider) {
+    signer = /* @__PURE__ */ __name(() => (0, import_core2.normalizeProvider)(config.region)().then(
+      async (region) => [
+        await config.regionInfoProvider(region, {
+          useFipsEndpoint: await config.useFipsEndpoint(),
+          useDualstackEndpoint: await config.useDualstackEndpoint()
+        }) || {},
+        region
+      ]
+    ).then(([regionInfo, region]) => {
+      const { signingRegion, signingService } = regionInfo;
+      config.signingRegion = config.signingRegion || signingRegion || region;
+      config.signingName = config.signingName || signingService || config.serviceId;
+      const params = {
+        ...config,
+        credentials: config.credentials,
+        region: config.signingRegion,
+        service: config.signingName,
+        sha256,
+        uriEscapePath: signingEscapePath
+      };
+      const SignerCtor = config.signerConstructor || import_signature_v4.SignatureV4;
+      return new SignerCtor(params);
+    }), "signer");
+  } else {
+    signer = /* @__PURE__ */ __name(async (authScheme) => {
+      authScheme = Object.assign(
+        {},
+        {
+          name: "sigv4",
+          signingName: config.signingName || config.defaultSigningName,
+          signingRegion: await (0, import_core2.normalizeProvider)(config.region)(),
+          properties: {}
+        },
+        authScheme
+      );
+      const signingRegion = authScheme.signingRegion;
+      const signingService = authScheme.signingName;
+      config.signingRegion = config.signingRegion || signingRegion;
+      config.signingName = config.signingName || signingService || config.serviceId;
+      const params = {
+        ...config,
+        credentials: config.credentials,
+        region: config.signingRegion,
+        service: config.signingName,
+        sha256,
+        uriEscapePath: signingEscapePath
+      };
+      const SignerCtor = config.signerConstructor || import_signature_v4.SignatureV4;
+      return new SignerCtor(params);
+    }, "signer");
+  }
+  const resolvedConfig = Object.assign(config, {
+    systemClockOffset,
+    signingEscapePath,
+    signer
+  });
+  return resolvedConfig;
+}, "resolveAwsSdkSigV4Config");
+var resolveAWSSDKSigV4Config = resolveAwsSdkSigV4Config;
+function normalizeCredentialProvider(config, {
+  credentials,
+  credentialDefaultProvider
+}) {
+  let credentialsProvider;
+  if (credentials) {
+    if (!credentials?.memoized) {
+      credentialsProvider = (0, import_core2.memoizeIdentityProvider)(credentials, import_core2.isIdentityExpired, import_core2.doesIdentityRequireRefresh);
+    } else {
+      credentialsProvider = credentials;
+    }
+  } else {
+    if (credentialDefaultProvider) {
+      credentialsProvider = (0, import_core2.normalizeProvider)(
+        credentialDefaultProvider(
+          Object.assign({}, config, {
+            parentClientConfig: config
+          })
+        )
+      );
+    } else {
+      credentialsProvider = /* @__PURE__ */ __name(async () => {
+        throw new Error(
+          "@aws-sdk/core::resolveAwsSdkSigV4Config - `credentials` not provided and no credentialDefaultProvider was configured."
+        );
+      }, "credentialsProvider");
+    }
+  }
+  credentialsProvider.memoized = true;
+  return credentialsProvider;
+}
+__name(normalizeCredentialProvider, "normalizeCredentialProvider");
+function bindCallerConfig(config, credentialsProvider) {
+  if (credentialsProvider.configBound) {
+    return credentialsProvider;
+  }
+  const fn = /* @__PURE__ */ __name(async (options) => credentialsProvider({ ...options, callerClientConfig: config }), "fn");
+  fn.memoized = credentialsProvider.memoized;
+  fn.configBound = true;
+  return fn;
+}
+__name(bindCallerConfig, "bindCallerConfig");
+// Annotate the CommonJS export names for ESM import in node:
+0 && (0);
+
+
+/***/ }),
+
+/***/ 3768:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/submodules/protocols/index.ts
+var index_exports = {};
+__export(index_exports, {
+  _toBool: () => _toBool,
+  _toNum: () => _toNum,
+  _toStr: () => _toStr,
+  awsExpectUnion: () => awsExpectUnion,
+  loadRestJsonErrorCode: () => loadRestJsonErrorCode,
+  loadRestXmlErrorCode: () => loadRestXmlErrorCode,
+  parseJsonBody: () => parseJsonBody,
+  parseJsonErrorBody: () => parseJsonErrorBody,
+  parseXmlBody: () => parseXmlBody,
+  parseXmlErrorBody: () => parseXmlErrorBody
+});
+module.exports = __toCommonJS(index_exports);
+
+// src/submodules/protocols/coercing-serializers.ts
+var _toStr = /* @__PURE__ */ __name((val) => {
+  if (val == null) {
+    return val;
+  }
+  if (typeof val === "number" || typeof val === "bigint") {
+    const warning = new Error(`Received number ${val} where a string was expected.`);
+    warning.name = "Warning";
+    console.warn(warning);
+    return String(val);
+  }
+  if (typeof val === "boolean") {
+    const warning = new Error(`Received boolean ${val} where a string was expected.`);
+    warning.name = "Warning";
+    console.warn(warning);
+    return String(val);
+  }
+  return val;
+}, "_toStr");
+var _toBool = /* @__PURE__ */ __name((val) => {
+  if (val == null) {
+    return val;
+  }
+  if (typeof val === "number") {
+  }
+  if (typeof val === "string") {
+    const lowercase = val.toLowerCase();
+    if (val !== "" && lowercase !== "false" && lowercase !== "true") {
+      const warning = new Error(`Received string "${val}" where a boolean was expected.`);
+      warning.name = "Warning";
+      console.warn(warning);
+    }
+    return val !== "" && lowercase !== "false";
+  }
+  return val;
+}, "_toBool");
+var _toNum = /* @__PURE__ */ __name((val) => {
+  if (val == null) {
+    return val;
+  }
+  if (typeof val === "boolean") {
+  }
+  if (typeof val === "string") {
+    const num = Number(val);
+    if (num.toString() !== val) {
+      const warning = new Error(`Received string "${val}" where a number was expected.`);
+      warning.name = "Warning";
+      console.warn(warning);
+      return val;
+    }
+    return num;
+  }
+  return val;
+}, "_toNum");
+
+// src/submodules/protocols/json/awsExpectUnion.ts
+var import_smithy_client = __nccwpck_require__(1411);
+var awsExpectUnion = /* @__PURE__ */ __name((value) => {
+  if (value == null) {
+    return void 0;
+  }
+  if (typeof value === "object" && "__type" in value) {
+    delete value.__type;
+  }
+  return (0, import_smithy_client.expectUnion)(value);
+}, "awsExpectUnion");
+
+// src/submodules/protocols/common.ts
+var import_smithy_client2 = __nccwpck_require__(1411);
+var collectBodyString = /* @__PURE__ */ __name((streamBody, context) => (0, import_smithy_client2.collectBody)(streamBody, context).then((body) => context.utf8Encoder(body)), "collectBodyString");
+
+// src/submodules/protocols/json/parseJsonBody.ts
+var parseJsonBody = /* @__PURE__ */ __name((streamBody, context) => collectBodyString(streamBody, context).then((encoded) => {
+  if (encoded.length) {
+    try {
+      return JSON.parse(encoded);
+    } catch (e) {
+      if (e?.name === "SyntaxError") {
+        Object.defineProperty(e, "$responseBodyText", {
+          value: encoded
+        });
+      }
+      throw e;
+    }
+  }
+  return {};
+}), "parseJsonBody");
+var parseJsonErrorBody = /* @__PURE__ */ __name(async (errorBody, context) => {
+  const value = await parseJsonBody(errorBody, context);
+  value.message = value.message ?? value.Message;
+  return value;
+}, "parseJsonErrorBody");
+var loadRestJsonErrorCode = /* @__PURE__ */ __name((output, data) => {
+  const findKey = /* @__PURE__ */ __name((object, key) => Object.keys(object).find((k) => k.toLowerCase() === key.toLowerCase()), "findKey");
+  const sanitizeErrorCode = /* @__PURE__ */ __name((rawValue) => {
+    let cleanValue = rawValue;
+    if (typeof cleanValue === "number") {
+      cleanValue = cleanValue.toString();
+    }
+    if (cleanValue.indexOf(",") >= 0) {
+      cleanValue = cleanValue.split(",")[0];
+    }
+    if (cleanValue.indexOf(":") >= 0) {
+      cleanValue = cleanValue.split(":")[0];
+    }
+    if (cleanValue.indexOf("#") >= 0) {
+      cleanValue = cleanValue.split("#")[1];
+    }
+    return cleanValue;
+  }, "sanitizeErrorCode");
+  const headerKey = findKey(output.headers, "x-amzn-errortype");
+  if (headerKey !== void 0) {
+    return sanitizeErrorCode(output.headers[headerKey]);
+  }
+  if (data && typeof data === "object") {
+    const codeKey = findKey(data, "code");
+    if (codeKey && data[codeKey] !== void 0) {
+      return sanitizeErrorCode(data[codeKey]);
+    }
+    if (data["__type"] !== void 0) {
+      return sanitizeErrorCode(data["__type"]);
+    }
+  }
+}, "loadRestJsonErrorCode");
+
+// src/submodules/protocols/xml/parseXmlBody.ts
+var import_smithy_client3 = __nccwpck_require__(1411);
+var import_fast_xml_parser = __nccwpck_require__(9741);
+var parseXmlBody = /* @__PURE__ */ __name((streamBody, context) => collectBodyString(streamBody, context).then((encoded) => {
+  if (encoded.length) {
+    const parser = new import_fast_xml_parser.XMLParser({
+      attributeNamePrefix: "",
+      htmlEntities: true,
+      ignoreAttributes: false,
+      ignoreDeclaration: true,
+      parseTagValue: false,
+      trimValues: false,
+      tagValueProcessor: /* @__PURE__ */ __name((_, val) => val.trim() === "" && val.includes("\n") ? "" : void 0, "tagValueProcessor")
+    });
+    parser.addEntity("#xD", "\r");
+    parser.addEntity("#10", "\n");
+    let parsedObj;
+    try {
+      parsedObj = parser.parse(encoded, true);
+    } catch (e) {
+      if (e && typeof e === "object") {
+        Object.defineProperty(e, "$responseBodyText", {
+          value: encoded
+        });
+      }
+      throw e;
+    }
+    const textNodeName = "#text";
+    const key = Object.keys(parsedObj)[0];
+    const parsedObjToReturn = parsedObj[key];
+    if (parsedObjToReturn[textNodeName]) {
+      parsedObjToReturn[key] = parsedObjToReturn[textNodeName];
+      delete parsedObjToReturn[textNodeName];
+    }
+    return (0, import_smithy_client3.getValueFromTextNode)(parsedObjToReturn);
+  }
+  return {};
+}), "parseXmlBody");
+var parseXmlErrorBody = /* @__PURE__ */ __name(async (errorBody, context) => {
+  const value = await parseXmlBody(errorBody, context);
+  if (value.Error) {
+    value.Error.message = value.Error.message ?? value.Error.Message;
+  }
+  return value;
+}, "parseXmlErrorBody");
+var loadRestXmlErrorCode = /* @__PURE__ */ __name((output, data) => {
+  if (data?.Error?.Code !== void 0) {
+    return data.Error.Code;
+  }
+  if (data?.Code !== void 0) {
+    return data.Code;
+  }
+  if (output.statusCode == 404) {
+    return "NotFound";
+  }
+}, "loadRestXmlErrorCode");
+// Annotate the CommonJS export names for ESM import in node:
+0 && (0);
+
+
+/***/ }),
+
+/***/ 2047:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.ts
+var index_exports = {};
+__export(index_exports, {
+  DEFAULT_UA_APP_ID: () => DEFAULT_UA_APP_ID,
+  getUserAgentMiddlewareOptions: () => getUserAgentMiddlewareOptions,
+  getUserAgentPlugin: () => getUserAgentPlugin,
+  resolveUserAgentConfig: () => resolveUserAgentConfig,
+  userAgentMiddleware: () => userAgentMiddleware
+});
+module.exports = __toCommonJS(index_exports);
+
+// src/configurations.ts
+var import_core = __nccwpck_require__(402);
+var DEFAULT_UA_APP_ID = void 0;
+function isValidUserAgentAppId(appId) {
+  if (appId === void 0) {
+    return true;
+  }
+  return typeof appId === "string" && appId.length <= 50;
+}
+__name(isValidUserAgentAppId, "isValidUserAgentAppId");
+function resolveUserAgentConfig(input) {
+  const normalizedAppIdProvider = (0, import_core.normalizeProvider)(input.userAgentAppId ?? DEFAULT_UA_APP_ID);
+  const { customUserAgent } = input;
+  return Object.assign(input, {
+    customUserAgent: typeof customUserAgent === "string" ? [[customUserAgent]] : customUserAgent,
+    userAgentAppId: /* @__PURE__ */ __name(async () => {
+      const appId = await normalizedAppIdProvider();
+      if (!isValidUserAgentAppId(appId)) {
+        const logger = input.logger?.constructor?.name === "NoOpLogger" || !input.logger ? console : input.logger;
+        if (typeof appId !== "string") {
+          logger?.warn("userAgentAppId must be a string or undefined.");
+        } else if (appId.length > 50) {
+          logger?.warn("The provided userAgentAppId exceeds the maximum length of 50 characters.");
+        }
+      }
+      return appId;
+    }, "userAgentAppId")
+  });
+}
+__name(resolveUserAgentConfig, "resolveUserAgentConfig");
+
+// src/user-agent-middleware.ts
+var import_util_endpoints = __nccwpck_require__(3068);
+var import_protocol_http = __nccwpck_require__(2356);
+
+// src/check-features.ts
+var import_core2 = __nccwpck_require__(3536);
+var ACCOUNT_ID_ENDPOINT_REGEX = /\d{12}\.ddb/;
+async function checkFeatures(context, config, args) {
+  const request = args.request;
+  if (request?.headers?.["smithy-protocol"] === "rpc-v2-cbor") {
+    (0, import_core2.setFeature)(context, "PROTOCOL_RPC_V2_CBOR", "M");
+  }
+  if (typeof config.retryStrategy === "function") {
+    const retryStrategy = await config.retryStrategy();
+    if (typeof retryStrategy.acquireInitialRetryToken === "function") {
+      if (retryStrategy.constructor?.name?.includes("Adaptive")) {
+        (0, import_core2.setFeature)(context, "RETRY_MODE_ADAPTIVE", "F");
+      } else {
+        (0, import_core2.setFeature)(context, "RETRY_MODE_STANDARD", "E");
+      }
+    } else {
+      (0, import_core2.setFeature)(context, "RETRY_MODE_LEGACY", "D");
+    }
+  }
+  if (typeof config.accountIdEndpointMode === "function") {
+    const endpointV2 = context.endpointV2;
+    if (String(endpointV2?.url?.hostname).match(ACCOUNT_ID_ENDPOINT_REGEX)) {
+      (0, import_core2.setFeature)(context, "ACCOUNT_ID_ENDPOINT", "O");
+    }
+    switch (await config.accountIdEndpointMode?.()) {
+      case "disabled":
+        (0, import_core2.setFeature)(context, "ACCOUNT_ID_MODE_DISABLED", "Q");
+        break;
+      case "preferred":
+        (0, import_core2.setFeature)(context, "ACCOUNT_ID_MODE_PREFERRED", "P");
+        break;
+      case "required":
+        (0, import_core2.setFeature)(context, "ACCOUNT_ID_MODE_REQUIRED", "R");
+        break;
+    }
+  }
+  const identity = context.__smithy_context?.selectedHttpAuthScheme?.identity;
+  if (identity?.$source) {
+    const credentials = identity;
+    if (credentials.accountId) {
+      (0, import_core2.setFeature)(context, "RESOLVED_ACCOUNT_ID", "T");
+    }
+    for (const [key, value] of Object.entries(credentials.$source ?? {})) {
+      (0, import_core2.setFeature)(context, key, value);
+    }
+  }
+}
+__name(checkFeatures, "checkFeatures");
+
+// src/constants.ts
+var USER_AGENT = "user-agent";
+var X_AMZ_USER_AGENT = "x-amz-user-agent";
+var SPACE = " ";
+var UA_NAME_SEPARATOR = "/";
+var UA_NAME_ESCAPE_REGEX = /[^\!\$\%\&\'\*\+\-\.\^\_\`\|\~\d\w]/g;
+var UA_VALUE_ESCAPE_REGEX = /[^\!\$\%\&\'\*\+\-\.\^\_\`\|\~\d\w\#]/g;
+var UA_ESCAPE_CHAR = "-";
+
+// src/encode-features.ts
+var BYTE_LIMIT = 1024;
+function encodeFeatures(features) {
+  let buffer = "";
+  for (const key in features) {
+    const val = features[key];
+    if (buffer.length + val.length + 1 <= BYTE_LIMIT) {
+      if (buffer.length) {
+        buffer += "," + val;
+      } else {
+        buffer += val;
+      }
+      continue;
+    }
+    break;
+  }
+  return buffer;
+}
+__name(encodeFeatures, "encodeFeatures");
+
+// src/user-agent-middleware.ts
+var userAgentMiddleware = /* @__PURE__ */ __name((options) => (next, context) => async (args) => {
+  const { request } = args;
+  if (!import_protocol_http.HttpRequest.isInstance(request)) {
+    return next(args);
+  }
+  const { headers } = request;
+  const userAgent = context?.userAgent?.map(escapeUserAgent) || [];
+  const defaultUserAgent = (await options.defaultUserAgentProvider()).map(escapeUserAgent);
+  await checkFeatures(context, options, args);
+  const awsContext = context;
+  defaultUserAgent.push(
+    `m/${encodeFeatures(
+      Object.assign({}, context.__smithy_context?.features, awsContext.__aws_sdk_context?.features)
+    )}`
+  );
+  const customUserAgent = options?.customUserAgent?.map(escapeUserAgent) || [];
+  const appId = await options.userAgentAppId();
+  if (appId) {
+    defaultUserAgent.push(escapeUserAgent([`app/${appId}`]));
+  }
+  const prefix = (0, import_util_endpoints.getUserAgentPrefix)();
+  const sdkUserAgentValue = (prefix ? [prefix] : []).concat([...defaultUserAgent, ...userAgent, ...customUserAgent]).join(SPACE);
+  const normalUAValue = [
+    ...defaultUserAgent.filter((section) => section.startsWith("aws-sdk-")),
+    ...customUserAgent
+  ].join(SPACE);
+  if (options.runtime !== "browser") {
+    if (normalUAValue) {
+      headers[X_AMZ_USER_AGENT] = headers[X_AMZ_USER_AGENT] ? `${headers[USER_AGENT]} ${normalUAValue}` : normalUAValue;
+    }
+    headers[USER_AGENT] = sdkUserAgentValue;
+  } else {
+    headers[X_AMZ_USER_AGENT] = sdkUserAgentValue;
+  }
+  return next({
+    ...args,
+    request
+  });
+}, "userAgentMiddleware");
+var escapeUserAgent = /* @__PURE__ */ __name((userAgentPair) => {
+  const name = userAgentPair[0].split(UA_NAME_SEPARATOR).map((part) => part.replace(UA_NAME_ESCAPE_REGEX, UA_ESCAPE_CHAR)).join(UA_NAME_SEPARATOR);
+  const version = userAgentPair[1]?.replace(UA_VALUE_ESCAPE_REGEX, UA_ESCAPE_CHAR);
+  const prefixSeparatorIndex = name.indexOf(UA_NAME_SEPARATOR);
+  const prefix = name.substring(0, prefixSeparatorIndex);
+  let uaName = name.substring(prefixSeparatorIndex + 1);
+  if (prefix === "api") {
+    uaName = uaName.toLowerCase();
+  }
+  return [prefix, uaName, version].filter((item) => item && item.length > 0).reduce((acc, item, index) => {
+    switch (index) {
+      case 0:
+        return item;
+      case 1:
+        return `${acc}/${item}`;
+      default:
+        return `${acc}#${item}`;
+    }
+  }, "");
+}, "escapeUserAgent");
+var getUserAgentMiddlewareOptions = {
+  name: "getUserAgentMiddleware",
+  step: "build",
+  priority: "low",
+  tags: ["SET_USER_AGENT", "USER_AGENT"],
+  override: true
+};
+var getUserAgentPlugin = /* @__PURE__ */ __name((config) => ({
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
+    clientStack.add(userAgentMiddleware(config), getUserAgentMiddlewareOptions);
+  }, "applyToStack")
+}), "getUserAgentPlugin");
+// Annotate the CommonJS export names for ESM import in node:
+
+0 && (0);
+
+
+
+/***/ }),
+
+/***/ 8616:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.ts
+var index_exports = {};
+__export(index_exports, {
+  NODE_APP_ID_CONFIG_OPTIONS: () => NODE_APP_ID_CONFIG_OPTIONS,
+  UA_APP_ID_ENV_NAME: () => UA_APP_ID_ENV_NAME,
+  UA_APP_ID_INI_NAME: () => UA_APP_ID_INI_NAME,
+  createDefaultUserAgentProvider: () => createDefaultUserAgentProvider,
+  crtAvailability: () => crtAvailability,
+  defaultUserAgent: () => defaultUserAgent
+});
+module.exports = __toCommonJS(index_exports);
+
+// src/defaultUserAgent.ts
+var import_os = __nccwpck_require__(857);
+var import_process = __nccwpck_require__(932);
+
+// src/crt-availability.ts
+var crtAvailability = {
+  isCrtAvailable: false
+};
+
+// src/is-crt-available.ts
+var isCrtAvailable = /* @__PURE__ */ __name(() => {
+  if (crtAvailability.isCrtAvailable) {
+    return ["md/crt-avail"];
+  }
+  return null;
+}, "isCrtAvailable");
+
+// src/defaultUserAgent.ts
+var createDefaultUserAgentProvider = /* @__PURE__ */ __name(({ serviceId, clientVersion }) => {
+  return async (config) => {
+    const sections = [
+      // sdk-metadata
+      ["aws-sdk-js", clientVersion],
+      // ua-metadata
+      ["ua", "2.1"],
+      // os-metadata
+      [`os/${(0, import_os.platform)()}`, (0, import_os.release)()],
+      // language-metadata
+      // ECMAScript edition doesn't matter in JS, so no version needed.
+      ["lang/js"],
+      ["md/nodejs", `${import_process.versions.node}`]
+    ];
+    const crtAvailable = isCrtAvailable();
+    if (crtAvailable) {
+      sections.push(crtAvailable);
+    }
+    if (serviceId) {
+      sections.push([`api/${serviceId}`, clientVersion]);
+    }
+    if (import_process.env.AWS_EXECUTION_ENV) {
+      sections.push([`exec-env/${import_process.env.AWS_EXECUTION_ENV}`]);
+    }
+    const appId = await config?.userAgentAppId?.();
+    const resolvedUserAgent = appId ? [...sections, [`app/${appId}`]] : [...sections];
+    return resolvedUserAgent;
+  };
+}, "createDefaultUserAgentProvider");
+var defaultUserAgent = createDefaultUserAgentProvider;
+
+// src/nodeAppIdConfigOptions.ts
+var import_middleware_user_agent = __nccwpck_require__(2047);
+var UA_APP_ID_ENV_NAME = "AWS_SDK_UA_APP_ID";
+var UA_APP_ID_INI_NAME = "sdk_ua_app_id";
+var UA_APP_ID_INI_NAME_DEPRECATED = "sdk-ua-app-id";
+var NODE_APP_ID_CONFIG_OPTIONS = {
+  environmentVariableSelector: /* @__PURE__ */ __name((env2) => env2[UA_APP_ID_ENV_NAME], "environmentVariableSelector"),
+  configFileSelector: /* @__PURE__ */ __name((profile) => profile[UA_APP_ID_INI_NAME] ?? profile[UA_APP_ID_INI_NAME_DEPRECATED], "configFileSelector"),
+  default: import_middleware_user_agent.DEFAULT_UA_APP_ID
+};
 // Annotate the CommonJS export names for ESM import in node:
 
 0 && (0);
@@ -27290,6 +29841,639 @@ var RequestBuilder = class {
 
 /***/ }),
 
+/***/ 2430:
+/***/ ((module) => {
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/submodules/serde/index.ts
+var serde_exports = {};
+__export(serde_exports, {
+  LazyJsonString: () => LazyJsonString,
+  NumericValue: () => NumericValue,
+  dateToUtcString: () => dateToUtcString,
+  expectBoolean: () => expectBoolean,
+  expectByte: () => expectByte,
+  expectFloat32: () => expectFloat32,
+  expectInt: () => expectInt,
+  expectInt32: () => expectInt32,
+  expectLong: () => expectLong,
+  expectNonNull: () => expectNonNull,
+  expectNumber: () => expectNumber,
+  expectObject: () => expectObject,
+  expectShort: () => expectShort,
+  expectString: () => expectString,
+  expectUnion: () => expectUnion,
+  handleFloat: () => handleFloat,
+  limitedParseDouble: () => limitedParseDouble,
+  limitedParseFloat: () => limitedParseFloat,
+  limitedParseFloat32: () => limitedParseFloat32,
+  logger: () => logger,
+  nv: () => nv,
+  parseBoolean: () => parseBoolean,
+  parseEpochTimestamp: () => parseEpochTimestamp,
+  parseRfc3339DateTime: () => parseRfc3339DateTime,
+  parseRfc3339DateTimeWithOffset: () => parseRfc3339DateTimeWithOffset,
+  parseRfc7231DateTime: () => parseRfc7231DateTime,
+  quoteHeader: () => quoteHeader,
+  splitEvery: () => splitEvery,
+  splitHeader: () => splitHeader,
+  strictParseByte: () => strictParseByte,
+  strictParseDouble: () => strictParseDouble,
+  strictParseFloat: () => strictParseFloat,
+  strictParseFloat32: () => strictParseFloat32,
+  strictParseInt: () => strictParseInt,
+  strictParseInt32: () => strictParseInt32,
+  strictParseLong: () => strictParseLong,
+  strictParseShort: () => strictParseShort
+});
+module.exports = __toCommonJS(serde_exports);
+
+// src/submodules/serde/parse-utils.ts
+var parseBoolean = (value) => {
+  switch (value) {
+    case "true":
+      return true;
+    case "false":
+      return false;
+    default:
+      throw new Error(`Unable to parse boolean value "${value}"`);
+  }
+};
+var expectBoolean = (value) => {
+  if (value === null || value === void 0) {
+    return void 0;
+  }
+  if (typeof value === "number") {
+    if (value === 0 || value === 1) {
+      logger.warn(stackTraceWarning(`Expected boolean, got ${typeof value}: ${value}`));
+    }
+    if (value === 0) {
+      return false;
+    }
+    if (value === 1) {
+      return true;
+    }
+  }
+  if (typeof value === "string") {
+    const lower = value.toLowerCase();
+    if (lower === "false" || lower === "true") {
+      logger.warn(stackTraceWarning(`Expected boolean, got ${typeof value}: ${value}`));
+    }
+    if (lower === "false") {
+      return false;
+    }
+    if (lower === "true") {
+      return true;
+    }
+  }
+  if (typeof value === "boolean") {
+    return value;
+  }
+  throw new TypeError(`Expected boolean, got ${typeof value}: ${value}`);
+};
+var expectNumber = (value) => {
+  if (value === null || value === void 0) {
+    return void 0;
+  }
+  if (typeof value === "string") {
+    const parsed = parseFloat(value);
+    if (!Number.isNaN(parsed)) {
+      if (String(parsed) !== String(value)) {
+        logger.warn(stackTraceWarning(`Expected number but observed string: ${value}`));
+      }
+      return parsed;
+    }
+  }
+  if (typeof value === "number") {
+    return value;
+  }
+  throw new TypeError(`Expected number, got ${typeof value}: ${value}`);
+};
+var MAX_FLOAT = Math.ceil(2 ** 127 * (2 - 2 ** -23));
+var expectFloat32 = (value) => {
+  const expected = expectNumber(value);
+  if (expected !== void 0 && !Number.isNaN(expected) && expected !== Infinity && expected !== -Infinity) {
+    if (Math.abs(expected) > MAX_FLOAT) {
+      throw new TypeError(`Expected 32-bit float, got ${value}`);
+    }
+  }
+  return expected;
+};
+var expectLong = (value) => {
+  if (value === null || value === void 0) {
+    return void 0;
+  }
+  if (Number.isInteger(value) && !Number.isNaN(value)) {
+    return value;
+  }
+  throw new TypeError(`Expected integer, got ${typeof value}: ${value}`);
+};
+var expectInt = expectLong;
+var expectInt32 = (value) => expectSizedInt(value, 32);
+var expectShort = (value) => expectSizedInt(value, 16);
+var expectByte = (value) => expectSizedInt(value, 8);
+var expectSizedInt = (value, size) => {
+  const expected = expectLong(value);
+  if (expected !== void 0 && castInt(expected, size) !== expected) {
+    throw new TypeError(`Expected ${size}-bit integer, got ${value}`);
+  }
+  return expected;
+};
+var castInt = (value, size) => {
+  switch (size) {
+    case 32:
+      return Int32Array.of(value)[0];
+    case 16:
+      return Int16Array.of(value)[0];
+    case 8:
+      return Int8Array.of(value)[0];
+  }
+};
+var expectNonNull = (value, location) => {
+  if (value === null || value === void 0) {
+    if (location) {
+      throw new TypeError(`Expected a non-null value for ${location}`);
+    }
+    throw new TypeError("Expected a non-null value");
+  }
+  return value;
+};
+var expectObject = (value) => {
+  if (value === null || value === void 0) {
+    return void 0;
+  }
+  if (typeof value === "object" && !Array.isArray(value)) {
+    return value;
+  }
+  const receivedType = Array.isArray(value) ? "array" : typeof value;
+  throw new TypeError(`Expected object, got ${receivedType}: ${value}`);
+};
+var expectString = (value) => {
+  if (value === null || value === void 0) {
+    return void 0;
+  }
+  if (typeof value === "string") {
+    return value;
+  }
+  if (["boolean", "number", "bigint"].includes(typeof value)) {
+    logger.warn(stackTraceWarning(`Expected string, got ${typeof value}: ${value}`));
+    return String(value);
+  }
+  throw new TypeError(`Expected string, got ${typeof value}: ${value}`);
+};
+var expectUnion = (value) => {
+  if (value === null || value === void 0) {
+    return void 0;
+  }
+  const asObject = expectObject(value);
+  const setKeys = Object.entries(asObject).filter(([, v]) => v != null).map(([k]) => k);
+  if (setKeys.length === 0) {
+    throw new TypeError(`Unions must have exactly one non-null member. None were found.`);
+  }
+  if (setKeys.length > 1) {
+    throw new TypeError(`Unions must have exactly one non-null member. Keys ${setKeys} were not null.`);
+  }
+  return asObject;
+};
+var strictParseDouble = (value) => {
+  if (typeof value == "string") {
+    return expectNumber(parseNumber(value));
+  }
+  return expectNumber(value);
+};
+var strictParseFloat = strictParseDouble;
+var strictParseFloat32 = (value) => {
+  if (typeof value == "string") {
+    return expectFloat32(parseNumber(value));
+  }
+  return expectFloat32(value);
+};
+var NUMBER_REGEX = /(-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?)|(-?Infinity)|(NaN)/g;
+var parseNumber = (value) => {
+  const matches = value.match(NUMBER_REGEX);
+  if (matches === null || matches[0].length !== value.length) {
+    throw new TypeError(`Expected real number, got implicit NaN`);
+  }
+  return parseFloat(value);
+};
+var limitedParseDouble = (value) => {
+  if (typeof value == "string") {
+    return parseFloatString(value);
+  }
+  return expectNumber(value);
+};
+var handleFloat = limitedParseDouble;
+var limitedParseFloat = limitedParseDouble;
+var limitedParseFloat32 = (value) => {
+  if (typeof value == "string") {
+    return parseFloatString(value);
+  }
+  return expectFloat32(value);
+};
+var parseFloatString = (value) => {
+  switch (value) {
+    case "NaN":
+      return NaN;
+    case "Infinity":
+      return Infinity;
+    case "-Infinity":
+      return -Infinity;
+    default:
+      throw new Error(`Unable to parse float value: ${value}`);
+  }
+};
+var strictParseLong = (value) => {
+  if (typeof value === "string") {
+    return expectLong(parseNumber(value));
+  }
+  return expectLong(value);
+};
+var strictParseInt = strictParseLong;
+var strictParseInt32 = (value) => {
+  if (typeof value === "string") {
+    return expectInt32(parseNumber(value));
+  }
+  return expectInt32(value);
+};
+var strictParseShort = (value) => {
+  if (typeof value === "string") {
+    return expectShort(parseNumber(value));
+  }
+  return expectShort(value);
+};
+var strictParseByte = (value) => {
+  if (typeof value === "string") {
+    return expectByte(parseNumber(value));
+  }
+  return expectByte(value);
+};
+var stackTraceWarning = (message) => {
+  return String(new TypeError(message).stack || message).split("\n").slice(0, 5).filter((s) => !s.includes("stackTraceWarning")).join("\n");
+};
+var logger = {
+  warn: console.warn
+};
+
+// src/submodules/serde/date-utils.ts
+var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+function dateToUtcString(date) {
+  const year = date.getUTCFullYear();
+  const month = date.getUTCMonth();
+  const dayOfWeek = date.getUTCDay();
+  const dayOfMonthInt = date.getUTCDate();
+  const hoursInt = date.getUTCHours();
+  const minutesInt = date.getUTCMinutes();
+  const secondsInt = date.getUTCSeconds();
+  const dayOfMonthString = dayOfMonthInt < 10 ? `0${dayOfMonthInt}` : `${dayOfMonthInt}`;
+  const hoursString = hoursInt < 10 ? `0${hoursInt}` : `${hoursInt}`;
+  const minutesString = minutesInt < 10 ? `0${minutesInt}` : `${minutesInt}`;
+  const secondsString = secondsInt < 10 ? `0${secondsInt}` : `${secondsInt}`;
+  return `${DAYS[dayOfWeek]}, ${dayOfMonthString} ${MONTHS[month]} ${year} ${hoursString}:${minutesString}:${secondsString} GMT`;
+}
+var RFC3339 = new RegExp(/^(\d{4})-(\d{2})-(\d{2})[tT](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?[zZ]$/);
+var parseRfc3339DateTime = (value) => {
+  if (value === null || value === void 0) {
+    return void 0;
+  }
+  if (typeof value !== "string") {
+    throw new TypeError("RFC-3339 date-times must be expressed as strings");
+  }
+  const match = RFC3339.exec(value);
+  if (!match) {
+    throw new TypeError("Invalid RFC-3339 date-time value");
+  }
+  const [_, yearStr, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds] = match;
+  const year = strictParseShort(stripLeadingZeroes(yearStr));
+  const month = parseDateValue(monthStr, "month", 1, 12);
+  const day = parseDateValue(dayStr, "day", 1, 31);
+  return buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
+};
+var RFC3339_WITH_OFFSET = new RegExp(
+  /^(\d{4})-(\d{2})-(\d{2})[tT](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(([-+]\d{2}\:\d{2})|[zZ])$/
+);
+var parseRfc3339DateTimeWithOffset = (value) => {
+  if (value === null || value === void 0) {
+    return void 0;
+  }
+  if (typeof value !== "string") {
+    throw new TypeError("RFC-3339 date-times must be expressed as strings");
+  }
+  const match = RFC3339_WITH_OFFSET.exec(value);
+  if (!match) {
+    throw new TypeError("Invalid RFC-3339 date-time value");
+  }
+  const [_, yearStr, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds, offsetStr] = match;
+  const year = strictParseShort(stripLeadingZeroes(yearStr));
+  const month = parseDateValue(monthStr, "month", 1, 12);
+  const day = parseDateValue(dayStr, "day", 1, 31);
+  const date = buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
+  if (offsetStr.toUpperCase() != "Z") {
+    date.setTime(date.getTime() - parseOffsetToMilliseconds(offsetStr));
+  }
+  return date;
+};
+var IMF_FIXDATE = new RegExp(
+  /^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), (\d{2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/
+);
+var RFC_850_DATE = new RegExp(
+  /^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), (\d{2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/
+);
+var ASC_TIME = new RegExp(
+  /^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ( [1-9]|\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? (\d{4})$/
+);
+var parseRfc7231DateTime = (value) => {
+  if (value === null || value === void 0) {
+    return void 0;
+  }
+  if (typeof value !== "string") {
+    throw new TypeError("RFC-7231 date-times must be expressed as strings");
+  }
+  let match = IMF_FIXDATE.exec(value);
+  if (match) {
+    const [_, dayStr, monthStr, yearStr, hours, minutes, seconds, fractionalMilliseconds] = match;
+    return buildDate(
+      strictParseShort(stripLeadingZeroes(yearStr)),
+      parseMonthByShortName(monthStr),
+      parseDateValue(dayStr, "day", 1, 31),
+      { hours, minutes, seconds, fractionalMilliseconds }
+    );
+  }
+  match = RFC_850_DATE.exec(value);
+  if (match) {
+    const [_, dayStr, monthStr, yearStr, hours, minutes, seconds, fractionalMilliseconds] = match;
+    return adjustRfc850Year(
+      buildDate(parseTwoDigitYear(yearStr), parseMonthByShortName(monthStr), parseDateValue(dayStr, "day", 1, 31), {
+        hours,
+        minutes,
+        seconds,
+        fractionalMilliseconds
+      })
+    );
+  }
+  match = ASC_TIME.exec(value);
+  if (match) {
+    const [_, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds, yearStr] = match;
+    return buildDate(
+      strictParseShort(stripLeadingZeroes(yearStr)),
+      parseMonthByShortName(monthStr),
+      parseDateValue(dayStr.trimLeft(), "day", 1, 31),
+      { hours, minutes, seconds, fractionalMilliseconds }
+    );
+  }
+  throw new TypeError("Invalid RFC-7231 date-time value");
+};
+var parseEpochTimestamp = (value) => {
+  if (value === null || value === void 0) {
+    return void 0;
+  }
+  let valueAsDouble;
+  if (typeof value === "number") {
+    valueAsDouble = value;
+  } else if (typeof value === "string") {
+    valueAsDouble = strictParseDouble(value);
+  } else if (typeof value === "object" && value.tag === 1) {
+    valueAsDouble = value.value;
+  } else {
+    throw new TypeError("Epoch timestamps must be expressed as floating point numbers or their string representation");
+  }
+  if (Number.isNaN(valueAsDouble) || valueAsDouble === Infinity || valueAsDouble === -Infinity) {
+    throw new TypeError("Epoch timestamps must be valid, non-Infinite, non-NaN numerics");
+  }
+  return new Date(Math.round(valueAsDouble * 1e3));
+};
+var buildDate = (year, month, day, time) => {
+  const adjustedMonth = month - 1;
+  validateDayOfMonth(year, adjustedMonth, day);
+  return new Date(
+    Date.UTC(
+      year,
+      adjustedMonth,
+      day,
+      parseDateValue(time.hours, "hour", 0, 23),
+      parseDateValue(time.minutes, "minute", 0, 59),
+      // seconds can go up to 60 for leap seconds
+      parseDateValue(time.seconds, "seconds", 0, 60),
+      parseMilliseconds(time.fractionalMilliseconds)
+    )
+  );
+};
+var parseTwoDigitYear = (value) => {
+  const thisYear = (/* @__PURE__ */ new Date()).getUTCFullYear();
+  const valueInThisCentury = Math.floor(thisYear / 100) * 100 + strictParseShort(stripLeadingZeroes(value));
+  if (valueInThisCentury < thisYear) {
+    return valueInThisCentury + 100;
+  }
+  return valueInThisCentury;
+};
+var FIFTY_YEARS_IN_MILLIS = 50 * 365 * 24 * 60 * 60 * 1e3;
+var adjustRfc850Year = (input) => {
+  if (input.getTime() - (/* @__PURE__ */ new Date()).getTime() > FIFTY_YEARS_IN_MILLIS) {
+    return new Date(
+      Date.UTC(
+        input.getUTCFullYear() - 100,
+        input.getUTCMonth(),
+        input.getUTCDate(),
+        input.getUTCHours(),
+        input.getUTCMinutes(),
+        input.getUTCSeconds(),
+        input.getUTCMilliseconds()
+      )
+    );
+  }
+  return input;
+};
+var parseMonthByShortName = (value) => {
+  const monthIdx = MONTHS.indexOf(value);
+  if (monthIdx < 0) {
+    throw new TypeError(`Invalid month: ${value}`);
+  }
+  return monthIdx + 1;
+};
+var DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+var validateDayOfMonth = (year, month, day) => {
+  let maxDays = DAYS_IN_MONTH[month];
+  if (month === 1 && isLeapYear(year)) {
+    maxDays = 29;
+  }
+  if (day > maxDays) {
+    throw new TypeError(`Invalid day for ${MONTHS[month]} in ${year}: ${day}`);
+  }
+};
+var isLeapYear = (year) => {
+  return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+};
+var parseDateValue = (value, type, lower, upper) => {
+  const dateVal = strictParseByte(stripLeadingZeroes(value));
+  if (dateVal < lower || dateVal > upper) {
+    throw new TypeError(`${type} must be between ${lower} and ${upper}, inclusive`);
+  }
+  return dateVal;
+};
+var parseMilliseconds = (value) => {
+  if (value === null || value === void 0) {
+    return 0;
+  }
+  return strictParseFloat32("0." + value) * 1e3;
+};
+var parseOffsetToMilliseconds = (value) => {
+  const directionStr = value[0];
+  let direction = 1;
+  if (directionStr == "+") {
+    direction = 1;
+  } else if (directionStr == "-") {
+    direction = -1;
+  } else {
+    throw new TypeError(`Offset direction, ${directionStr}, must be "+" or "-"`);
+  }
+  const hour = Number(value.substring(1, 3));
+  const minute = Number(value.substring(4, 6));
+  return direction * (hour * 60 + minute) * 60 * 1e3;
+};
+var stripLeadingZeroes = (value) => {
+  let idx = 0;
+  while (idx < value.length - 1 && value.charAt(idx) === "0") {
+    idx++;
+  }
+  if (idx === 0) {
+    return value;
+  }
+  return value.slice(idx);
+};
+
+// src/submodules/serde/quote-header.ts
+function quoteHeader(part) {
+  if (part.includes(",") || part.includes('"')) {
+    part = `"${part.replace(/"/g, '\\"')}"`;
+  }
+  return part;
+}
+
+// src/submodules/serde/split-header.ts
+var splitHeader = (value) => {
+  const z = value.length;
+  const values = [];
+  let withinQuotes = false;
+  let prevChar = void 0;
+  let anchor = 0;
+  for (let i = 0; i < z; ++i) {
+    const char = value[i];
+    switch (char) {
+      case `"`:
+        if (prevChar !== "\\") {
+          withinQuotes = !withinQuotes;
+        }
+        break;
+      case ",":
+        if (!withinQuotes) {
+          values.push(value.slice(anchor, i));
+          anchor = i + 1;
+        }
+        break;
+      default:
+    }
+    prevChar = char;
+  }
+  values.push(value.slice(anchor));
+  return values.map((v) => {
+    v = v.trim();
+    const z2 = v.length;
+    if (z2 < 2) {
+      return v;
+    }
+    if (v[0] === `"` && v[z2 - 1] === `"`) {
+      v = v.slice(1, z2 - 1);
+    }
+    return v.replace(/\\"/g, '"');
+  });
+};
+
+// src/submodules/serde/value/NumericValue.ts
+var NumericValue = class {
+  constructor(string, type) {
+    this.string = string;
+    this.type = type;
+  }
+};
+function nv(string) {
+  return new NumericValue(string, "bigDecimal");
+}
+
+// src/submodules/serde/lazy-json.ts
+var LazyJsonString = function LazyJsonString2(val) {
+  const str = Object.assign(new String(val), {
+    deserializeJSON() {
+      return JSON.parse(String(val));
+    },
+    toString() {
+      return String(val);
+    },
+    toJSON() {
+      return String(val);
+    }
+  });
+  return str;
+};
+LazyJsonString.from = (object) => {
+  if (object && typeof object === "object" && (object instanceof LazyJsonString || "deserializeJSON" in object)) {
+    return object;
+  } else if (typeof object === "string" || Object.getPrototypeOf(object) === String.prototype) {
+    return LazyJsonString(String(object));
+  }
+  return LazyJsonString(JSON.stringify(object));
+};
+LazyJsonString.fromObject = LazyJsonString.from;
+
+// src/submodules/serde/split-every.ts
+function splitEvery(value, delimiter, numDelimiters) {
+  if (numDelimiters <= 0 || !Number.isInteger(numDelimiters)) {
+    throw new Error("Invalid number of delimiters (" + numDelimiters + ") for splitEvery.");
+  }
+  const segments = value.split(delimiter);
+  if (numDelimiters === 1) {
+    return segments;
+  }
+  const compoundSegments = [];
+  let currentSegment = "";
+  for (let i = 0; i < segments.length; i++) {
+    if (currentSegment === "") {
+      currentSegment = segments[i];
+    } else {
+      currentSegment += delimiter + segments[i];
+    }
+    if ((i + 1) % numDelimiters === 0) {
+      compoundSegments.push(currentSegment);
+      currentSegment = "";
+    }
+  }
+  if (currentSegment !== "") {
+    compoundSegments.push(currentSegment);
+  }
+  return compoundSegments;
+}
+// Annotate the CommonJS export names for ESM import in node:
+0 && (0);
+
+
+/***/ }),
+
 /***/ 566:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -30244,7 +33428,8 @@ var findHeader = /* @__PURE__ */ __name((pattern, headers) => {
 
 // src/serializerMiddleware.ts
 var serializerMiddleware = /* @__PURE__ */ __name((options, serializer) => (next, context) => async (args) => {
-  const endpoint = context.endpointV2?.url && options.urlParser ? async () => options.urlParser(context.endpointV2.url) : options.endpoint;
+  const endpointConfig = options;
+  const endpoint = context.endpointV2?.url && endpointConfig.urlParser ? async () => endpointConfig.urlParser(context.endpointV2.url) : endpointConfig.endpoint;
   if (!endpoint) {
     throw new Error("No valid endpoint provider available.");
   }
@@ -33301,6 +36486,7 @@ var __copyProps = (to, from, except, desc) => {
   }
   return to;
 };
+var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
@@ -33308,7 +36494,6 @@ var src_exports = {};
 __export(src_exports, {
   Client: () => Client,
   Command: () => Command,
-  LazyJsonString: () => LazyJsonString,
   NoOpLogger: () => NoOpLogger,
   SENSITIVE_STRING: () => SENSITIVE_STRING,
   ServiceException: () => ServiceException,
@@ -33316,54 +36501,20 @@ __export(src_exports, {
   collectBody: () => import_protocols.collectBody,
   convertMap: () => convertMap,
   createAggregatedClient: () => createAggregatedClient,
-  dateToUtcString: () => dateToUtcString,
   decorateServiceException: () => decorateServiceException,
   emitWarningIfUnsupportedVersion: () => emitWarningIfUnsupportedVersion,
-  expectBoolean: () => expectBoolean,
-  expectByte: () => expectByte,
-  expectFloat32: () => expectFloat32,
-  expectInt: () => expectInt,
-  expectInt32: () => expectInt32,
-  expectLong: () => expectLong,
-  expectNonNull: () => expectNonNull,
-  expectNumber: () => expectNumber,
-  expectObject: () => expectObject,
-  expectShort: () => expectShort,
-  expectString: () => expectString,
-  expectUnion: () => expectUnion,
   extendedEncodeURIComponent: () => import_protocols.extendedEncodeURIComponent,
   getArrayIfSingleItem: () => getArrayIfSingleItem,
   getDefaultClientConfiguration: () => getDefaultClientConfiguration,
   getDefaultExtensionConfiguration: () => getDefaultExtensionConfiguration,
   getValueFromTextNode: () => getValueFromTextNode,
-  handleFloat: () => handleFloat,
   isSerializableHeaderValue: () => isSerializableHeaderValue,
-  limitedParseDouble: () => limitedParseDouble,
-  limitedParseFloat: () => limitedParseFloat,
-  limitedParseFloat32: () => limitedParseFloat32,
   loadConfigsForDefaultMode: () => loadConfigsForDefaultMode,
-  logger: () => logger,
   map: () => map,
-  parseBoolean: () => parseBoolean,
-  parseEpochTimestamp: () => parseEpochTimestamp,
-  parseRfc3339DateTime: () => parseRfc3339DateTime,
-  parseRfc3339DateTimeWithOffset: () => parseRfc3339DateTimeWithOffset,
-  parseRfc7231DateTime: () => parseRfc7231DateTime,
-  quoteHeader: () => quoteHeader,
   resolveDefaultRuntimeConfig: () => resolveDefaultRuntimeConfig,
   resolvedPath: () => import_protocols.resolvedPath,
   serializeDateTime: () => serializeDateTime,
   serializeFloat: () => serializeFloat,
-  splitEvery: () => splitEvery,
-  splitHeader: () => splitHeader,
-  strictParseByte: () => strictParseByte,
-  strictParseDouble: () => strictParseDouble,
-  strictParseFloat: () => strictParseFloat,
-  strictParseFloat32: () => strictParseFloat32,
-  strictParseInt: () => strictParseInt,
-  strictParseInt32: () => strictParseInt32,
-  strictParseLong: () => strictParseLong,
-  strictParseShort: () => strictParseShort,
   take: () => take,
   throwDefaultError: () => throwDefaultError,
   withBaseException: () => withBaseException
@@ -33457,9 +36608,9 @@ var Command = class {
       this.middlewareStack.use(mw);
     }
     const stack = clientStack.concat(this.middlewareStack);
-    const { logger: logger2 } = configuration;
+    const { logger } = configuration;
     const handlerExecutionContext = {
-      logger: logger2,
+      logger,
       clientName,
       commandName,
       inputFilterSensitiveLog,
@@ -33639,460 +36790,6 @@ var createAggregatedClient = /* @__PURE__ */ __name((commands, Client2) => {
     Client2.prototype[methodName] = methodImpl;
   }
 }, "createAggregatedClient");
-
-// src/parse-utils.ts
-var parseBoolean = /* @__PURE__ */ __name((value) => {
-  switch (value) {
-    case "true":
-      return true;
-    case "false":
-      return false;
-    default:
-      throw new Error(`Unable to parse boolean value "${value}"`);
-  }
-}, "parseBoolean");
-var expectBoolean = /* @__PURE__ */ __name((value) => {
-  if (value === null || value === void 0) {
-    return void 0;
-  }
-  if (typeof value === "number") {
-    if (value === 0 || value === 1) {
-      logger.warn(stackTraceWarning(`Expected boolean, got ${typeof value}: ${value}`));
-    }
-    if (value === 0) {
-      return false;
-    }
-    if (value === 1) {
-      return true;
-    }
-  }
-  if (typeof value === "string") {
-    const lower = value.toLowerCase();
-    if (lower === "false" || lower === "true") {
-      logger.warn(stackTraceWarning(`Expected boolean, got ${typeof value}: ${value}`));
-    }
-    if (lower === "false") {
-      return false;
-    }
-    if (lower === "true") {
-      return true;
-    }
-  }
-  if (typeof value === "boolean") {
-    return value;
-  }
-  throw new TypeError(`Expected boolean, got ${typeof value}: ${value}`);
-}, "expectBoolean");
-var expectNumber = /* @__PURE__ */ __name((value) => {
-  if (value === null || value === void 0) {
-    return void 0;
-  }
-  if (typeof value === "string") {
-    const parsed = parseFloat(value);
-    if (!Number.isNaN(parsed)) {
-      if (String(parsed) !== String(value)) {
-        logger.warn(stackTraceWarning(`Expected number but observed string: ${value}`));
-      }
-      return parsed;
-    }
-  }
-  if (typeof value === "number") {
-    return value;
-  }
-  throw new TypeError(`Expected number, got ${typeof value}: ${value}`);
-}, "expectNumber");
-var MAX_FLOAT = Math.ceil(2 ** 127 * (2 - 2 ** -23));
-var expectFloat32 = /* @__PURE__ */ __name((value) => {
-  const expected = expectNumber(value);
-  if (expected !== void 0 && !Number.isNaN(expected) && expected !== Infinity && expected !== -Infinity) {
-    if (Math.abs(expected) > MAX_FLOAT) {
-      throw new TypeError(`Expected 32-bit float, got ${value}`);
-    }
-  }
-  return expected;
-}, "expectFloat32");
-var expectLong = /* @__PURE__ */ __name((value) => {
-  if (value === null || value === void 0) {
-    return void 0;
-  }
-  if (Number.isInteger(value) && !Number.isNaN(value)) {
-    return value;
-  }
-  throw new TypeError(`Expected integer, got ${typeof value}: ${value}`);
-}, "expectLong");
-var expectInt = expectLong;
-var expectInt32 = /* @__PURE__ */ __name((value) => expectSizedInt(value, 32), "expectInt32");
-var expectShort = /* @__PURE__ */ __name((value) => expectSizedInt(value, 16), "expectShort");
-var expectByte = /* @__PURE__ */ __name((value) => expectSizedInt(value, 8), "expectByte");
-var expectSizedInt = /* @__PURE__ */ __name((value, size) => {
-  const expected = expectLong(value);
-  if (expected !== void 0 && castInt(expected, size) !== expected) {
-    throw new TypeError(`Expected ${size}-bit integer, got ${value}`);
-  }
-  return expected;
-}, "expectSizedInt");
-var castInt = /* @__PURE__ */ __name((value, size) => {
-  switch (size) {
-    case 32:
-      return Int32Array.of(value)[0];
-    case 16:
-      return Int16Array.of(value)[0];
-    case 8:
-      return Int8Array.of(value)[0];
-  }
-}, "castInt");
-var expectNonNull = /* @__PURE__ */ __name((value, location) => {
-  if (value === null || value === void 0) {
-    if (location) {
-      throw new TypeError(`Expected a non-null value for ${location}`);
-    }
-    throw new TypeError("Expected a non-null value");
-  }
-  return value;
-}, "expectNonNull");
-var expectObject = /* @__PURE__ */ __name((value) => {
-  if (value === null || value === void 0) {
-    return void 0;
-  }
-  if (typeof value === "object" && !Array.isArray(value)) {
-    return value;
-  }
-  const receivedType = Array.isArray(value) ? "array" : typeof value;
-  throw new TypeError(`Expected object, got ${receivedType}: ${value}`);
-}, "expectObject");
-var expectString = /* @__PURE__ */ __name((value) => {
-  if (value === null || value === void 0) {
-    return void 0;
-  }
-  if (typeof value === "string") {
-    return value;
-  }
-  if (["boolean", "number", "bigint"].includes(typeof value)) {
-    logger.warn(stackTraceWarning(`Expected string, got ${typeof value}: ${value}`));
-    return String(value);
-  }
-  throw new TypeError(`Expected string, got ${typeof value}: ${value}`);
-}, "expectString");
-var expectUnion = /* @__PURE__ */ __name((value) => {
-  if (value === null || value === void 0) {
-    return void 0;
-  }
-  const asObject = expectObject(value);
-  const setKeys = Object.entries(asObject).filter(([, v]) => v != null).map(([k]) => k);
-  if (setKeys.length === 0) {
-    throw new TypeError(`Unions must have exactly one non-null member. None were found.`);
-  }
-  if (setKeys.length > 1) {
-    throw new TypeError(`Unions must have exactly one non-null member. Keys ${setKeys} were not null.`);
-  }
-  return asObject;
-}, "expectUnion");
-var strictParseDouble = /* @__PURE__ */ __name((value) => {
-  if (typeof value == "string") {
-    return expectNumber(parseNumber(value));
-  }
-  return expectNumber(value);
-}, "strictParseDouble");
-var strictParseFloat = strictParseDouble;
-var strictParseFloat32 = /* @__PURE__ */ __name((value) => {
-  if (typeof value == "string") {
-    return expectFloat32(parseNumber(value));
-  }
-  return expectFloat32(value);
-}, "strictParseFloat32");
-var NUMBER_REGEX = /(-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?)|(-?Infinity)|(NaN)/g;
-var parseNumber = /* @__PURE__ */ __name((value) => {
-  const matches = value.match(NUMBER_REGEX);
-  if (matches === null || matches[0].length !== value.length) {
-    throw new TypeError(`Expected real number, got implicit NaN`);
-  }
-  return parseFloat(value);
-}, "parseNumber");
-var limitedParseDouble = /* @__PURE__ */ __name((value) => {
-  if (typeof value == "string") {
-    return parseFloatString(value);
-  }
-  return expectNumber(value);
-}, "limitedParseDouble");
-var handleFloat = limitedParseDouble;
-var limitedParseFloat = limitedParseDouble;
-var limitedParseFloat32 = /* @__PURE__ */ __name((value) => {
-  if (typeof value == "string") {
-    return parseFloatString(value);
-  }
-  return expectFloat32(value);
-}, "limitedParseFloat32");
-var parseFloatString = /* @__PURE__ */ __name((value) => {
-  switch (value) {
-    case "NaN":
-      return NaN;
-    case "Infinity":
-      return Infinity;
-    case "-Infinity":
-      return -Infinity;
-    default:
-      throw new Error(`Unable to parse float value: ${value}`);
-  }
-}, "parseFloatString");
-var strictParseLong = /* @__PURE__ */ __name((value) => {
-  if (typeof value === "string") {
-    return expectLong(parseNumber(value));
-  }
-  return expectLong(value);
-}, "strictParseLong");
-var strictParseInt = strictParseLong;
-var strictParseInt32 = /* @__PURE__ */ __name((value) => {
-  if (typeof value === "string") {
-    return expectInt32(parseNumber(value));
-  }
-  return expectInt32(value);
-}, "strictParseInt32");
-var strictParseShort = /* @__PURE__ */ __name((value) => {
-  if (typeof value === "string") {
-    return expectShort(parseNumber(value));
-  }
-  return expectShort(value);
-}, "strictParseShort");
-var strictParseByte = /* @__PURE__ */ __name((value) => {
-  if (typeof value === "string") {
-    return expectByte(parseNumber(value));
-  }
-  return expectByte(value);
-}, "strictParseByte");
-var stackTraceWarning = /* @__PURE__ */ __name((message) => {
-  return String(new TypeError(message).stack || message).split("\n").slice(0, 5).filter((s) => !s.includes("stackTraceWarning")).join("\n");
-}, "stackTraceWarning");
-var logger = {
-  warn: console.warn
-};
-
-// src/date-utils.ts
-var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-function dateToUtcString(date) {
-  const year = date.getUTCFullYear();
-  const month = date.getUTCMonth();
-  const dayOfWeek = date.getUTCDay();
-  const dayOfMonthInt = date.getUTCDate();
-  const hoursInt = date.getUTCHours();
-  const minutesInt = date.getUTCMinutes();
-  const secondsInt = date.getUTCSeconds();
-  const dayOfMonthString = dayOfMonthInt < 10 ? `0${dayOfMonthInt}` : `${dayOfMonthInt}`;
-  const hoursString = hoursInt < 10 ? `0${hoursInt}` : `${hoursInt}`;
-  const minutesString = minutesInt < 10 ? `0${minutesInt}` : `${minutesInt}`;
-  const secondsString = secondsInt < 10 ? `0${secondsInt}` : `${secondsInt}`;
-  return `${DAYS[dayOfWeek]}, ${dayOfMonthString} ${MONTHS[month]} ${year} ${hoursString}:${minutesString}:${secondsString} GMT`;
-}
-__name(dateToUtcString, "dateToUtcString");
-var RFC3339 = new RegExp(/^(\d{4})-(\d{2})-(\d{2})[tT](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?[zZ]$/);
-var parseRfc3339DateTime = /* @__PURE__ */ __name((value) => {
-  if (value === null || value === void 0) {
-    return void 0;
-  }
-  if (typeof value !== "string") {
-    throw new TypeError("RFC-3339 date-times must be expressed as strings");
-  }
-  const match = RFC3339.exec(value);
-  if (!match) {
-    throw new TypeError("Invalid RFC-3339 date-time value");
-  }
-  const [_, yearStr, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds] = match;
-  const year = strictParseShort(stripLeadingZeroes(yearStr));
-  const month = parseDateValue(monthStr, "month", 1, 12);
-  const day = parseDateValue(dayStr, "day", 1, 31);
-  return buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
-}, "parseRfc3339DateTime");
-var RFC3339_WITH_OFFSET = new RegExp(
-  /^(\d{4})-(\d{2})-(\d{2})[tT](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(([-+]\d{2}\:\d{2})|[zZ])$/
-);
-var parseRfc3339DateTimeWithOffset = /* @__PURE__ */ __name((value) => {
-  if (value === null || value === void 0) {
-    return void 0;
-  }
-  if (typeof value !== "string") {
-    throw new TypeError("RFC-3339 date-times must be expressed as strings");
-  }
-  const match = RFC3339_WITH_OFFSET.exec(value);
-  if (!match) {
-    throw new TypeError("Invalid RFC-3339 date-time value");
-  }
-  const [_, yearStr, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds, offsetStr] = match;
-  const year = strictParseShort(stripLeadingZeroes(yearStr));
-  const month = parseDateValue(monthStr, "month", 1, 12);
-  const day = parseDateValue(dayStr, "day", 1, 31);
-  const date = buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
-  if (offsetStr.toUpperCase() != "Z") {
-    date.setTime(date.getTime() - parseOffsetToMilliseconds(offsetStr));
-  }
-  return date;
-}, "parseRfc3339DateTimeWithOffset");
-var IMF_FIXDATE = new RegExp(
-  /^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), (\d{2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/
-);
-var RFC_850_DATE = new RegExp(
-  /^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), (\d{2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/
-);
-var ASC_TIME = new RegExp(
-  /^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ( [1-9]|\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? (\d{4})$/
-);
-var parseRfc7231DateTime = /* @__PURE__ */ __name((value) => {
-  if (value === null || value === void 0) {
-    return void 0;
-  }
-  if (typeof value !== "string") {
-    throw new TypeError("RFC-7231 date-times must be expressed as strings");
-  }
-  let match = IMF_FIXDATE.exec(value);
-  if (match) {
-    const [_, dayStr, monthStr, yearStr, hours, minutes, seconds, fractionalMilliseconds] = match;
-    return buildDate(
-      strictParseShort(stripLeadingZeroes(yearStr)),
-      parseMonthByShortName(monthStr),
-      parseDateValue(dayStr, "day", 1, 31),
-      { hours, minutes, seconds, fractionalMilliseconds }
-    );
-  }
-  match = RFC_850_DATE.exec(value);
-  if (match) {
-    const [_, dayStr, monthStr, yearStr, hours, minutes, seconds, fractionalMilliseconds] = match;
-    return adjustRfc850Year(
-      buildDate(parseTwoDigitYear(yearStr), parseMonthByShortName(monthStr), parseDateValue(dayStr, "day", 1, 31), {
-        hours,
-        minutes,
-        seconds,
-        fractionalMilliseconds
-      })
-    );
-  }
-  match = ASC_TIME.exec(value);
-  if (match) {
-    const [_, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds, yearStr] = match;
-    return buildDate(
-      strictParseShort(stripLeadingZeroes(yearStr)),
-      parseMonthByShortName(monthStr),
-      parseDateValue(dayStr.trimLeft(), "day", 1, 31),
-      { hours, minutes, seconds, fractionalMilliseconds }
-    );
-  }
-  throw new TypeError("Invalid RFC-7231 date-time value");
-}, "parseRfc7231DateTime");
-var parseEpochTimestamp = /* @__PURE__ */ __name((value) => {
-  if (value === null || value === void 0) {
-    return void 0;
-  }
-  let valueAsDouble;
-  if (typeof value === "number") {
-    valueAsDouble = value;
-  } else if (typeof value === "string") {
-    valueAsDouble = strictParseDouble(value);
-  } else if (typeof value === "object" && value.tag === 1) {
-    valueAsDouble = value.value;
-  } else {
-    throw new TypeError("Epoch timestamps must be expressed as floating point numbers or their string representation");
-  }
-  if (Number.isNaN(valueAsDouble) || valueAsDouble === Infinity || valueAsDouble === -Infinity) {
-    throw new TypeError("Epoch timestamps must be valid, non-Infinite, non-NaN numerics");
-  }
-  return new Date(Math.round(valueAsDouble * 1e3));
-}, "parseEpochTimestamp");
-var buildDate = /* @__PURE__ */ __name((year, month, day, time) => {
-  const adjustedMonth = month - 1;
-  validateDayOfMonth(year, adjustedMonth, day);
-  return new Date(
-    Date.UTC(
-      year,
-      adjustedMonth,
-      day,
-      parseDateValue(time.hours, "hour", 0, 23),
-      parseDateValue(time.minutes, "minute", 0, 59),
-      // seconds can go up to 60 for leap seconds
-      parseDateValue(time.seconds, "seconds", 0, 60),
-      parseMilliseconds(time.fractionalMilliseconds)
-    )
-  );
-}, "buildDate");
-var parseTwoDigitYear = /* @__PURE__ */ __name((value) => {
-  const thisYear = (/* @__PURE__ */ new Date()).getUTCFullYear();
-  const valueInThisCentury = Math.floor(thisYear / 100) * 100 + strictParseShort(stripLeadingZeroes(value));
-  if (valueInThisCentury < thisYear) {
-    return valueInThisCentury + 100;
-  }
-  return valueInThisCentury;
-}, "parseTwoDigitYear");
-var FIFTY_YEARS_IN_MILLIS = 50 * 365 * 24 * 60 * 60 * 1e3;
-var adjustRfc850Year = /* @__PURE__ */ __name((input) => {
-  if (input.getTime() - (/* @__PURE__ */ new Date()).getTime() > FIFTY_YEARS_IN_MILLIS) {
-    return new Date(
-      Date.UTC(
-        input.getUTCFullYear() - 100,
-        input.getUTCMonth(),
-        input.getUTCDate(),
-        input.getUTCHours(),
-        input.getUTCMinutes(),
-        input.getUTCSeconds(),
-        input.getUTCMilliseconds()
-      )
-    );
-  }
-  return input;
-}, "adjustRfc850Year");
-var parseMonthByShortName = /* @__PURE__ */ __name((value) => {
-  const monthIdx = MONTHS.indexOf(value);
-  if (monthIdx < 0) {
-    throw new TypeError(`Invalid month: ${value}`);
-  }
-  return monthIdx + 1;
-}, "parseMonthByShortName");
-var DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-var validateDayOfMonth = /* @__PURE__ */ __name((year, month, day) => {
-  let maxDays = DAYS_IN_MONTH[month];
-  if (month === 1 && isLeapYear(year)) {
-    maxDays = 29;
-  }
-  if (day > maxDays) {
-    throw new TypeError(`Invalid day for ${MONTHS[month]} in ${year}: ${day}`);
-  }
-}, "validateDayOfMonth");
-var isLeapYear = /* @__PURE__ */ __name((year) => {
-  return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
-}, "isLeapYear");
-var parseDateValue = /* @__PURE__ */ __name((value, type, lower, upper) => {
-  const dateVal = strictParseByte(stripLeadingZeroes(value));
-  if (dateVal < lower || dateVal > upper) {
-    throw new TypeError(`${type} must be between ${lower} and ${upper}, inclusive`);
-  }
-  return dateVal;
-}, "parseDateValue");
-var parseMilliseconds = /* @__PURE__ */ __name((value) => {
-  if (value === null || value === void 0) {
-    return 0;
-  }
-  return strictParseFloat32("0." + value) * 1e3;
-}, "parseMilliseconds");
-var parseOffsetToMilliseconds = /* @__PURE__ */ __name((value) => {
-  const directionStr = value[0];
-  let direction = 1;
-  if (directionStr == "+") {
-    direction = 1;
-  } else if (directionStr == "-") {
-    direction = -1;
-  } else {
-    throw new TypeError(`Offset direction, ${directionStr}, must be "+" or "-"`);
-  }
-  const hour = Number(value.substring(1, 3));
-  const minute = Number(value.substring(4, 6));
-  return direction * (hour * 60 + minute) * 60 * 1e3;
-}, "parseOffsetToMilliseconds");
-var stripLeadingZeroes = /* @__PURE__ */ __name((value) => {
-  let idx = 0;
-  while (idx < value.length - 1 && value.charAt(idx) === "0") {
-    idx++;
-  }
-  if (idx === 0) {
-    return value;
-  }
-  return value.slice(idx);
-}, "stripLeadingZeroes");
 
 // src/exceptions.ts
 var ServiceException = class _ServiceException extends Error {
@@ -34286,31 +36983,6 @@ var isSerializableHeaderValue = /* @__PURE__ */ __name((value) => {
   return value != null;
 }, "isSerializableHeaderValue");
 
-// src/lazy-json.ts
-var LazyJsonString = /* @__PURE__ */ __name(function LazyJsonString2(val) {
-  const str = Object.assign(new String(val), {
-    deserializeJSON() {
-      return JSON.parse(String(val));
-    },
-    toString() {
-      return String(val);
-    },
-    toJSON() {
-      return String(val);
-    }
-  });
-  return str;
-}, "LazyJsonString");
-LazyJsonString.from = (object) => {
-  if (object && typeof object === "object" && (object instanceof LazyJsonString || "deserializeJSON" in object)) {
-    return object;
-  } else if (typeof object === "string" || Object.getPrototypeOf(object) === String.prototype) {
-    return LazyJsonString(String(object));
-  }
-  return LazyJsonString(JSON.stringify(object));
-};
-LazyJsonString.fromObject = LazyJsonString.from;
-
 // src/NoOpLogger.ts
 var NoOpLogger = class {
   static {
@@ -34423,15 +37095,6 @@ var applyInstruction = /* @__PURE__ */ __name((target, source, instructions, tar
 var nonNullish = /* @__PURE__ */ __name((_) => _ != null, "nonNullish");
 var pass = /* @__PURE__ */ __name((_) => _, "pass");
 
-// src/quote-header.ts
-function quoteHeader(part) {
-  if (part.includes(",") || part.includes('"')) {
-    part = `"${part.replace(/"/g, '\\"')}"`;
-  }
-  return part;
-}
-__name(quoteHeader, "quoteHeader");
-
 // src/resolve-path.ts
 
 
@@ -34472,73 +37135,8 @@ var _json = /* @__PURE__ */ __name((obj) => {
   return obj;
 }, "_json");
 
-// src/split-every.ts
-function splitEvery(value, delimiter, numDelimiters) {
-  if (numDelimiters <= 0 || !Number.isInteger(numDelimiters)) {
-    throw new Error("Invalid number of delimiters (" + numDelimiters + ") for splitEvery.");
-  }
-  const segments = value.split(delimiter);
-  if (numDelimiters === 1) {
-    return segments;
-  }
-  const compoundSegments = [];
-  let currentSegment = "";
-  for (let i = 0; i < segments.length; i++) {
-    if (currentSegment === "") {
-      currentSegment = segments[i];
-    } else {
-      currentSegment += delimiter + segments[i];
-    }
-    if ((i + 1) % numDelimiters === 0) {
-      compoundSegments.push(currentSegment);
-      currentSegment = "";
-    }
-  }
-  if (currentSegment !== "") {
-    compoundSegments.push(currentSegment);
-  }
-  return compoundSegments;
-}
-__name(splitEvery, "splitEvery");
-
-// src/split-header.ts
-var splitHeader = /* @__PURE__ */ __name((value) => {
-  const z = value.length;
-  const values = [];
-  let withinQuotes = false;
-  let prevChar = void 0;
-  let anchor = 0;
-  for (let i = 0; i < z; ++i) {
-    const char = value[i];
-    switch (char) {
-      case `"`:
-        if (prevChar !== "\\") {
-          withinQuotes = !withinQuotes;
-        }
-        break;
-      case ",":
-        if (!withinQuotes) {
-          values.push(value.slice(anchor, i));
-          anchor = i + 1;
-        }
-        break;
-      default:
-    }
-    prevChar = char;
-  }
-  values.push(value.slice(anchor));
-  return values.map((v) => {
-    v = v.trim();
-    const z2 = v.length;
-    if (z2 < 2) {
-      return v;
-    }
-    if (v[0] === `"` && v[z2 - 1] === `"`) {
-      v = v.slice(1, z2 - 1);
-    }
-    return v.replace(/\\"/g, '"');
-  });
-}, "splitHeader");
+// src/index.ts
+__reExport(src_exports, __nccwpck_require__(2430), module.exports);
 // Annotate the CommonJS export names for ESM import in node:
 
 0 && (0);
@@ -36460,7 +39058,7 @@ exports.createChecksumStream = createChecksumStream;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.createChecksumStream = void 0;
+exports.createChecksumStream = createChecksumStream;
 const stream_type_check_1 = __nccwpck_require__(4414);
 const ChecksumStream_1 = __nccwpck_require__(1775);
 const createChecksumStream_browser_1 = __nccwpck_require__(4129);
@@ -36470,7 +39068,6 @@ function createChecksumStream(init) {
     }
     return new ChecksumStream_1.ChecksumStream(init);
 }
-exports.createChecksumStream = createChecksumStream;
 
 
 /***/ }),
@@ -36481,7 +39078,7 @@ exports.createChecksumStream = createChecksumStream;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.createBufferedReadable = void 0;
+exports.createBufferedReadable = createBufferedReadable;
 const node_stream_1 = __nccwpck_require__(7075);
 const ByteArrayCollector_1 = __nccwpck_require__(1732);
 const createBufferedReadableStream_1 = __nccwpck_require__(8213);
@@ -36539,7 +39136,6 @@ function createBufferedReadable(upstream, size, logger) {
     });
     return downstream;
 }
-exports.createBufferedReadable = createBufferedReadable;
 
 
 /***/ }),
@@ -36550,7 +39146,12 @@ exports.createBufferedReadable = createBufferedReadable;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.modeOf = exports.sizeOf = exports.flush = exports.merge = exports.createBufferedReadable = exports.createBufferedReadableStream = void 0;
+exports.createBufferedReadable = void 0;
+exports.createBufferedReadableStream = createBufferedReadableStream;
+exports.merge = merge;
+exports.flush = flush;
+exports.sizeOf = sizeOf;
+exports.modeOf = modeOf;
 const ByteArrayCollector_1 = __nccwpck_require__(1732);
 function createBufferedReadableStream(upstream, size, logger) {
     const reader = upstream.getReader();
@@ -36607,7 +39208,6 @@ function createBufferedReadableStream(upstream, size, logger) {
         pull,
     });
 }
-exports.createBufferedReadableStream = createBufferedReadableStream;
 exports.createBufferedReadable = createBufferedReadableStream;
 function merge(buffers, mode, chunk) {
     switch (mode) {
@@ -36620,7 +39220,6 @@ function merge(buffers, mode, chunk) {
             return sizeOf(buffers[mode]);
     }
 }
-exports.merge = merge;
 function flush(buffers, mode) {
     switch (mode) {
         case 0:
@@ -36633,12 +39232,10 @@ function flush(buffers, mode) {
     }
     throw new Error(`@smithy/util-stream - invalid index ${mode} given to flush()`);
 }
-exports.flush = flush;
 function sizeOf(chunk) {
     var _a, _b;
     return (_b = (_a = chunk === null || chunk === void 0 ? void 0 : chunk.byteLength) !== null && _a !== void 0 ? _a : chunk === null || chunk === void 0 ? void 0 : chunk.length) !== null && _b !== void 0 ? _b : 0;
 }
-exports.sizeOf = sizeOf;
 function modeOf(chunk, allowBuffer = true) {
     if (allowBuffer && typeof Buffer !== "undefined" && chunk instanceof Buffer) {
         return 2;
@@ -36651,7 +39248,6 @@ function modeOf(chunk, allowBuffer = true) {
     }
     return -1;
 }
-exports.modeOf = modeOf;
 
 
 /***/ }),
@@ -36700,7 +39296,7 @@ exports.getAwsChunkedEncodingStream = getAwsChunkedEncodingStream;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.headStream = void 0;
+exports.headStream = headStream;
 async function headStream(stream, bytes) {
     var _a;
     let byteLengthCounter = 0;
@@ -36733,7 +39329,6 @@ async function headStream(stream, bytes) {
     }
     return collected;
 }
-exports.headStream = headStream;
 
 
 /***/ }),
@@ -37037,7 +39632,7 @@ exports.sdkStreamMixin = sdkStreamMixin;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.splitStream = void 0;
+exports.splitStream = splitStream;
 async function splitStream(stream) {
     if (typeof stream.stream === "function") {
         stream = stream.stream();
@@ -37045,7 +39640,6 @@ async function splitStream(stream) {
     const readableStream = stream;
     return readableStream.tee();
 }
-exports.splitStream = splitStream;
 
 
 /***/ }),
@@ -37056,7 +39650,7 @@ exports.splitStream = splitStream;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.splitStream = void 0;
+exports.splitStream = splitStream;
 const stream_1 = __nccwpck_require__(2203);
 const splitStream_browser_1 = __nccwpck_require__(7570);
 const stream_type_check_1 = __nccwpck_require__(4414);
@@ -37070,7 +39664,6 @@ async function splitStream(stream) {
     stream.pipe(stream2);
     return [stream1, stream2];
 }
-exports.splitStream = splitStream;
 
 
 /***/ }),
@@ -37544,6 +40137,6659 @@ var createWaiter = /* @__PURE__ */ __name(async (options, input, acceptorChecks)
 0 && (0);
 
 
+
+/***/ }),
+
+/***/ 9328:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.extractRegionFromEndpoint = exports.buildMqtt5FinalUsername = exports.canonicalizeCustomAuthConfig = exports.canonicalizeCustomAuthTokenSignature = exports.populate_username_string_with_custom_authorizer = exports.is_string_and_not_empty = exports.add_to_username_parameter = void 0;
+/**
+ *
+ * A module containing miscellaneous functionality that is shared across both native and browser for aws_iot
+ *
+ * @packageDocumentation
+ * @module aws_iot
+ */
+const platform = __importStar(__nccwpck_require__(5141));
+const utils = __importStar(__nccwpck_require__(4049));
+/**
+ * A helper function to add parameters to the username in with_custom_authorizer function
+ *
+ * @internal
+ */
+function add_to_username_parameter(current_username, parameter_value, parameter_pre_text) {
+    let return_string = current_username;
+    if (return_string.indexOf("?") != -1) {
+        return_string += "&";
+    }
+    else {
+        return_string += "?";
+    }
+    if (parameter_value.indexOf(parameter_pre_text) != -1) {
+        return return_string + parameter_value;
+    }
+    else {
+        return return_string + parameter_pre_text + parameter_value;
+    }
+}
+exports.add_to_username_parameter = add_to_username_parameter;
+/**
+ * A helper function to see if a string is not null, is defined, and is not an empty string
+ *
+ * @internal
+ */
+function is_string_and_not_empty(item) {
+    return item != undefined && typeof (item) == 'string' && item != "";
+}
+exports.is_string_and_not_empty = is_string_and_not_empty;
+/**
+ * A helper function to populate the username with the Custom Authorizer fields
+ * @param current_username the current username
+ * @param input_username the username to add - can be an empty string to skip
+ * @param input_authorizer the name of the authorizer to add - can be an empty string to skip
+ * @param input_signature the name of the signature to add - can be an empty string to skip
+ * @param input_builder_username the username from the MQTT builder
+ * @param input_token_key_name the token key name
+ * @param input_token_value the token key value
+ * @returns The finished username with the additions added to it
+ *
+ * @internal
+ */
+function populate_username_string_with_custom_authorizer(current_username, input_username, input_authorizer, input_signature, input_builder_username, input_token_key_name, input_token_value) {
+    let username_string = "";
+    if (current_username) {
+        username_string += current_username;
+    }
+    if (is_string_and_not_empty(input_username) == false) {
+        if (is_string_and_not_empty(input_builder_username) && input_builder_username) {
+            username_string += input_builder_username;
+        }
+    }
+    else {
+        username_string += input_username;
+    }
+    if (is_string_and_not_empty(input_authorizer) && input_authorizer) {
+        username_string = add_to_username_parameter(username_string, input_authorizer, "x-amz-customauthorizer-name=");
+    }
+    if (is_string_and_not_empty(input_signature) || is_string_and_not_empty(input_token_value) || is_string_and_not_empty(input_token_key_name)) {
+        if (!input_token_value || !input_token_key_name || !input_signature) {
+            throw new Error("Signing-based custom authentication requires all token-related properties to be set");
+        }
+    }
+    if (is_string_and_not_empty(input_signature) && input_signature) {
+        username_string = add_to_username_parameter(username_string, input_signature, "x-amz-customauthorizer-signature=");
+    }
+    if (is_string_and_not_empty(input_token_value) && is_string_and_not_empty(input_token_key_name)) {
+        // @ts-ignore
+        username_string = add_to_username_parameter(username_string, input_token_value, input_token_key_name + "=");
+    }
+    return username_string;
+}
+exports.populate_username_string_with_custom_authorizer = populate_username_string_with_custom_authorizer;
+;
+/** @internal */
+function canonicalizeCustomAuthTokenSignature(signature) {
+    if (signature === undefined || signature == null) {
+        return undefined;
+    }
+    let hasPercent = signature.indexOf("%") != -1;
+    if (hasPercent) {
+        return signature;
+    }
+    else {
+        return encodeURIComponent(signature);
+    }
+}
+exports.canonicalizeCustomAuthTokenSignature = canonicalizeCustomAuthTokenSignature;
+/** @internal */
+function canonicalizeCustomAuthConfig(config) {
+    let processedConfig = {};
+    utils.set_defined_property(processedConfig, "authorizerName", config.authorizerName);
+    utils.set_defined_property(processedConfig, "username", config.username);
+    utils.set_defined_property(processedConfig, "password", config.password);
+    utils.set_defined_property(processedConfig, "tokenKeyName", config.tokenKeyName);
+    utils.set_defined_property(processedConfig, "tokenValue", config.tokenValue);
+    utils.set_defined_property(processedConfig, "tokenSignature", canonicalizeCustomAuthTokenSignature(config.tokenSignature));
+    return processedConfig;
+}
+exports.canonicalizeCustomAuthConfig = canonicalizeCustomAuthConfig;
+/** @internal */
+function addParam(paramName, paramValue, paramSet) {
+    if (paramValue) {
+        paramSet.push([paramName, paramValue]);
+    }
+}
+/**
+ * Builds the final value for the CONNECT packet's username property based on AWS IoT custom auth configuration
+ * and SDK metrics properties.
+ *
+ * @param customAuthConfig intended AWS IoT custom auth client configuration
+ *
+ * @internal
+ */
+function buildMqtt5FinalUsername(customAuthConfig) {
+    let path = "";
+    let paramList = [];
+    if (customAuthConfig) {
+        /* If we're using token-signing authentication, then all token properties must be set */
+        let usingSigning = false;
+        if (customAuthConfig.tokenValue || customAuthConfig.tokenKeyName || customAuthConfig.tokenSignature) {
+            usingSigning = true;
+            if (!customAuthConfig.tokenValue || !customAuthConfig.tokenKeyName || !customAuthConfig.tokenSignature) {
+                throw new Error("Token-based custom authentication requires all token-related properties to be set");
+            }
+        }
+        let username = customAuthConfig.username;
+        let pathSplit = (username !== null && username !== void 0 ? username : "").split("?");
+        let params = pathSplit.slice(1);
+        path = pathSplit[0];
+        if (params.length > 1) {
+            throw new Error("Custom auth username property value is invalid");
+        }
+        else if (params.length == 1) {
+            params[0].split("&").forEach((keyValue, index, array) => {
+                var _a;
+                let kvPair = keyValue.split("=");
+                paramList.push([kvPair[0], (_a = kvPair[1]) !== null && _a !== void 0 ? _a : ""]);
+            });
+        }
+        addParam("x-amz-customauthorizer-name", customAuthConfig.authorizerName, paramList);
+        if (usingSigning) {
+            // @ts-ignore verified earlier
+            addParam(customAuthConfig.tokenKeyName, customAuthConfig.tokenValue, paramList);
+            addParam("x-amz-customauthorizer-signature", customAuthConfig.tokenSignature, paramList);
+        }
+    }
+    paramList.push(["SDK", "NodeJSv2"]);
+    paramList.push(["Version", platform.crt_version()]);
+    return (path !== null && path !== void 0 ? path : "") + "?" + paramList.map((value) => `${value[0]}=${value[1]}`).join("&");
+}
+exports.buildMqtt5FinalUsername = buildMqtt5FinalUsername;
+/**
+ * Attempts to determine the AWS region associated with an endpoint.
+ *
+ * @param endpoint endpoint to compute the region for
+ *
+ * @internal
+ */
+function extractRegionFromEndpoint(endpoint) {
+    const regexpRegion = /^[\w\-]+\.[\w\-]+\.([\w+\-]+)\./;
+    const match = endpoint.match(regexpRegion);
+    if (match) {
+        return match[1];
+    }
+    throw new Error("AWS region could not be extracted from endpoint.  Use 'region' property on WebsocketConfig to set manually.");
+}
+exports.extractRegionFromEndpoint = extractRegionFromEndpoint;
+//# sourceMappingURL=aws_iot_shared.js.map
+
+/***/ }),
+
+/***/ 3600:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.newCancellablePromiseFromNextEvent = exports.CancelController = exports.EVENT_NAME = void 0;
+/**
+ *
+ * A module containing support for cancelling asynchronous operations
+ *
+ * @packageDocumentation
+ * @module cancel
+ */
+const events_1 = __nccwpck_require__(4434);
+const promise = __importStar(__nccwpck_require__(1357));
+exports.EVENT_NAME = 'cancelled';
+/**
+ * CRT implementation of the ICancelController interface
+ */
+class CancelController {
+    constructor(options) {
+        this.cancelled = false;
+        if (options && options.emitterFactory) {
+            this.emitter = options.emitterFactory();
+        }
+        else {
+            this.emitter = new events_1.EventEmitter();
+        }
+    }
+    /**
+     * Cancels all asynchronous operations associated with this controller
+     */
+    cancel() {
+        if (!this.cancelled) {
+            this.cancelled = true;
+            this.emitter.emit(exports.EVENT_NAME);
+            this.emitter.removeAllListeners(exports.EVENT_NAME);
+        }
+    }
+    /**
+     * Checks whether or not the controller is in the cancelled state
+     */
+    hasBeenCancelled() {
+        return this.cancelled;
+    }
+    /**
+     * Registers a callback to be notified when cancel() is invoked externally.  In general, the callback
+     * will cancel an asynchronous operation by rejecting the associated promise.
+     *
+     * IMPORTANT: The listener is invoked synchronously if the controller has already been cancelled.
+     *
+     * @param listener - function to invoke on cancel; invoked synchronously if the controller has been cancelled
+     *
+     * @return undefined if the controller has already been cancelled, otherwise a function object whose invocation
+     * will remove the listener from the controller's event emitter.
+     *
+     */
+    addListener(listener) {
+        if (this.cancelled) {
+            listener();
+            return undefined;
+        }
+        this.emitter.on(exports.EVENT_NAME, listener);
+        return () => { this.emitter.removeListener(exports.EVENT_NAME, listener); };
+    }
+}
+exports.CancelController = CancelController;
+/**
+ * Creates a promise that can be rejected by a CancelController and resolved by the receipt of an event from an
+ * EventEmitter.
+ *
+ * @param config promise creation options
+ */
+function newCancellablePromiseFromNextEvent(config) {
+    let onEvent = undefined;
+    let cancelRemoveListener = undefined;
+    let liftedPromise = promise.newLiftedPromise();
+    onEvent = (eventData) => {
+        try {
+            if (config.eventDataTransformer) {
+                liftedPromise.resolve(config.eventDataTransformer(eventData));
+            }
+            else {
+                liftedPromise.resolve(eventData);
+            }
+        }
+        catch (err) {
+            liftedPromise.reject(err);
+        }
+    };
+    config.emitter.addListener(config.eventName, onEvent);
+    if (config.cancelController) {
+        cancelRemoveListener = config.cancelController.addListener(() => {
+            liftedPromise.reject(config.cancelMessage);
+        });
+    }
+    return promise.makeSelfCleaningPromise(liftedPromise.promise, () => {
+        if (onEvent) {
+            config.emitter.removeListener(config.eventName, onEvent);
+        }
+        if (cancelRemoveListener) {
+            cancelRemoveListener();
+        }
+    });
+}
+exports.newCancellablePromiseFromNextEvent = newCancellablePromiseFromNextEvent;
+//# sourceMappingURL=cancel.js.map
+
+/***/ }),
+
+/***/ 8468:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.BufferedEventEmitter = void 0;
+/**
+ * Module for base types related to event emission
+ *
+ * @packageDocumentation
+ * @module event
+ */
+const events_1 = __nccwpck_require__(4434);
+/**
+ * @internal
+ */
+class BufferedEvent {
+    constructor(event, args) {
+        this.event = event;
+        this.args = args;
+    }
+}
+/**
+ * Provides buffered event emitting semantics, similar to many Node-style streams.
+ * Subclasses will override EventEmitter.on() and trigger uncorking.
+ * NOTE: It is HIGHLY recommended that uncorking should always be done via
+ * ```process.nextTick()```, not during the EventEmitter.on() call.
+ *
+ * See also: [Node writable streams](https://nodejs.org/api/stream.html#stream_writable_cork)
+ *
+ * @category Events
+ */
+class BufferedEventEmitter extends events_1.EventEmitter {
+    constructor() {
+        super();
+        this.corked = false;
+    }
+    /**
+     * Forces all written events to be buffered in memory. The buffered data will be
+     * flushed when {@link BufferedEventEmitter.uncork} is called.
+     */
+    cork() {
+        this.corked = true;
+    }
+    /**
+     * Flushes all data buffered since {@link BufferedEventEmitter.cork} was called.
+     *
+     * NOTE: It is HIGHLY recommended that uncorking should always be done via
+     * ``` process.nextTick```, not during the ```EventEmitter.on()``` call.
+     */
+    uncork() {
+        this.corked = false;
+        while (this.eventQueue) {
+            const event = this.eventQueue;
+            super.emit(event.event, ...event.args);
+            this.eventQueue = this.eventQueue.next;
+        }
+    }
+    /**
+     * Synchronously calls each of the listeners registered for the event key supplied
+     * in registration order. If the {@link BufferedEventEmitter} is currently corked,
+     * the event will be buffered until {@link BufferedEventEmitter.uncork} is called.
+     * @param event The name of the event
+     * @param args Event payload
+     */
+    emit(event, ...args) {
+        if (this.corked) {
+            // queue requests in order
+            let last = this.lastQueuedEvent;
+            this.lastQueuedEvent = new BufferedEvent(event, args);
+            if (last) {
+                last.next = this.lastQueuedEvent;
+            }
+            else {
+                this.eventQueue = this.lastQueuedEvent;
+            }
+            return this.listeners(event).length > 0;
+        }
+        return super.emit(event, ...args);
+    }
+}
+exports.BufferedEventEmitter = BufferedEventEmitter;
+//# sourceMappingURL=event.js.map
+
+/***/ }),
+
+/***/ 2926:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/*
+ *
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CommonHttpProxyOptions = exports.HttpProxyAuthenticationType = exports.HttpVersion = void 0;
+/**
+ *
+ * A module containing support for creating http connections and making requests on them.
+ *
+ * @packageDocumentation
+ * @module http
+ */
+/**
+ * HTTP protocol version
+ *
+ * @category HTTP
+ */
+var HttpVersion;
+(function (HttpVersion) {
+    HttpVersion[HttpVersion["Unknown"] = 0] = "Unknown";
+    /** HTTP/1.0 */
+    HttpVersion[HttpVersion["Http1_0"] = 1] = "Http1_0";
+    /** HTTP/1.1 */
+    HttpVersion[HttpVersion["Http1_1"] = 2] = "Http1_1";
+    /** HTTP/2 */
+    HttpVersion[HttpVersion["Http2"] = 3] = "Http2";
+})(HttpVersion = exports.HttpVersion || (exports.HttpVersion = {}));
+/**
+ * Proxy authentication types
+ *
+ * @category HTTP
+ */
+var HttpProxyAuthenticationType;
+(function (HttpProxyAuthenticationType) {
+    /**
+     * No to-proxy authentication logic
+     */
+    HttpProxyAuthenticationType[HttpProxyAuthenticationType["None"] = 0] = "None";
+    /**
+     * Use basic authentication (user/pass).  Supply these values in {@link HttpProxyOptions}
+     */
+    HttpProxyAuthenticationType[HttpProxyAuthenticationType["Basic"] = 1] = "Basic";
+})(HttpProxyAuthenticationType = exports.HttpProxyAuthenticationType || (exports.HttpProxyAuthenticationType = {}));
+;
+/**
+ * Options used when connecting to an HTTP endpoint via a proxy
+ *
+ * @category HTTP
+ */
+class CommonHttpProxyOptions {
+    /**
+     *
+     * @param host_name endpoint of the proxy to use
+     * @param port port of proxy to use
+     * @param auth_method type of authentication to use with the proxy
+     * @param auth_username (basic authentication only) proxy username
+     * @param auth_password (basic authentication only) password associated with the username
+     */
+    constructor(host_name, port, auth_method = HttpProxyAuthenticationType.None, auth_username, auth_password) {
+        this.host_name = host_name;
+        this.port = port;
+        this.auth_method = auth_method;
+        this.auth_username = auth_username;
+        this.auth_password = auth_password;
+    }
+}
+exports.CommonHttpProxyOptions = CommonHttpProxyOptions;
+//# sourceMappingURL=http.js.map
+
+/***/ }),
+
+/***/ 5674:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.logTrace = exports.logDebug = exports.logInfo = exports.logWarn = exports.logError = exports.logFatal = exports.setLogLevel = exports.LogLevel = exports.SocketDomain = exports.SocketType = exports.TlsVersion = void 0;
+/**
+ *
+ * A module containing a grab bag of support for core network I/O functionality, including sockets, TLS, DNS, logging,
+ * error handling, streams, and connection -> thread mapping.
+ *
+ * Categories include:
+ * - Network: socket configuration
+ * - TLS: tls configuration
+ * - Logging: logging controls and configuration
+ * - IO: everything else
+ *
+ * @packageDocumentation
+ * @module io
+ */
+/**
+ * TLS Version
+ *
+ * @category TLS
+ */
+var TlsVersion;
+(function (TlsVersion) {
+    TlsVersion[TlsVersion["SSLv3"] = 0] = "SSLv3";
+    TlsVersion[TlsVersion["TLSv1"] = 1] = "TLSv1";
+    TlsVersion[TlsVersion["TLSv1_1"] = 2] = "TLSv1_1";
+    TlsVersion[TlsVersion["TLSv1_2"] = 3] = "TLSv1_2";
+    TlsVersion[TlsVersion["TLSv1_3"] = 4] = "TLSv1_3";
+    TlsVersion[TlsVersion["Default"] = 128] = "Default";
+})(TlsVersion = exports.TlsVersion || (exports.TlsVersion = {}));
+/**
+ * @category Network
+ */
+var SocketType;
+(function (SocketType) {
+    /**
+     * A streaming socket sends reliable messages over a two-way connection.
+     * This means TCP when used with {@link SocketDomain.IPV4}/{@link SocketDomain.IPV6},
+     * and Unix domain sockets when used with {@link SocketDomain.LOCAL }
+      */
+    SocketType[SocketType["STREAM"] = 0] = "STREAM";
+    /**
+     * A datagram socket is connectionless and sends unreliable messages.
+     * This means UDP when used with {@link SocketDomain.IPV4}/{@link SocketDomain.IPV6}.
+     * {@link SocketDomain.LOCAL} is not compatible with {@link DGRAM}
+     */
+    SocketType[SocketType["DGRAM"] = 1] = "DGRAM";
+})(SocketType = exports.SocketType || (exports.SocketType = {}));
+/**
+ * @category Network
+ */
+var SocketDomain;
+(function (SocketDomain) {
+    /** IPv4 sockets */
+    SocketDomain[SocketDomain["IPV4"] = 0] = "IPV4";
+    /** IPv6 sockets */
+    SocketDomain[SocketDomain["IPV6"] = 1] = "IPV6";
+    /** UNIX domain socket/Windows named pipes */
+    SocketDomain[SocketDomain["LOCAL"] = 2] = "LOCAL";
+})(SocketDomain = exports.SocketDomain || (exports.SocketDomain = {}));
+/**
+ * The amount of detail that will be logged
+ * @category Logging
+ */
+var LogLevel;
+(function (LogLevel) {
+    /** No logging whatsoever. */
+    LogLevel[LogLevel["NONE"] = 0] = "NONE";
+    /** Only fatals. In practice, this will not do much, as the process will log and then crash (intentionally) if a fatal condition occurs */
+    LogLevel[LogLevel["FATAL"] = 1] = "FATAL";
+    /** Only errors */
+    LogLevel[LogLevel["ERROR"] = 2] = "ERROR";
+    /** Only warnings and errors */
+    LogLevel[LogLevel["WARN"] = 3] = "WARN";
+    /** Information about connection/stream creation/destruction events */
+    LogLevel[LogLevel["INFO"] = 4] = "INFO";
+    /** Enough information to debug the chain of events a given network connection encounters */
+    LogLevel[LogLevel["DEBUG"] = 5] = "DEBUG";
+    /** Everything. Only use this if you really need to know EVERY single call */
+    LogLevel[LogLevel["TRACE"] = 6] = "TRACE";
+})(LogLevel = exports.LogLevel || (exports.LogLevel = {}));
+let logLevel = LogLevel.NONE;
+/**
+ * Sets the amount of detail that will be logged
+ * @param level - maximum level of logging detail.  Log invocations at a higher level of detail will be ignored.
+ *
+ * @category Logging
+ */
+function setLogLevel(level) {
+    logLevel = level;
+}
+exports.setLogLevel = setLogLevel;
+/*
+ * The logging API is exported to library-internal, but stays private beyond the package boundary, so the following API
+ * decisions are not binding.
+ */
+function logFatal(subject, logLine) {
+    if (logLevel < LogLevel.FATAL) {
+        return;
+    }
+    let currentTime = new Date().toISOString();
+    console.log(`[FATAL] [${currentTime}] [${subject}] - ${logLine}`);
+}
+exports.logFatal = logFatal;
+function logError(subject, logLine) {
+    if (logLevel < LogLevel.ERROR) {
+        return;
+    }
+    let currentTime = new Date().toISOString();
+    console.log(`[ERROR] [${currentTime}] [${subject}] - ${logLine}`);
+}
+exports.logError = logError;
+function logWarn(subject, logLine) {
+    if (logLevel < LogLevel.WARN) {
+        return;
+    }
+    let currentTime = new Date().toISOString();
+    console.log(`[WARN] [${currentTime}] [${subject}] - ${logLine}`);
+}
+exports.logWarn = logWarn;
+function logInfo(subject, logLine) {
+    if (logLevel < LogLevel.INFO) {
+        return;
+    }
+    let currentTime = new Date().toISOString();
+    console.log(`[INFO] [${currentTime}] [${subject}] - ${logLine}`);
+}
+exports.logInfo = logInfo;
+function logDebug(subject, logLine) {
+    if (logLevel < LogLevel.DEBUG) {
+        return;
+    }
+    let currentTime = new Date().toISOString();
+    console.log(`[DEBUG] [${currentTime}] [${subject}] - ${logLine}`);
+}
+exports.logDebug = logDebug;
+function logTrace(subject, logLine) {
+    if (logLevel < LogLevel.TRACE) {
+        return;
+    }
+    let currentTime = new Date().toISOString();
+    console.log(`[TRACE] [${currentTime}] [${subject}] - ${logLine}`);
+}
+exports.logTrace = logTrace;
+//# sourceMappingURL=io.js.map
+
+/***/ }),
+
+/***/ 8064:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DEFAULT_RECONNECT_MIN_SEC = exports.DEFAULT_RECONNECT_MAX_SEC = exports.MqttWill = exports.QoS = void 0;
+/**
+ * Quality of service control for mqtt publish operations
+ *
+ * @category MQTT
+ */
+var QoS;
+(function (QoS) {
+    /**
+     * QoS 0 - At most once delivery
+     * The message is delivered according to the capabilities of the underlying network.
+     * No response is sent by the receiver and no retry is performed by the sender.
+     * The message arrives at the receiver either once or not at all.
+     */
+    QoS[QoS["AtMostOnce"] = 0] = "AtMostOnce";
+    /**
+     * QoS 1 - At least once delivery
+     * This quality of service ensures that the message arrives at the receiver at least once.
+     */
+    QoS[QoS["AtLeastOnce"] = 1] = "AtLeastOnce";
+    /**
+     * QoS 2 - Exactly once delivery
+
+     * This is the highest quality of service, for use when neither loss nor
+     * duplication of messages are acceptable. There is an increased overhead
+     * associated with this quality of service.
+
+     * Note that, while this client supports QoS 2, the AWS IoT Core service
+     * does not support QoS 2 at time of writing (May 2020).
+     */
+    QoS[QoS["ExactlyOnce"] = 2] = "ExactlyOnce";
+})(QoS = exports.QoS || (exports.QoS = {}));
+/**
+ * A Will message is published by the server if a client is lost unexpectedly.
+ *
+ * The Will message is stored on the server when a client connects.
+ * It is published if the client connection is lost without the server
+ * receiving a DISCONNECT packet.
+ *
+ * [MQTT - 3.1.2 - 8]
+ *
+ * @category MQTT
+ */
+class MqttWill {
+    constructor(
+    /** Topic to publish Will message on. */
+    topic, 
+    /** QoS used when publishing the Will message. */
+    qos, 
+    /** Content of Will message. */
+    payload, 
+    /** Whether the Will message is to be retained when it is published. */
+    retain = false) {
+        this.topic = topic;
+        this.qos = qos;
+        this.payload = payload;
+        this.retain = retain;
+    }
+}
+exports.MqttWill = MqttWill;
+/**
+ * Const value for max reconnection back off time
+ *
+ * @category MQTT
+ */
+exports.DEFAULT_RECONNECT_MAX_SEC = 128;
+/**
+ * Const value for min reconnection back off time
+ *
+ * @category MQTT
+ */
+exports.DEFAULT_RECONNECT_MIN_SEC = 1;
+//# sourceMappingURL=mqtt.js.map
+
+/***/ }),
+
+/***/ 9485:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.InboundTopicAliasBehaviorType = exports.OutboundTopicAliasBehaviorType = exports.RetryJitterType = exports.ClientSessionBehavior = void 0;
+/**
+ * Controls how the MQTT5 client should behave with respect to MQTT sessions.
+ */
+var ClientSessionBehavior;
+(function (ClientSessionBehavior) {
+    /** Maps to Clean */
+    ClientSessionBehavior[ClientSessionBehavior["Default"] = 0] = "Default";
+    /**
+     * Always ask for a clean session when connecting
+     */
+    ClientSessionBehavior[ClientSessionBehavior["Clean"] = 1] = "Clean";
+    /**
+     * Always attempt to rejoin an existing session after an initial connection success.
+     *
+     * Session rejoin requires an appropriate non-zero session expiry interval in the client's CONNECT options.
+     */
+    ClientSessionBehavior[ClientSessionBehavior["RejoinPostSuccess"] = 2] = "RejoinPostSuccess";
+    /**
+     * Always attempt to rejoin an existing session.  Since the client does not yet support durable session persistence,
+     * this option is not guaranteed to be spec compliant because any unacknowledged qos1 publishes (which are
+     * part of the client session state) will not be present on the initial connection.  Until we support
+     * durable session resumption, this option is technically spec-breaking, but useful.
+     */
+    ClientSessionBehavior[ClientSessionBehavior["RejoinAlways"] = 3] = "RejoinAlways";
+})(ClientSessionBehavior = exports.ClientSessionBehavior || (exports.ClientSessionBehavior = {}));
+/**
+ * Controls how the reconnect delay is modified in order to smooth out the distribution of reconnection attempt
+ * timepoints for a large set of reconnecting clients.
+ *
+ * See [Exponential Backoff and Jitter](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/)
+ */
+var RetryJitterType;
+(function (RetryJitterType) {
+    /**
+     * Maps to Full
+     */
+    RetryJitterType[RetryJitterType["Default"] = 0] = "Default";
+    /**
+     * Do not perform any randomization on the reconnect delay:
+     * ```NextReconnectDelay = CurrentExponentialBackoffValue```
+     */
+    RetryJitterType[RetryJitterType["None"] = 1] = "None";
+    /**
+     * Fully random between no delay and the current exponential backoff value.
+     * ```NextReconnectDelay = Random(0, CurrentExponentialBackoffValue)```
+     */
+    RetryJitterType[RetryJitterType["Full"] = 2] = "Full";
+    /**
+     * ```NextReconnectDelay = Min(MaxReconnectDelay, Random(MinReconnectDelay, 3 * CurrentReconnectDelay)```
+     */
+    RetryJitterType[RetryJitterType["Decorrelated"] = 3] = "Decorrelated";
+})(RetryJitterType = exports.RetryJitterType || (exports.RetryJitterType = {}));
+/**
+ * An enumeration that controls how the client applies topic aliasing to outbound publish packets.
+ *
+ * Topic alias behavior is described in https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901113
+ */
+var OutboundTopicAliasBehaviorType;
+(function (OutboundTopicAliasBehaviorType) {
+    /**
+     * Maps to Disabled.  This keeps the client from being broken (by default) if the broker
+     * topic aliasing implementation has a problem.
+     */
+    OutboundTopicAliasBehaviorType[OutboundTopicAliasBehaviorType["Default"] = 0] = "Default";
+    /**
+     * Outbound aliasing is the user's responsibility.  Client will cache and use
+     * previously-established aliases if they fall within the negotiated limits of the connection.
+     *
+     * The user must still always submit a full topic in their publishes because disconnections disrupt
+     * topic alias mappings unpredictably.  The client will properly use a requested alias when the most-recently-seen
+     * binding for a topic alias value matches the alias and topic in the publish packet.
+     */
+    OutboundTopicAliasBehaviorType[OutboundTopicAliasBehaviorType["Manual"] = 1] = "Manual";
+    /**
+     * (Recommended) The client will use an LRU cache to drive alias usage.
+     *
+     * Manually setting a topic alias will be ignored (the LRU cache is authoritative)
+     */
+    OutboundTopicAliasBehaviorType[OutboundTopicAliasBehaviorType["LRU"] = 2] = "LRU";
+    /**
+     * Completely disable outbound topic aliasing.
+     */
+    OutboundTopicAliasBehaviorType[OutboundTopicAliasBehaviorType["Disabled"] = 3] = "Disabled";
+})(OutboundTopicAliasBehaviorType = exports.OutboundTopicAliasBehaviorType || (exports.OutboundTopicAliasBehaviorType = {}));
+/**
+ * An enumeration that controls whether or not the client allows the broker to send publishes that use topic
+ * aliasing.
+ *
+ * Topic alias behavior is described in https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901113
+ */
+var InboundTopicAliasBehaviorType;
+(function (InboundTopicAliasBehaviorType) {
+    /**
+     * Maps to Disabled.  This keeps the client from being broken (by default) if the broker
+     * topic aliasing implementation has a problem.
+     */
+    InboundTopicAliasBehaviorType[InboundTopicAliasBehaviorType["Default"] = 0] = "Default";
+    /**
+     * Allow the server to send PUBLISH packets to the client that use topic aliasing
+     */
+    InboundTopicAliasBehaviorType[InboundTopicAliasBehaviorType["Enabled"] = 1] = "Enabled";
+    /**
+     * Forbid the server from sending PUBLISH packets to the client that use topic aliasing
+     */
+    InboundTopicAliasBehaviorType[InboundTopicAliasBehaviorType["Disabled"] = 2] = "Disabled";
+})(InboundTopicAliasBehaviorType = exports.InboundTopicAliasBehaviorType || (exports.InboundTopicAliasBehaviorType = {}));
+//# sourceMappingURL=mqtt5.js.map
+
+/***/ }),
+
+/***/ 9008:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PacketType = exports.RetainHandlingType = exports.QoS = exports.PayloadFormatIndicator = exports.isSuccessfulPubackReasonCode = exports.PubackReasonCode = exports.isSuccessfulUnsubackReasonCode = exports.UnsubackReasonCode = exports.isSuccessfulSubackReasonCode = exports.SubackReasonCode = exports.isSuccessfulDisconnectReasonCode = exports.DisconnectReasonCode = exports.isSuccessfulConnectReasonCode = exports.ConnectReasonCode = void 0;
+/**
+ * Server return code for connect attempts.
+ *
+ * Enum values match [MQTT5 spec](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901079) encoding values.
+ */
+var ConnectReasonCode;
+(function (ConnectReasonCode) {
+    /**
+     * Returned when the connection is accepted.
+     */
+    ConnectReasonCode[ConnectReasonCode["Success"] = 0] = "Success";
+    /**
+     * Returned when the server has a failure but does not want to specify a reason or none
+     * of the other reason codes apply.
+     */
+    ConnectReasonCode[ConnectReasonCode["UnspecifiedError"] = 128] = "UnspecifiedError";
+    /**
+     * Returned when data in the CONNECT packet could not be correctly parsed by the server.
+     */
+    ConnectReasonCode[ConnectReasonCode["MalformedPacket"] = 129] = "MalformedPacket";
+    /**
+     * Returned when data in the CONNECT packet does not conform to the MQTT5 specification requirements.
+     */
+    ConnectReasonCode[ConnectReasonCode["ProtocolError"] = 130] = "ProtocolError";
+    /**
+     * Returned when the CONNECT packet is valid but was not accepted by the server.
+     */
+    ConnectReasonCode[ConnectReasonCode["ImplementationSpecificError"] = 131] = "ImplementationSpecificError";
+    /**
+     * Returned when the server does not support MQTT5 protocol version specified in the connection.
+     */
+    ConnectReasonCode[ConnectReasonCode["UnsupportedProtocolVersion"] = 132] = "UnsupportedProtocolVersion";
+    /**
+     * Returned when the client identifier in the CONNECT packet is a valid string but not one that
+     * is allowed on the server.
+     */
+    ConnectReasonCode[ConnectReasonCode["ClientIdentifierNotValid"] = 133] = "ClientIdentifierNotValid";
+    /**
+     * Returned when the server does not accept the username and/or password specified by the client
+     * in the connection packet.
+     */
+    ConnectReasonCode[ConnectReasonCode["BadUsernameOrPassword"] = 134] = "BadUsernameOrPassword";
+    /**
+     * Returned when the client is not authorized to connect to the server.
+     */
+    ConnectReasonCode[ConnectReasonCode["NotAuthorized"] = 135] = "NotAuthorized";
+    /**
+     * Returned when the MQTT5 server is not available.
+     */
+    ConnectReasonCode[ConnectReasonCode["ServerUnavailable"] = 136] = "ServerUnavailable";
+    /**
+     * Returned when the server is too busy to make a connection. It is recommended that the client try again later.
+     */
+    ConnectReasonCode[ConnectReasonCode["ServerBusy"] = 137] = "ServerBusy";
+    /**
+     * Returned when the client has been banned by the server.
+     */
+    ConnectReasonCode[ConnectReasonCode["Banned"] = 138] = "Banned";
+    /**
+     * Returned when the authentication method used in the connection is either not supported on the server or it does
+     * not match the authentication method currently in use in the CONNECT packet.
+     */
+    ConnectReasonCode[ConnectReasonCode["BadAuthenticationMethod"] = 140] = "BadAuthenticationMethod";
+    /**
+     * Returned when the Will topic name sent in the connection packet is correctly formed, but is not accepted by
+     * the server.
+     */
+    ConnectReasonCode[ConnectReasonCode["TopicNameInvalid"] = 144] = "TopicNameInvalid";
+    /**
+     * Returned when the connection packet exceeded the maximum permissible size on the server.
+     */
+    ConnectReasonCode[ConnectReasonCode["PacketTooLarge"] = 149] = "PacketTooLarge";
+    /**
+     * Returned when the quota limits set on the server have been met and/or exceeded.
+     */
+    ConnectReasonCode[ConnectReasonCode["QuotaExceeded"] = 151] = "QuotaExceeded";
+    /**
+     * Returned when the Will payload in the CONNECT packet does not match the specified payload format indicator.
+     */
+    ConnectReasonCode[ConnectReasonCode["PayloadFormatInvalid"] = 153] = "PayloadFormatInvalid";
+    /**
+     * Returned when the server does not retain messages but the connection packet on the client had Will retain enabled.
+     */
+    ConnectReasonCode[ConnectReasonCode["RetainNotSupported"] = 154] = "RetainNotSupported";
+    /**
+     * Returned when the server does not support the QOS setting in the Will QOS in the connection packet.
+     */
+    ConnectReasonCode[ConnectReasonCode["QosNotSupported"] = 155] = "QosNotSupported";
+    /**
+     * Returned when the server is telling the client to temporarily use another server instead of the one they
+     * are trying to connect to.
+     */
+    ConnectReasonCode[ConnectReasonCode["UseAnotherServer"] = 156] = "UseAnotherServer";
+    /**
+     * Returned when the server is telling the client to permanently use another server instead of the one they
+     * are trying to connect to.
+     */
+    ConnectReasonCode[ConnectReasonCode["ServerMoved"] = 157] = "ServerMoved";
+    /**
+     * Returned when the server connection rate limit has been exceeded.
+     */
+    ConnectReasonCode[ConnectReasonCode["ConnectionRateExceeded"] = 159] = "ConnectionRateExceeded";
+})(ConnectReasonCode = exports.ConnectReasonCode || (exports.ConnectReasonCode = {}));
+/**
+ * Determines if a reason code represents a successful connect operation
+ *
+ * @param reasonCode reason code to check success for
+ */
+function isSuccessfulConnectReasonCode(reasonCode) {
+    return reasonCode < 128;
+}
+exports.isSuccessfulConnectReasonCode = isSuccessfulConnectReasonCode;
+/**
+ * Reason code inside DISCONNECT packets.  Helps determine why a connection was terminated.
+ *
+ * Enum values match [MQTT5 spec](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901208) encoding values.
+ */
+var DisconnectReasonCode;
+(function (DisconnectReasonCode) {
+    /**
+     * Returned when the remote endpoint wishes to disconnect normally. Will not trigger the publish of a Will message if a
+     * Will message was configured on the connection.
+     *
+     * May be sent by the client or server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["NormalDisconnection"] = 0] = "NormalDisconnection";
+    /**
+     * Returns that the client wants to disconnect but requires that the server publish the Will message configured
+     * on the connection.
+     *
+     * May only be sent by the client.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["DisconnectWithWillMessage"] = 4] = "DisconnectWithWillMessage";
+    /**
+     * Returned when the connection was closed but the sender does not want to specify a reason or none
+     * of the other reason codes apply.
+     *
+     * May be sent by the client or the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["UnspecifiedError"] = 128] = "UnspecifiedError";
+    /**
+     * Indicates the remote endpoint received a packet that does not conform to the MQTT specification.
+     *
+     * May be sent by the client or the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["MalformedPacket"] = 129] = "MalformedPacket";
+    /**
+     * Returned when an unexpected or out-of-order packet was received by the remote endpoint.
+     *
+     * May be sent by the client or the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["ProtocolError"] = 130] = "ProtocolError";
+    /**
+     * Returned when a valid packet was received by the remote endpoint, but could not be processed by the current implementation.
+     *
+     * May be sent by the client or the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["ImplementationSpecificError"] = 131] = "ImplementationSpecificError";
+    /**
+     * Returned when the remote endpoint received a packet that represented an operation that was not authorized within
+     * the current connection.
+     *
+     * May only be sent by the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["NotAuthorized"] = 135] = "NotAuthorized";
+    /**
+     * Returned when the server is busy and cannot continue processing packets from the client.
+     *
+     * May only be sent by the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["ServerBusy"] = 137] = "ServerBusy";
+    /**
+     * Returned when the server is shutting down.
+     *
+     * May only be sent by the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["ServerShuttingDown"] = 139] = "ServerShuttingDown";
+    /**
+     * Returned when the server closes the connection because no packet from the client has been received in
+     * 1.5 times the KeepAlive time set when the connection was established.
+     *
+     * May only be sent by the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["KeepAliveTimeout"] = 141] = "KeepAliveTimeout";
+    /**
+     * Returned when the server has established another connection with the same client ID as a client's current
+     * connection, causing the current client to become disconnected.
+     *
+     * May only be sent by the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["SessionTakenOver"] = 142] = "SessionTakenOver";
+    /**
+     * Returned when the topic filter name is correctly formed but not accepted by the server.
+     *
+     * May only be sent by the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["TopicFilterInvalid"] = 143] = "TopicFilterInvalid";
+    /**
+     * Returned when topic name is correctly formed, but is not accepted.
+     *
+     * May be sent by the client or the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["TopicNameInvalid"] = 144] = "TopicNameInvalid";
+    /**
+     * Returned when the remote endpoint reached a state where there were more in-progress QoS1+ publishes then the
+     * limit it established for itself when the connection was opened.
+     *
+     * May be sent by the client or the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["ReceiveMaximumExceeded"] = 147] = "ReceiveMaximumExceeded";
+    /**
+     * Returned when the remote endpoint receives a PUBLISH packet that contained a topic alias greater than the
+     * maximum topic alias limit that it established for itself when the connection was opened.
+     *
+     * May be sent by the client or the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["TopicAliasInvalid"] = 148] = "TopicAliasInvalid";
+    /**
+     * Returned when the remote endpoint received a packet whose size was greater than the maximum packet size limit
+     * it established for itself when the connection was opened.
+     *
+     * May be sent by the client or the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["PacketTooLarge"] = 149] = "PacketTooLarge";
+    /**
+     * Returned when the remote endpoint's incoming data rate was too high.
+     *
+     * May be sent by the client or the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["MessageRateTooHigh"] = 150] = "MessageRateTooHigh";
+    /**
+     * Returned when an internal quota of the remote endpoint was exceeded.
+     *
+     * May be sent by the client or the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["QuotaExceeded"] = 151] = "QuotaExceeded";
+    /**
+     * Returned when the connection was closed due to an administrative action.
+     *
+     * May be sent by the client or the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["AdministrativeAction"] = 152] = "AdministrativeAction";
+    /**
+     * Returned when the remote endpoint received a packet where payload format did not match the format specified
+     * by the payload format indicator.
+     *
+     * May be sent by the client or the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["PayloadFormatInvalid"] = 153] = "PayloadFormatInvalid";
+    /**
+     * Returned when the server does not support retained messages.
+     *
+     * May only be sent by the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["RetainNotSupported"] = 154] = "RetainNotSupported";
+    /**
+     * Returned when the client sends a QOS that is greater than the maximum QOS established when the connection was
+     * opened.
+     *
+     * May only be sent by the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["QosNotSupported"] = 155] = "QosNotSupported";
+    /**
+     * Returned by the server to tell the client to temporarily use a different server.
+     *
+     * May only be sent by the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["UseAnotherServer"] = 156] = "UseAnotherServer";
+    /**
+     * Returned by the server to tell the client to permanently use a different server.
+     *
+     * May only be sent by the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["ServerMoved"] = 157] = "ServerMoved";
+    /**
+     * Returned by the server to tell the client that shared subscriptions are not supported on the server.
+     *
+     * May only be sent by the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["SharedSubscriptionsNotSupported"] = 158] = "SharedSubscriptionsNotSupported";
+    /**
+     * Returned when the server disconnects the client due to the connection rate being too high.
+     *
+     * May only be sent by the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["ConnectionRateExceeded"] = 159] = "ConnectionRateExceeded";
+    /**
+     * Returned by the server when the maximum connection time authorized for the connection was exceeded.
+     *
+     * May only be sent by the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["MaximumConnectTime"] = 160] = "MaximumConnectTime";
+    /**
+     * Returned by the server when it received a SUBSCRIBE packet with a subscription identifier, but the server does
+     * not support subscription identifiers.
+     *
+     * May only be sent by the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["SubscriptionIdentifiersNotSupported"] = 161] = "SubscriptionIdentifiersNotSupported";
+    /**
+     * Returned by the server when it received a SUBSCRIBE packet with a wildcard topic filter, but the server does
+     * not support wildcard topic filters.
+     *
+     * May only be sent by the server.
+     */
+    DisconnectReasonCode[DisconnectReasonCode["WildcardSubscriptionsNotSupported"] = 162] = "WildcardSubscriptionsNotSupported";
+})(DisconnectReasonCode = exports.DisconnectReasonCode || (exports.DisconnectReasonCode = {}));
+/**
+ * Determines if a reason code represents a successful disconnect operation
+ *
+ * @param reasonCode reason code to check success for
+ */
+function isSuccessfulDisconnectReasonCode(reasonCode) {
+    return reasonCode < 128;
+}
+exports.isSuccessfulDisconnectReasonCode = isSuccessfulDisconnectReasonCode;
+/**
+ * Reason codes inside SUBACK packet payloads that specify the results for each subscription in the associated
+ * SUBSCRIBE packet.
+ *
+ * Enum values match [MQTT5 spec](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901178) encoding values.
+ */
+var SubackReasonCode;
+(function (SubackReasonCode) {
+    /**
+     * Returned when the subscription was accepted and the maximum QOS sent will be QOS 0.
+     */
+    SubackReasonCode[SubackReasonCode["GrantedQoS0"] = 0] = "GrantedQoS0";
+    /**
+     * Returned when the subscription was accepted and the maximum QOS sent will be QOS 1.
+     */
+    SubackReasonCode[SubackReasonCode["GrantedQoS1"] = 1] = "GrantedQoS1";
+    /**
+     * Returned when the subscription was accepted and the maximum QOS sent will be QOS 2.
+     */
+    SubackReasonCode[SubackReasonCode["GrantedQoS2"] = 2] = "GrantedQoS2";
+    /**
+     * Returned when the connection was closed but the sender does not want to specify a reason or none
+     * of the other reason codes apply.
+     */
+    SubackReasonCode[SubackReasonCode["UnspecifiedError"] = 128] = "UnspecifiedError";
+    /**
+     * Returned when the subscription was valid but the server did not accept it.
+     */
+    SubackReasonCode[SubackReasonCode["ImplementationSpecificError"] = 131] = "ImplementationSpecificError";
+    /**
+     * Returned when the client was not authorized to make the subscription on the server.
+     */
+    SubackReasonCode[SubackReasonCode["NotAuthorized"] = 135] = "NotAuthorized";
+    /**
+     * Returned when the subscription topic filter was correctly formed but not allowed for the client.
+     */
+    SubackReasonCode[SubackReasonCode["TopicFilterInvalid"] = 143] = "TopicFilterInvalid";
+    /**
+     * Returned when the packet identifier was already in use on the server.
+     */
+    SubackReasonCode[SubackReasonCode["PacketIdentifierInUse"] = 145] = "PacketIdentifierInUse";
+    /**
+     * Returned when a subscribe-related quota set on the server was exceeded.
+     */
+    SubackReasonCode[SubackReasonCode["QuotaExceeded"] = 151] = "QuotaExceeded";
+    /**
+     * Returned when the subscription's topic filter was a shared subscription and the server does not support
+     * shared subscriptions.
+     */
+    SubackReasonCode[SubackReasonCode["SharedSubscriptionsNotSupported"] = 158] = "SharedSubscriptionsNotSupported";
+    /**
+     * Returned when the SUBSCRIBE packet contained a subscription identifier and the server does not support
+     * subscription identifiers.
+     */
+    SubackReasonCode[SubackReasonCode["SubscriptionIdentifiersNotSupported"] = 161] = "SubscriptionIdentifiersNotSupported";
+    /**
+     * Returned when the subscription's topic filter contains a wildcard but the server does not support
+     * wildcard subscriptions.
+     */
+    SubackReasonCode[SubackReasonCode["WildcardSubscriptionsNotSupported"] = 162] = "WildcardSubscriptionsNotSupported";
+})(SubackReasonCode = exports.SubackReasonCode || (exports.SubackReasonCode = {}));
+/**
+ * Determines if a reason code represents a successful subscribe operation
+ *
+ * @param reasonCode reason code to check success for
+ */
+function isSuccessfulSubackReasonCode(reasonCode) {
+    return reasonCode < 128;
+}
+exports.isSuccessfulSubackReasonCode = isSuccessfulSubackReasonCode;
+/**
+ * Reason codes inside UNSUBACK packet payloads that specify the results for each topic filter in the associated
+ * UNSUBSCRIBE packet.
+ *
+ * Enum values match [MQTT5 spec](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901194) encoding values.
+ */
+var UnsubackReasonCode;
+(function (UnsubackReasonCode) {
+    /**
+     * Returned when the unsubscribe was successful and the client is no longer subscribed to the topic filter on the server.
+     */
+    UnsubackReasonCode[UnsubackReasonCode["Success"] = 0] = "Success";
+    /**
+     * Returned when the topic filter did not match one of the client's existing subscriptions on the server.
+     */
+    UnsubackReasonCode[UnsubackReasonCode["NoSubscriptionExisted"] = 17] = "NoSubscriptionExisted";
+    /**
+     * Returned when the unsubscribe of the topic filter was not accepted and the server does not want to specify a
+     * reason or none of the other reason codes apply.
+     */
+    UnsubackReasonCode[UnsubackReasonCode["UnspecifiedError"] = 128] = "UnspecifiedError";
+    /**
+     * Returned when the topic filter was valid but the server does not accept an unsubscribe for it.
+     */
+    UnsubackReasonCode[UnsubackReasonCode["ImplementationSpecificError"] = 131] = "ImplementationSpecificError";
+    /**
+     * Returned when the client was not authorized to unsubscribe from that topic filter on the server.
+     */
+    UnsubackReasonCode[UnsubackReasonCode["NotAuthorized"] = 135] = "NotAuthorized";
+    /**
+     * Returned when the topic filter was correctly formed but is not allowed for the client on the server.
+     */
+    UnsubackReasonCode[UnsubackReasonCode["TopicFilterInvalid"] = 143] = "TopicFilterInvalid";
+    /**
+     * Returned when the packet identifier was already in use on the server.
+     */
+    UnsubackReasonCode[UnsubackReasonCode["PacketIdentifierInUse"] = 145] = "PacketIdentifierInUse";
+})(UnsubackReasonCode = exports.UnsubackReasonCode || (exports.UnsubackReasonCode = {}));
+/**
+ * Determines if a reason code represents a successful unsubscribe operation
+ *
+ * @param reasonCode reason code to check success for
+ */
+function isSuccessfulUnsubackReasonCode(reasonCode) {
+    return reasonCode < 128;
+}
+exports.isSuccessfulUnsubackReasonCode = isSuccessfulUnsubackReasonCode;
+/**
+ * Reason code inside PUBACK packets that indicates the result of the associated PUBLISH request.
+ *
+ * Enum values match [MQTT5 spec](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901124) encoding values.
+ */
+var PubackReasonCode;
+(function (PubackReasonCode) {
+    /**
+     * Returned when the (QoS 1) publish was accepted by the recipient.
+     *
+     * May be sent by the client or the server.
+     */
+    PubackReasonCode[PubackReasonCode["Success"] = 0] = "Success";
+    /**
+     * Returned when the (QoS 1) publish was accepted but there were no matching subscribers.
+     *
+     * May only be sent by the server.
+     */
+    PubackReasonCode[PubackReasonCode["NoMatchingSubscribers"] = 16] = "NoMatchingSubscribers";
+    /**
+     * Returned when the (QoS 1) publish was not accepted and the receiver does not want to specify a reason or none
+     * of the other reason codes apply.
+     *
+     * May be sent by the client or the server.
+     */
+    PubackReasonCode[PubackReasonCode["UnspecifiedError"] = 128] = "UnspecifiedError";
+    /**
+     * Returned when the (QoS 1) publish was valid but the receiver was not willing to accept it.
+     *
+     * May be sent by the client or the server.
+     */
+    PubackReasonCode[PubackReasonCode["ImplementationSpecificError"] = 131] = "ImplementationSpecificError";
+    /**
+     * Returned when the (QoS 1) publish was not authorized by the receiver.
+     *
+     * May be sent by the client or the server.
+     */
+    PubackReasonCode[PubackReasonCode["NotAuthorized"] = 135] = "NotAuthorized";
+    /**
+     * Returned when the topic name was valid but the receiver was not willing to accept it.
+     *
+     * May be sent by the client or the server.
+     */
+    PubackReasonCode[PubackReasonCode["TopicNameInvalid"] = 144] = "TopicNameInvalid";
+    /**
+     * Returned when the packet identifier used in the associated PUBLISH was already in use.
+     * This can indicate a mismatch in the session state between client and server.
+     *
+     * May be sent by the client or the server.
+     */
+    PubackReasonCode[PubackReasonCode["PacketIdentifierInUse"] = 145] = "PacketIdentifierInUse";
+    /**
+     * Returned when the associated PUBLISH failed because an internal quota on the recipient was exceeded.
+     *
+     * May be sent by the client or the server.
+     */
+    PubackReasonCode[PubackReasonCode["QuotaExceeded"] = 151] = "QuotaExceeded";
+    /**
+     * Returned when the PUBLISH packet's payload format did not match its payload format indicator property.
+     *
+     * May be sent by the client or the server.
+     */
+    PubackReasonCode[PubackReasonCode["PayloadFormatInvalid"] = 153] = "PayloadFormatInvalid";
+})(PubackReasonCode = exports.PubackReasonCode || (exports.PubackReasonCode = {}));
+/**
+ * Determines if a reason code represents a successful QoS 1 publish operation
+ *
+ * @param reasonCode reason code to check success for
+ */
+function isSuccessfulPubackReasonCode(reasonCode) {
+    return reasonCode < 128;
+}
+exports.isSuccessfulPubackReasonCode = isSuccessfulPubackReasonCode;
+/**
+ * Optional property describing a PUBLISH payload's format.
+ *
+ * Enum values match [MQTT5 spec](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901111) encoding values.
+ */
+var PayloadFormatIndicator;
+(function (PayloadFormatIndicator) {
+    /**
+     * The payload is arbitrary binary data
+     */
+    PayloadFormatIndicator[PayloadFormatIndicator["Bytes"] = 0] = "Bytes";
+    /**
+     * The payload is a well-formed utf-8 string value.
+     */
+    PayloadFormatIndicator[PayloadFormatIndicator["Utf8"] = 1] = "Utf8";
+})(PayloadFormatIndicator = exports.PayloadFormatIndicator || (exports.PayloadFormatIndicator = {}));
+/**
+ * MQTT message delivery quality of service.
+ *
+ * Enum values match [MQTT5 spec](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901234) encoding values.
+ */
+var QoS;
+(function (QoS) {
+    /**
+     * The message is delivered according to the capabilities of the underlying network. No response is sent by the
+     * receiver and no retry is performed by the sender. The message arrives at the receiver either once or not at all.
+     */
+    QoS[QoS["AtMostOnce"] = 0] = "AtMostOnce";
+    /**
+     * A level of service that ensures that the message arrives at the receiver at least once.
+     */
+    QoS[QoS["AtLeastOnce"] = 1] = "AtLeastOnce";
+    /**
+     * A level of service that ensures that the message arrives at the receiver exactly once.
+     */
+    QoS[QoS["ExactlyOnce"] = 2] = "ExactlyOnce";
+})(QoS = exports.QoS || (exports.QoS = {}));
+/**
+ * Configures how retained messages should be handled when subscribing with a topic filter that matches topics with
+ * associated retained messages.
+ *
+ * Enum values match [MQTT5 spec](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901169) encoding values.
+ */
+var RetainHandlingType;
+(function (RetainHandlingType) {
+    /**
+     * The server should always send all retained messages on topics that match a subscription's filter.
+     */
+    RetainHandlingType[RetainHandlingType["SendOnSubscribe"] = 0] = "SendOnSubscribe";
+    /**
+     * The server should send retained messages on topics that match the subscription's filter, but only for the
+     * first matching subscription, per session.
+     */
+    RetainHandlingType[RetainHandlingType["SendOnSubscribeIfNew"] = 1] = "SendOnSubscribeIfNew";
+    /**
+     * Subscriptions must not trigger any retained message publishes from the server.
+     */
+    RetainHandlingType[RetainHandlingType["DontSend"] = 2] = "DontSend";
+})(RetainHandlingType = exports.RetainHandlingType || (exports.RetainHandlingType = {}));
+/**
+ * Packet type indicator that allows for basic polymorphism with user-received packets.  Enum values
+ * match the mqtt spec's [packet type encoding](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901022) values.
+ */
+var PacketType;
+(function (PacketType) {
+    PacketType[PacketType["Connect"] = 1] = "Connect";
+    PacketType[PacketType["Connack"] = 2] = "Connack";
+    PacketType[PacketType["Publish"] = 3] = "Publish";
+    PacketType[PacketType["Puback"] = 4] = "Puback";
+    PacketType[PacketType["Pubrec"] = 5] = "Pubrec";
+    PacketType[PacketType["Pubrel"] = 6] = "Pubrel";
+    PacketType[PacketType["Pubcomp"] = 7] = "Pubcomp";
+    PacketType[PacketType["Subscribe"] = 8] = "Subscribe";
+    PacketType[PacketType["Suback"] = 9] = "Suback";
+    PacketType[PacketType["Unsubscribe"] = 10] = "Unsubscribe";
+    PacketType[PacketType["Unsuback"] = 11] = "Unsuback";
+    PacketType[PacketType["Pingreq"] = 12] = "Pingreq";
+    PacketType[PacketType["Pingresp"] = 13] = "Pingresp";
+    PacketType[PacketType["Disconnect"] = 14] = "Disconnect";
+    PacketType[PacketType["Auth"] = 15] = "Auth";
+})(PacketType = exports.PacketType || (exports.PacketType = {}));
+//# sourceMappingURL=mqtt5_packet.js.map
+
+/***/ }),
+
+/***/ 6834:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SubscriptionStatusEventType = void 0;
+/**
+ * The type of change to the state of a streaming operation subscription
+ */
+var SubscriptionStatusEventType;
+(function (SubscriptionStatusEventType) {
+    /**
+     * The streaming operation is successfully subscribed to its topic (filter)
+     */
+    SubscriptionStatusEventType[SubscriptionStatusEventType["SubscriptionEstablished"] = 0] = "SubscriptionEstablished";
+    /**
+     * The streaming operation has temporarily lost its subscription to its topic (filter)
+     */
+    SubscriptionStatusEventType[SubscriptionStatusEventType["SubscriptionLost"] = 1] = "SubscriptionLost";
+    /**
+     * The streaming operation has entered a terminal state where it has given up trying to subscribe
+     * to its topic (filter).  This is always due to user error (bad topic filter or IoT Core permission policy).
+     */
+    SubscriptionStatusEventType[SubscriptionStatusEventType["SubscriptionHalted"] = 2] = "SubscriptionHalted";
+})(SubscriptionStatusEventType = exports.SubscriptionStatusEventType || (exports.SubscriptionStatusEventType = {}));
+//# sourceMappingURL=mqtt_request_response.js.map
+
+/***/ }),
+
+/***/ 2228:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RequestResponseClientState = exports.StreamingOperationState = void 0;
+/**
+ * @packageDocumentation
+ * @module mqtt_request_response
+ */
+var StreamingOperationState;
+(function (StreamingOperationState) {
+    StreamingOperationState[StreamingOperationState["None"] = 0] = "None";
+    StreamingOperationState[StreamingOperationState["Open"] = 1] = "Open";
+    StreamingOperationState[StreamingOperationState["Closed"] = 2] = "Closed";
+})(StreamingOperationState = exports.StreamingOperationState || (exports.StreamingOperationState = {}));
+var RequestResponseClientState;
+(function (RequestResponseClientState) {
+    RequestResponseClientState[RequestResponseClientState["Ready"] = 0] = "Ready";
+    RequestResponseClientState[RequestResponseClientState["Closed"] = 1] = "Closed";
+})(RequestResponseClientState = exports.RequestResponseClientState || (exports.RequestResponseClientState = {}));
+//# sourceMappingURL=mqtt_request_response_internal.js.map
+
+/***/ }),
+
+/***/ 9986:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.isValidTopic = exports.isValidTopicFilter = exports.DEFAULT_KEEP_ALIVE = exports.normalize_payload_to_buffer = exports.normalize_payload = void 0;
+/**
+ * @packageDocumentation
+ */
+/**
+ * Converts payload to Buffer or string regardless of the supplied type
+ * @param payload The payload to convert
+ * @internal
+ */
+function normalize_payload(payload) {
+    if (payload instanceof Buffer) {
+        // pass Buffer through
+        return payload;
+    }
+    if (typeof payload === 'string') {
+        // pass string through
+        return payload;
+    }
+    if (ArrayBuffer.isView(payload)) {
+        // return Buffer with view upon the same bytes (no copy)
+        const view = payload;
+        return Buffer.from(view.buffer, view.byteOffset, view.byteLength);
+    }
+    if (payload instanceof ArrayBuffer) {
+        // return Buffer with view upon the same bytes (no copy)
+        return Buffer.from(payload);
+    }
+    if (typeof payload === 'object') {
+        // Convert Object to JSON string
+        return JSON.stringify(payload);
+    }
+    if (!payload) {
+        return "";
+    }
+    throw new TypeError("payload parameter must be a string, object, or DataView.");
+}
+exports.normalize_payload = normalize_payload;
+/**
+ * Converts payload to Buffer only, regardless of the supplied type
+ * @param payload The payload to convert
+ * @internal
+ */
+function normalize_payload_to_buffer(payload) {
+    let normalized = normalize_payload(payload);
+    if (typeof normalized === 'string') {
+        // pass string through
+        return Buffer.from(normalized);
+    }
+    return normalized;
+}
+exports.normalize_payload_to_buffer = normalize_payload_to_buffer;
+/** @internal */
+exports.DEFAULT_KEEP_ALIVE = 1200;
+function isValidTopicInternal(topic, isFilter) {
+    if (topic.length === 0 || topic.length > 65535) {
+        return false;
+    }
+    let sawHash = false;
+    for (let segment of topic.split('/')) {
+        if (sawHash) {
+            return false;
+        }
+        if (segment.length === 0) {
+            continue;
+        }
+        if (segment.includes("+")) {
+            if (!isFilter) {
+                return false;
+            }
+            if (segment.length > 1) {
+                return false;
+            }
+        }
+        if (segment.includes("#")) {
+            if (!isFilter) {
+                return false;
+            }
+            if (segment.length > 1) {
+                return false;
+            }
+            sawHash = true;
+        }
+    }
+    return true;
+}
+function isValidTopicFilter(topicFilter) {
+    if (typeof (topicFilter) !== 'string') {
+        return false;
+    }
+    let topicFilterAsString = topicFilter;
+    return isValidTopicInternal(topicFilterAsString, true);
+}
+exports.isValidTopicFilter = isValidTopicFilter;
+function isValidTopic(topic) {
+    if (typeof (topic) !== 'string') {
+        return false;
+    }
+    let topicAsString = topic;
+    return isValidTopicInternal(topicAsString, false);
+}
+exports.isValidTopic = isValidTopic;
+//# sourceMappingURL=mqtt_shared.js.map
+
+/***/ }),
+
+/***/ 5141:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.crt_version = exports.package_info = exports.is_browser = exports.is_nodejs = void 0;
+/**
+ *
+ * A module containing miscellaneous platform-related queries
+ *
+ * @packageDocumentation
+ * @module platform
+ * @mergeTarget
+ */
+/**
+ * Returns true if this script is running under nodejs
+ *
+ * @category System
+ */
+function is_nodejs() {
+    return (typeof process === 'object' &&
+        typeof process.versions === 'object' &&
+        typeof process.versions.node !== 'undefined');
+}
+exports.is_nodejs = is_nodejs;
+/**
+ * Returns true if this script is running in a browser
+ *
+ * @category System
+ */
+function is_browser() {
+    return !is_nodejs();
+}
+exports.is_browser = is_browser;
+/**
+ * Returns the package information for aws-crt-nodejs
+ *
+ * @category System
+ */
+function package_info() {
+    try {
+        const pkg = __nccwpck_require__(467);
+        return pkg;
+    }
+    catch (err) {
+        return {
+            name: 'aws-crt-nodejs',
+            version: 'UNKNOWN'
+        };
+    }
+}
+exports.package_info = package_info;
+/**
+ * Returns the AWS CRT version
+ *
+ * @category System
+ */
+function crt_version() {
+    const pkg = package_info();
+    return pkg.version;
+}
+exports.crt_version = crt_version;
+//# sourceMappingURL=platform.js.map
+
+/***/ }),
+
+/***/ 1357:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.newLiftedPromise = exports.makeSelfCleaningPromise = void 0;
+/**
+ * A helper function that takes a promise and creates a wrapper promise that invokes a cleanup function when the inner
+ * promise is completed for any reason.  The primary use is to remove event listeners related to promise completion
+ * when the promise actually completes.  This allows us to keep the number of listeners on a CancelController bounded by
+ * the number of incomplete promises associated with it.  If we didn't clean up, the listener set would grow
+ * without limit.
+ *
+ * For cancellation, this leads to an internal usage pattern that is strongly recommended:
+ *
+ * ```
+ * async doSomethingCancellable(...) : Promise<...> {
+ *    removeListenerFunctor = undefined;
+ *
+ *    innerPromise = new Promise(async (resolve, reject) => {
+ *       ...
+ *
+ *       cancelListenerFunction = () => { clean up and reject innerPromise };
+ *       removeListenerFunctor = cancelController.addListener(cancelListenerFunction);
+ *
+ *       ...
+ *    }
+ *
+ *    return makeSelfCleaningPromise(innerPromise, removeListenerFunctor);
+ * }
+ * ```
+ *
+ * @param promise promise to wrap with automatic cleanup
+ * @param cleaner cleaner function to invoke when the promise is completed
+ *
+ * @return a promise with matching result/err, that invokes the cleaner function on inner promise completion
+ */
+function makeSelfCleaningPromise(promise, cleaner) {
+    if (!cleaner) {
+        return promise;
+    }
+    return promise.finally(() => { cleaner(); });
+}
+exports.makeSelfCleaningPromise = makeSelfCleaningPromise;
+/**
+ * Factory function to create a new LiftedPromise
+ *
+ * @param promiseBody optional body function to invoke as part of promise creation
+ *
+ * @return a promise whose resolve and reject methods have been lifted out of the internal body function and made
+ * available to external actors
+ */
+function newLiftedPromise(promiseBody) {
+    let localResolve = undefined;
+    let localReject = undefined;
+    let promise = new Promise((resolve, reject) => {
+        localResolve = resolve;
+        localReject = reject;
+    });
+    if (!localResolve || !localReject) {
+        // should never happen
+        throw new Error("Failed to bind resolve and reject when making lifted promise");
+    }
+    if (promiseBody) {
+        promiseBody(localResolve, localReject);
+    }
+    return {
+        promise: promise,
+        resolve: localResolve,
+        reject: localReject
+    };
+}
+exports.newLiftedPromise = newLiftedPromise;
+//# sourceMappingURL=promise.js.map
+
+/***/ }),
+
+/***/ 915:
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.using = void 0;
+/**
+ * Use this function to create a resource in an async context. This will make sure the
+ * resources are cleaned up before returning.
+ *
+ * Example:
+ * ```
+ * await using(res = new SomeResource(), async (res) =>  {
+ *     res.do_the_thing();
+ * });
+ * ```
+ *
+ * @category System
+ */
+function using(resource, func) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield func(resource);
+        }
+        finally {
+            resource.close();
+        }
+    });
+}
+exports.using = using;
+//# sourceMappingURL=resource_safety.js.map
+
+/***/ }),
+
+/***/ 4049:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.set_defined_property = void 0;
+/** @internal */
+function set_defined_property(object, propertyName, value) {
+    if (value === undefined || value == null) {
+        return false;
+    }
+    object[propertyName] = value;
+    return true;
+}
+exports.set_defined_property = set_defined_property;
+//# sourceMappingURL=utils.js.map
+
+/***/ }),
+
+/***/ 228:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CrtError = exports.resource_safety = exports.promise = exports.platform = exports.mqtt_request_response = exports.mqtt5 = exports.mqtt = exports.iot = exports.io = exports.http = exports.eventstream = exports.crt = exports.crypto = exports.checksums = exports.cancel = exports.auth = void 0;
+// This is the entry point for the AWS CRT nodejs native libraries
+/* common libs */
+const cancel = __importStar(__nccwpck_require__(3600));
+exports.cancel = cancel;
+const platform = __importStar(__nccwpck_require__(5141));
+exports.platform = platform;
+const promise = __importStar(__nccwpck_require__(1357));
+exports.promise = promise;
+const resource_safety = __importStar(__nccwpck_require__(915));
+exports.resource_safety = resource_safety;
+/* node specific libs */
+const auth = __importStar(__nccwpck_require__(118));
+exports.auth = auth;
+const checksums = __importStar(__nccwpck_require__(786));
+exports.checksums = checksums;
+const crt = __importStar(__nccwpck_require__(6217));
+exports.crt = crt;
+const crypto = __importStar(__nccwpck_require__(8749));
+exports.crypto = crypto;
+const eventstream = __importStar(__nccwpck_require__(1618));
+exports.eventstream = eventstream;
+const http = __importStar(__nccwpck_require__(2960));
+exports.http = http;
+const io = __importStar(__nccwpck_require__(1528));
+exports.io = io;
+const iot = __importStar(__nccwpck_require__(1158));
+exports.iot = iot;
+const mqtt = __importStar(__nccwpck_require__(9130));
+exports.mqtt = mqtt;
+const mqtt5 = __importStar(__nccwpck_require__(5795));
+exports.mqtt5 = mqtt5;
+const mqtt_request_response = __importStar(__nccwpck_require__(1580));
+exports.mqtt_request_response = mqtt_request_response;
+const error_1 = __nccwpck_require__(9440);
+Object.defineProperty(exports, "CrtError", ({ enumerable: true, get: function () { return error_1.CrtError; } }));
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 118:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.aws_verify_sigv4a_signing = exports.aws_sign_request = exports.AwsSignedBodyHeaderType = exports.AwsSignedBodyValue = exports.AwsSignatureType = exports.AwsSigningAlgorithm = exports.AwsCredentialsProvider = void 0;
+const binding_1 = __importDefault(__nccwpck_require__(4739));
+const error_1 = __nccwpck_require__(9440);
+const io_1 = __nccwpck_require__(1528);
+/**
+ * Credentials providers source the AwsCredentials needed to sign an authenticated AWS request.
+ *
+ * We don't currently expose an interface for fetching credentials from Javascript.
+ *
+ * @category Auth
+ */
+/* Subclass for the purpose of exposing a non-NativeHandle based API */
+class AwsCredentialsProvider extends binding_1.default.AwsCredentialsProvider {
+    /**
+     * Creates a new default credentials provider to be used internally for AWS credentials resolution:
+     *
+     *   The CRT's default provider chain currently sources in this order:
+     *
+     *     1. Environment
+     *     2. Profile
+     *     3. (conditional, off by default) ECS
+     *     4. (conditional, on by default) EC2 Instance Metadata
+     *
+     * @param bootstrap (optional) client bootstrap to be used to establish any required network connections
+     *
+     * @returns a new credentials provider using default credentials resolution rules
+     */
+    static newDefault(bootstrap = undefined) {
+        return super.newDefault(bootstrap != null ? bootstrap.native_handle() : null);
+    }
+    /**
+     * Creates a new credentials provider that returns a fixed set of credentials.
+     *
+     * @param access_key access key to use in the static credentials
+     * @param secret_key secret key to use in the static credentials
+     * @param session_token (optional) session token to use in the static credentials
+     *
+     * @returns a new credentials provider that will return a fixed set of AWS credentials
+     */
+    static newStatic(access_key, secret_key, session_token) {
+        return super.newStatic(access_key, secret_key, session_token);
+    }
+    /**
+     * Creates a new credentials provider that sources credentials from the AWS Cognito Identity service via the
+     * GetCredentialsForIdentity http API.
+     *
+     * @param config provider configuration necessary to make GetCredentialsForIdentity web requests
+     *
+     * @returns a new credentials provider that returns credentials sourced from the AWS Cognito Identity service
+     */
+    static newCognito(config) {
+        if (config == null || config == undefined) {
+            throw new error_1.CrtError("AwsCredentialsProvider newCognito: Cognito config not defined");
+        }
+        return super.newCognito(config, config.tlsContext != null ? config.tlsContext.native_handle() : new io_1.ClientTlsContext().native_handle(), config.bootstrap != null ? config.bootstrap.native_handle() : null, config.httpProxyOptions ? config.httpProxyOptions.create_native_handle() : null);
+    }
+    /**
+     * Creates a new credentials provider that sources credentials from the the X509 service on AWS IoT Core.
+     *
+     * @param config provider configuration necessary to source credentials via X509
+     *
+     * @returns a new credentials provider that returns credentials sourced from the AWS X509 service
+     */
+    static newX509(config) {
+        if (config == null || config == undefined) {
+            throw new error_1.CrtError("AwsCredentialsProvider newX509: X509 config not defined");
+        }
+        return super.newX509(config, config.tlsContext.native_handle(), config.httpProxyOptions ? config.httpProxyOptions.create_native_handle() : null);
+    }
+}
+exports.AwsCredentialsProvider = AwsCredentialsProvider;
+/**
+ * AWS signing algorithm enumeration.
+ *
+ * @category Auth
+ */
+var AwsSigningAlgorithm;
+(function (AwsSigningAlgorithm) {
+    /** Use the Aws signature version 4 signing process to sign the request */
+    AwsSigningAlgorithm[AwsSigningAlgorithm["SigV4"] = 0] = "SigV4";
+    /** Use the Aws signature version 4 Asymmetric signing process to sign the request */
+    AwsSigningAlgorithm[AwsSigningAlgorithm["SigV4Asymmetric"] = 1] = "SigV4Asymmetric";
+})(AwsSigningAlgorithm = exports.AwsSigningAlgorithm || (exports.AwsSigningAlgorithm = {}));
+/**
+ * AWS signature type enumeration.
+ *
+ * @category Auth
+ */
+var AwsSignatureType;
+(function (AwsSignatureType) {
+    /** Sign an http request and apply the signing results as headers */
+    AwsSignatureType[AwsSignatureType["HttpRequestViaHeaders"] = 0] = "HttpRequestViaHeaders";
+    /** Sign an http request and apply the signing results as query params */
+    AwsSignatureType[AwsSignatureType["HttpRequestViaQueryParams"] = 1] = "HttpRequestViaQueryParams";
+    /** Sign an http request payload chunk */
+    AwsSignatureType[AwsSignatureType["HttpRequestChunk"] = 2] = "HttpRequestChunk";
+    /** Sign an event stream event */
+    AwsSignatureType[AwsSignatureType["HttpRequestEvent"] = 3] = "HttpRequestEvent";
+})(AwsSignatureType = exports.AwsSignatureType || (exports.AwsSignatureType = {}));
+/**
+ * Values for use with {@link AwsSigningConfig.signed_body_value}.
+ *
+ * Some services use special values (e.g. 'UNSIGNED-PAYLOAD') when the body
+ * is not being signed in the usual way.
+ *
+ * @category Auth
+ */
+var AwsSignedBodyValue;
+(function (AwsSignedBodyValue) {
+    /** Use the SHA-256 of the empty string as the canonical request payload value */
+    AwsSignedBodyValue["EmptySha256"] = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+    /** Use the literal string 'UNSIGNED-PAYLOAD' as the canonical request payload value  */
+    AwsSignedBodyValue["UnsignedPayload"] = "UNSIGNED-PAYLOAD";
+    /** Use the literal string 'STREAMING-AWS4-HMAC-SHA256-PAYLOAD' as the canonical request payload value  */
+    AwsSignedBodyValue["StreamingAws4HmacSha256Payload"] = "STREAMING-AWS4-HMAC-SHA256-PAYLOAD";
+    /** Use the literal string 'STREAMING-AWS4-HMAC-SHA256-EVENTS' as the canonical request payload value  */
+    AwsSignedBodyValue["StreamingAws4HmacSha256Events"] = "STREAMING-AWS4-HMAC-SHA256-EVENTS";
+})(AwsSignedBodyValue = exports.AwsSignedBodyValue || (exports.AwsSignedBodyValue = {}));
+/**
+ * AWS signed body header enumeration.
+ *
+ * @category Auth
+ */
+var AwsSignedBodyHeaderType;
+(function (AwsSignedBodyHeaderType) {
+    /** Do not add a header containing the canonical request payload value */
+    AwsSignedBodyHeaderType[AwsSignedBodyHeaderType["None"] = 0] = "None";
+    /** Add the X-Amz-Content-Sha256 header with the canonical request payload value */
+    AwsSignedBodyHeaderType[AwsSignedBodyHeaderType["XAmzContentSha256"] = 1] = "XAmzContentSha256";
+})(AwsSignedBodyHeaderType = exports.AwsSignedBodyHeaderType || (exports.AwsSignedBodyHeaderType = {}));
+/**
+ * Perform AWS HTTP request signing.
+ *
+ * The {@link HttpRequest} is transformed asynchronously,
+ * according to the {@link AwsSigningConfig}.
+ *
+ * When signing:
+ *  1.  It is good practice to use a new config for each signature,
+ *      or the date might get too old.
+ *
+ *  2.  Do not add the following headers to requests before signing, they may be added by the signer:
+ *      x-amz-content-sha256,
+ *      X-Amz-Date,
+ *      Authorization
+ *
+ *  3.  Do not add the following query params to requests before signing, they may be added by the signer:
+ *      X-Amz-Signature,
+ *      X-Amz-Date,
+ *      X-Amz-Credential,
+ *      X-Amz-Algorithm,
+ *      X-Amz-SignedHeaders
+ * @param request The HTTP request to sign.
+ * @param config Configuration for signing.
+ * @returns A promise whose result will be the signed
+ *       {@link HttpRequest}. The future will contain an exception
+ *       if the signing process fails.
+ *
+ * @category Auth
+ */
+function aws_sign_request(request, config) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve, reject) => {
+            try {
+                /* Note: if the body of request has not fully loaded, it will lead to an endless loop.
+                 * User should set the signed_body_value of config to prevent this endless loop in this case */
+                binding_1.default.aws_sign_request(request, config, (error_code) => {
+                    if (error_code == 0) {
+                        resolve(request);
+                    }
+                    else {
+                        reject(new error_1.CrtError(error_code));
+                    }
+                });
+            }
+            catch (error) {
+                reject(error);
+            }
+        });
+    });
+}
+exports.aws_sign_request = aws_sign_request;
+/**
+ *
+ * @internal
+ *
+ * Test only.
+ * Verifies:
+ *  (1) The canonical request generated during sigv4a signing of the request matches what is passed in
+ *  (2) The signature passed in is a valid ECDSA signature of the hashed string-to-sign derived from the
+ *  canonical request
+ *
+ * @param request The HTTP request to sign.
+ * @param config Configuration for signing.
+ * @param expected_canonical_request String type of expected canonical request. Refer to XXX(link to doc?)
+ * @param signature The generated signature string from {@link aws_sign_request}, which is verified here.
+ * @param ecc_key_pub_x the x coordinate of the public part of the ecc key to verify the signature.
+ * @param ecc_key_pub_y the y coordinate of the public part of the ecc key to verify the signature
+ * @returns True, if the verification succeed. Otherwise, false.
+ */
+function aws_verify_sigv4a_signing(request, config, expected_canonical_request, signature, ecc_key_pub_x, ecc_key_pub_y) {
+    return binding_1.default.aws_verify_sigv4a_signing(request, config, expected_canonical_request, signature, ecc_key_pub_x, ecc_key_pub_y);
+}
+exports.aws_verify_sigv4a_signing = aws_verify_sigv4a_signing;
+//# sourceMappingURL=auth.js.map
+
+/***/ }),
+
+/***/ 5828:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AwsIotMqttConnectionConfigBuilder = void 0;
+const mqtt_1 = __nccwpck_require__(8064);
+const io = __importStar(__nccwpck_require__(1528));
+const io_1 = __nccwpck_require__(1528);
+const platform = __importStar(__nccwpck_require__(5141));
+const error_1 = __nccwpck_require__(9440);
+const auth_1 = __nccwpck_require__(118);
+const iot_shared = __importStar(__nccwpck_require__(9328));
+/**
+ * Builder functions to create a {@link MqttConnectionConfig} which can then be used to create
+ * a {@link MqttClientConnection}, configured for use with AWS IoT.
+ *
+ * @category IoT
+ */
+class AwsIotMqttConnectionConfigBuilder {
+    constructor(tls_ctx_options) {
+        this.tls_ctx_options = tls_ctx_options;
+        this.params = {
+            client_id: '',
+            host_name: '',
+            socket_options: new io.SocketOptions(),
+            port: 8883,
+            use_websocket: false,
+            clean_session: false,
+            keep_alive: undefined,
+            will: undefined,
+            username: "",
+            password: undefined,
+            tls_ctx: undefined,
+            reconnect_min_sec: mqtt_1.DEFAULT_RECONNECT_MIN_SEC,
+            reconnect_max_sec: mqtt_1.DEFAULT_RECONNECT_MAX_SEC
+        };
+        this.is_using_custom_authorizer = false;
+    }
+    /**
+     * Create a new builder with mTLS file paths
+     * @param cert_path - Path to certificate, in PEM format
+     * @param key_path - Path to private key, in PEM format
+     */
+    static new_mtls_builder_from_path(cert_path, key_path) {
+        let builder = new AwsIotMqttConnectionConfigBuilder(io_1.TlsContextOptions.create_client_with_mtls_from_path(cert_path, key_path));
+        builder.params.port = 8883;
+        if (io.is_alpn_available()) {
+            builder.tls_ctx_options.alpn_list.unshift('x-amzn-mqtt-ca');
+        }
+        return builder;
+    }
+    /**
+     * Create a new builder with mTLS cert pair in memory
+     * @param cert - Certificate, in PEM format
+     * @param private_key - Private key, in PEM format
+     */
+    static new_mtls_builder(cert, private_key) {
+        let builder = new AwsIotMqttConnectionConfigBuilder(io_1.TlsContextOptions.create_client_with_mtls(cert, private_key));
+        builder.params.port = 8883;
+        if (io.is_alpn_available()) {
+            builder.tls_ctx_options.alpn_list.unshift('x-amzn-mqtt-ca');
+        }
+        return builder;
+    }
+    /**
+     * Create a new builder with mTLS using a PKCS#11 library for private key operations.
+     *
+     * NOTE: This configuration only works on Unix devices.
+     * @param pkcs11_options - PKCS#11 options.
+     */
+    static new_mtls_pkcs11_builder(pkcs11_options) {
+        let builder = new AwsIotMqttConnectionConfigBuilder(io_1.TlsContextOptions.create_client_with_mtls_pkcs11(pkcs11_options));
+        builder.params.port = 8883;
+        if (io.is_alpn_available()) {
+            builder.tls_ctx_options.alpn_list.unshift('x-amzn-mqtt-ca');
+        }
+        return builder;
+    }
+    /**
+     * Create a new builder with mTLS using a PKCS#12 file for private key operations.
+     *
+     * Note: This configuration only works on MacOS devices.
+     *
+     * @param pkcs12_options - The PKCS#12 options to use in the builder.
+     */
+    static new_mtls_pkcs12_builder(pkcs12_options) {
+        let builder = new AwsIotMqttConnectionConfigBuilder(io_1.TlsContextOptions.create_client_with_mtls_pkcs12_from_path(pkcs12_options.pkcs12_file, pkcs12_options.pkcs12_password));
+        builder.params.port = 8883;
+        if (io.is_alpn_available()) {
+            builder.tls_ctx_options.alpn_list.unshift('x-amzn-mqtt-ca');
+        }
+        return builder;
+    }
+    /**
+     * Create a new builder with mTLS using a certificate in a Windows certificate store.
+     *
+     * NOTE: This configuration only works on Windows devices.
+     * @param certificate_path - Path to certificate in a Windows certificate store.
+     *      The path must use backslashes and end with the certificate's thumbprint.
+     *      Example: `CurrentUser\MY\A11F8A9B5DF5B98BA3508FBCA575D09570E0D2C6`
+     */
+    static new_mtls_windows_cert_store_path_builder(certificate_path) {
+        let builder = new AwsIotMqttConnectionConfigBuilder(io_1.TlsContextOptions.create_client_with_mtls_windows_cert_store_path(certificate_path));
+        builder.params.port = 8883;
+        if (io.is_alpn_available()) {
+            builder.tls_ctx_options.alpn_list.unshift('x-amzn-mqtt-ca');
+        }
+        return builder;
+    }
+    /**
+     * Creates a new builder with default Tls options. This requires setting the connection details manually.
+     */
+    static new_default_builder() {
+        let ctx_options = new io.TlsContextOptions();
+        let builder = new AwsIotMqttConnectionConfigBuilder(ctx_options);
+        return builder;
+    }
+    static new_websocket_builder(...args) {
+        return this.new_with_websockets(...args);
+    }
+    static configure_websocket_handshake(builder, options) {
+        if (options) {
+            if (builder == null || builder == undefined) {
+                throw new error_1.CrtError("AwsIotMqttConnectionConfigBuilder configure_websocket_handshake: builder not defined");
+            }
+            builder.params.websocket_handshake_transform = (request, done) => __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const signing_config = (_b = (_a = options.create_signing_config) === null || _a === void 0 ? void 0 : _a.call(options)) !== null && _b !== void 0 ? _b : {
+                    algorithm: auth_1.AwsSigningAlgorithm.SigV4,
+                    signature_type: auth_1.AwsSignatureType.HttpRequestViaQueryParams,
+                    provider: options.credentials_provider,
+                    region: options.region,
+                    service: (_c = options.service) !== null && _c !== void 0 ? _c : "iotdevicegateway",
+                    signed_body_value: auth_1.AwsSignedBodyValue.EmptySha256,
+                    omit_session_token: true,
+                };
+                try {
+                    yield (0, auth_1.aws_sign_request)(request, signing_config);
+                    done();
+                }
+                catch (error) {
+                    if (error instanceof error_1.CrtError) {
+                        done(error.error_code);
+                    }
+                    else {
+                        done(3); /* TODO: AWS_ERROR_UNKNOWN */
+                    }
+                }
+            });
+        }
+        return builder;
+    }
+    /**
+     * Configures the connection to use MQTT over websockets. Forces the port to 443.
+     */
+    static new_with_websockets(options) {
+        let tls_ctx_options = options === null || options === void 0 ? void 0 : options.tls_ctx_options;
+        if (!tls_ctx_options) {
+            tls_ctx_options = new io_1.TlsContextOptions();
+            tls_ctx_options.alpn_list = [];
+        }
+        let builder = new AwsIotMqttConnectionConfigBuilder(tls_ctx_options);
+        builder.params.use_websocket = true;
+        builder.params.proxy_options = options === null || options === void 0 ? void 0 : options.proxy_options;
+        if (builder.tls_ctx_options) {
+            builder.params.port = 443;
+        }
+        this.configure_websocket_handshake(builder, options);
+        return builder;
+    }
+    /**
+     * For API compatibility with the browser version. Alias for {@link new_with_websockets}.
+     *
+     * @returns a new websocket connection builder object with default TLS configuration
+     */
+    static new_builder_for_websocket() {
+        return this.new_with_websockets();
+    }
+    /**
+     * Overrides the default system trust store.
+     * @param ca_dirpath - Only used on Unix-style systems where all trust anchors are
+     * stored in a directory (e.g. /etc/ssl/certs).
+     * @param ca_filepath - Single file containing all trust CAs, in PEM format
+     */
+    with_certificate_authority_from_path(ca_dirpath, ca_filepath) {
+        this.tls_ctx_options.override_default_trust_store_from_path(ca_dirpath, ca_filepath);
+        return this;
+    }
+    /**
+     * Overrides the default system trust store.
+     * @param ca - Buffer containing all trust CAs, in PEM format
+     */
+    with_certificate_authority(ca) {
+        this.tls_ctx_options.override_default_trust_store(ca);
+        return this;
+    }
+    /**
+     * Configures the IoT endpoint for this connection
+     * @param endpoint The IoT endpoint to connect to
+     */
+    with_endpoint(endpoint) {
+        this.params.host_name = endpoint;
+        return this;
+    }
+    /**
+     * The port to connect to on the IoT endpoint
+     * @param port The port to connect to on the IoT endpoint. Usually 8883 for MQTT, or 443 for websockets
+     */
+    with_port(port) {
+        this.params.port = port;
+        return this;
+    }
+    /**
+     * Configures the client_id to use to connect to the IoT Core service
+     * @param client_id The client id for this connection. Needs to be unique across all devices/clients.
+     */
+    with_client_id(client_id) {
+        this.params.client_id = client_id;
+        return this;
+    }
+    /**
+     * Determines whether or not the service should try to resume prior subscriptions, if it has any
+     * @param clean_session true if the session should drop prior subscriptions when this client connects, false to resume the session
+     */
+    with_clean_session(clean_session) {
+        this.params.clean_session = clean_session;
+        return this;
+    }
+    /**
+     * Configures MQTT keep-alive via PING messages. Note that this is not TCP keepalive.
+     * @param keep_alive How often in seconds to send an MQTT PING message to the service to keep the connection alive
+     */
+    with_keep_alive_seconds(keep_alive) {
+        this.params.keep_alive = keep_alive;
+        return this;
+    }
+    /**
+     * Configures the TCP socket timeout (in milliseconds)
+     * @param timeout_ms TCP socket timeout
+     * @deprecated
+     */
+    with_timeout_ms(timeout_ms) {
+        this.with_ping_timeout_ms(timeout_ms);
+        return this;
+    }
+    /**
+     * Configures the PINGREQ response timeout (in milliseconds)
+     * @param ping_timeout PINGREQ response timeout
+     */
+    with_ping_timeout_ms(ping_timeout) {
+        this.params.ping_timeout = ping_timeout;
+        return this;
+    }
+    /**
+     * Configures the protocol operation timeout (in milliseconds)
+     * @param protocol_operation_timeout protocol operation timeout
+     */
+    with_protocol_operation_timeout_ms(protocol_operation_timeout) {
+        this.params.protocol_operation_timeout = protocol_operation_timeout;
+        return this;
+    }
+    /**
+     * Configures the will message to be sent when this client disconnects
+     * @param will The will topic, qos, and message
+     */
+    with_will(will) {
+        this.params.will = will;
+        return this;
+    }
+    /**
+     * Configures the common settings for the socket to use when opening a connection to the server
+     * @param socket_options The socket settings
+     */
+    with_socket_options(socket_options) {
+        this.params.socket_options = socket_options;
+        return this;
+    }
+    /**
+     * Configures AWS credentials (usually from Cognito) for this connection
+     * @param aws_region The service region to connect to
+     * @param aws_access_id IAM Access ID
+     * @param aws_secret_key IAM Secret Key
+     * @param aws_sts_token STS token from Cognito (optional)
+     */
+    with_credentials(aws_region, aws_access_id, aws_secret_key, aws_sts_token) {
+        return AwsIotMqttConnectionConfigBuilder.configure_websocket_handshake(this, {
+            credentials_provider: auth_1.AwsCredentialsProvider.newStatic(aws_access_id, aws_secret_key, aws_sts_token),
+            region: aws_region,
+            service: "iotdevicegateway",
+        });
+    }
+    /**
+     * Configure the http proxy options to use to establish the connection
+     * @param proxy_options proxy options to use to establish the mqtt connection
+     */
+    with_http_proxy_options(proxy_options) {
+        this.params.proxy_options = proxy_options;
+        return this;
+    }
+    /**
+     * Sets the custom authorizer settings. This function will modify the username, port, and TLS options.
+     *
+     * @param username The username to use with the custom authorizer. If an empty string is passed, it will
+     *                 check to see if a username has already been set (via WithUsername function). If no
+     *                 username is set then no username will be passed with the MQTT connection.
+     * @param authorizer_name The name of the custom authorizer. If an empty string is passed, then
+     *                       'x-amz-customauthorizer-name' will not be added with the MQTT connection.  It is strongly
+     *                       recommended to URL-encode this value; the SDK will not do so for you.
+     * @param authorizer_signature The signature of the custom authorizer. If an empty string is passed, then
+     *                            'x-amz-customauthorizer-signature' will not be added with the MQTT connection.
+     *                            The signature must be based on the private key associated with the custom authorizer.
+     *                            The signature must be base64 encoded.
+     *                            Required if the custom authorizer has signing enabled.
+     * @param password The password to use with the custom authorizer. If null is passed, then no password will
+     *                 be set.
+     * @param token_key_name Key used to extract the custom authorizer token from MQTT username query-string properties.
+     *                       Required if the custom authorizer has signing enabled.  It is strongly suggested to URL-encode
+     *                       this value; the SDK will not do so for you.
+     * @param token_value An opaque token value.
+     *                    Required if the custom authorizer has signing enabled. This value must be signed by the private
+     *                    key associated with the custom authorizer and the result placed in the token_signature argument.
+     */
+    with_custom_authorizer(username, authorizer_name, authorizer_signature, password, token_key_name, token_value) {
+        this.is_using_custom_authorizer = true;
+        let uri_encoded_signature = iot_shared.canonicalizeCustomAuthTokenSignature(authorizer_signature);
+        let username_string = iot_shared.populate_username_string_with_custom_authorizer("", username, authorizer_name, uri_encoded_signature, this.params.username, token_key_name, token_value);
+        this.params.username = username_string;
+        this.params.password = password;
+        if (!this.params.use_websocket) {
+            this.tls_ctx_options.alpn_list = ["mqtt"];
+        }
+        this.params.port = 443;
+        return this;
+    }
+    /**
+     * Sets username for the connection
+     *
+     * @param username the username that will be passed with the MQTT connection
+     */
+    with_username(username) {
+        this.params.username = username;
+        return this;
+    }
+    /**
+     * Sets password for the connection
+     *
+     * @param password the password that will be passed with the MQTT connection
+     */
+    with_password(password) {
+        this.params.password = password;
+        return this;
+    }
+    /**
+     * Configure the max reconnection period (in second). The reonnection period will
+     * be set in range of [reconnect_min_sec,reconnect_max_sec].
+     * @param max_sec max reconnection period
+     */
+    with_reconnect_max_sec(max_sec) {
+        this.params.reconnect_max_sec = max_sec;
+        return this;
+    }
+    /**
+     * Configure the min reconnection period (in second). The reonnection period will
+     * be set in range of [reconnect_min_sec,reconnect_max_sec].
+     * @param min_sec min reconnection period
+     */
+    with_reconnect_min_sec(min_sec) {
+        this.params.reconnect_min_sec = min_sec;
+        return this;
+    }
+    /**
+     * Returns the configured MqttConnectionConfig.  On the first invocation of this function, the TLS context is cached
+     * and re-used on all subsequent calls to build().
+     * @returns The configured MqttConnectionConfig
+     */
+    build() {
+        var _a, _b, _c;
+        if (this.params.client_id === undefined || this.params.host_name === undefined) {
+            throw 'client_id and endpoint are required';
+        }
+        // Check to see if a custom authorizer is being used but not through the builder
+        if (this.is_using_custom_authorizer == false) {
+            if (iot_shared.is_string_and_not_empty(this.params.username)) {
+                if (((_a = this.params.username) === null || _a === void 0 ? void 0 : _a.indexOf("x-amz-customauthorizer-name=")) != -1 || ((_b = this.params.username) === null || _b === void 0 ? void 0 : _b.indexOf("x-amz-customauthorizer-signature=")) != -1) {
+                    this.is_using_custom_authorizer = true;
+                }
+            }
+        }
+        // Is the user trying to connect using a custom authorizer?
+        if (this.is_using_custom_authorizer == true) {
+            if (this.params.port != 443) {
+                console.log("Warning: Attempting to connect to authorizer with unsupported port. Port is not 443...");
+            }
+        }
+        /*
+         * By caching and reusing the TLS context we get an enormous memory savings on a per-connection basis.
+         * The tradeoff is that you can't modify TLS options in between calls to build.
+         * Previously we were making a new one with every single connection which had a huge negative impact on large
+         * scale tests.
+         */
+        if (this.params.tls_ctx === undefined) {
+            this.params.tls_ctx = new io.ClientTlsContext(this.tls_ctx_options);
+        }
+        // Add the metrics string
+        if (iot_shared.is_string_and_not_empty(this.params.username) == false) {
+            this.params.username = "?SDK=NodeJSv2&Version=";
+        }
+        else {
+            if (((_c = this.params.username) === null || _c === void 0 ? void 0 : _c.indexOf("?")) != -1) {
+                this.params.username += "&SDK=NodeJSv2&Version=";
+            }
+            else {
+                this.params.username += "?SDK=NodeJSv2&Version=";
+            }
+        }
+        this.params.username += platform.crt_version();
+        return this.params;
+    }
+}
+exports.AwsIotMqttConnectionConfigBuilder = AwsIotMqttConnectionConfigBuilder;
+//# sourceMappingURL=aws_iot.js.map
+
+/***/ }),
+
+/***/ 8982:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AwsIotMqtt5ClientConfigBuilder = void 0;
+/**
+ * Module for the configuration of MQTT5 clients to connect to AWS IoT
+ *
+ * @packageDocumentation
+ */
+const mqtt5 = __importStar(__nccwpck_require__(5795));
+const io = __importStar(__nccwpck_require__(1528));
+const auth = __importStar(__nccwpck_require__(118));
+const error_1 = __nccwpck_require__(9440);
+const iot_shared = __importStar(__nccwpck_require__(9328));
+const mqtt_shared = __importStar(__nccwpck_require__(9986));
+/**
+ * Builder pattern class to create an {@link mqtt5.Mqtt5ClientConfig} which can then be used to create
+ * an {@link mqtt5.Mqtt5Client}, configured for use with AWS IoT.
+ *
+ * [MQTT5 Client User Guide](https://www.github.com/awslabs/aws-crt-nodejs/blob/main/MQTT5-UserGuide.md)
+ *
+ * @category IoT
+ */
+class AwsIotMqtt5ClientConfigBuilder {
+    constructor(hostName, port, tlsContextOptions) {
+        this.tlsContextOptions = tlsContextOptions;
+        this.config = {
+            hostName: hostName,
+            port: port,
+            connectProperties: {
+                keepAliveIntervalSeconds: mqtt_shared.DEFAULT_KEEP_ALIVE
+            },
+            extendedValidationAndFlowControlOptions: mqtt5.ClientExtendedValidationAndFlowControl.AwsIotCoreDefaults
+        };
+    }
+    /* Builders for different connection methods to AWS IoT Core */
+    /**
+     * Create a new MQTT5 client builder that will create MQTT5 clients that connect to AWS IoT Core via mutual TLS
+     * using X509 certificate and key at the supplied file paths.
+     *
+     * @param hostName - AWS IoT endpoint to connect to
+     * @param certPath - Path to certificate, in PEM format
+     * @param keyPath - Path to private key, in PEM format
+     */
+    static newDirectMqttBuilderWithMtlsFromPath(hostName, certPath, keyPath) {
+        let builder = new AwsIotMqtt5ClientConfigBuilder(hostName, AwsIotMqtt5ClientConfigBuilder.DEFAULT_DIRECT_MQTT_PORT, io.TlsContextOptions.create_client_with_mtls_from_path(certPath, keyPath));
+        if (io.is_alpn_available()) {
+            builder.tlsContextOptions.alpn_list.unshift('x-amzn-mqtt-ca');
+        }
+        return builder;
+    }
+    /**
+     * Create a new MQTT5 client builder that will create MQTT5 clients that connect to AWS IoT Core via mutual TLS
+     * using in-memory X509 certificate and key.
+     *
+     * @param hostName - AWS IoT endpoint to connect to
+     * @param cert - Certificate, in PEM format
+     * @param privateKey - Private key, in PEM format
+     */
+    static newDirectMqttBuilderWithMtlsFromMemory(hostName, cert, privateKey) {
+        let builder = new AwsIotMqtt5ClientConfigBuilder(hostName, AwsIotMqtt5ClientConfigBuilder.DEFAULT_DIRECT_MQTT_PORT, io.TlsContextOptions.create_client_with_mtls(cert, privateKey));
+        if (io.is_alpn_available()) {
+            builder.tlsContextOptions.alpn_list.unshift('x-amzn-mqtt-ca');
+        }
+        return builder;
+    }
+    /**
+     * Create a new MQTT5 client builder that will create MQTT5 clients that connect to AWS IoT Core via mutual TLS
+     * using a PKCS11 library for certificate and private key operations.
+     *
+     * NOTE: This configuration only works on Unix devices.
+     *
+     * @param hostName - AWS IoT endpoint to connect to
+     * @param pkcs11Options - PKCS#11 options.
+     */
+    static newDirectMqttBuilderWithMtlsFromPkcs11(hostName, pkcs11Options) {
+        let builder = new AwsIotMqtt5ClientConfigBuilder(hostName, AwsIotMqtt5ClientConfigBuilder.DEFAULT_DIRECT_MQTT_PORT, io.TlsContextOptions.create_client_with_mtls_pkcs11(pkcs11Options));
+        if (io.is_alpn_available()) {
+            builder.tlsContextOptions.alpn_list.unshift('x-amzn-mqtt-ca');
+        }
+        return builder;
+    }
+    /**
+     * Create a new MQTT5 client builder that will create MQTT5 clients that connect to AWS IoT Core via mutual TLS
+     * using a PKCS12 file.
+     *
+     * Note: This configuration only works on MacOS devices.
+     *
+     * @param hostName - AWS IoT endpoint to connect to
+     * @param pkcs12_options - The PKCS#12 options to use in the builder.
+     */
+    static newDirectMqttBuilderWithMtlsFromPkcs12(hostName, pkcs12_options) {
+        let builder = new AwsIotMqtt5ClientConfigBuilder(hostName, AwsIotMqtt5ClientConfigBuilder.DEFAULT_DIRECT_MQTT_PORT, io.TlsContextOptions.create_client_with_mtls_pkcs12_from_path(pkcs12_options.pkcs12_file, pkcs12_options.pkcs12_password));
+        if (io.is_alpn_available()) {
+            builder.tlsContextOptions.alpn_list.unshift('x-amzn-mqtt-ca');
+        }
+        return builder;
+    }
+    /**
+     * Create a new MQTT5 client builder that will create MQTT5 clients that connect to AWS IoT Core via mutual TLS
+     * using a certificate entry in a Windows certificate store.
+     *
+     * NOTE: This configuration only works on Windows devices.
+     *
+     * @param hostName - AWS IoT endpoint to connect to
+     * @param certificatePath - Path to certificate in a Windows certificate store.
+     *      The path must use backslashes and end with the certificate's thumbprint.
+     *      Example: `CurrentUser\MY\A11F8A9B5DF5B98BA3508FBCA575D09570E0D2C6`
+     */
+    static newDirectMqttBuilderWithMtlsFromWindowsCertStorePath(hostName, certificatePath) {
+        let builder = new AwsIotMqtt5ClientConfigBuilder(hostName, AwsIotMqtt5ClientConfigBuilder.DEFAULT_DIRECT_MQTT_PORT, io.TlsContextOptions.create_client_with_mtls_windows_cert_store_path(certificatePath));
+        if (io.is_alpn_available()) {
+            builder.tlsContextOptions.alpn_list.unshift('x-amzn-mqtt-ca');
+        }
+        return builder;
+    }
+    /**
+     * Create a new MQTT5 client builder that will create MQTT5 clients that connect to AWS IoT Core via TLS,
+     * authenticating via a custom authenticator.
+     *
+     * @param hostName - AWS IoT endpoint to connect to
+     * @param customAuthConfig - AWS IoT custom auth configuration
+     */
+    static newDirectMqttBuilderWithCustomAuth(hostName, customAuthConfig) {
+        let builder = new AwsIotMqtt5ClientConfigBuilder(hostName, AwsIotMqtt5ClientConfigBuilder.DEFAULT_WEBSOCKET_MQTT_PORT, new io.TlsContextOptions());
+        builder.customAuthConfig = iot_shared.canonicalizeCustomAuthConfig(customAuthConfig);
+        builder.tlsContextOptions.alpn_list = ["mqtt"];
+        return builder;
+    }
+    /**
+     * Create a new MQTT5 client builder that will create MQTT5 clients that connect to AWS IoT Core via websockets,
+     * using AWS Sigv4 signing to establish authenticate.
+     *
+     * @param hostName - AWS IoT endpoint to connect to
+     * @param options - additional sigv4-oriented options to use
+     */
+    static newWebsocketMqttBuilderWithSigv4Auth(hostName, options) {
+        let tlsContextOptions = new io.TlsContextOptions();
+        tlsContextOptions.alpn_list = [];
+        let builder = new AwsIotMqtt5ClientConfigBuilder(hostName, AwsIotMqtt5ClientConfigBuilder.DEFAULT_WEBSOCKET_MQTT_PORT, tlsContextOptions);
+        let credentialsProvider = options === null || options === void 0 ? void 0 : options.credentialsProvider;
+        if (!credentialsProvider) {
+            credentialsProvider = auth.AwsCredentialsProvider.newDefault();
+        }
+        builder.config.websocketHandshakeTransform = (request, done) => __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            try {
+                const signingConfig = {
+                    algorithm: auth.AwsSigningAlgorithm.SigV4,
+                    signature_type: auth.AwsSignatureType.HttpRequestViaQueryParams,
+                    provider: credentialsProvider,
+                    region: (_a = options === null || options === void 0 ? void 0 : options.region) !== null && _a !== void 0 ? _a : iot_shared.extractRegionFromEndpoint(hostName),
+                    service: "iotdevicegateway",
+                    signed_body_value: auth.AwsSignedBodyValue.EmptySha256,
+                    omit_session_token: true,
+                };
+                yield auth.aws_sign_request(request, signingConfig);
+                done();
+            }
+            catch (error) {
+                if (error instanceof error_1.CrtError) {
+                    done(error.error_code);
+                }
+                else {
+                    done(3); /* TODO: AWS_ERROR_UNKNOWN */
+                }
+            }
+        });
+        return builder;
+    }
+    /**
+     * Create a new MQTT5 client builder that will create MQTT5 clients that connect to AWS IoT Core via websockets,
+     * authenticating via a custom authenticator.
+     *
+     * @param hostName - AWS IoT endpoint to connect to
+     * @param customAuthConfig - AWS IoT custom auth configuration
+     */
+    static newWebsocketMqttBuilderWithCustomAuth(hostName, customAuthConfig) {
+        let builder = new AwsIotMqtt5ClientConfigBuilder(hostName, AwsIotMqtt5ClientConfigBuilder.DEFAULT_WEBSOCKET_MQTT_PORT, new io.TlsContextOptions());
+        builder.customAuthConfig = customAuthConfig;
+        builder.config.websocketHandshakeTransform = (request, done) => __awaiter(this, void 0, void 0, function* () {
+            done(0);
+        });
+        return builder;
+    }
+    /* Instance Methods for various config overrides */
+    /**
+     * Overrides the default system trust store.
+     *
+     * @param caDirpath - Only used on Unix-style systems where all trust anchors are
+     * stored in a directory (e.g. /etc/ssl/certs).
+     * @param caFilepath - Single file containing all trust CAs, in PEM format
+     */
+    withCertificateAuthorityFromPath(caDirpath, caFilepath) {
+        this.tlsContextOptions.override_default_trust_store_from_path(caDirpath, caFilepath);
+        return this;
+    }
+    /**
+     * Overrides the default system trust store.
+     *
+     * @param ca - Buffer containing all trust CAs, in PEM format
+     */
+    withCertificateAuthority(ca) {
+        this.tlsContextOptions.override_default_trust_store(ca);
+        return this;
+    }
+    /**
+     * Overrides the IoT endpoint port to connect to.
+     *
+     * @param port The IoT endpoint port to connect to. Usually 8883 for MQTT, or 443 for websockets
+     */
+    withPort(port) {
+        this.config.port = port;
+        return this;
+    }
+    /**
+     * Overrides all configurable options with respect to the CONNECT packet sent by the client, including the will.
+     * These connect properties will be used for every connection attempt made by the client.  Custom authentication
+     * configuration will override the username and password values in this configuration.
+     *
+     * @param connectPacket all configurable options with respect to the CONNECT packet sent by the client
+     */
+    withConnectProperties(connectPacket) {
+        this.config.connectProperties = connectPacket;
+        return this;
+    }
+    /**
+     * Overrides how the MQTT5 client should behave with respect to MQTT sessions.
+     *
+     * @param sessionBehavior how the MQTT5 client should behave with respect to MQTT sessions.
+     */
+    withSessionBehavior(sessionBehavior) {
+        this.config.sessionBehavior = sessionBehavior;
+        return this;
+    }
+    /**
+     * Overrides how the reconnect delay is modified in order to smooth out the distribution of reconnection attempt
+     * timepoints for a large set of reconnecting clients.
+     *
+     * @param retryJitterMode controls how the reconnect delay is modified in order to smooth out the distribution of
+     * econnection attempt timepoints for a large set of reconnecting clients.
+     */
+    withRetryJitterMode(retryJitterMode) {
+        this.config.retryJitterMode = retryJitterMode;
+        return this;
+    }
+    /**
+     * Overrides the minimum amount of time to wait to reconnect after a disconnect.  Exponential backoff is performed
+     * with controllable jitter after each connection failure.
+     *
+     * @param minReconnectDelayMs minimum amount of time to wait to reconnect after a disconnect.
+     */
+    withMinReconnectDelayMs(minReconnectDelayMs) {
+        this.config.minReconnectDelayMs = minReconnectDelayMs;
+        return this;
+    }
+    /**
+     * Overrides the maximum amount of time to wait to reconnect after a disconnect.  Exponential backoff is performed
+     * with controllable jitter after each connection failure.
+     *
+     * @param maxReconnectDelayMs maximum amount of time to wait to reconnect after a disconnect.
+     */
+    withMaxReconnectDelayMs(maxReconnectDelayMs) {
+        this.config.maxReconnectDelayMs = maxReconnectDelayMs;
+        return this;
+    }
+    /**
+     * Overrides the amount of time that must elapse with an established connection before the reconnect delay is
+     * reset to the minimum.  This helps alleviate bandwidth-waste in fast reconnect cycles due to permission
+     * failures on operations.
+     *
+     * @param minConnectedTimeToResetReconnectDelayMs the amount of time that must elapse with an established
+     * connection before the reconnect delay is reset to the minimum
+     */
+    withMinConnectedTimeToResetReconnectDelayMs(minConnectedTimeToResetReconnectDelayMs) {
+        this.config.minConnectedTimeToResetReconnectDelayMs = minConnectedTimeToResetReconnectDelayMs;
+        return this;
+    }
+    /**
+     * Overrides the time interval to wait after sending a CONNECT request for a CONNACK to arrive.  If one does not
+     * arrive, the connection will be shut down.
+     *
+     * @param connackTimeoutMs time interval to wait after sending a CONNECT request for a CONNACK to arrive
+     */
+    withConnackTimeoutMs(connackTimeoutMs) {
+        this.config.connackTimeoutMs = connackTimeoutMs;
+        return this;
+    }
+    /**
+     * Overrides how disconnects affect the queued and in-progress operations tracked by the client.  Also controls
+     * how new operations are handled while the client is not connected.  In particular, if the client is not connected,
+     * then any operation that would be failed on disconnect (according to these rules) will also be rejected.
+     *
+     * @param offlineQueueBehavior how disconnects affect the queued and in-progress operations tracked by the client
+     *
+     * @group Node-only
+     */
+    withOfflineQueueBehavior(offlineQueueBehavior) {
+        this.config.offlineQueueBehavior = offlineQueueBehavior;
+        return this;
+    }
+    /**
+     * Overrides the time interval to wait after sending a PINGREQ for a PINGRESP to arrive.  If one does not arrive,
+     * the client will close the current connection.
+     *
+     * @param pingTimeoutMs time interval to wait after sending a PINGREQ for a PINGRESP to arrive
+     *
+     * @group Node-only
+     */
+    withPingTimeoutMs(pingTimeoutMs) {
+        this.config.pingTimeoutMs = pingTimeoutMs;
+        return this;
+    }
+    /**
+     * Overrides the time interval to wait for an ack after sending a QoS 1+ PUBLISH, SUBSCRIBE, or UNSUBSCRIBE before
+     * failing the operation.  Defaults to no timeout.
+     *
+     * @param ackTimeoutSeconds the time interval to wait for an ack after sending a QoS 1+ PUBLISH, SUBSCRIBE,
+     * or UNSUBSCRIBE before failing the operation
+     *
+     * @group Node-only
+     */
+    withAckTimeoutSeconds(ackTimeoutSeconds) {
+        this.config.ackTimeoutSeconds = ackTimeoutSeconds;
+        return this;
+    }
+    /**
+     * Overrides the socket properties of the underlying MQTT connections made by the client.  Leave undefined to use
+     * defaults (no TCP keep alive, 10 second socket timeout).
+     *
+     * @param socketOptions socket properties of the underlying MQTT connections made by the client
+     *
+     * @group Node-only
+     */
+    withSocketOptions(socketOptions) {
+        this.config.socketOptions = socketOptions;
+        return this;
+    }
+    /**
+     * Overrides (tunneling) HTTP proxy usage when establishing MQTT connections.
+     *
+     * @param httpProxyOptions HTTP proxy options to use when establishing MQTT connections
+     *
+     * @group Node-only
+     */
+    withHttpProxyOptions(httpProxyOptions) {
+        this.config.httpProxyOptions = httpProxyOptions;
+        return this;
+    }
+    /**
+     * Overrides additional controls for client behavior with respect to operation validation and flow control; these
+     * checks go beyond the base MQTT5 spec to respect limits of specific MQTT brokers.
+     *
+     * @param extendedValidationAndFlowControlOptions additional controls for client behavior with respect to operation
+     * validation and flow control
+     *
+     * @group Node-only
+     */
+    withExtendedValidationAndFlowControlOptions(extendedValidationAndFlowControlOptions) {
+        this.config.extendedValidationAndFlowControlOptions = extendedValidationAndFlowControlOptions;
+        return this;
+    }
+    /**
+     * Overrides how the MQTT5 client should behave with respect to topic aliasing
+     *
+     * @param topicAliasingOptions how the MQTT5 client should behave with respect to topic aliasing
+     */
+    withTopicAliasingOptions(topicAliasingOptions) {
+        this.config.topicAliasingOptions = topicAliasingOptions;
+        return this;
+    }
+    /**
+     * Constructs an MQTT5 Client configuration object for creating mqtt5 clients.
+     */
+    build() {
+        var _a, _b;
+        if (this.config.tlsCtx === undefined) {
+            this.config.tlsCtx = new io.ClientTlsContext(this.tlsContextOptions);
+        }
+        // this is always set by the constructor, but check it to make typescript happy
+        if (this.config.connectProperties) {
+            this.config.connectProperties.username = iot_shared.buildMqtt5FinalUsername(this.customAuthConfig);
+            if ((_a = this.customAuthConfig) === null || _a === void 0 ? void 0 : _a.password) {
+                this.config.connectProperties.password = (_b = this.customAuthConfig) === null || _b === void 0 ? void 0 : _b.password;
+            }
+        }
+        return this.config;
+    }
+}
+exports.AwsIotMqtt5ClientConfigBuilder = AwsIotMqtt5ClientConfigBuilder;
+AwsIotMqtt5ClientConfigBuilder.DEFAULT_WEBSOCKET_MQTT_PORT = 443;
+AwsIotMqtt5ClientConfigBuilder.DEFAULT_DIRECT_MQTT_PORT = 8883;
+//# sourceMappingURL=aws_iot_mqtt5.js.map
+
+/***/ }),
+
+/***/ 4739:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.cRuntime = exports.CRuntimeType = void 0;
+const path = __importStar(__nccwpck_require__(6928));
+const os_1 = __nccwpck_require__(857);
+const fs_1 = __nccwpck_require__(9896);
+const process_1 = __nccwpck_require__(932);
+const child_process_1 = __importDefault(__nccwpck_require__(5317));
+const CRuntimeType = Object.freeze({
+    NON_LINUX: "cruntime",
+    MUSL: "musl",
+    GLIBC: "glibc"
+});
+exports.CRuntimeType = CRuntimeType;
+function getCRuntime() {
+    if ((0, os_1.platform)() !== "linux") {
+        return CRuntimeType.NON_LINUX;
+    }
+    try {
+        // sometimes, ldd's output goes to stderr, so capture that too
+        // Using spawnSync because execSync treats any output to stderr as an exception.
+        const spawnedProcess = child_process_1.default.spawnSync('ldd', ['--version'], { encoding: 'utf8' });
+        const output = spawnedProcess.stdout + spawnedProcess.stderr;
+        if (output.includes(CRuntimeType.MUSL)) {
+            return CRuntimeType.MUSL;
+        }
+        else {
+            return CRuntimeType.GLIBC;
+        }
+    }
+    catch (error) {
+        return CRuntimeType.GLIBC;
+    }
+}
+const upgrade_string = "Please upgrade to node >=10.16.0, or use the provided browser implementation.";
+if ('napi' in process_1.versions) {
+    // @ts-ignore
+    const napi_version = parseInt(process_1.versions['napi']);
+    if (napi_version < 4) {
+        throw new Error("The AWS CRT native implementation requires that NAPI version 4 be present. " + upgrade_string);
+    }
+}
+else {
+    throw new Error("The current runtime is not reporting an NAPI version. " + upgrade_string);
+}
+const cRuntime = getCRuntime();
+exports.cRuntime = cRuntime;
+const binary_name = 'aws-crt-nodejs';
+const platformDir = `${os_1.platform}-${os_1.arch}-${cRuntime}`;
+let source_root = path.resolve(__dirname, '..', '..');
+const dist = path.join(source_root, 'dist');
+if ((0, fs_1.existsSync)(dist)) {
+    source_root = dist;
+}
+const bin_path = path.resolve(source_root, 'bin');
+let search_paths = [
+    path.join(bin_path, platformDir, binary_name) + '.node',
+];
+/*
+ * Environment variables can inject (at lower-priority) paths into the search process as well.  Support both relative
+ * and absolute path overrides.
+ */
+let relative_path = process.env.AWS_CRT_NODEJS_BINARY_RELATIVE_PATH;
+if (relative_path) {
+    let final_path = path.resolve(__dirname, ...relative_path.split(path.sep));
+    search_paths.push(final_path);
+}
+if (process.env.AWS_CRT_NODEJS_BINARY_ABSOLUTE_PATH) {
+    search_paths.push(process.env.AWS_CRT_NODEJS_BINARY_ABSOLUTE_PATH);
+}
+let binding;
+for (const path of search_paths) {
+    if ((0, fs_1.existsSync)(path)) {
+        binding = require(path);
+        break;
+    }
+}
+if (binding == undefined) {
+    throw new Error("AWS CRT binary not present in any of the following locations:\n\t" + search_paths.join('\n\t'));
+}
+const binding_1 = __importDefault(__nccwpck_require__(4739));
+/** Electron will shutdown the node process on exit, which causes the threadsafe function to segfault. To prevent
+  * the segfault we disable the threadsafe function on node process exit. */
+if (process.versions.hasOwnProperty('electron')) {
+    process.on('exit', function () {
+        binding_1.default.disable_threadsafe_function();
+    });
+}
+exports["default"] = binding;
+//# sourceMappingURL=binding.js.map
+
+/***/ }),
+
+/***/ 786:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.crc64nvme = exports.crc32c = exports.crc32 = void 0;
+/**
+ *
+ * A module containing various checksum implementations intended for streaming payloads
+ *
+ * @packageDocumentation
+ * @module checksums
+ * @mergeTarget
+ */
+const binding_1 = __importDefault(__nccwpck_require__(4739));
+/**
+ * Computes an crc32 checksum.
+ *
+ * @param data The data to checksum
+ * @param previous previous crc32 checksum result. Used if you are buffering large input.
+ *
+ * @category Crypto
+ */
+function crc32(data, previous) {
+    return binding_1.default.checksums_crc32(data, previous);
+}
+exports.crc32 = crc32;
+/**
+ * Computes a crc32c checksum.
+ *
+ * @param data The data to checksum
+ * @param previous previous crc32c checksum result. Used if you are buffering large input.
+ *
+ * @category Crypto
+ */
+function crc32c(data, previous) {
+    return binding_1.default.checksums_crc32c(data, previous);
+}
+exports.crc32c = crc32c;
+/**
+ * Computes a crc64nvme checksum.
+ *
+ * @param data The data to checksum
+ * @param previous previous crc64nvme checksum result. Used if you are buffering large input.
+ *
+ * @category Crypto
+ */
+function crc64nvme(data, previous) {
+    return binding_1.default.checksums_crc64nvme(data, previous);
+}
+exports.crc64nvme = crc64nvme;
+//# sourceMappingURL=checksums.js.map
+
+/***/ }),
+
+/***/ 6217:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.native_memory_dump = exports.native_memory = void 0;
+/**
+ *
+ * A module containing some miscellaneous crt native memory queries
+ *
+ * @packageDocumentation
+ * @module crt
+ * @mergeTarget
+ */
+/**
+ * Memory reporting is controlled by the AWS_CRT_MEMORY_TRACING environment
+ * variable. Possible values are:
+ * * 0 - No tracing
+ * * 1 - Track active memory usage. Incurs a small performance penalty.
+ * * 2 - Track active memory usage, and also track callstacks for every allocation.
+ *   This incurs a performance penalty, depending on the cost of the platform's
+ *   stack unwinding/backtrace API.
+ * @category System
+ */
+const binding_1 = __importDefault(__nccwpck_require__(4739));
+/**
+ * If the ```AWS_CRT_MEMORY_TRACING``` is environment variable is set to 1 or 2,
+ * will return the native memory usage in bytes. Otherwise, returns 0.
+ * @returns The total allocated native memory, in bytes.
+ *
+ * @category System
+ */
+function native_memory() {
+    return binding_1.default.native_memory();
+}
+exports.native_memory = native_memory;
+/**
+ * Dumps outstanding native memory allocations. If the ```AWS_CRT_MEMORY_TRACING```
+ * environment variable is set to 1 or 2, will dump all active native memory to
+ * the console log.
+ *
+ * @category System
+ */
+function native_memory_dump() {
+    return binding_1.default.native_memory_dump();
+}
+exports.native_memory_dump = native_memory_dump;
+//# sourceMappingURL=crt.js.map
+
+/***/ }),
+
+/***/ 8749:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.hmac_sha256 = exports.Sha256Hmac = exports.hash_sha1 = exports.Sha1Hash = exports.hash_sha256 = exports.Sha256Hash = exports.hash_md5 = exports.Md5Hash = void 0;
+/**
+ * A module containing support for a variety of cryptographic operations.
+ *
+ * @packageDocumentation
+ * @module crypto
+ * @mergeTarget
+ */
+const binding_1 = __importDefault(__nccwpck_require__(4739));
+const native_resource_1 = __nccwpck_require__(7990);
+/**
+ * Object that allows for continuous hashing of data.
+ *
+ * @internal
+ */
+class Hash extends native_resource_1.NativeResource {
+    /**
+     * Hash additional data.
+     * @param data Additional data to hash
+     */
+    update(data) {
+        binding_1.default.hash_update(this.native_handle(), data);
+    }
+    /**
+     * Completes the hash computation and returns the final hash digest.
+     *
+     * @param truncate_to The maximum number of bytes to receive. Leave as undefined or 0 to receive the entire digest.
+     */
+    finalize(truncate_to) {
+        return binding_1.default.hash_digest(this.native_handle(), truncate_to);
+    }
+    constructor(hash_handle) {
+        super(hash_handle);
+    }
+}
+/**
+ * Object that allows for continuous MD5 hashing of data.
+ *
+ * @category Crypto
+ */
+class Md5Hash extends Hash {
+    constructor() {
+        super(binding_1.default.hash_md5_new());
+    }
+}
+exports.Md5Hash = Md5Hash;
+/**
+ * Computes an MD5 hash. Use this if you don't need to stream the data you're hashing and can load the entire input
+ * into memory.
+ *
+ * @param data The data to hash
+ * @param truncate_to The maximum number of bytes to receive. Leave as undefined or 0 to receive the entire digest.
+ *
+ * @category Crypto
+ */
+function hash_md5(data, truncate_to) {
+    return binding_1.default.hash_md5_compute(data, truncate_to);
+}
+exports.hash_md5 = hash_md5;
+/**
+ * Object that allows for continuous SHA256 hashing of data.
+ *
+ * @category Crypto
+ */
+class Sha256Hash extends Hash {
+    constructor() {
+        super(binding_1.default.hash_sha256_new());
+    }
+}
+exports.Sha256Hash = Sha256Hash;
+/**
+ * Computes an SHA256 hash. Use this if you don't need to stream the data you're hashing and can load the entire input
+ * into memory.
+ *
+ * @param data The data to hash
+ * @param truncate_to The maximum number of bytes to receive. Leave as undefined or 0 to receive the entire digest.
+ *
+ * @category Crypto
+ */
+function hash_sha256(data, truncate_to) {
+    return binding_1.default.hash_sha256_compute(data, truncate_to);
+}
+exports.hash_sha256 = hash_sha256;
+/**
+ * Object that allows for continuous SHA1 hashing of data.
+ *
+ * @category Crypto
+ */
+class Sha1Hash extends Hash {
+    constructor() {
+        super(binding_1.default.hash_sha1_new());
+    }
+}
+exports.Sha1Hash = Sha1Hash;
+/**
+ * Computes an SHA1 hash. Use this if you don't need to stream the data you're hashing and can load the entire input
+ * into memory.
+ *
+ * @param data The data to hash
+ * @param truncate_to The maximum number of bytes to receive. Leave as undefined or 0 to receive the entire digest.
+ *
+ * @category Crypto
+ */
+function hash_sha1(data, truncate_to) {
+    return binding_1.default.hash_sha1_compute(data, truncate_to);
+}
+exports.hash_sha1 = hash_sha1;
+/**
+ * Object that allows for continuous hashing of data with an hmac secret.
+ *
+ * @category Crypto
+ */
+class Hmac extends native_resource_1.NativeResource {
+    /**
+     * Hash additional data.
+     *
+     * @param data additional data to hash
+     */
+    update(data) {
+        binding_1.default.hmac_update(this.native_handle(), data);
+    }
+    /**
+     * Completes the hash computation and returns the final hmac digest.
+     *
+     * @param truncate_to The maximum number of bytes to receive. Leave as undefined or 0 to receive the entire digest.
+     */
+    finalize(truncate_to) {
+        return binding_1.default.hmac_digest(this.native_handle(), truncate_to);
+    }
+    constructor(hash_handle) {
+        super(hash_handle);
+    }
+}
+/**
+ * Object that allows for continuous SHA256 HMAC hashing of data.
+ *
+ * @category Crypto
+ */
+class Sha256Hmac extends Hmac {
+    constructor(secret) {
+        super(binding_1.default.hmac_sha256_new(secret));
+    }
+}
+exports.Sha256Hmac = Sha256Hmac;
+/**
+ * Computes an SHA256 HMAC. Use this if you don't need to stream the data you're hashing and can load the entire input
+ * into memory.
+ *
+ * @param secret The key to use for the HMAC process
+ * @param data The data to hash
+ * @param truncate_to The maximum number of bytes to receive. Leave as undefined or 0 to receive the entire digest.
+ *
+ * @category Crypto
+ */
+function hmac_sha256(secret, data, truncate_to) {
+    return binding_1.default.hmac_sha256_compute(secret, data, truncate_to);
+}
+exports.hmac_sha256 = hmac_sha256;
+//# sourceMappingURL=crypto.js.map
+
+/***/ }),
+
+/***/ 9440:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CrtError = void 0;
+/**
+ * Library-specific error extension type
+ *
+ * @packageDocumentation
+ * @module error
+ * @mergeTarget
+ */
+const binding_1 = __importDefault(__nccwpck_require__(4739));
+/**
+ * Represents an error encountered in native code. Can also be used to convert a numeric error code into
+ * a human-readable string.
+ *
+ * @category System
+ */
+class CrtError extends Error {
+    /** @var error - The original error. Most often an error_code, but possibly some other context */
+    constructor(error) {
+        super(extract_message(error));
+        this.error = error;
+        this.error_code = extract_code(error);
+        this.error_name = extract_name(error);
+    }
+}
+exports.CrtError = CrtError;
+function extract_message(error) {
+    if (typeof error === 'number') {
+        return binding_1.default.error_code_to_string(error);
+    }
+    else if (error instanceof CrtError) {
+        return error.message;
+    }
+    return error.toString();
+}
+function extract_code(error) {
+    if (typeof error === 'number') {
+        return error;
+    }
+    else if (error instanceof CrtError) {
+        return error.error_code;
+    }
+    return undefined;
+}
+function extract_name(error) {
+    if (typeof error === 'number') {
+        return binding_1.default.error_code_to_name(error);
+    }
+    else if (error instanceof CrtError) {
+        return error.error_name;
+    }
+    return undefined;
+}
+//# sourceMappingURL=error.js.map
+
+/***/ }),
+
+/***/ 1618:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ClientStream = exports.ClientConnection = exports.MessageType = exports.MessageFlags = exports.Header = exports.HeaderType = void 0;
+const native_resource_1 = __nccwpck_require__(7990);
+const event_1 = __nccwpck_require__(8468);
+const error_1 = __nccwpck_require__(9440);
+const io = __importStar(__nccwpck_require__(1528));
+const eventstream_utils = __importStar(__nccwpck_require__(2332));
+const promise = __importStar(__nccwpck_require__(1357));
+const binding_1 = __importDefault(__nccwpck_require__(4739));
+/**
+ * Node.js specific eventstream rpc native bindings
+ *
+ * @packageDocumentation
+ * @module eventstream
+ * @mergeTarget
+ *
+ */
+/**
+ * Supported types for the value within an eventstream message header
+ */
+var HeaderType;
+(function (HeaderType) {
+    /** Value is True. No actual value is transmitted on the wire. */
+    HeaderType[HeaderType["BooleanTrue"] = 0] = "BooleanTrue";
+    /** Value is True. No actual value is transmitted on the wire. */
+    HeaderType[HeaderType["BooleanFalse"] = 1] = "BooleanFalse";
+    /** Value is signed 8-bit int. */
+    HeaderType[HeaderType["Byte"] = 2] = "Byte";
+    /** Value is signed 16-bit int. */
+    HeaderType[HeaderType["Int16"] = 3] = "Int16";
+    /** Value is signed 32-bit int. */
+    HeaderType[HeaderType["Int32"] = 4] = "Int32";
+    /** Value is signed 64-bit int. */
+    HeaderType[HeaderType["Int64"] = 5] = "Int64";
+    /** Value is raw bytes. */
+    HeaderType[HeaderType["ByteBuffer"] = 6] = "ByteBuffer";
+    /** Value is a str.  Transmitted on the wire as utf-8. */
+    HeaderType[HeaderType["String"] = 7] = "String";
+    /** Value is a posix timestamp (seconds since Unix epoch).  Transmitted on the wire as a 64-bit int. */
+    HeaderType[HeaderType["Timestamp"] = 8] = "Timestamp";
+    /** Value is a UUID. Transmitted on the wire as 16 bytes. */
+    HeaderType[HeaderType["UUID"] = 9] = "UUID";
+})(HeaderType = exports.HeaderType || (exports.HeaderType = {}));
+const AWS_MAXIMUM_EVENT_STREAM_HEADER_NAME_LENGTH = 127;
+/**
+ * Wrapper class for event stream message headers.  Similar to HTTP, a header is a name-value pair.  Unlike HTTP, the
+ * value's wire format varies depending on a type annotation.  We provide static builder functions to help
+ * ensure correct type agreement (type annotation matches actual value) at construction time.  Getting the header
+ * value requires the use of a safe conversion function.
+ */
+class Header {
+    /** @internal */
+    constructor(name, type, value) {
+        this.name = name;
+        this.type = type;
+        this.value = value;
+    }
+    static validateHeaderName(name) {
+        if (name.length == 0 || name.length > AWS_MAXIMUM_EVENT_STREAM_HEADER_NAME_LENGTH) {
+            throw new error_1.CrtError(`Event stream header name (${name}) is not valid`);
+        }
+    }
+    /**
+     * Create a new boolean-valued message header
+     *
+     * @param name name of the header
+     * @param value value of the header
+     */
+    static newBoolean(name, value) {
+        Header.validateHeaderName(name);
+        if (value) {
+            return new Header(name, HeaderType.BooleanTrue);
+        }
+        else {
+            return new Header(name, HeaderType.BooleanFalse);
+        }
+    }
+    /**
+     * Create a new byte-valued message header
+     *
+     * @param name name of the header
+     * @param value value of the header
+     */
+    static newByte(name, value) {
+        Header.validateHeaderName(name);
+        if (value >= eventstream_utils.MIN_INT8 && value <= eventstream_utils.MAX_INT8 && Number.isSafeInteger(value)) {
+            return new Header(name, HeaderType.Byte, value);
+        }
+        throw new error_1.CrtError(`Illegal value for eventstream byte-valued header: ${value}`);
+    }
+    /**
+     * Create a new 16-bit-integer-valued message header
+     *
+     * @param name name of the header
+     * @param value value of the header
+     */
+    static newInt16(name, value) {
+        Header.validateHeaderName(name);
+        if (value >= eventstream_utils.MIN_INT16 && value <= eventstream_utils.MAX_INT16 && Number.isSafeInteger(value)) {
+            return new Header(name, HeaderType.Int16, value);
+        }
+        throw new error_1.CrtError(`Illegal value for eventstream int16-valued header: ${value}`);
+    }
+    /**
+     * Create a new 32-bit-integer-valued message header
+     *
+     * @param name name of the header
+     * @param value value of the header
+     */
+    static newInt32(name, value) {
+        Header.validateHeaderName(name);
+        if (value >= eventstream_utils.MIN_INT32 && value <= eventstream_utils.MAX_INT32 && Number.isSafeInteger(value)) {
+            return new Header(name, HeaderType.Int32, value);
+        }
+        throw new error_1.CrtError(`Illegal value for eventstream int32-valued header: ${value}`);
+    }
+    /**
+     * Create a new 64-bit-integer-valued message header.  number cannot represent a full 64-bit integer range but
+     * its usage is so common that this exists for convenience.  Internally, we always track 64 bit integers as
+     * bigints.
+     *
+     * @param name name of the header
+     * @param value value of the header
+     */
+    static newInt64FromNumber(name, value) {
+        Header.validateHeaderName(name);
+        if (Number.isSafeInteger(value)) {
+            return new Header(name, HeaderType.Int64, eventstream_utils.marshalInt64BigintAsBuffer(BigInt(value)));
+        }
+        throw new error_1.CrtError(`Illegal value for eventstream int64-valued header: ${value}`);
+    }
+    /**
+     * Create a new 64-bit-integer-valued message header from a big integer.
+     *
+     * @param name name of the header
+     * @param value value of the header
+     */
+    static newInt64FromBigint(name, value) {
+        Header.validateHeaderName(name);
+        if (value >= eventstream_utils.MIN_INT64 && value <= eventstream_utils.MAX_INT64) {
+            return new Header(name, HeaderType.Int64, eventstream_utils.marshalInt64BigintAsBuffer(value));
+        }
+        throw new error_1.CrtError(`Illegal value for eventstream int64-valued header: ${value}`);
+    }
+    /**
+     * Create a new byte-buffer-valued message header
+     *
+     * @param name name of the header
+     * @param value value of the header
+     */
+    static newByteBuffer(name, value) {
+        Header.validateHeaderName(name);
+        return new Header(name, HeaderType.ByteBuffer, value);
+    }
+    /**
+     * Create a new string-valued message header
+     *
+     * @param name name of the header
+     * @param value value of the header
+     */
+    static newString(name, value) {
+        Header.validateHeaderName(name);
+        return new Header(name, HeaderType.String, value);
+    }
+    /**
+     * Create a new timestamp-valued message header from an integral value in seconds since epoch.
+     *
+     * @param name name of the header
+     * @param value value of the header
+     */
+    static newTimeStampFromSecondsSinceEpoch(name, secondsSinceEpoch) {
+        Header.validateHeaderName(name);
+        if (Number.isSafeInteger(secondsSinceEpoch) && secondsSinceEpoch >= 0) {
+            return new Header(name, HeaderType.Timestamp, secondsSinceEpoch);
+        }
+        throw new error_1.CrtError(`Illegal value for eventstream timestamp-valued header: ${secondsSinceEpoch}`);
+    }
+    /**
+     * Create a new timestamp-valued message header from a date.
+     *
+     * @param name name of the header
+     * @param value value of the header
+     */
+    static newTimeStampFromDate(name, date) {
+        Header.validateHeaderName(name);
+        const secondsSinceEpoch = date.getTime();
+        if (Number.isSafeInteger(secondsSinceEpoch)) {
+            return new Header(name, HeaderType.Timestamp, secondsSinceEpoch);
+        }
+        throw new error_1.CrtError(`Illegal value for eventstream timestamp-valued header: ${date}`);
+    }
+    /**
+     * Create a new UUID-valued message header.
+     * WIP
+     *
+     * @param name name of the header
+     * @param value value of the header
+     */
+    static newUUID(name, value) {
+        Header.validateHeaderName(name);
+        if (value.byteLength == 16) {
+            return new Header(name, HeaderType.UUID, value);
+        }
+        throw new error_1.CrtError(`Illegal value for eventstream uuid-valued header: ${value}`);
+    }
+    toValue(type) {
+        if (type != this.type) {
+            throw new error_1.CrtError(`Header of type (${this.type}) cannot be converted to type (${type})`);
+        }
+        return this.value;
+    }
+    /**
+     * All conversion functions require the header's type to be appropriately matching.  There are no error-prone
+     * flexible conversion helpers.
+     */
+    /**
+     * Returns a boolean header's value.
+     */
+    asBoolean() {
+        switch (this.type) {
+            case HeaderType.BooleanFalse:
+                return false;
+            case HeaderType.BooleanTrue:
+                return true;
+            default:
+                throw new error_1.CrtError(`Header of type (${this.type}) cannot be converted to type (boolean)`);
+        }
+    }
+    /**
+     * Returns a byte header's value.
+     */
+    asByte() {
+        return this.toValue(HeaderType.Byte);
+    }
+    /**
+     * Returns a 16-bit integer header's value.
+     */
+    asInt16() {
+        return this.toValue(HeaderType.Int16);
+    }
+    /**
+     * Returns a 32-bit integer header's value.
+     */
+    asInt32() {
+        return this.toValue(HeaderType.Int32);
+    }
+    /**
+     * Returns a 64-bit integer header's value.
+     */
+    asInt64() {
+        return eventstream_utils.unmarshalInt64BigintFromBuffer(this.toValue(HeaderType.Int64));
+    }
+    /**
+     * Returns a byte buffer header's value.
+     */
+    asByteBuffer() {
+        return this.toValue(HeaderType.ByteBuffer);
+    }
+    /**
+     * Returns a string header's value.
+     */
+    asString() {
+        return this.toValue(HeaderType.String);
+    }
+    /**
+     * Returns a timestamp header's value (as seconds since epoch).
+     */
+    asTimestamp() {
+        return this.toValue(HeaderType.Timestamp);
+    }
+    /**
+     * Returns a UUID header's value.
+     */
+    asUUID() {
+        return this.toValue(HeaderType.UUID);
+    }
+}
+exports.Header = Header;
+/**
+ * Flags for messages in the event-stream RPC protocol.
+ *
+ * Flags may be XORed together.
+ * Not all flags can be used with all message types, consult documentation.
+ */
+var MessageFlags;
+(function (MessageFlags) {
+    /** Nothing */
+    MessageFlags[MessageFlags["None"] = 0] = "None";
+    /**
+     * Connection accepted
+     *
+     * If this flag is absent from a {@link MessageType.ConnectAck ConnectAck} message, the connection has been
+     * rejected.
+     */
+    MessageFlags[MessageFlags["ConnectionAccepted"] = 1] = "ConnectionAccepted";
+    /**
+     * Terminate stream
+     *
+     * This message may be used with any message type.
+     * The sender will close their connection after the message is written to the wire.
+     * The receiver will close their connection after delivering the message to the user.
+     */
+    MessageFlags[MessageFlags["TerminateStream"] = 2] = "TerminateStream";
+})(MessageFlags = exports.MessageFlags || (exports.MessageFlags = {}));
+/**
+ *
+ * Types of messages in the event-stream RPC protocol.
+ * The {@link MessageType.ApplicationMessage Application} and {@link MessageType.ApplicationError Error} message types
+ * may only be sent on streams, and will never arrive as a protocol message (stream-id 0).
+ *
+ * For all other message types, they may only be sent as protocol messages
+ * (stream-id 0), and will never arrive as a stream message.
+ *
+ * Different message types expect specific headers and flags, consult documentation.
+ */
+var MessageType;
+(function (MessageType) {
+    /** Application message */
+    MessageType[MessageType["ApplicationMessage"] = 0] = "ApplicationMessage";
+    /** Application error */
+    MessageType[MessageType["ApplicationError"] = 1] = "ApplicationError";
+    /** Ping */
+    MessageType[MessageType["Ping"] = 2] = "Ping";
+    /** Ping response */
+    MessageType[MessageType["PingResponse"] = 3] = "PingResponse";
+    /** Connect */
+    MessageType[MessageType["Connect"] = 4] = "Connect";
+    /**
+     * Connect acknowledgement
+     *
+     * If the {@link MessageFlags.ConnectionAccepted ConnectionAccepted} flag is not present, the connection has been rejected.
+     */
+    MessageType[MessageType["ConnectAck"] = 5] = "ConnectAck";
+    /**
+     * Protocol error
+     */
+    MessageType[MessageType["ProtocolError"] = 6] = "ProtocolError";
+    /**
+     * Internal error
+     */
+    MessageType[MessageType["InternalError"] = 7] = "InternalError";
+})(MessageType = exports.MessageType || (exports.MessageType = {}));
+/** @internal */
+function mapPodHeadersToJSHeaders(headers) {
+    return Array.from(headers, (header) => {
+        return new Header(header.name, header.type, header.value);
+    });
+}
+/** @internal */
+function mapPodMessageToJSMessage(message) {
+    let jsMessage = {
+        type: message.type,
+        flags: message.flags,
+        payload: message.payload
+    };
+    if (message.headers) {
+        jsMessage.headers = mapPodHeadersToJSHeaders(message.headers);
+    }
+    return jsMessage;
+}
+/**
+ * @internal
+ *
+ * While not strictly necessary, the single-threaded nature of JS execution allows us to easily apply some
+ * rigid constraints to the public API calls of our event stream objects.  This in turn reduces the complexity of the
+ * binding cases we need to consider.
+ *
+ * This state value is the primary means by which we add and enforce these constraints to connection objects.
+ *
+ * Constraints enforced in the managed binding:
+ *
+ *  (1) close() may only be called once.  Once it has been called, nothing else may be called.
+ *  (2) newStream() and sendMessage() may only be called after successful connection establishment and before the
+ *      connection has been closed.
+ *  (3) connect() may only be called once.  Combined with (1) and (2), this means that if connect() is called, it must
+ *      be the first thing called.
+ */
+var ClientConnectionState;
+(function (ClientConnectionState) {
+    ClientConnectionState[ClientConnectionState["None"] = 0] = "None";
+    ClientConnectionState[ClientConnectionState["Connecting"] = 1] = "Connecting";
+    ClientConnectionState[ClientConnectionState["Connected"] = 2] = "Connected";
+    ClientConnectionState[ClientConnectionState["Disconnected"] = 3] = "Disconnected";
+    ClientConnectionState[ClientConnectionState["Closed"] = 4] = "Closed";
+})(ClientConnectionState || (ClientConnectionState = {}));
+/**
+ * Wrapper for a network connection that fulfills the client-side event stream RPC protocol contract.
+ *
+ * The user **must** call close() on a connection once finished with it.  Once close() has been called, no more events
+ * will be emitted and all public API invocations will trigger an exception.
+ */
+class ClientConnection extends (0, native_resource_1.NativeResourceMixin)(event_1.BufferedEventEmitter) {
+    /**
+     * Configures and creates a new ClientConnection instance
+     *
+     * @param config configuration options for the event stream connection
+     */
+    constructor(config) {
+        if (config === undefined) {
+            throw new error_1.CrtError("Invalid configuration passed to eventstream ClientConnection constructor");
+        }
+        super();
+        this.state = ClientConnectionState.None;
+        this._super(binding_1.default.event_stream_client_connection_new(this, config, (connection, errorCode) => { ClientConnection._s_on_disconnect(connection, errorCode); }, (connection, message) => { ClientConnection._s_on_protocol_message(connection, message); }, config.socketOptions ? config.socketOptions.native_handle() : null, config.tlsCtx ? config.tlsCtx.native_handle() : null));
+    }
+    /**
+     * Shuts down the connection (if active) and begins the process to release native resources associated with it by
+     * having the native binding release the only reference to the extern object representing the connection.  Once
+     * close() has been called, no more events will be emitted and all public API invocations will trigger an exception.
+     *
+     * Ultimately, the native resources will not be released until the connection has fully shut down and that
+     * shutdown event has reached the libuv event loop.
+     *
+     * This function **must** be called for every ClientConnection instance or native resources will leak.
+     */
+    close() {
+        if (this.state != ClientConnectionState.Closed) {
+            this.state = ClientConnectionState.Closed;
+            // invoke native binding close
+            binding_1.default.event_stream_client_connection_close(this.native_handle());
+        }
+    }
+    /**
+     * Attempts to open a network connection to the configured remote endpoint.  Returned promise will be fulfilled if
+     * the transport-level connection is successfully established, and rejected otherwise.
+     *
+     * connect() may only be called once.
+     */
+    connect(options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let cleanupCancelListener = undefined;
+            let connectPromise = new Promise((resolve, reject) => {
+                if (!options) {
+                    reject(new error_1.CrtError("Invalid options passed to event stream ClientConnection.connect"));
+                    return;
+                }
+                if (this.state != ClientConnectionState.None) {
+                    reject(new error_1.CrtError(`Event stream connection in a state (${this.state}) where connect() is not allowed.`));
+                    return;
+                }
+                this.state = ClientConnectionState.Connecting;
+                if (options.cancelController) {
+                    let cancel = () => {
+                        reject(new error_1.CrtError(`Event stream connection connect() cancelled by external request.`));
+                        setImmediate(() => { this.close(); });
+                    };
+                    cleanupCancelListener = options.cancelController.addListener(cancel);
+                    if (!cleanupCancelListener) {
+                        return;
+                    }
+                }
+                function curriedPromiseCallback(connection, errorCode) {
+                    return ClientConnection._s_on_connection_setup(resolve, reject, connection, errorCode);
+                }
+                try {
+                    binding_1.default.event_stream_client_connection_connect(this.native_handle(), curriedPromiseCallback);
+                }
+                catch (e) {
+                    this.state = ClientConnectionState.Disconnected;
+                    reject(e);
+                }
+            });
+            return promise.makeSelfCleaningPromise(connectPromise, cleanupCancelListener);
+        });
+    }
+    /**
+     * Attempts to send an event stream protocol message over an open connection.
+     *
+     * @param options configuration -- including the message itself -- for sending a protocol message
+     *
+     * Returns a promise that will be fulfilled when the message is successfully flushed to the wire, and rejected if
+     * an error occurs prior to that point.
+     */
+    sendProtocolMessage(options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let cleanupCancelListener = undefined;
+            let sendProtocolMessagePromise = new Promise((resolve, reject) => {
+                try {
+                    if (!options) {
+                        reject(new error_1.CrtError("Invalid options passed to event stream ClientConnection.sendProtocolMessage"));
+                        return;
+                    }
+                    if (!this.isConnected()) {
+                        reject(new error_1.CrtError(`Event stream connection in a state (${this.state}) where sending protocol messages is not allowed.`));
+                        return;
+                    }
+                    if (options.cancelController) {
+                        let cancel = () => {
+                            reject(new error_1.CrtError(`Event stream connection sendProtocolMessage() cancelled by external request.`));
+                            setImmediate(() => { this.close(); });
+                        };
+                        cleanupCancelListener = options.cancelController.addListener(cancel);
+                        if (!cleanupCancelListener) {
+                            return;
+                        }
+                    }
+                    // invoke native binding send message;
+                    function curriedPromiseCallback(errorCode) {
+                        return ClientConnection._s_on_connection_send_protocol_message_completion(resolve, reject, errorCode);
+                    }
+                    // invoke native binding send message;
+                    binding_1.default.event_stream_client_connection_send_protocol_message(this.native_handle(), options, curriedPromiseCallback);
+                }
+                catch (e) {
+                    reject(e);
+                }
+            });
+            return promise.makeSelfCleaningPromise(sendProtocolMessagePromise, cleanupCancelListener);
+        });
+    }
+    /**
+     * Returns true if the connection is currently open and ready-to-use, false otherwise.
+     *
+     * Internal note: Our notion of "connected" is intentionally not an invocation of
+     * aws_event_stream_rpc_client_connection_is_open() (whose status is an out-of-sync race condition vs. our
+     * well-defined client state)
+     */
+    isConnected() {
+        return this.state == ClientConnectionState.Connected;
+    }
+    /**
+     * Creates a new stream within the connection.
+     */
+    newStream() {
+        if (!this.isConnected()) {
+            throw new error_1.CrtError(`Event stream connection in a state (${this.state}) where creating new streams is forbidden.`);
+        }
+        return new ClientStream(this);
+    }
+    on(event, listener) {
+        super.on(event, listener);
+        return this;
+    }
+    static _s_on_connection_setup(resolve, reject, connection, errorCode) {
+        if (errorCode == 0 && connection.state == ClientConnectionState.Connecting) {
+            connection.state = ClientConnectionState.Connected;
+            resolve();
+        }
+        else {
+            if (connection.state != ClientConnectionState.Closed) {
+                connection.state = ClientConnectionState.Disconnected;
+            }
+            reject(io.error_code_to_string(errorCode));
+        }
+    }
+    static _s_on_disconnect(connection, errorCode) {
+        if (connection.state != ClientConnectionState.Closed) {
+            connection.state = ClientConnectionState.Disconnected;
+        }
+        process.nextTick(() => {
+            connection.emit('disconnection', { errorCode: errorCode });
+        });
+    }
+    static _s_on_protocol_message(connection, message) {
+        process.nextTick(() => {
+            connection.emit('protocolMessage', { message: mapPodMessageToJSMessage(message) });
+        });
+    }
+    static _s_on_connection_send_protocol_message_completion(resolve, reject, errorCode) {
+        if (errorCode == 0) {
+            resolve();
+        }
+        else {
+            reject(io.error_code_to_string(errorCode));
+        }
+    }
+}
+exports.ClientConnection = ClientConnection;
+/**
+ * Event emitted when the connection is closed for any reason.
+ *
+ * Listener type: {@link DisconnectionListener}
+ *
+ * @event
+ */
+ClientConnection.DISCONNECTION = 'disconnection';
+/**
+ * Event emitted when a protocol message is received from the remote endpoint
+ *
+ * Listener type: {@link MessageListener}
+ *
+ * @event
+ */
+ClientConnection.PROTOCOL_MESSAGE = 'protocolMessage';
+/**
+ * @internal
+ *
+ * While not strictly necessary, the single-threaded nature of JS execution allows us to easily apply some
+ * rigid constraints to the public API calls of our event stream objects.  This in turn reduces the complexity of the
+ * binding cases we need to consider.
+ *
+ * This state value is the primary means by which we add and enforce these constraints to stream objects.
+ *
+ * Constraints enforced in the managed binding:
+ *
+ *  (1) close() may only be called once.  Once it has been called, nothing else may be called.
+ *  (2) sendMessage() may only be called after successful stream activation and before the
+ *      stream has been closed.
+ *  (3) activate() may only be called once.  Combined with (1) and (2), this means that if activate() is called, it must
+ *      be the first thing called.
+ */
+var ClientStreamState;
+(function (ClientStreamState) {
+    ClientStreamState[ClientStreamState["None"] = 0] = "None";
+    ClientStreamState[ClientStreamState["Activating"] = 1] = "Activating";
+    ClientStreamState[ClientStreamState["Activated"] = 2] = "Activated";
+    ClientStreamState[ClientStreamState["Ended"] = 3] = "Ended";
+    ClientStreamState[ClientStreamState["Closed"] = 4] = "Closed";
+})(ClientStreamState || (ClientStreamState = {}));
+/**
+ * Wrapper for an individual stream within an eventstream connection.
+ *
+ * The user **must** call close() on a stream once finished with it.  Once close() has been called, no more events
+ * will be emitted and all public API invocations will trigger an exception.
+ */
+class ClientStream extends (0, native_resource_1.NativeResourceMixin)(event_1.BufferedEventEmitter) {
+    constructor(connection) {
+        super();
+        this._super(binding_1.default.event_stream_client_stream_new(this, connection.native_handle(), (stream) => { ClientStream._s_on_stream_ended(stream); }, (stream, message) => { ClientStream._s_on_stream_message(stream, message); }));
+        this.state = ClientStreamState.None;
+    }
+    /**
+     * Shuts down the stream (if active) and begins the process to release native resources associated with it by
+     * having the native binding release the only reference to the extern object representing the stream.  Once
+     * close() has been called, no more events will be emitted and all public API invocations will trigger an exception.
+     *
+     * Ultimately, the native resources will not be released until the native stream has fully shut down and that
+     * shutdown event has reached the libuv event loop.
+     *
+     * This function **must** be called for every ClientStream instance or native resources will leak.
+     */
+    close() {
+        if (this.state != ClientStreamState.Closed) {
+            this.state = ClientStreamState.Closed;
+            binding_1.default.event_stream_client_stream_close(this.native_handle());
+        }
+    }
+    /**
+     * Activates the stream, allowing it to start sending and receiving messages.  The promise completes when
+     * the activation message has been written to the wire.
+     *
+     * activate() may only be called once.
+     *
+     * @param options -- configuration data for stream activation, including operation name and initial message
+     */
+    activate(options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let cleanupCancelListener = undefined;
+            let activatePromise = new Promise((resolve, reject) => {
+                try {
+                    if (this.state != ClientStreamState.None) {
+                        reject(new error_1.CrtError(`Event stream in a state (${this.state}) where activation is not allowed.`));
+                        return;
+                    }
+                    /*
+                     * Intentionally check this after the state check (so closed streams do not reach here).
+                     * Intentionally mutate state the same way a failed synchronous call to native activate does.
+                     */
+                    if (options === undefined) {
+                        this.state = ClientStreamState.Ended;
+                        reject(new error_1.CrtError("Invalid options passed to ClientStream.activate"));
+                        return;
+                    }
+                    this.state = ClientStreamState.Activating;
+                    if (options.cancelController) {
+                        let cancel = () => {
+                            reject(new error_1.CrtError(`Event stream activate() cancelled by external request.`));
+                            setImmediate(() => { this.close(); });
+                        };
+                        cleanupCancelListener = options.cancelController.addListener(cancel);
+                        if (!cleanupCancelListener) {
+                            return;
+                        }
+                    }
+                    function curriedPromiseCallback(stream, errorCode) {
+                        return ClientStream._s_on_stream_activated(resolve, reject, stream, errorCode);
+                    }
+                    binding_1.default.event_stream_client_stream_activate(this.native_handle(), options, curriedPromiseCallback);
+                }
+                catch (e) {
+                    this.state = ClientStreamState.Ended;
+                    reject(e);
+                }
+            });
+            return promise.makeSelfCleaningPromise(activatePromise, cleanupCancelListener);
+        });
+    }
+    /**
+     * Attempts to send an event stream message.
+     *
+     * @param options configuration -- including the message itself -- for sending a message
+     *
+     * Returns a promise that will be fulfilled when the message is successfully flushed to the wire, and rejected if
+     * an error occurs prior to that point.
+     */
+    sendMessage(options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let cleanupCancelListener = undefined;
+            let sendMessagePromise = new Promise((resolve, reject) => {
+                try {
+                    if (!options) {
+                        reject(new error_1.CrtError("Invalid options passed to ClientStream.sendMessage"));
+                        return;
+                    }
+                    if (this.state != ClientStreamState.Activated) {
+                        reject(new error_1.CrtError(`Event stream in a state (${this.state}) where sending messages is not allowed.`));
+                        return;
+                    }
+                    if (options.cancelController) {
+                        let cancel = () => {
+                            reject(new error_1.CrtError(`Event stream sendMessage() cancelled by external request.`));
+                            setImmediate(() => { this.close(); });
+                        };
+                        cleanupCancelListener = options.cancelController.addListener(cancel);
+                        if (!cleanupCancelListener) {
+                            return;
+                        }
+                    }
+                    function curriedPromiseCallback(errorCode) {
+                        return ClientStream._s_on_stream_send_message_completion(resolve, reject, errorCode);
+                    }
+                    // invoke native binding send message;
+                    binding_1.default.event_stream_client_stream_send_message(this.native_handle(), options, curriedPromiseCallback);
+                }
+                catch (e) {
+                    reject(e);
+                }
+            });
+            return promise.makeSelfCleaningPromise(sendMessagePromise, cleanupCancelListener);
+        });
+    }
+    /**
+     * Returns true if the stream is currently active and ready-to-use, false otherwise.
+     */
+    isActive() {
+        return this.state == ClientStreamState.Activated;
+    }
+    on(event, listener) {
+        super.on(event, listener);
+        return this;
+    }
+    static _s_on_stream_activated(resolve, reject, stream, errorCode) {
+        if (errorCode == 0 && stream.state == ClientStreamState.Activating) {
+            stream.state = ClientStreamState.Activated;
+            resolve();
+        }
+        else {
+            if (stream.state != ClientStreamState.Closed) {
+                stream.state = ClientStreamState.Ended;
+            }
+            reject(io.error_code_to_string(errorCode));
+        }
+    }
+    static _s_on_stream_send_message_completion(resolve, reject, errorCode) {
+        if (errorCode == 0) {
+            resolve();
+        }
+        else {
+            reject(io.error_code_to_string(errorCode));
+        }
+    }
+    static _s_on_stream_ended(stream) {
+        process.nextTick(() => {
+            stream.emit(ClientStream.ENDED, {});
+        });
+    }
+    static _s_on_stream_message(stream, message) {
+        process.nextTick(() => {
+            stream.emit(ClientStream.MESSAGE, { message: mapPodMessageToJSMessage(message) });
+        });
+    }
+}
+exports.ClientStream = ClientStream;
+/**
+ * Event emitted when the stream is shut down for any reason.
+ *
+ * Listener type: {@link StreamEndedListener}
+ *
+ * @event
+ */
+ClientStream.ENDED = 'ended';
+/**
+ * Event emitted when a stream message is received from the remote endpoint
+ *
+ * Listener type: {@link MessageListener}
+ *
+ * @event
+ */
+ClientStream.MESSAGE = 'message';
+//# sourceMappingURL=eventstream.js.map
+
+/***/ }),
+
+/***/ 2332:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.unmarshalInt64BigintFromBuffer = exports.marshalInt64BigintAsBuffer = exports.MIN_INT64 = exports.MAX_INT64 = exports.MIN_INT32 = exports.MAX_INT32 = exports.MIN_INT16 = exports.MAX_INT16 = exports.MIN_INT8 = exports.MAX_INT8 = void 0;
+const error_1 = __nccwpck_require__(9440);
+/*
+* Limits for header value validation
+*/
+exports.MAX_INT8 = 127;
+exports.MIN_INT8 = -128;
+exports.MAX_INT16 = 32767;
+exports.MIN_INT16 = -32768;
+exports.MAX_INT32 = 2147483647;
+exports.MIN_INT32 = -2147483648;
+exports.MAX_INT64 = BigInt("9223372036854775807");
+exports.MIN_INT64 = BigInt("-9223372036854775808");
+const MAX_UINT8_AS_BIGINT = BigInt("256");
+/** @internal */
+function marshalInt64BigintAsBuffer(value) {
+    if (value < exports.MIN_INT64 || value > exports.MAX_INT64) {
+        throw new error_1.CrtError("marshalInt64BigintAsBuffer expects a value that can fit in 8 bytes");
+    }
+    let buffer = new Uint8Array(8);
+    /* encode the integer as a twos-complement byte sequence */
+    if (value < 0) {
+        value = -value - BigInt(1);
+        for (let i = 0; i < 8; ++i) {
+            buffer[i] = 255 - Number(value % MAX_UINT8_AS_BIGINT);
+            value /= MAX_UINT8_AS_BIGINT;
+        }
+    }
+    else {
+        for (let i = 0; i < 8; ++i) {
+            buffer[i] = Number(value % MAX_UINT8_AS_BIGINT);
+            value /= MAX_UINT8_AS_BIGINT;
+        }
+    }
+    return buffer;
+}
+exports.marshalInt64BigintAsBuffer = marshalInt64BigintAsBuffer;
+/** @internal */
+function unmarshalInt64BigintFromBuffer(buffer) {
+    let value = BigInt(0);
+    let byteView = new Uint8Array(buffer);
+    if (byteView.length != 8) {
+        throw new error_1.CrtError("unmarshalInt64BigintFromBuffer expects a byte buffer of length 8");
+    }
+    let shift = BigInt(1);
+    let isNegative = (byteView[7] & 0x80) != 0;
+    /* encoding is two's-complement, so treat negative and non-negative differently */
+    if (isNegative) {
+        for (let i = 0; i < byteView.length; ++i) {
+            let byteValue = BigInt(255 - byteView[i]);
+            value += (byteValue * shift);
+            shift *= MAX_UINT8_AS_BIGINT;
+        }
+        value += BigInt(1);
+        value = -value;
+    }
+    else {
+        for (let i = 0; i < byteView.length; ++i) {
+            let byteValue = BigInt(byteView[i]);
+            value += (byteValue * shift);
+            shift *= MAX_UINT8_AS_BIGINT;
+        }
+    }
+    return value;
+}
+exports.unmarshalInt64BigintFromBuffer = unmarshalInt64BigintFromBuffer;
+//# sourceMappingURL=eventstream_utils.js.map
+
+/***/ }),
+
+/***/ 2960:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.HttpClientConnectionManager = exports.HttpClientStream = exports.HttpStream = exports.HttpClientConnection = exports.HttpProxyOptions = exports.HttpProxyConnectionType = exports.HttpConnection = exports.HttpRequest = exports.HttpHeaders = exports.HttpProxyAuthenticationType = void 0;
+/**
+ *
+ * A module containing support for creating http connections and making requests on them.
+ *
+ * @packageDocumentation
+ * @module http
+ * @mergeTarget
+ */
+const binding_1 = __importDefault(__nccwpck_require__(4739));
+const native_resource_1 = __nccwpck_require__(7990);
+const error_1 = __nccwpck_require__(9440);
+const http_1 = __nccwpck_require__(2926);
+/** @internal */
+var http_2 = __nccwpck_require__(2926);
+Object.defineProperty(exports, "HttpProxyAuthenticationType", ({ enumerable: true, get: function () { return http_2.HttpProxyAuthenticationType; } }));
+const event_1 = __nccwpck_require__(8468);
+/**
+ * @category HTTP
+ */
+exports.HttpHeaders = binding_1.default.HttpHeaders;
+/** @internal */
+const nativeHttpRequest = binding_1.default.HttpRequest;
+/**
+ * @category HTTP
+ */
+class HttpRequest extends nativeHttpRequest {
+    constructor(method, path, headers, body) {
+        super(method, path, headers, body === null || body === void 0 ? void 0 : body.native_handle());
+    }
+}
+exports.HttpRequest = HttpRequest;
+/**
+ * Base class for HTTP connections
+ *
+ * @category HTTP
+ */
+class HttpConnection extends (0, native_resource_1.NativeResourceMixin)(event_1.BufferedEventEmitter) {
+    constructor(native_handle) {
+        super();
+        this._super(native_handle);
+    }
+    /**
+     * Close the connection.
+     * Shutdown is asynchronous. This call has no effect if the connection is already
+     * closing.
+     */
+    close() {
+        binding_1.default.http_connection_close(this.native_handle());
+    }
+    // Overridden to allow uncorking on ready
+    on(event, listener) {
+        super.on(event, listener);
+        if (event == 'connect') {
+            process.nextTick(() => {
+                this.uncork();
+            });
+        }
+        return this;
+    }
+}
+exports.HttpConnection = HttpConnection;
+/**
+ * Emitted when the connection is connected and ready to start streams
+ *
+ * @event
+ */
+HttpConnection.CONNECT = 'connect';
+/**
+ * Emitted when an error occurs on the connection
+ *
+ * @event
+ */
+HttpConnection.ERROR = 'error';
+/**
+ * Emitted when the connection has completed
+ *
+ * @event
+ */
+HttpConnection.CLOSE = 'close';
+/**
+ * Proxy connection types.
+ *
+ * The original behavior was to make a tunneling connection if TLS was used, and a forwarding connection if it was not.
+ * There are legitimate use cases for plaintext tunneling connections, and so the implicit behavior has now
+ * been replaced by this setting, with a default that maps to the old behavior.
+ *
+ * @category HTTP
+ */
+var HttpProxyConnectionType;
+(function (HttpProxyConnectionType) {
+    /**
+     * (Default for backwards compatibility).  If Tls options are supplied then the connection will be a tunneling
+     * one, otherwise it will be a forwarding one.
+     */
+    HttpProxyConnectionType[HttpProxyConnectionType["Legacy"] = 0] = "Legacy";
+    /**
+     * Establish a forwarding-based connection with the proxy.  Tls is not allowed in this case.
+     */
+    HttpProxyConnectionType[HttpProxyConnectionType["Forwarding"] = 1] = "Forwarding";
+    /**
+     * Establish a tunneling-based connection with the proxy.
+     */
+    HttpProxyConnectionType[HttpProxyConnectionType["Tunneling"] = 2] = "Tunneling";
+})(HttpProxyConnectionType = exports.HttpProxyConnectionType || (exports.HttpProxyConnectionType = {}));
+;
+/**
+ * Proxy options for HTTP clients.
+ *
+ * @category HTTP
+ */
+class HttpProxyOptions extends http_1.CommonHttpProxyOptions {
+    /**
+     *
+     * @param host_name Name of the proxy server to connect through
+     * @param port Port number of the proxy server to connect through
+     * @param auth_method Type of proxy authentication to use. Default is {@link HttpProxyAuthenticationType.None}
+     * @param auth_username Username to use when `auth_type` is {@link HttpProxyAuthenticationType.Basic}
+     * @param auth_password Password to use when `auth_type` is {@link HttpProxyAuthenticationType.Basic}
+     * @param tls_opts Optional TLS connection options for the connection to the proxy host.
+     *                 Must be distinct from the {@link TlsConnectionOptions} provided to
+     *                 the HTTP connection
+     * @param connection_type Optional Type of connection to make.  If not specified,
+     *                 {@link HttpProxyConnectionType.Legacy} will be used.
+     */
+    constructor(host_name, port, auth_method = http_1.HttpProxyAuthenticationType.None, auth_username, auth_password, tls_opts, connection_type) {
+        super(host_name, port, auth_method, auth_username, auth_password);
+        this.tls_opts = tls_opts;
+        this.connection_type = connection_type;
+    }
+    /** @internal */
+    create_native_handle() {
+        return binding_1.default.http_proxy_options_new(this.host_name, this.port, this.auth_method, this.auth_username, this.auth_password, this.tls_opts ? this.tls_opts.native_handle() : undefined, this.connection_type ? this.connection_type : HttpProxyConnectionType.Legacy);
+    }
+}
+exports.HttpProxyOptions = HttpProxyOptions;
+/**
+ * Represents an HTTP connection from a client to a server
+ *
+ * @category HTTP
+ */
+class HttpClientConnection extends HttpConnection {
+    _on_setup(native_handle, error_code) {
+        if (error_code) {
+            this.emit('error', new error_1.CrtError(error_code));
+            return;
+        }
+        this.emit('connect');
+    }
+    _on_shutdown(native_handle, error_code) {
+        if (error_code) {
+            this.emit('error', new error_1.CrtError(error_code));
+            return;
+        }
+        this.emit('close');
+    }
+    /** Asynchronously establish a new HttpClientConnection.
+     * @param bootstrap Client bootstrap to use when initiating socket connection.  Leave undefined to use the
+     *          default system-wide bootstrap (recommended).
+     * @param host_name Host to connect to
+     * @param port Port to connect to on host
+     * @param socket_options Socket options
+     * @param tls_opts Optional TLS connection options
+     * @param proxy_options Optional proxy options
+    */
+    constructor(bootstrap, host_name, port, socket_options, tls_opts, proxy_options, handle) {
+        if (socket_options == null || socket_options == undefined) {
+            throw new error_1.CrtError("HttpClientConnection constructor: socket_options not defined");
+        }
+        super(handle
+            ? handle
+            : binding_1.default.http_connection_new(bootstrap != null ? bootstrap.native_handle() : null, (handle, error_code) => {
+                this._on_setup(handle, error_code);
+            }, (handle, error_code) => {
+                this._on_shutdown(handle, error_code);
+            }, host_name, port, socket_options.native_handle(), tls_opts ? tls_opts.native_handle() : undefined, proxy_options ? proxy_options.create_native_handle() : undefined));
+        this.bootstrap = bootstrap;
+        this.socket_options = socket_options;
+        this.tls_opts = tls_opts;
+    }
+    /**
+     * Create {@link HttpClientStream} to carry out the request/response exchange.
+     *
+     * NOTE: The stream sends no data until :meth:`HttpClientStream.activate()`
+     * is called. Call {@link HttpStream.activate} when you're ready for
+     * callbacks and events to fire.
+     * @param request - The HttpRequest to attempt on this connection
+     * @returns A new stream that will deliver events for the request
+     */
+    request(request) {
+        let stream;
+        const on_response_impl = (status_code, headers) => {
+            stream._on_response(status_code, headers);
+        };
+        const on_body_impl = (data) => {
+            stream._on_body(data);
+        };
+        const on_complete_impl = (error_code) => {
+            stream._on_complete(error_code);
+        };
+        const native_handle = binding_1.default.http_stream_new(this.native_handle(), request, on_complete_impl, on_response_impl, on_body_impl);
+        return stream = new HttpClientStream(native_handle, this, request);
+    }
+}
+exports.HttpClientConnection = HttpClientConnection;
+/**
+ * Represents a single http message exchange (request/response) in HTTP/1.1. In H2, it may
+ * also represent a PUSH_PROMISE followed by the accompanying response.
+ *
+ * NOTE: Binding either the ready or response event will uncork any buffered events and start
+ * event delivery
+ *
+ * @category HTTP
+ */
+class HttpStream extends (0, native_resource_1.NativeResourceMixin)(event_1.BufferedEventEmitter) {
+    constructor(native_handle, connection) {
+        super();
+        this.connection = connection;
+        this._super(native_handle);
+        this.cork();
+    }
+    /**
+     * Begin sending the request.
+     *
+     * The stream does nothing until this is called. Call activate() when you
+     * are ready for its callbacks and events to fire.
+     */
+    activate() {
+        binding_1.default.http_stream_activate(this.native_handle());
+    }
+    /**
+     * Closes and ends all communication on this stream. Called automatically after the 'end'
+     * event is delivered. Calling this manually is only necessary if you wish to terminate
+     * communication mid-request/response.
+     */
+    close() {
+        binding_1.default.http_stream_close(this.native_handle());
+    }
+    /** @internal */
+    _on_body(data) {
+        this.emit('data', data);
+    }
+    /** @internal */
+    _on_complete(error_code) {
+        if (error_code) {
+            this.emit('error', new error_1.CrtError(error_code));
+            this.close();
+            return;
+        }
+        // schedule death after end is delivered
+        this.on('end', () => {
+            this.close();
+        });
+        this.emit('end');
+    }
+}
+exports.HttpStream = HttpStream;
+/**
+ * Stream that sends a request and receives a response.
+ *
+ * Create an HttpClientStream with {@link HttpClientConnection.request}.
+ *
+ * NOTE: The stream sends no data until {@link HttpStream.activate} is called.
+ * Call {@link HttpStream.activate} when you're ready for callbacks and events to fire.
+ *
+ * @category HTTP
+ */
+class HttpClientStream extends HttpStream {
+    constructor(native_handle, connection, request) {
+        super(native_handle, connection);
+        this.request = request;
+    }
+    /**
+     * HTTP status code returned from the server.
+     * @return Either the status code, or undefined if the server response has not arrived yet.
+     */
+    status_code() {
+        return this.response_status_code;
+    }
+    // Overridden to allow uncorking on ready and response
+    on(event, listener) {
+        super.on(event, listener);
+        if (event == 'response') {
+            process.nextTick(() => {
+                this.uncork();
+            });
+        }
+        return this;
+    }
+    /** @internal */
+    _on_response(status_code, header_array) {
+        this.response_status_code = status_code;
+        let headers = new exports.HttpHeaders(header_array);
+        this.emit('response', status_code, headers);
+    }
+}
+exports.HttpClientStream = HttpClientStream;
+/**
+ * Emitted when the http response headers have arrived.
+ *
+ * @event
+ */
+HttpClientStream.RESPONSE = 'response';
+/**
+ * Emitted when http response data is available.
+ *
+ * @event
+ */
+HttpClientStream.DATA = 'data';
+/**
+ * Emitted when an error occurs in stream processing
+ *
+ * @event
+ */
+HttpClientStream.ERROR = 'error';
+/**
+ * Emitted when the stream has completed
+ *
+ * @event
+ */
+HttpClientStream.END = 'end';
+/**
+ * Emitted when inline headers are delivered while communicating over H2
+ *
+ * @event
+ */
+HttpClientStream.HEADERS = 'headers';
+/**
+ * Creates, manages, and vends connections to a given host/port endpoint
+ *
+ * @category HTTP
+ */
+class HttpClientConnectionManager extends native_resource_1.NativeResource {
+    /**
+     * @param bootstrap Client bootstrap to use when initiating socket connections.  Leave undefined to use the
+     *          default system-wide bootstrap (recommended).
+     * @param host Host to connect to
+     * @param port Port to connect to on host
+     * @param max_connections Maximum number of connections to pool
+     * @param initial_window_size Optional initial window size
+     * @param socket_options Socket options to use when initiating socket connections
+     * @param tls_opts Optional TLS connection options
+     * @param proxy_options Optional proxy options
+     */
+    constructor(bootstrap, host, port, max_connections, initial_window_size, socket_options, tls_opts, proxy_options) {
+        if (socket_options == null || socket_options == undefined) {
+            throw new error_1.CrtError("HttpClientConnectionManager constructor: socket_options not defined");
+        }
+        super(binding_1.default.http_connection_manager_new(bootstrap != null ? bootstrap.native_handle() : null, host, port, max_connections, initial_window_size, socket_options.native_handle(), tls_opts ? tls_opts.native_handle() : undefined, proxy_options ? proxy_options.create_native_handle() : undefined, undefined /* on_shutdown */));
+        this.bootstrap = bootstrap;
+        this.host = host;
+        this.port = port;
+        this.max_connections = max_connections;
+        this.initial_window_size = initial_window_size;
+        this.socket_options = socket_options;
+        this.tls_opts = tls_opts;
+        this.proxy_options = proxy_options;
+        this.connections = new Map();
+    }
+    /**
+    * Vends a connection from the pool
+    * @returns A promise that results in an HttpClientConnection. When done with the connection, return
+    *          it via {@link release}
+    */
+    acquire() {
+        return new Promise((resolve, reject) => {
+            // Only create 1 connection in JS/TS from each native connection
+            const on_acquired = (handle, error_code) => {
+                if (error_code) {
+                    reject(new error_1.CrtError(error_code));
+                    return;
+                }
+                let connection = this.connections.get(handle);
+                if (!connection) {
+                    connection = new HttpClientConnection(this.bootstrap, this.host, this.port, this.socket_options, this.tls_opts, this.proxy_options, handle);
+                    this.connections.set(handle, connection);
+                    connection.on('close', () => {
+                        this.connections.delete(handle);
+                    });
+                }
+                resolve(connection);
+            };
+            binding_1.default.http_connection_manager_acquire(this.native_handle(), on_acquired);
+        });
+    }
+    /**
+     * Returns an unused connection to the pool
+     * @param connection - The connection to return
+    */
+    release(connection) {
+        if (connection == null || connection == undefined) {
+            throw new error_1.CrtError("HttpClientConnectionManager release: connection not defined");
+        }
+        binding_1.default.http_connection_manager_release(this.native_handle(), connection.native_handle());
+    }
+    /** Closes all connections and rejects all pending requests */
+    close() {
+        binding_1.default.http_connection_manager_close(this.native_handle());
+    }
+}
+exports.HttpClientConnectionManager = HttpClientConnectionManager;
+//# sourceMappingURL=http.js.map
+
+/***/ }),
+
+/***/ 1528:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Pkcs11Lib = exports.TlsConnectionOptions = exports.ServerTlsContext = exports.ClientTlsContext = exports.TlsContext = exports.TlsContextOptions = exports.SocketOptions = exports.ClientBootstrap = exports.InputStream = exports.is_alpn_available = exports.enable_logging = exports.error_code_to_name = exports.error_code_to_string = exports.SocketDomain = exports.SocketType = exports.TlsVersion = exports.LogLevel = exports.setLogLevel = void 0;
+/**
+ *
+ * A module containing a grab bag of support for core network I/O functionality, including sockets, TLS, DNS, logging,
+ * error handling, streams, and connection -> thread mapping.
+ *
+ * Categories include:
+ * - Network: socket configuration
+ * - TLS: tls configuration
+ * - Logging: logging controls and configuration
+ * - IO: everything else
+ *
+ * @packageDocumentation
+ * @module io
+ * @mergeTarget
+ */
+const binding_1 = __importDefault(__nccwpck_require__(4739));
+const native_resource_1 = __nccwpck_require__(7990);
+const io_1 = __nccwpck_require__(5674);
+// Do not re-export the logging functions in common; they are package-private
+var io_2 = __nccwpck_require__(5674);
+Object.defineProperty(exports, "setLogLevel", ({ enumerable: true, get: function () { return io_2.setLogLevel; } }));
+Object.defineProperty(exports, "LogLevel", ({ enumerable: true, get: function () { return io_2.LogLevel; } }));
+Object.defineProperty(exports, "TlsVersion", ({ enumerable: true, get: function () { return io_2.TlsVersion; } }));
+Object.defineProperty(exports, "SocketType", ({ enumerable: true, get: function () { return io_2.SocketType; } }));
+Object.defineProperty(exports, "SocketDomain", ({ enumerable: true, get: function () { return io_2.SocketDomain; } }));
+const error_1 = __nccwpck_require__(9440);
+/**
+ * Convert a native error code into a human-readable string
+ * @param error_code - An error code returned from a native API call, or delivered
+ * via callback.
+ * @returns Long-form description of the error
+ * @see CrtError
+ *
+ * nodejs only.
+ *
+ * @category System
+ */
+function error_code_to_string(error_code) {
+    return binding_1.default.error_code_to_string(error_code);
+}
+exports.error_code_to_string = error_code_to_string;
+/**
+ * Convert a native error code into a human-readable identifier
+ * @param error_code - An error code returned from a native API call, or delivered
+ * via callback.
+ * @return error name as a string
+ * @see CrtError
+ *
+ * nodejs only.
+ *
+ * @category System
+ */
+function error_code_to_name(error_code) {
+    return binding_1.default.error_code_to_name(error_code);
+}
+exports.error_code_to_name = error_code_to_name;
+/**
+ * Enables logging of the native AWS CRT libraries.
+ * @param level - The logging level to filter to. It is not possible to log less than WARN.
+ *
+ * nodejs only.
+ * @category Logging
+ */
+function enable_logging(level) {
+    binding_1.default.io_logging_enable(level);
+    (0, io_1.setLogLevel)(level);
+}
+exports.enable_logging = enable_logging;
+/**
+ * Returns true if ALPN is available on this platform natively
+ * @return true if ALPN is supported natively, false otherwise
+ *
+ * nodejs only.
+ * @category TLS
+*/
+function is_alpn_available() {
+    return binding_1.default.is_alpn_available();
+}
+exports.is_alpn_available = is_alpn_available;
+/**
+ * Wraps a ```Readable``` for reading by native code, used to stream
+ *  data into the AWS CRT libraries.
+ *
+ * nodejs only.
+ * @category IO
+ */
+class InputStream extends native_resource_1.NativeResource {
+    constructor(source) {
+        super(binding_1.default.io_input_stream_new(16 * 1024));
+        this.source = source;
+        this.source.on('data', (data) => {
+            data = Buffer.isBuffer(data) ? data : Buffer.from(data.toString());
+            binding_1.default.io_input_stream_append(this.native_handle(), data);
+        });
+        this.source.on('end', () => {
+            binding_1.default.io_input_stream_append(this.native_handle(), undefined);
+        });
+    }
+}
+exports.InputStream = InputStream;
+/**
+ * Represents native resources required to bootstrap a client connection
+ * Things like a host resolver, event loop group, etc. There should only need
+ * to be 1 of these per application, in most cases.
+ *
+ * nodejs only.
+ * @category IO
+ */
+class ClientBootstrap extends native_resource_1.NativeResource {
+    constructor() {
+        super(binding_1.default.io_client_bootstrap_new());
+    }
+}
+exports.ClientBootstrap = ClientBootstrap;
+/**
+ * Standard Berkeley socket style options.
+ *
+ * nodejs only.
+ * @category Network
+*/
+class SocketOptions extends native_resource_1.NativeResource {
+    constructor(type = io_1.SocketType.STREAM, domain = io_1.SocketDomain.IPV6, connect_timeout_ms = 5000, keepalive = false, keep_alive_interval_sec = 0, keep_alive_timeout_sec = 0, keep_alive_max_failed_probes = 0) {
+        super(binding_1.default.io_socket_options_new(type, domain, connect_timeout_ms, keep_alive_interval_sec, keep_alive_timeout_sec, keep_alive_max_failed_probes, keepalive));
+    }
+}
+exports.SocketOptions = SocketOptions;
+/**
+ * Options for creating a {@link ClientTlsContext} or {@link ServerTlsContext}.
+ *
+ * nodejs only.
+ * @category TLS
+ */
+class TlsContextOptions {
+    constructor() {
+        /** Minimum version of TLS to support. Uses OS/system default if unspecified. */
+        this.min_tls_version = io_1.TlsVersion.Default;
+        /** List of ALPN protocols to be used on platforms which support ALPN */
+        this.alpn_list = [];
+        /**
+         * In client mode, this turns off x.509 validation. Don't do this unless you are testing.
+         * It is much better to just override the default trust store and pass the self-signed
+         * certificate as the ca_file argument.
+         *
+         * In server mode (ServerTlsContext), this defaults to false. If you want to enforce mutual TLS on the server,
+         * set this to true.
+         */
+        this.verify_peer = true;
+    }
+    /**
+     * Overrides the default system trust store.
+     * @param ca_dirpath - Only used on Unix-style systems where all trust anchors are
+     * stored in a directory (e.g. /etc/ssl/certs).
+     * @param ca_filepath - Single file containing all trust CAs, in PEM format
+     */
+    override_default_trust_store_from_path(ca_dirpath, ca_filepath) {
+        this.ca_dirpath = ca_dirpath;
+        this.ca_filepath = ca_filepath;
+    }
+    /**
+     * Overrides the default system trust store.
+     * @param certificate_authority - String containing all trust CAs, in PEM format
+     */
+    override_default_trust_store(certificate_authority) {
+        this.certificate_authority = certificate_authority;
+    }
+    /**
+     * Create options configured for mutual TLS in client mode,
+     * with client certificate and private key provided as in-memory strings.
+     * @param certificate - Client certificate file contents, in PEM format
+     * @param private_key - Client private key file contents, in PEM format
+     *
+     * @returns newly configured TlsContextOptions object
+     */
+    static create_client_with_mtls(certificate, private_key) {
+        let opt = new TlsContextOptions();
+        opt.certificate = certificate;
+        opt.private_key = private_key;
+        opt.verify_peer = true;
+        return opt;
+    }
+    /**
+     * Create options configured for mutual TLS in client mode,
+     * with client certificate and private key provided via filepath.
+     * @param certificate_filepath - Path to client certificate, in PEM format
+     * @param private_key_filepath - Path to private key, in PEM format
+     *
+     * @returns newly configured TlsContextOptions object
+     */
+    static create_client_with_mtls_from_path(certificate_filepath, private_key_filepath) {
+        let opt = new TlsContextOptions();
+        opt.certificate_filepath = certificate_filepath;
+        opt.private_key_filepath = private_key_filepath;
+        opt.verify_peer = true;
+        return opt;
+    }
+    /**
+     * Create options for mutual TLS in client mode,
+     * with client certificate and private key bundled in a single PKCS#12 file.
+     * @param pkcs12_filepath - Path to PKCS#12 file containing client certificate and private key.
+     * @param pkcs12_password - PKCS#12 password
+     *
+     * @returns newly configured TlsContextOptions object
+    */
+    static create_client_with_mtls_pkcs12_from_path(pkcs12_filepath, pkcs12_password) {
+        let opt = new TlsContextOptions();
+        opt.pkcs12_filepath = pkcs12_filepath;
+        opt.pkcs12_password = pkcs12_password;
+        opt.verify_peer = true;
+        return opt;
+    }
+    /**
+     * @deprecated Renamed [[create_client_with_mtls_pkcs12_from_path]]
+     */
+    static create_client_with_mtls_pkcs_from_path(pkcs12_filepath, pkcs12_password) {
+        return this.create_client_with_mtls_pkcs12_from_path(pkcs12_filepath, pkcs12_password);
+    }
+    /**
+     * Create options configured for mutual TLS in client mode,
+     * using a PKCS#11 library for private key operations.
+     *
+     * NOTE: This configuration only works on Unix devices.
+     *
+     * @param options - PKCS#11 options
+     *
+     * @returns newly configured TlsContextOptions object
+     */
+    static create_client_with_mtls_pkcs11(options) {
+        let opt = new TlsContextOptions();
+        opt.pkcs11_options = options;
+        opt.verify_peer = true;
+        return opt;
+    }
+    /**
+     * Create options configured for mutual TLS in client mode,
+     * using a certificate in a Windows certificate store.
+     *
+     * NOTE: Windows only.
+     *
+     * @param certificate_path - Path to certificate in a Windows certificate store.
+     *      The path must use backslashes and end with the certificate's thumbprint.
+     *      Example: `CurrentUser\MY\A11F8A9B5DF5B98BA3508FBCA575D09570E0D2C6`
+     */
+    static create_client_with_mtls_windows_cert_store_path(certificate_path) {
+        let opt = new TlsContextOptions();
+        opt.windows_cert_store_path = certificate_path;
+        opt.verify_peer = true;
+        return opt;
+    }
+    /**
+     * Creates TLS context with peer verification disabled, along with a certificate and private key
+     * @param certificate_filepath - Path to certificate, in PEM format
+     * @param private_key_filepath - Path to private key, in PEM format
+     *
+     * @returns newly configured TlsContextOptions object
+     */
+    static create_server_with_mtls_from_path(certificate_filepath, private_key_filepath) {
+        let opt = new TlsContextOptions();
+        opt.certificate_filepath = certificate_filepath;
+        opt.private_key_filepath = private_key_filepath;
+        opt.verify_peer = false;
+        return opt;
+    }
+    /**
+     * Creates TLS context with peer verification disabled, along with a certificate and private key
+     * in PKCS#12 format
+     * @param pkcs12_filepath - Path to certificate, in PKCS#12 format
+     * @param pkcs12_password - PKCS#12 Password
+     *
+     * @returns newly configured TlsContextOptions object
+     */
+    static create_server_with_mtls_pkcs_from_path(pkcs12_filepath, pkcs12_password) {
+        let opt = new TlsContextOptions();
+        opt.pkcs12_filepath = pkcs12_filepath;
+        opt.pkcs12_password = pkcs12_password;
+        opt.verify_peer = false;
+        return opt;
+    }
+}
+exports.TlsContextOptions = TlsContextOptions;
+/**
+ * Abstract base TLS context used for client/server TLS communications over sockets.
+ *
+ * @see ClientTlsContext
+ * @see ServerTlsContext
+ *
+ * nodejs only.
+ * @category TLS
+ */
+class TlsContext extends native_resource_1.NativeResource {
+    constructor(ctx_opt) {
+        if (ctx_opt == null || ctx_opt == undefined) {
+            throw new error_1.CrtError("TlsContext constructor: ctx_opt not defined");
+        }
+        super(binding_1.default.io_tls_ctx_new(ctx_opt.min_tls_version, ctx_opt.ca_filepath, ctx_opt.ca_dirpath, ctx_opt.certificate_authority, (ctx_opt.alpn_list && ctx_opt.alpn_list.length > 0) ? ctx_opt.alpn_list.join(';') : undefined, ctx_opt.certificate_filepath, ctx_opt.certificate, ctx_opt.private_key_filepath, ctx_opt.private_key, ctx_opt.pkcs12_filepath, ctx_opt.pkcs12_password, ctx_opt.pkcs11_options, ctx_opt.windows_cert_store_path, ctx_opt.verify_peer));
+    }
+}
+exports.TlsContext = TlsContext;
+/**
+ * TLS context used for client TLS communications over sockets. If no
+ * options are supplied, the context will default to enabling peer verification
+ * only.
+ *
+ * nodejs only.
+ * @category TLS
+ */
+class ClientTlsContext extends TlsContext {
+    constructor(ctx_opt) {
+        if (!ctx_opt) {
+            ctx_opt = new TlsContextOptions();
+            ctx_opt.verify_peer = true;
+        }
+        super(ctx_opt);
+    }
+}
+exports.ClientTlsContext = ClientTlsContext;
+/**
+ * TLS context used for server TLS communications over sockets. If no
+ * options are supplied, the context will default to disabling peer verification
+ * only.
+ *
+ * nodejs only.
+ * @category TLS
+ */
+class ServerTlsContext extends TlsContext {
+    constructor(ctx_opt) {
+        if (!ctx_opt) {
+            ctx_opt = new TlsContextOptions();
+            ctx_opt.verify_peer = false;
+        }
+        super(ctx_opt);
+    }
+}
+exports.ServerTlsContext = ServerTlsContext;
+/**
+ * TLS options that are unique to a given connection using a shared TlsContext.
+ *
+ * nodejs only.
+ * @category TLS
+ */
+class TlsConnectionOptions extends native_resource_1.NativeResource {
+    constructor(tls_ctx, server_name, alpn_list = []) {
+        if (tls_ctx == null || tls_ctx == undefined) {
+            throw new error_1.CrtError("TlsConnectionOptions constructor: tls_ctx not defined");
+        }
+        super(binding_1.default.io_tls_connection_options_new(tls_ctx.native_handle(), server_name, (alpn_list && alpn_list.length > 0) ? alpn_list.join(';') : undefined));
+        this.tls_ctx = tls_ctx;
+        this.server_name = server_name;
+        this.alpn_list = alpn_list;
+    }
+}
+exports.TlsConnectionOptions = TlsConnectionOptions;
+/**
+ * Handle to a loaded PKCS#11 library.
+ *
+ * For most use cases, a single instance of Pkcs11Lib should be used
+ * for the lifetime of your application.
+ *
+ * nodejs only.
+ * @category TLS
+ */
+class Pkcs11Lib extends native_resource_1.NativeResource {
+    /**
+     * @param path - Path to PKCS#11 library.
+     * @param behavior - Specifies how `C_Initialize()` and `C_Finalize()`
+     *                   will be called on the PKCS#11 library.
+     */
+    constructor(path, behavior = Pkcs11Lib.InitializeFinalizeBehavior.DEFAULT) {
+        super(binding_1.default.io_pkcs11_lib_new(path, behavior));
+    }
+    /**
+     * Release the PKCS#11 library immediately, without waiting for the GC.
+     */
+    close() {
+        binding_1.default.io_pkcs11_lib_close(this.native_handle());
+    }
+}
+exports.Pkcs11Lib = Pkcs11Lib;
+(function (Pkcs11Lib) {
+    /**
+     * Controls `C_Initialize()` and `C_Finalize()` are called on the PKCS#11 library.
+     */
+    let InitializeFinalizeBehavior;
+    (function (InitializeFinalizeBehavior) {
+        /**
+         * Default behavior that accommodates most use cases.
+         *
+         * `C_Initialize()` is called on creation, and "already-initialized"
+         * errors are ignored. `C_Finalize()` is never called, just in case
+         * another part of your application is still using the PKCS#11 library.
+         */
+        InitializeFinalizeBehavior[InitializeFinalizeBehavior["DEFAULT"] = 0] = "DEFAULT";
+        /**
+         * Skip calling `C_Initialize()` and `C_Finalize()`.
+         *
+         * Use this if your application has already initialized the PKCS#11 library,
+         * and you do not want `C_Initialize()` called again.
+         */
+        InitializeFinalizeBehavior[InitializeFinalizeBehavior["OMIT"] = 1] = "OMIT";
+        /**
+         * `C_Initialize()` is called on creation and `C_Finalize()` is called on cleanup.
+         *
+         * If `C_Initialize()` reports that's it's already initialized, this is
+         * treated as an error. Use this if you need perfect cleanup (ex: running
+         * valgrind with --leak-check).
+         */
+        InitializeFinalizeBehavior[InitializeFinalizeBehavior["STRICT"] = 2] = "STRICT";
+    })(InitializeFinalizeBehavior = Pkcs11Lib.InitializeFinalizeBehavior || (Pkcs11Lib.InitializeFinalizeBehavior = {}));
+})(Pkcs11Lib = exports.Pkcs11Lib || (exports.Pkcs11Lib = {}));
+//# sourceMappingURL=io.js.map
+
+/***/ }),
+
+/***/ 1158:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+/**
+ * Module for AWS IoT MQTT client configuration and connection establishment.
+ *
+ * @packageDocumentation
+ * @module iot
+ * @mergeTarget
+ */
+__exportStar(__nccwpck_require__(5828), exports);
+__exportStar(__nccwpck_require__(8982), exports);
+//# sourceMappingURL=iot.js.map
+
+/***/ }),
+
+/***/ 9130:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MqttClientConnection = exports.MqttClient = exports.MqttWill = exports.QoS = exports.HttpProxyOptions = void 0;
+/**
+ *
+ * A module containing support for mqtt connection establishment and operations.
+ *
+ * @packageDocumentation
+ * @module mqtt
+ * @mergeTarget
+ */
+const binding_1 = __importDefault(__nccwpck_require__(4739));
+const native_resource_1 = __nccwpck_require__(7990);
+const event_1 = __nccwpck_require__(8468);
+const crt = __importStar(__nccwpck_require__(9986));
+const error_1 = __nccwpck_require__(9440);
+const io = __importStar(__nccwpck_require__(1528));
+var http_1 = __nccwpck_require__(2960);
+Object.defineProperty(exports, "HttpProxyOptions", ({ enumerable: true, get: function () { return http_1.HttpProxyOptions; } }));
+const mqtt_1 = __nccwpck_require__(8064);
+var mqtt_2 = __nccwpck_require__(8064);
+Object.defineProperty(exports, "QoS", ({ enumerable: true, get: function () { return mqtt_2.QoS; } }));
+Object.defineProperty(exports, "MqttWill", ({ enumerable: true, get: function () { return mqtt_2.MqttWill; } }));
+/**
+ * MQTT client
+ *
+ * @category MQTT
+ */
+class MqttClient extends native_resource_1.NativeResource {
+    /**
+     * @param bootstrap The {@link io.ClientBootstrap} to use for socket connections.  Leave undefined to use the
+     *          default system-wide bootstrap (recommended).
+     */
+    constructor(bootstrap = undefined) {
+        super(binding_1.default.mqtt_client_new(bootstrap != null ? bootstrap.native_handle() : null));
+        this.bootstrap = bootstrap;
+    }
+    /**
+     * Creates a new {@link MqttClientConnection}
+     * @param config Configuration for the mqtt connection
+     * @returns A new connection
+     */
+    new_connection(config) {
+        return new MqttClientConnection(this, config);
+    }
+}
+exports.MqttClient = MqttClient;
+;
+/**
+ * MQTT client connection
+ *
+ * @category MQTT
+ */
+class MqttClientConnection extends (0, native_resource_1.NativeResourceMixin)(event_1.BufferedEventEmitter) {
+    /**
+     * @param client The client that owns this connection
+     * @param config The configuration for this connection
+     */
+    constructor(client, config) {
+        super();
+        this.client = client;
+        this.config = config;
+        if (config == null || config == undefined) {
+            throw new error_1.CrtError("MqttClientConnection constructor: config not defined");
+        }
+        // If there is a will, ensure that its payload is normalized to a DataView
+        const will = config.will ?
+            {
+                topic: config.will.topic,
+                qos: config.will.qos,
+                payload: crt.normalize_payload(config.will.payload),
+                retain: config.will.retain
+            }
+            : undefined;
+        /** clamp reconnection time out values */
+        var min_sec = mqtt_1.DEFAULT_RECONNECT_MIN_SEC;
+        var max_sec = mqtt_1.DEFAULT_RECONNECT_MAX_SEC;
+        if (config.reconnect_min_sec) {
+            min_sec = config.reconnect_min_sec;
+            // clamp max, in case they only passed in min
+            max_sec = Math.max(min_sec, max_sec);
+        }
+        if (config.reconnect_max_sec) {
+            max_sec = config.reconnect_max_sec;
+            // clamp min, in case they only passed in max (or passed in min > max)
+            min_sec = Math.min(min_sec, max_sec);
+        }
+        if (client == undefined || client == null) {
+            throw new error_1.CrtError("MqttClientConnection constructor: client not defined");
+        }
+        if (config.socket_options == undefined || config.socket_options == null) {
+            throw new error_1.CrtError("MqttClientConnection constructor: socket_options in configuration not defined");
+        }
+        this._super(binding_1.default.mqtt_client_connection_new(client.native_handle(), (error_code) => { this._on_connection_interrupted(error_code); }, (return_code, session_present) => { this._on_connection_resumed(return_code, session_present); }, (return_code, session_present) => { this._on_connection_success(return_code, session_present); }, (error_code) => { this._on_connection_failure(error_code); }, config.tls_ctx ? config.tls_ctx.native_handle() : null, will, config.username, config.password, config.use_websocket, config.proxy_options ? config.proxy_options.create_native_handle() : undefined, config.websocket_handshake_transform, min_sec, max_sec));
+        this.tls_ctx = config.tls_ctx;
+        binding_1.default.mqtt_client_connection_on_message(this.native_handle(), this._on_any_publish.bind(this));
+        binding_1.default.mqtt_client_connection_on_closed(this.native_handle(), this._on_connection_closed.bind(this));
+        /*
+         * Failed mqtt operations (which is normal) emit error events as well as rejecting the original promise.
+         * By installing a default error handler here we help prevent common issues where operation failures bring
+         * the whole program to an end because a handler wasn't installed.  Programs that install their own handler
+         * will be unaffected.
+         */
+        this.on('error', (error) => { });
+    }
+    close() {
+        binding_1.default.mqtt_client_connection_close(this.native_handle());
+    }
+    // Overridden to allow uncorking on ready
+    on(event, listener) {
+        super.on(event, listener);
+        if (event == 'connect') {
+            process.nextTick(() => {
+                this.uncork();
+            });
+        }
+        return this;
+    }
+    /**
+     * Open the actual connection to the server (async).
+     * @returns A Promise which completes whether the connection succeeds or fails.
+     *          If connection fails, the Promise will reject with an exception.
+     *          If connection succeeds, the Promise will return a boolean that is
+     *          true for resuming an existing session, or false if the session is new
+     */
+    connect() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => {
+                reject = this._reject(reject);
+                if (this.config.socket_options == null || this.config.socket_options == undefined) {
+                    throw new error_1.CrtError("MqttClientConnection connect: socket_options in configuration not defined");
+                }
+                try {
+                    binding_1.default.mqtt_client_connection_connect(this.native_handle(), this.config.client_id, this.config.host_name, this.config.port, this.config.socket_options.native_handle(), this.config.keep_alive, this.config.ping_timeout, this.config.protocol_operation_timeout, this.config.clean_session, this._on_connect_callback.bind(this, resolve, reject));
+                }
+                catch (e) {
+                    reject(e);
+                }
+            });
+        });
+    }
+    /**
+     * The connection will automatically reconnect when disconnected, removing the need for this function.
+     * To cease automatic reconnection attempts, call {@link disconnect}.
+     * @deprecated
+     */
+    reconnect() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => {
+                reject = this._reject(reject);
+                try {
+                    binding_1.default.mqtt_client_connection_reconnect(this.native_handle(), this._on_connect_callback.bind(this, resolve, reject));
+                }
+                catch (e) {
+                    reject(e);
+                }
+            });
+        });
+    }
+    /**
+     * Publish message (async).
+     * If the device is offline, the PUBLISH packet will be sent once the connection resumes.
+     *
+     * @param topic Topic name
+     * @param payload Contents of message
+     * @param qos Quality of Service for delivering this message
+     * @param retain If true, the server will store the message and its QoS so that it can be
+     *               delivered to future subscribers whose subscriptions match the topic name
+     * @returns Promise which returns a {@link MqttRequest} which will contain the packet id of
+     *          the PUBLISH packet.
+     *
+     * * For QoS 0, completes as soon as the packet is sent.
+     * * For QoS 1, completes when PUBACK is received.
+     * * For QoS 2, completes when PUBCOMP is received.
+     */
+    publish(topic, payload, qos, retain = false) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // Skip payload since it can be several different types
+            if (typeof (topic) !== 'string') {
+                return Promise.reject("topic is not a string");
+            }
+            if (typeof (qos) !== 'number') {
+                return Promise.reject("qos is not a number");
+            }
+            if (typeof (retain) !== 'boolean') {
+                return Promise.reject("retain is not a boolean");
+            }
+            return new Promise((resolve, reject) => {
+                reject = this._reject(reject);
+                try {
+                    binding_1.default.mqtt_client_connection_publish(this.native_handle(), topic, crt.normalize_payload(payload), qos, retain, this._on_puback_callback.bind(this, resolve, reject));
+                }
+                catch (e) {
+                    reject(e);
+                }
+            });
+        });
+    }
+    /**
+     * Subscribe to a topic filter (async).
+     * The client sends a SUBSCRIBE packet and the server responds with a SUBACK.
+     *
+     * subscribe() may be called while the device is offline, though the async
+     * operation cannot complete successfully until the connection resumes.
+     *
+     * Once subscribed, `callback` is invoked each time a message matching
+     * the `topic` is received. It is possible for such messages to arrive before
+     * the SUBACK is received.
+     *
+     * @param topic Subscribe to this topic filter, which may include wildcards
+     * @param qos Maximum requested QoS that server may use when sending messages to the client.
+     *            The server may grant a lower QoS in the SUBACK
+     * @param on_message Optional callback invoked when message received.
+     * @returns Promise which returns a {@link MqttSubscribeRequest} which will contain the
+     *          result of the SUBSCRIBE. The Promise resolves when a SUBACK is returned
+     *          from the server or is rejected when an exception occurs.
+     */
+    subscribe(topic, qos, on_message) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (typeof (topic) !== 'string') {
+                return Promise.reject("topic is not a string");
+            }
+            if (typeof (qos) !== 'number') {
+                return Promise.reject("qos is not a number");
+            }
+            return new Promise((resolve, reject) => {
+                reject = this._reject(reject);
+                try {
+                    binding_1.default.mqtt_client_connection_subscribe(this.native_handle(), topic, qos, on_message, this._on_suback_callback.bind(this, resolve, reject));
+                }
+                catch (e) {
+                    reject(e);
+                }
+            });
+        });
+    }
+    /**
+     * Unsubscribe from a topic filter (async).
+     * The client sends an UNSUBSCRIBE packet, and the server responds with an UNSUBACK.
+     * @param topic The topic filter to unsubscribe from. May contain wildcards.
+     * @returns Promise wihch returns a {@link MqttRequest} which will contain the packet id
+     *          of the UNSUBSCRIBE packet being acknowledged. Promise is resolved when an
+     *          UNSUBACK is received from the server or is rejected when an exception occurs.
+     */
+    unsubscribe(topic) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (typeof (topic) !== 'string') {
+                return Promise.reject("topic is not a string");
+            }
+            return new Promise((resolve, reject) => {
+                reject = this._reject(reject);
+                try {
+                    binding_1.default.mqtt_client_connection_unsubscribe(this.native_handle(), topic, this._on_unsuback_callback.bind(this, resolve, reject));
+                }
+                catch (e) {
+                    reject(e);
+                }
+            });
+        });
+    }
+    /**
+     * Close the connection (async).
+     *
+     * Will free all native resources, rendering the connection unusable after the disconnect() call.
+     *
+     * @returns Promise which completes when the connection is closed.
+    */
+    disconnect() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => {
+                reject = this._reject(reject);
+                try {
+                    binding_1.default.mqtt_client_connection_disconnect(this.native_handle(), this._on_disconnect_callback.bind(this, resolve));
+                }
+                catch (e) {
+                    reject(e);
+                }
+            });
+        });
+    }
+    /**
+     * Queries a small set of numerical statistics about the current state of the connection's operation queue
+     *
+     * @group Node-only
+     */
+    getOperationalStatistics() {
+        return binding_1.default.mqtt_client_connection_get_queue_statistics(this.native_handle());
+    }
+    /**
+     * Queries a small set of numerical statistics about the current state of the connection's operation queue
+     * @deprecated use getOperationalStatistics instead
+     *
+     * @group Node-only
+     */
+    getQueueStatistics() {
+        return this.getOperationalStatistics();
+    }
+    // Wrap a promise rejection with a function that will also emit the error as an event
+    _reject(reject) {
+        return (reason) => {
+            reject(reason);
+            process.nextTick(() => {
+                this.emit('error', new error_1.CrtError(reason));
+            });
+        };
+    }
+    _on_connection_failure(error_code) {
+        let failureCallbackData = { error: new error_1.CrtError(error_code) };
+        this.emit('connection_failure', failureCallbackData);
+    }
+    _on_connection_success(return_code, session_present) {
+        let successCallbackData = { session_present: session_present, reason_code: return_code };
+        this.emit('connection_success', successCallbackData);
+    }
+    _on_connection_interrupted(error_code) {
+        this.emit('interrupt', new error_1.CrtError(error_code));
+    }
+    _on_connection_resumed(return_code, session_present) {
+        this.emit('resume', return_code, session_present);
+    }
+    _on_any_publish(topic, payload, dup, qos, retain) {
+        this.emit('message', topic, payload, dup, qos, retain);
+    }
+    _on_connection_closed() {
+        let closedCallbackData = {};
+        this.emit('closed', closedCallbackData);
+        /**
+         * We call close() here instead of on disconnect because on_close is always called AFTER disconnect
+         * but if we call close() before, then we cannot emit the closed callback.
+         */
+        this.close();
+    }
+    _on_connect_callback(resolve, reject, error_code, return_code, session_present) {
+        if (error_code == 0 && return_code == 0) {
+            resolve(session_present);
+            this.emit('connect', session_present);
+        }
+        else if (error_code != 0) {
+            reject("Failed to connect: " + io.error_code_to_string(error_code));
+        }
+        else {
+            reject("Server rejected connection.");
+        }
+    }
+    _on_puback_callback(resolve, reject, packet_id, error_code) {
+        if (error_code == 0) {
+            resolve({ packet_id });
+        }
+        else {
+            reject("Failed to publish: " + io.error_code_to_string(error_code));
+        }
+    }
+    _on_suback_callback(resolve, reject, packet_id, topic, qos, error_code) {
+        if (error_code == 0) {
+            resolve({ packet_id, topic, qos, error_code });
+        }
+        else {
+            reject("Failed to subscribe: " + io.error_code_to_string(error_code));
+        }
+    }
+    _on_unsuback_callback(resolve, reject, packet_id, error_code) {
+        if (error_code == 0) {
+            resolve({ packet_id });
+        }
+        else {
+            reject("Failed to unsubscribe: " + io.error_code_to_string(error_code));
+        }
+    }
+    _on_disconnect_callback(resolve) {
+        resolve();
+        this.emit('disconnect');
+        /** NOTE: We are NOT calling close() here but instead calling it at
+         * on_closed because it is always called after disconnect */
+    }
+}
+exports.MqttClientConnection = MqttClientConnection;
+/**
+ * Emitted when the connection successfully establishes itself for the first time
+ *
+ * @event
+ */
+MqttClientConnection.CONNECT = 'connect';
+/**
+ * Emitted when connection has disconnected successfully.
+ *
+ * @event
+ */
+MqttClientConnection.DISCONNECT = 'disconnect';
+/**
+ * Emitted when an error occurs.  The error will contain the error
+ * code and message.
+ *
+ * @event
+ */
+MqttClientConnection.ERROR = 'error';
+/**
+ * Emitted when the connection is dropped unexpectedly. The error will contain the error
+ * code and message.  The underlying mqtt implementation will attempt to reconnect.
+ *
+ * @event
+ */
+MqttClientConnection.INTERRUPT = 'interrupt';
+/**
+ * Emitted when the connection reconnects (after an interrupt). Only triggers on connections after the initial one.
+ *
+ * @event
+ */
+MqttClientConnection.RESUME = 'resume';
+/**
+ * Emitted when any MQTT publish message arrives.
+ *
+ * @event
+ */
+MqttClientConnection.MESSAGE = 'message';
+/**
+ * Emitted on every successful connect and reconnect.
+ * Will contain a number with the connection reason code and
+ * a boolean indicating whether the connection resumed a session.
+ *
+ * @event
+ */
+MqttClientConnection.CONNECTION_SUCCESS = 'connection_success';
+/**
+ * Emitted on an unsuccessful connect and reconnect.
+ * Will contain an error code indicating the reason for the unsuccessful connection.
+ *
+ * @event
+ */
+MqttClientConnection.CONNECTION_FAILURE = 'connection_failure';
+/**
+ * Emitted when the MQTT connection was disconnected and shutdown successfully.
+ *
+ * @event
+ */
+MqttClientConnection.CLOSED = 'closed';
+//# sourceMappingURL=mqtt.js.map
+
+/***/ }),
+
+/***/ 5795:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Mqtt5Client = exports.ClientExtendedValidationAndFlowControl = exports.ClientOperationQueueBehavior = exports.HttpProxyOptions = void 0;
+/**
+ * Node.js specific MQTT5 client implementation
+ *
+ * [MQTT5 Client User Guide](https://www.github.com/awslabs/aws-crt-nodejs/blob/main/MQTT5-UserGuide.md)
+ *
+ * @packageDocumentation
+ * @module mqtt5
+ * @mergeTarget
+ *
+ */
+const binding_1 = __importDefault(__nccwpck_require__(4739));
+const native_resource_1 = __nccwpck_require__(7990);
+const event_1 = __nccwpck_require__(8468);
+const io = __importStar(__nccwpck_require__(1528));
+const mqtt_shared = __importStar(__nccwpck_require__(9986));
+const error_1 = __nccwpck_require__(9440);
+var http_1 = __nccwpck_require__(2960);
+Object.defineProperty(exports, "HttpProxyOptions", ({ enumerable: true, get: function () { return http_1.HttpProxyOptions; } }));
+__exportStar(__nccwpck_require__(9485), exports);
+__exportStar(__nccwpck_require__(9008), exports);
+;
+/**
+ * Controls how disconnects affect the queued and in-progress operations tracked by the client.  Also controls
+ * how operations are handled while the client is not connected.  In particular, if the client is not connected,
+ * then any operation that would be failed on disconnect (according to these rules) will be rejected.
+ */
+var ClientOperationQueueBehavior;
+(function (ClientOperationQueueBehavior) {
+    /** Same as FailQos0PublishOnDisconnect */
+    ClientOperationQueueBehavior[ClientOperationQueueBehavior["Default"] = 0] = "Default";
+    /**
+     * Re-queues QoS 1+ publishes on disconnect; un-acked publishes go to the front while unprocessed publishes stay
+     * in place.  All other operations (QoS 0 publishes, subscribe, unsubscribe) are failed.
+     */
+    ClientOperationQueueBehavior[ClientOperationQueueBehavior["FailNonQos1PublishOnDisconnect"] = 1] = "FailNonQos1PublishOnDisconnect";
+    /**
+     * QoS 0 publishes that are not complete at the time of disconnection are failed.  Un-acked QoS 1+ publishes are
+     * re-queued at the head of the line for immediate retransmission on a session resumption.  All other operations
+     * are requeued in original order behind any retransmissions.
+     */
+    ClientOperationQueueBehavior[ClientOperationQueueBehavior["FailQos0PublishOnDisconnect"] = 2] = "FailQos0PublishOnDisconnect";
+    /**
+     * All operations that are not complete at the time of disconnection are failed, except operations that
+     * the MQTT5 spec requires to be retransmitted (un-acked QoS1+ publishes).
+     */
+    ClientOperationQueueBehavior[ClientOperationQueueBehavior["FailAllOnDisconnect"] = 3] = "FailAllOnDisconnect";
+})(ClientOperationQueueBehavior = exports.ClientOperationQueueBehavior || (exports.ClientOperationQueueBehavior = {}));
+/**
+ * Additional controls for client behavior with respect to operation validation and flow control; these checks
+ * go beyond the MQTT5 spec to respect limits of specific MQTT brokers.
+ */
+var ClientExtendedValidationAndFlowControl;
+(function (ClientExtendedValidationAndFlowControl) {
+    /**
+     * Do not do any additional validation or flow control
+     */
+    ClientExtendedValidationAndFlowControl[ClientExtendedValidationAndFlowControl["None"] = 0] = "None";
+    /**
+     * Apply additional client-side validation and operational flow control that respects the
+     * default AWS IoT Core limits.
+     *
+     * Currently applies the following additional validation:
+     *
+     * 1. No more than 8 subscriptions per SUBSCRIBE packet
+     * 1. Topics and topic filters have a maximum of 7 slashes (8 segments), not counting any AWS rules prefix
+     * 1. Topics must be <= 256 bytes in length
+     * 1. Client id must be <= 128 bytes in length
+     *
+     * Also applies the following flow control:
+     *
+     * 1. Outbound throughput throttled to 512KB/s
+     * 1. Outbound publish TPS throttled to 100
+     */
+    ClientExtendedValidationAndFlowControl[ClientExtendedValidationAndFlowControl["AwsIotCoreDefaults"] = 1] = "AwsIotCoreDefaults";
+})(ClientExtendedValidationAndFlowControl = exports.ClientExtendedValidationAndFlowControl || (exports.ClientExtendedValidationAndFlowControl = {}));
+/**
+ * Node.js specific MQTT5 client implementation
+ *
+ * Not all parts of the MQTT5 spec are supported. We currently do not support:
+ *
+ * * AUTH packets and the authentication fields in the CONNECT packet
+ * * QoS 2
+ *
+ * [MQTT5 Client User Guide](https://www.github.com/awslabs/aws-crt-nodejs/blob/main/MQTT5-UserGuide.md)
+ *
+ * This client is based on native resources.  When finished with the client, you must call close() to dispose of
+ * them or they will leak.
+ *
+ */
+class Mqtt5Client extends (0, native_resource_1.NativeResourceMixin)(event_1.BufferedEventEmitter) {
+    /**
+     * Client constructor
+     *
+     * @param config The configuration for this client
+     */
+    constructor(config) {
+        super();
+        this._super(binding_1.default.mqtt5_client_new(this, config, (client) => { Mqtt5Client._s_on_stopped(client); }, (client) => { Mqtt5Client._s_on_attempting_connect(client); }, (client, connack, settings) => { Mqtt5Client._s_on_connection_success(client, connack, settings); }, (client, errorCode, connack) => { Mqtt5Client._s_on_connection_failure(client, new error_1.CrtError(errorCode), connack); }, (client, errorCode, disconnect) => { Mqtt5Client._s_on_disconnection(client, new error_1.CrtError(errorCode), disconnect); }, (client, message) => { Mqtt5Client._s_on_message_received(client, message); }, config.clientBootstrap ? config.clientBootstrap.native_handle() : null, config.socketOptions ? config.socketOptions.native_handle() : null, config.tlsCtx ? config.tlsCtx.native_handle() : null, config.httpProxyOptions ? config.httpProxyOptions.create_native_handle() : null));
+    }
+    /**
+     * Triggers cleanup of native resources associated with the MQTT5 client.  Once this has been invoked, callbacks
+     * and events are not guaranteed to be received.
+     *
+     * This must be called when finished with a client; otherwise, native resources will leak.  It is not safe
+     * to invoke any further operations on the client after close() has been called.
+     *
+     * For a running client, safe and proper shutdown can be accomplished by
+     *
+     * ```ts
+     * const stopped = once(client, "stopped");
+     * client.stop();
+     * await stopped;
+     * client.close();
+     * ```
+     *
+     * This is an asynchronous operation.
+     *
+     * @group Node-only
+     */
+    close() {
+        binding_1.default.mqtt5_client_close(this.native_handle());
+    }
+    /**
+     * Notifies the MQTT5 client that you want it to maintain connectivity to the configured endpoint.
+     * The client will attempt to stay connected using the properties of the reconnect-related parameters
+     * in the mqtt5 client configuration.
+     *
+     * This is an asynchronous operation.
+     */
+    start() {
+        binding_1.default.mqtt5_client_start(this.native_handle());
+    }
+    /**
+     * Notifies the MQTT5 client that you want it to end connectivity to the configured endpoint, disconnecting any
+     * existing connection and halting reconnection attempts.
+     *
+     * This is an asynchronous operation.  Once the process completes, no further events will be emitted until the client
+     * has {@link start} invoked.  Invoking {@link start start()} after a {@link stop stop()} will always result in a
+     * new MQTT session.
+     *
+     * @param disconnectPacket (optional) properties of a DISCONNECT packet to send as part of the shutdown process
+     */
+    stop(disconnectPacket) {
+        binding_1.default.mqtt5_client_stop(this.native_handle(), disconnectPacket);
+    }
+    /**
+     * Subscribe to one or more topic filters by queuing a SUBSCRIBE packet to be sent to the server.
+     *
+     * @param packet SUBSCRIBE packet to send to the server
+     * @returns a promise that will be rejected with an error or resolved with the SUBACK response
+     */
+    subscribe(packet) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => {
+                function curriedPromiseCallback(client, errorCode, suback) {
+                    return Mqtt5Client._s_on_suback_callback(resolve, reject, client, errorCode, suback);
+                }
+                try {
+                    binding_1.default.mqtt5_client_subscribe(this.native_handle(), packet, curriedPromiseCallback);
+                }
+                catch (e) {
+                    reject(e);
+                }
+            });
+        });
+    }
+    /**
+     * Unsubscribe from one or more topic filters by queuing an UNSUBSCRIBE packet to be sent to the server.
+     *
+     * @param packet UNSUBSCRIBE packet to send to the server
+     * @returns a promise that will be rejected with an error or resolved with the UNSUBACK response
+     */
+    unsubscribe(packet) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => {
+                function curriedPromiseCallback(client, errorCode, unsuback) {
+                    return Mqtt5Client._s_on_unsuback_callback(resolve, reject, client, errorCode, unsuback);
+                }
+                try {
+                    binding_1.default.mqtt5_client_unsubscribe(this.native_handle(), packet, curriedPromiseCallback);
+                }
+                catch (e) {
+                    reject(e);
+                }
+            });
+        });
+    }
+    /**
+     * Send a message to subscribing clients by queuing a PUBLISH packet to be sent to the server.
+     *
+     * @param packet PUBLISH packet to send to the server
+     * @returns a promise that will be rejected with an error or resolved with the PUBACK response (QoS 1) or
+     * undefined (QoS 0)
+     */
+    publish(packet) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => {
+                if (packet && packet.payload) {
+                    packet.payload = mqtt_shared.normalize_payload(packet.payload);
+                }
+                function curriedPromiseCallback(client, errorCode, result) {
+                    return Mqtt5Client._s_on_puback_callback(resolve, reject, client, errorCode, result);
+                }
+                try {
+                    binding_1.default.mqtt5_client_publish(this.native_handle(), packet, curriedPromiseCallback);
+                }
+                catch (e) {
+                    reject(e);
+                }
+            });
+        });
+    }
+    /**
+     * Queries a small set of numerical statistics about the current state of the client's operation queue
+     *
+     * @group Node-only
+     */
+    getOperationalStatistics() {
+        return binding_1.default.mqtt5_client_get_queue_statistics(this.native_handle());
+    }
+    /**
+     * Queries a small set of numerical statistics about the current state of the client's operation queue
+     * @deprecated use getOperationalStatistics instead
+     *
+     * @group Node-only
+     */
+    getQueueStatistics() {
+        return this.getOperationalStatistics();
+    }
+    on(event, listener) {
+        super.on(event, listener);
+        return this;
+    }
+    /*
+     * Private helper functions
+     *
+     * Callbacks come through static functions so that the native threadsafe function objects do not
+     * capture the client object itself, simplifying the number of strong references to the client floating around.
+     */
+    static _s_on_stopped(client) {
+        process.nextTick(() => {
+            let stoppedEvent = {};
+            client.emit(Mqtt5Client.STOPPED, stoppedEvent);
+        });
+    }
+    static _s_on_attempting_connect(client) {
+        process.nextTick(() => {
+            let attemptingConnectEvent = {};
+            client.emit(Mqtt5Client.ATTEMPTING_CONNECT, attemptingConnectEvent);
+        });
+    }
+    static _s_on_connection_success(client, connack, settings) {
+        let connectionSuccessEvent = {
+            connack: connack,
+            settings: settings
+        };
+        process.nextTick(() => {
+            client.emit(Mqtt5Client.CONNECTION_SUCCESS, connectionSuccessEvent);
+        });
+    }
+    static _s_on_connection_failure(client, error, connack) {
+        let connectionFailureEvent = {
+            error: error
+        };
+        if (connack !== null && connack !== undefined) {
+            connectionFailureEvent.connack = connack;
+        }
+        process.nextTick(() => {
+            client.emit(Mqtt5Client.CONNECTION_FAILURE, connectionFailureEvent);
+        });
+    }
+    static _s_on_disconnection(client, error, disconnect) {
+        let disconnectionEvent = {
+            error: error
+        };
+        if (disconnect !== null && disconnect !== undefined) {
+            disconnectionEvent.disconnect = disconnect;
+        }
+        process.nextTick(() => {
+            client.emit(Mqtt5Client.DISCONNECTION, disconnectionEvent);
+        });
+    }
+    static _s_on_suback_callback(resolve, reject, client, errorCode, suback) {
+        if (errorCode == 0 && suback !== undefined) {
+            resolve(suback);
+        }
+        else {
+            reject(io.error_code_to_string(errorCode));
+        }
+    }
+    static _s_on_unsuback_callback(resolve, reject, client, errorCode, unsuback) {
+        if (errorCode == 0 && unsuback !== undefined) {
+            resolve(unsuback);
+        }
+        else {
+            reject(io.error_code_to_string(errorCode));
+        }
+    }
+    static _s_on_puback_callback(resolve, reject, client, errorCode, result) {
+        if (errorCode == 0) {
+            resolve(result);
+        }
+        else {
+            reject(io.error_code_to_string(errorCode));
+        }
+    }
+    static _s_on_message_received(client, message) {
+        let messageReceivedEvent = {
+            message: message
+        };
+        process.nextTick(() => {
+            client.emit(Mqtt5Client.MESSAGE_RECEIVED, messageReceivedEvent);
+        });
+    }
+}
+exports.Mqtt5Client = Mqtt5Client;
+/**
+ * Event emitted when the client encounters a serious error condition, such as invalid input, napi failures, and
+ * other potentially unrecoverable situations.
+ *
+ * Listener type: {@link ErrorEventListener}
+ *
+ * @event
+ */
+Mqtt5Client.ERROR = 'error';
+/**
+ * Event emitted when an MQTT PUBLISH packet is received by the client.
+ *
+ * Listener type: {@link MessageReceivedEventListener}
+ *
+ * @event
+ */
+Mqtt5Client.MESSAGE_RECEIVED = 'messageReceived';
+/**
+ * Event emitted when the client begins a connection attempt.
+ *
+ * Listener type: {@link AttemptingConnectEventListener}
+ *
+ * @event
+ */
+Mqtt5Client.ATTEMPTING_CONNECT = 'attemptingConnect';
+/**
+ * Event emitted when the client successfully establishes an MQTT connection.  Only emitted after
+ * an {@link ATTEMPTING_CONNECT attemptingConnect} event.
+ *
+ * Listener type: {@link ConnectionSuccessEventListener}
+ *
+ * @event
+ */
+Mqtt5Client.CONNECTION_SUCCESS = 'connectionSuccess';
+/**
+ * Event emitted when the client fails to establish an MQTT connection.  Only emitted after
+ * an {@link ATTEMPTING_CONNECT attemptingConnect} event.
+ *
+ * Listener type: {@link ConnectionFailureEventListener}
+ *
+ * @event
+ */
+Mqtt5Client.CONNECTION_FAILURE = 'connectionFailure';
+/**
+ * Event emitted when the client's current connection is closed for any reason.  Only emitted after
+ * a {@link CONNECTION_SUCCESS connectionSuccess} event.
+ *
+ * Listener type: {@link DisconnectionEventListener}
+ *
+ * @event
+ */
+Mqtt5Client.DISCONNECTION = 'disconnection';
+/**
+ * Event emitted when the client finishes shutdown as a result of the user invoking {@link stop}.
+ *
+ * Listener type: {@link StoppedEventListener}
+ *
+ * @event
+ */
+Mqtt5Client.STOPPED = 'stopped';
+//# sourceMappingURL=mqtt5.js.map
+
+/***/ }),
+
+/***/ 1580:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RequestResponseClient = exports.StreamingOperationBase = void 0;
+/**
+ *
+ * @packageDocumentation
+ * @module mqtt_request_response
+ * @mergeTarget
+ *
+ */
+const error_1 = __nccwpck_require__(9440);
+const mqtt_request_response_internal = __importStar(__nccwpck_require__(2228));
+const native_resource_1 = __nccwpck_require__(7990);
+const event_1 = __nccwpck_require__(8468);
+const binding_1 = __importDefault(__nccwpck_require__(4739));
+const io_1 = __nccwpck_require__(1528);
+__exportStar(__nccwpck_require__(6834), exports);
+/**
+ * An AWS MQTT service streaming operation.  A streaming operation listens to messages on
+ * a particular topic, deserializes them using a service model, and emits the modeled data as Javascript events.
+ */
+class StreamingOperationBase extends (0, native_resource_1.NativeResourceMixin)(event_1.BufferedEventEmitter) {
+    static new(options, client) {
+        if (!options) {
+            throw new error_1.CrtError("invalid configuration for streaming operation");
+        }
+        let operation = new StreamingOperationBase(client);
+        operation._super(binding_1.default.mqtt_streaming_operation_new(operation, client.native_handle(), options, (streamingOperation, type, error_code) => {
+            StreamingOperationBase._s_on_subscription_status_update(operation, type, error_code);
+        }, (streamingOperation, publishEvent) => {
+            StreamingOperationBase._s_on_incoming_publish(operation, publishEvent);
+        }));
+        client.registerUnclosedStreamingOperation(operation);
+        return operation;
+    }
+    constructor(client) {
+        super();
+        this.state = mqtt_request_response_internal.StreamingOperationState.None;
+        this.client = client;
+    }
+    /**
+     * Triggers the streaming operation to start listening to the configured stream of events.  Has no effect on an
+     * already-open operation.  It is an error to attempt to re-open a closed streaming operation.
+     */
+    open() {
+        if (this.state == mqtt_request_response_internal.StreamingOperationState.None) {
+            this.state = mqtt_request_response_internal.StreamingOperationState.Open;
+            binding_1.default.mqtt_streaming_operation_open(this.native_handle());
+        }
+        else if (this.state == mqtt_request_response_internal.StreamingOperationState.Closed) {
+            throw new error_1.CrtError("MQTT streaming operation already closed");
+        }
+    }
+    /**
+     * Stops a streaming operation from listening to the configured stream of events and releases all native
+     * resources associated with the stream.
+     */
+    close() {
+        if (this.state != mqtt_request_response_internal.StreamingOperationState.Closed) {
+            this.client.unregisterUnclosedStreamingOperation(this);
+            this.state = mqtt_request_response_internal.StreamingOperationState.Closed;
+            binding_1.default.mqtt_streaming_operation_close(this.native_handle());
+        }
+    }
+    on(event, listener) {
+        super.on(event, listener);
+        return this;
+    }
+    static _s_on_subscription_status_update(streamingOperation, type, error_code) {
+        let statusEvent = {
+            type: type
+        };
+        if (error_code != 0) {
+            statusEvent.error = new error_1.CrtError(error_code);
+        }
+        process.nextTick(() => {
+            streamingOperation.emit(StreamingOperationBase.SUBSCRIPTION_STATUS, statusEvent);
+        });
+    }
+    static _s_on_incoming_publish(streamingOperation, publishEvent) {
+        process.nextTick(() => {
+            streamingOperation.emit(StreamingOperationBase.INCOMING_PUBLISH, publishEvent);
+        });
+    }
+}
+exports.StreamingOperationBase = StreamingOperationBase;
+/**
+ * Event emitted when the stream's subscription status changes.
+ *
+ * Listener type: {@link SubscriptionStatusListener}
+ *
+ * @event
+ */
+StreamingOperationBase.SUBSCRIPTION_STATUS = 'subscriptionStatus';
+/**
+ * Event emitted when a stream message is received
+ *
+ * Listener type: {@link IncomingPublishListener}
+ *
+ * @event
+ */
+StreamingOperationBase.INCOMING_PUBLISH = 'incomingPublish';
+/**
+ * Native implementation of an MQTT-based request-response client tuned for AWS MQTT services.
+ *
+ * Supports streaming operations (listen to a stream of modeled events from an MQTT topic) and request-response
+ * operations (performs the subscribes, publish, and incoming publish correlation and error checking needed to
+ * perform simple request-response operations over MQTT).
+ */
+class RequestResponseClient extends (0, native_resource_1.NativeResourceMixin)(event_1.BufferedEventEmitter) {
+    constructor() {
+        super();
+        this.state = mqtt_request_response_internal.RequestResponseClientState.Ready;
+        this.unclosedOperations = new Set();
+    }
+    /**
+     * Creates a new MQTT service request-response client that uses an MQTT5 client as the protocol implementation.
+     *
+     * @param protocolClient protocol client to use for all operations
+     * @param options configuration options for the desired request-response client
+     */
+    static newFromMqtt5(protocolClient, options) {
+        if (!protocolClient) {
+            throw new error_1.CrtError("protocol client is null");
+        }
+        let client = new RequestResponseClient();
+        client._super(binding_1.default.mqtt_request_response_client_new_from_5(client, protocolClient.native_handle(), options));
+        return client;
+    }
+    /**
+     * Creates a new MQTT service request-response client that uses an MQTT311 client as the protocol implementation.
+     *
+     * @param protocolClient protocol client to use for all operations
+     * @param options configuration options for the desired request-response client
+     */
+    static newFromMqtt311(protocolClient, options) {
+        if (!protocolClient) {
+            throw new error_1.CrtError("protocol client is null");
+        }
+        let client = new RequestResponseClient();
+        client._super(binding_1.default.mqtt_request_response_client_new_from_311(client, protocolClient.native_handle(), options));
+        return client;
+    }
+    /**
+     * Triggers cleanup of native resources associated with the request-response client.  Closing a client will fail
+     * all incomplete requests and close all outstanding streaming operations.
+     *
+     * This must be called when finished with a client; otherwise, native resources will leak.
+     */
+    close() {
+        if (this.state != mqtt_request_response_internal.RequestResponseClientState.Closed) {
+            this.state = mqtt_request_response_internal.RequestResponseClientState.Closed;
+            this.closeStreamingOperations();
+            binding_1.default.mqtt_request_response_client_close(this.native_handle());
+        }
+    }
+    /**
+     * Creates a new streaming operation from a set of configuration options.  A streaming operation provides a
+     * mechanism for listening to a specific event stream from an AWS MQTT-based service.
+     *
+     * @param streamOptions configuration options for the streaming operation
+     */
+    createStream(streamOptions) {
+        if (this.state == mqtt_request_response_internal.RequestResponseClientState.Closed) {
+            throw new error_1.CrtError("MQTT request-response client has already been closed");
+        }
+        return StreamingOperationBase.new(streamOptions, this);
+    }
+    /**
+     * Submits a request to the request-response client.
+     *
+     * @param requestOptions description of the request to perform
+     *
+     * Returns a promise that resolves to a response to the request or an error describing how the request attempt
+     * failed.
+     *
+     * A "successful" request-response execution flow is defined as "the service sent a response payload that
+     * correlates with the request payload."  Upon deserialization (which is the responsibility of the service model
+     * client, one layer up), such a payload may actually indicate a failure.
+     */
+    submitRequest(requestOptions) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => {
+                if (this.state == mqtt_request_response_internal.RequestResponseClientState.Closed) {
+                    reject(new error_1.CrtError("MQTT request-response client has already been closed"));
+                    return;
+                }
+                if (!requestOptions) {
+                    reject(new error_1.CrtError("null request options"));
+                    return;
+                }
+                function curriedPromiseCallback(errorCode, topic, response) {
+                    return RequestResponseClient._s_on_request_completion(resolve, reject, errorCode, topic, response);
+                }
+                try {
+                    binding_1.default.mqtt_request_response_client_submit_request(this.native_handle(), requestOptions, curriedPromiseCallback);
+                }
+                catch (e) {
+                    reject(e);
+                }
+            });
+        });
+    }
+    /**
+     *
+     * Adds a streaming operation to the set of operations that will be closed automatically when the
+     * client is closed.
+     *
+     * @internal
+     *
+     * @param operation streaming operation to add
+     */
+    registerUnclosedStreamingOperation(operation) {
+        if (this.unclosedOperations) {
+            this.unclosedOperations.add(operation);
+        }
+    }
+    /**
+     *
+     * Removes a streaming operation from the set of operations that will be closed automatically when the
+     * client is closed.
+     *
+     * @internal
+     *
+     * @param operation streaming operation to remove
+     */
+    unregisterUnclosedStreamingOperation(operation) {
+        if (this.unclosedOperations) {
+            this.unclosedOperations.delete(operation);
+        }
+    }
+    closeStreamingOperations() {
+        if (this.unclosedOperations) {
+            // swap out the set so that calls to unregisterUnclosedStreamingOperation do not mess with things mid-iteration
+            let unclosedOperations = this.unclosedOperations;
+            this.unclosedOperations = undefined;
+            for (const operation of unclosedOperations) {
+                operation.close();
+            }
+        }
+    }
+    static _s_on_request_completion(resolve, reject, errorCode, topic, payload) {
+        if (errorCode == 0 && topic !== undefined && payload !== undefined) {
+            let response = {
+                payload: payload,
+                topic: topic,
+            };
+            resolve(response);
+        }
+        else {
+            reject(new error_1.CrtError((0, io_1.error_code_to_string)(errorCode)));
+        }
+    }
+}
+exports.RequestResponseClient = RequestResponseClient;
+//# sourceMappingURL=mqtt_request_response.js.map
+
+/***/ }),
+
+/***/ 7990:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.NativeResourceMixin = exports.NativeResource = void 0;
+/**
+ * Represents an object allocated natively inside the AWS CRT.
+ * @internal
+ */
+class NativeResource {
+    constructor(handle) {
+        this.handle = handle;
+    }
+    /** @internal */
+    native_handle() {
+        return this.handle;
+    }
+}
+exports.NativeResource = NativeResource;
+/**
+ * Represents an object allocated natively inside the AWS CRT which also
+ * needs a node/TS base class
+ * @internal
+ */
+function NativeResourceMixin(Base) {
+    /** @internal */
+    return class extends Base {
+        /** @internal */
+        constructor(...args) {
+            const handle = args.shift();
+            super(...args);
+            this._handle = handle;
+        }
+        /** @internal */
+        _super(handle) {
+            this._handle = handle;
+        }
+        /** @internal */
+        native_handle() {
+            return this._handle;
+        }
+    };
+}
+exports.NativeResourceMixin = NativeResourceMixin;
+//# sourceMappingURL=native_resource.js.map
 
 /***/ }),
 
@@ -67770,6 +77016,7 @@ exports.getInputAsBool = getInputAsBool;
 exports.isCacheFeatureAvailable = isCacheFeatureAvailable;
 exports.getInputS3ClientConfig = getInputS3ClientConfig;
 const core = __importStar(__nccwpck_require__(7484));
+__nccwpck_require__(7520);
 const constants_1 = __nccwpck_require__(7242);
 function isExactKeyMatch(key, cacheKey) {
     return !!(cacheKey &&
@@ -69755,6 +79002,14 @@ module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/client-sso","descrip
 
 "use strict";
 module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/nested-clients","version":"3.808.0","description":"Nested clients for AWS SDK packages.","main":"./dist-cjs/index.js","module":"./dist-es/index.js","types":"./dist-types/index.d.ts","scripts":{"build":"yarn lint && concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"node ../../scripts/compilation/inline nested-clients","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","lint":"node ../../scripts/validation/submodules-linter.js --pkg nested-clients","test":"yarn g:vitest run","test:watch":"yarn g:vitest watch"},"engines":{"node":">=18.0.0"},"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","dependencies":{"@aws-crypto/sha256-browser":"5.2.0","@aws-crypto/sha256-js":"5.2.0","@aws-sdk/core":"3.808.0","@aws-sdk/middleware-host-header":"3.804.0","@aws-sdk/middleware-logger":"3.804.0","@aws-sdk/middleware-recursion-detection":"3.804.0","@aws-sdk/middleware-user-agent":"3.808.0","@aws-sdk/region-config-resolver":"3.808.0","@aws-sdk/types":"3.804.0","@aws-sdk/util-endpoints":"3.808.0","@aws-sdk/util-user-agent-browser":"3.804.0","@aws-sdk/util-user-agent-node":"3.808.0","@smithy/config-resolver":"^4.1.2","@smithy/core":"^3.3.1","@smithy/fetch-http-handler":"^5.0.2","@smithy/hash-node":"^4.0.2","@smithy/invalid-dependency":"^4.0.2","@smithy/middleware-content-length":"^4.0.2","@smithy/middleware-endpoint":"^4.1.4","@smithy/middleware-retry":"^4.1.5","@smithy/middleware-serde":"^4.0.3","@smithy/middleware-stack":"^4.0.2","@smithy/node-config-provider":"^4.1.1","@smithy/node-http-handler":"^4.0.4","@smithy/protocol-http":"^5.1.0","@smithy/smithy-client":"^4.2.4","@smithy/types":"^4.2.0","@smithy/url-parser":"^4.0.2","@smithy/util-base64":"^4.0.0","@smithy/util-body-length-browser":"^4.0.0","@smithy/util-body-length-node":"^4.0.0","@smithy/util-defaults-mode-browser":"^4.0.12","@smithy/util-defaults-mode-node":"^4.0.12","@smithy/util-endpoints":"^3.0.4","@smithy/util-middleware":"^4.0.2","@smithy/util-retry":"^4.0.3","@smithy/util-utf8":"^4.0.0","tslib":"^2.6.2"},"devDependencies":{"concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typescript":"~5.8.3"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["./sso-oidc.d.ts","./sso-oidc.js","./sts.d.ts","./sts.js","dist-*/**"],"browser":{"./dist-es/submodules/sso-oidc/runtimeConfig":"./dist-es/submodules/sso-oidc/runtimeConfig.browser","./dist-es/submodules/sts/runtimeConfig":"./dist-es/submodules/sts/runtimeConfig.browser"},"react-native":{},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/packages/nested-clients","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"packages/nested-clients"},"exports":{"./sso-oidc":{"types":"./dist-types/submodules/sso-oidc/index.d.ts","module":"./dist-es/submodules/sso-oidc/index.js","node":"./dist-cjs/submodules/sso-oidc/index.js","import":"./dist-es/submodules/sso-oidc/index.js","require":"./dist-cjs/submodules/sso-oidc/index.js"},"./sts":{"types":"./dist-types/submodules/sts/index.d.ts","module":"./dist-es/submodules/sts/index.js","node":"./dist-cjs/submodules/sts/index.js","import":"./dist-es/submodules/sts/index.js","require":"./dist-cjs/submodules/sts/index.js"}}}');
+
+/***/ }),
+
+/***/ 467:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"name":"aws-crt","version":"1.26.2","description":"NodeJS/browser bindings to the aws-c-* libraries","homepage":"https://github.com/awslabs/aws-crt-nodejs","repository":{"type":"git","url":"git+https://github.com/awslabs/aws-crt-nodejs.git"},"contributors":["AWS Common Runtime Team <aws-sdk-common-runtime@amazon.com>"],"license":"Apache-2.0","main":"./dist/index.js","browser":"./dist.browser/browser.js","types":"./dist/index.d.ts","scripts":{"tsc":"node ./scripts/tsc.js","test":"npm run test:native","test:node":"npm run test:native","test:native":"npx jest --runInBand --verbose --config test/native/jest.config.js --forceExit","test:browser":"npx jest --runInBand --verbose --config test/browser/jest.config.js --forceExit","test:browser:ci":"npm run install:puppeteer && npm run test:browser","install:puppeteer":"npm install --save-dev jest-puppeteer puppeteer @types/puppeteer","prepare":"node ./scripts/tsc.js && node ./scripts/install.js","install":"node ./scripts/install.js"},"devDependencies":{"@types/crypto-js":"^3.1.43","@types/jest":"^27.0.1","@types/node":"^14.18.63","@types/prettier":"2.6.0","@types/puppeteer":"^5.4.7","@types/uuid":"^10.0.0","@types/ws":"^7.4.7","aws-sdk":"^2.1537.0","cmake-js":"^7.3.0","https-proxy-agent":"^5.0.1","jest":"^27.2.1","jest-puppeteer":"^5.0.4","jest-runtime":"^27.2.1","puppeteer":"^3.3.0","tar":"^6.2.1","ts-jest":"^27.0.5","typedoc":"^0.24.8","typedoc-plugin-merge-modules":"^5.1.0","typescript":"^4.9.5","uuid":"^10.0.0","yargs":"^17.2.1"},"dependencies":{"@aws-sdk/util-utf8-browser":"^3.259.0","@httptoolkit/websocket-stream":"^6.0.1","axios":"^1.7.4","buffer":"^6.0.3","crypto-js":"^4.2.0","mqtt":"^4.3.8","process":"^0.11.10"}}');
 
 /***/ })
 
