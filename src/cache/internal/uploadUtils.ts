@@ -1,7 +1,8 @@
 import {
     S3Client,
     S3ClientConfig,
-    _Object
+    _Object,
+    ChecksumAlgorithm
   } from '@aws-sdk/client-s3'
 import * as core from '@actions/core'
 import {Progress, Upload} from '@aws-sdk/lib-storage'
@@ -32,7 +33,7 @@ export async function uploadFileS3(
         Bucket: s3BucketName,
         Key: key,
         Body: fileStream,
-        ChecksumAlgorithm: 'SHA256'
+        ChecksumAlgorithm: ChecksumAlgorithm.SHA256,
       }
     })
 

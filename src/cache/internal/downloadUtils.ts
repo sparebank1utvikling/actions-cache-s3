@@ -4,7 +4,7 @@ import * as stream from 'stream'
 import * as util from 'util'
 import {spawn} from 'child_process'
 
-import {GetObjectCommand, S3Client, S3ClientConfig} from '@aws-sdk/client-s3'
+import {ChecksumAlgorithm, GetObjectCommand, S3Client, S3ClientConfig} from '@aws-sdk/client-s3'
 import { Timer } from './timeUtils'
 import { CompressionMethod } from './constants'
 
@@ -27,6 +27,7 @@ export async function downloadCacheStorageS3(
    const param = {
      Bucket: s3BucketName,
      Key: key,
+     ChecksumAlgorithm: ChecksumAlgorithm.SHA256,
    }
  
    try {
@@ -77,6 +78,7 @@ export async function downloadAndExtractCacheFromS3Stream(
   const param = {
     Bucket: s3BucketName,
     Key: key,
+    ChecksumAlgorithm: ChecksumAlgorithm.SHA256,
   }
 
   let ret: DownloadObject = {

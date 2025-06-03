@@ -68249,7 +68249,7 @@ function getCacheEntry(keys, paths, s3Options, s3BucketName) {
         let s3ContinuationToken = undefined;
         let count = 0;
         const param = {
-            Bucket: s3BucketName
+            Bucket: s3BucketName,
         };
         for (;;) {
             core.debug(`ListObjects Count: ${count}`);
@@ -68712,6 +68712,7 @@ function downloadCacheStorageS3(key, archivePath, s3Options, s3BucketName) {
         const param = {
             Bucket: s3BucketName,
             Key: key,
+            ChecksumAlgorithm: client_s3_1.ChecksumAlgorithm.SHA256,
         };
         try {
             const response = yield s3client.send(new client_s3_1.GetObjectCommand(param));
@@ -68748,6 +68749,7 @@ function downloadAndExtractCacheFromS3Stream(key, s3Options, s3BucketName, compr
         const param = {
             Bucket: s3BucketName,
             Key: key,
+            ChecksumAlgorithm: client_s3_1.ChecksumAlgorithm.SHA256,
         };
         let ret = {
             key: key,
@@ -69252,7 +69254,7 @@ function uploadFileS3(s3options, s3BucketName, archivePath, key, concurrency, ma
                     Bucket: s3BucketName,
                     Key: key,
                     Body: fileStream,
-                    ChecksumAlgorithm: 'SHA256'
+                    ChecksumAlgorithm: client_s3_1.ChecksumAlgorithm.SHA256,
                 }
             });
             parallelUpload.on('httpUploadProgress', (progress) => {
