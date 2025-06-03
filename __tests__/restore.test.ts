@@ -76,7 +76,8 @@ test("restore with no cache found", async () => {
         "tmp-cache-bucket",
         [],
         {
-            lookupOnly: false
+            lookupOnly: false,
+            s3StreamDownload: true
         }
     );
 
@@ -120,7 +121,8 @@ test("restore with restore keys and no cache found", async () => {
         "tmp-cache-bucket",
         [restoreKey],
         {
-            lookupOnly: false
+            lookupOnly: false,
+            s3StreamDownload: true
         }
     );
 
@@ -163,7 +165,8 @@ test("restore with cache found for key", async () => {
         "tmp-cache-bucket",
         [],
         {
-            lookupOnly: false
+            lookupOnly: false,
+            s3StreamDownload: true
         }
     );
 
@@ -209,7 +212,8 @@ test("restore with cache found for restore key", async () => {
         "tmp-cache-bucket",
         [restoreKey],
         {
-            lookupOnly: false
+            lookupOnly: false,
+            s3StreamDownload: true
         }
     );
 
@@ -255,7 +259,8 @@ test("Fail restore when fail on cache miss is enabled and primary + restore keys
         "tmp-cache-bucket",
         [restoreKey],
         {
-            lookupOnly: false
+            lookupOnly: false,
+            s3StreamDownload: true
         }
     );
 
@@ -299,7 +304,8 @@ test("restore when fail on cache miss is enabled and primary key doesn't match r
         "tmp-cache-bucket",
         [restoreKey],
         {
-            lookupOnly: false
+            lookupOnly: false,
+            s3StreamDownload: true
         }
     );
 
@@ -346,7 +352,8 @@ test("restore with fail on cache miss disabled and no cache found", async () => 
         "tmp-cache-bucket",
         [restoreKey],
         {
-            lookupOnly: false
+            lookupOnly: false,
+            s3StreamDownload: true
         }
     );
 

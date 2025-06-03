@@ -125,7 +125,8 @@ test("restore with too many keys should fail", async () => {
         "tmp-cache-bucket",
         restoreKeys,
         {
-            lookupOnly: false
+            lookupOnly: false,
+            s3StreamDownload: true
         }
     );
     expect(failedMock).toHaveBeenCalledWith(
@@ -152,7 +153,8 @@ test("restore with large key should fail", async () => {
         "tmp-cache-bucket",
         [],
         {
-            lookupOnly: false
+            lookupOnly: false,
+            s3StreamDownload: true
         }
     );
     expect(failedMock).toHaveBeenCalledWith(
@@ -179,7 +181,8 @@ test("restore with invalid key should fail", async () => {
         "tmp-cache-bucket",
         [],
         {
-            lookupOnly: false
+            lookupOnly: false,
+            s3StreamDownload: true
         }
     );
     expect(failedMock).toHaveBeenCalledWith(
@@ -215,7 +218,8 @@ test("restore with no cache found", async () => {
         "tmp-cache-bucket",
         [],
         {
-            lookupOnly: false
+            lookupOnly: false,
+            s3StreamDownload: true
         }
     );
 
@@ -257,7 +261,8 @@ test("restore with restore keys and no cache found", async () => {
         "tmp-cache-bucket",
         [restoreKey],
         {
-            lookupOnly: false
+            lookupOnly: false,
+            s3StreamDownload: true
         }
     );
 
@@ -298,7 +303,8 @@ test("restore with cache found for key", async () => {
         "tmp-cache-bucket",
         [],
         {
-            lookupOnly: false
+            lookupOnly: false,
+            s3StreamDownload: true
         }
     );
 
@@ -341,7 +347,8 @@ test("restore with cache found for restore key", async () => {
         "tmp-cache-bucket",
         [restoreKey],
         {
-            lookupOnly: false
+            lookupOnly: false,
+            s3StreamDownload: true
         }
     );
 
@@ -383,7 +390,8 @@ test("restore with lookup-only set", async () => {
         "tmp-cache-bucket",
         [],
         {
-            lookupOnly: true
+            lookupOnly: true,
+            s3StreamDownload: true
         }
     );
 

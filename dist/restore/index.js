@@ -67921,6 +67921,7 @@ const utils = __importStar(__nccwpck_require__(6535));
 const cacheClient = __importStar(__nccwpck_require__(743));
 const config_1 = __nccwpck_require__(7886);
 const tar_1 = __nccwpck_require__(5149);
+const downloadUtils_1 = __nccwpck_require__(4699);
 const timeUtils_1 = __nccwpck_require__(7832);
 class ValidationError extends Error {
     constructor(message) {
@@ -67987,6 +67988,7 @@ function restoreCache(paths, primaryKey, s3Options, s3BucketName, restoreKeys, o
  */
 function restoreCacheS3(paths, primaryKey, s3Options, s3BucketName, restoreKeys, options) {
     return __awaiter(this, void 0, void 0, function* () {
+        var _a, _b, _c;
         restoreKeys = restoreKeys || [];
         const keys = [primaryKey, ...restoreKeys];
         core.debug("Resolved Keys:" + JSON.stringify(keys));
@@ -68011,16 +68013,24 @@ function restoreCacheS3(paths, primaryKey, s3Options, s3BucketName, restoreKeys,
             }
             archivePath = path.join(yield utils.createTempDirectory(), utils.getCacheFileName(compressionMethod));
             core.debug(`Archive Path: ${archivePath}`);
-            // Download the cache from the cache entry
-            yield cacheClient.downloadCache(cacheEntry, archivePath, s3Options, s3BucketName);
-            if (core.isDebug()) {
-                yield (0, tar_1.listTar)(archivePath, compressionMethod);
+            if (!((_a = options === null || options === void 0 ? void 0 : options.s3StreamDownload) !== null && _a !== void 0 ? _a : true)) {
+                // Download the cache from the cache entry
+                yield cacheClient.downloadCache(cacheEntry, archivePath, s3Options, s3BucketName);
+                if (core.isDebug()) {
+                    yield (0, tar_1.listTar)(archivePath, compressionMethod);
+                }
+                const archiveFileSize = utils.getArchiveFileSizeInBytes(archivePath);
+                core.info(`Cache Size: ~${Math.round(archiveFileSize / (1024 * 1024))} MB (${archiveFileSize} B)`);
+                yield (0, tar_1.extractTar)(archivePath, compressionMethod);
+                core.info("Cache restored successfully");
+                return cacheEntry.cacheKey;
             }
-            const archiveFileSize = utils.getArchiveFileSizeInBytes(archivePath);
-            core.info(`Cache Size: ~${Math.round(archiveFileSize / (1024 * 1024))} MB (${archiveFileSize} B)`);
-            yield (0, tar_1.extractTar)(archivePath, compressionMethod);
-            core.info("Cache restored successfully");
-            return cacheEntry.cacheKey;
+            else {
+                const info = yield (0, downloadUtils_1.downloadAndExtractCacheFromS3Stream)(primaryKey, s3Options, s3BucketName, compressionMethod);
+                const size = Math.round(((_b = info.size) !== null && _b !== void 0 ? _b : 0) / (1024 * 1024));
+                core.info(`Cache restored successfully for key: ${info.key} of size: ${size} MB (${info.size} B) and last modified: ${(_c = info.lastModified) === null || _c === void 0 ? void 0 : _c.toISOString()}`);
+                return cacheEntry.cacheKey;
+            }
         }
         catch (error) {
             const typedError = error;
@@ -68678,11 +68688,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.downloadCacheStorageS3 = downloadCacheStorageS3;
+exports.downloadAndExtractCacheFromS3Stream = downloadAndExtractCacheFromS3Stream;
+const core = __importStar(__nccwpck_require__(7484));
 const fs = __importStar(__nccwpck_require__(9896));
 const stream = __importStar(__nccwpck_require__(2203));
 const util = __importStar(__nccwpck_require__(9023));
+const child_process_1 = __nccwpck_require__(5317);
 const client_s3_1 = __nccwpck_require__(3711);
 const timeUtils_1 = __nccwpck_require__(7832);
+const constants_1 = __nccwpck_require__(379);
 /**
  * Download the cache using the AWS S3.  Only call this method if the use S3.
  *
@@ -68716,6 +68730,100 @@ function downloadCacheStorageS3(key, archivePath, s3Options, s3BucketName) {
         }
         return;
     });
+}
+/**
+ * Download and extract cache directly from S3 stream without saving to disk first.
+ * This enables concurrent downloading and extraction for better performance.
+ *
+ * @param key the key for the cache in S3
+ * @param s3Options: the option for AWS S3 client
+ * @param s3BucketName: the name of bucket in AWS S3
+ * @param compressionMethod: the compression method used for the cache
+ */
+function downloadAndExtractCacheFromS3Stream(key, s3Options, s3BucketName, compressionMethod) {
+    return __awaiter(this, void 0, void 0, function* () {
+        var _a;
+        const timer = new timeUtils_1.Timer(`Download and extract from S3 bucket ${s3BucketName}`);
+        const s3client = new client_s3_1.S3Client(s3Options);
+        const param = {
+            Bucket: s3BucketName,
+            Key: key,
+        };
+        let ret = {
+            key: key,
+            size: undefined,
+            lastModified: undefined
+        };
+        try {
+            const response = yield s3client.send(new client_s3_1.GetObjectCommand(param));
+            if (!response.Body) {
+                timer.stop();
+                throw new Error(`Incomplete download. response.Body is undefined from S3.`);
+            }
+            ret.key = key;
+            ret.size = response.ContentLength;
+            ret.lastModified = response.LastModified ? new Date(response.LastModified) : undefined;
+            // Get the appropriate tar command for extraction
+            const tarCommand = getTarExtractionCommand(compressionMethod);
+            core.debug(`Using tar command: ${tarCommand.command} with args: ${tarCommand.args.join(' ')}`);
+            // Spawn the tar process
+            const tarProcess = (0, child_process_1.spawn)(tarCommand.command, tarCommand.args, {
+                stdio: ['pipe', 'inherit', 'inherit'],
+                cwd: (_a = process.env['GITHUB_WORKSPACE']) !== null && _a !== void 0 ? _a : process.cwd()
+            });
+            // Stream S3 response directly to tar stdin
+            const pipeline = util.promisify(stream.pipeline);
+            yield pipeline(response.Body, tarProcess.stdin);
+            // Wait for tar process to complete
+            yield new Promise((resolve, reject) => {
+                tarProcess.on('close', (code) => {
+                    if (code === 0) {
+                        resolve();
+                    }
+                    else {
+                        reject(new Error(`Tar extraction failed with exit code ${code}`));
+                    }
+                });
+                tarProcess.on('error', reject);
+            });
+            timer.stop();
+        }
+        catch (error) {
+            timer.stop();
+            throw error;
+        }
+        return ret;
+    });
+}
+/**
+ * Get the tar command and arguments for extracting from stdin
+ */
+function getTarExtractionCommand(compressionMethod) {
+    var _a;
+    const workingDirectory = (_a = process.env['GITHUB_WORKSPACE']) !== null && _a !== void 0 ? _a : process.cwd();
+    // Base tar arguments for extraction from stdin
+    const baseArgs = [
+        '-xf', '-', // Extract from stdin
+        '-P', // Don't strip leading slashes
+        '-C', workingDirectory // Change to working directory
+    ];
+    switch (compressionMethod) {
+        case constants_1.CompressionMethod.Zstd:
+            return {
+                command: 'tar',
+                args: [...baseArgs, '--use-compress-program', process.platform === 'win32' ? '"zstd -d --long=30"' : 'unzstd --long=30']
+            };
+        case constants_1.CompressionMethod.ZstdWithoutLong:
+            return {
+                command: 'tar',
+                args: [...baseArgs, '--use-compress-program', process.platform === 'win32' ? '"zstd -d"' : 'unzstd']
+            };
+        default: // Gzip
+            return {
+                command: 'tar',
+                args: [...baseArgs, '-z']
+            };
+    }
 }
 
 
@@ -69188,6 +69296,7 @@ var Inputs;
     Inputs["AWSEndpoint"] = "aws-endpoint";
     Inputs["AWSS3BucketEndpoint"] = "aws-s3-bucket-endpoint";
     Inputs["AWSS3ForcePathStyle"] = "aws-s3-force-path-style";
+    Inputs["S3StreamDownload"] = "s3-stream-download";
 })(Inputs || (exports.Inputs = Inputs = {}));
 var Outputs;
 (function (Outputs) {
@@ -69292,7 +69401,8 @@ function restoreImpl(stateProvider) {
             const s3config = utils.getInputS3ClientConfig();
             const failOnCacheMiss = utils.getInputAsBool(constants_1.Inputs.FailOnCacheMiss);
             const lookupOnly = utils.getInputAsBool(constants_1.Inputs.LookupOnly);
-            const cacheKey = yield (0, cache_1.restoreCache)(cachePaths.slice(), primaryKey, s3config, s3BucketName, restoreKeys, { lookupOnly: lookupOnly });
+            const s3StreamDownload = utils.getInputAsBool(constants_1.Inputs.S3StreamDownload);
+            const cacheKey = yield (0, cache_1.restoreCache)(cachePaths.slice(), primaryKey, s3config, s3BucketName, restoreKeys, { lookupOnly: lookupOnly, s3StreamDownload: s3StreamDownload });
             if (!cacheKey) {
                 if (failOnCacheMiss) {
                     throw new Error(`Failed to restore cache entry. Exiting as fail-on-cache-miss is set. Input key: ${primaryKey}`);

@@ -43,6 +43,7 @@ export async function restoreImpl(
 
         const failOnCacheMiss = utils.getInputAsBool(Inputs.FailOnCacheMiss);
         const lookupOnly = utils.getInputAsBool(Inputs.LookupOnly);
+        const s3StreamDownload = utils.getInputAsBool(Inputs.S3StreamDownload);
 
         const cacheKey = await restoreCache(
             cachePaths.slice(),
@@ -50,7 +51,7 @@ export async function restoreImpl(
             s3config,
             s3BucketName,
             restoreKeys,
-            { lookupOnly: lookupOnly }
+            { lookupOnly: lookupOnly, s3StreamDownload: s3StreamDownload }
         );
 
         if (!cacheKey) {
