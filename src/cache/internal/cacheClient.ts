@@ -103,7 +103,7 @@ export async function getCacheEntry(
   let count = 0
 
   const param = {
-    Bucket: s3BucketName
+    Bucket: s3BucketName,
   } as ListObjectsV2CommandInput
 
   for (;;) {
