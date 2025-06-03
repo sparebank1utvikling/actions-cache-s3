@@ -64,4 +64,14 @@ export interface DownloadOptions {
    * @default false
    */
   lookupOnly?: boolean
+
+  /**
+   * Whether to download the cache entry using by streaming s3 object get to tar.
+   * If set to true (default), the cache will be downloaded directly from S3 stream
+   * without saving to disk first.
+   *
+   * @default true
+  
+   */
+  s3StreamDownload?: boolean
 }

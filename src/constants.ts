@@ -13,7 +13,8 @@ export enum Inputs {
     AWSRegion = "aws-region",
     AWSEndpoint = "aws-endpoint",
     AWSS3BucketEndpoint = "aws-s3-bucket-endpoint",
-    AWSS3ForcePathStyle = "aws-s3-force-path-style"
+    AWSS3ForcePathStyle = "aws-s3-force-path-style",
+    S3StreamDownload = "s3-stream-download"
 }
 
 export enum Outputs {

@@ -1,6 +1,6 @@
 name: 'Restore Cache'
 description: 'Restore Cache artifacts like dependencies and build outputs to improve workflow execution time'
-author: 'GitHub'
+author: 'sparebank1utvikling'
 inputs:
   path:
     description: 'A list of files, directories, and wildcard patterns to restore'
@@ -45,6 +45,11 @@ inputs:
     description: 'Whether to force path style URLs for S3 objects.'
     required: false
     default: 'false'
+  s3-stream-download:
+    description: 'Stream s3 download instead of downloading the whole file at once.'
+    required: false
+    default: 'true'
+
 outputs:
   cache-hit:
     description: 'A boolean value to indicate an exact match was found for the primary key'

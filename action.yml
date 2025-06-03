@@ -1,6 +1,6 @@
 name: 'Cache S3'
-description: 'actions/cache@v2 for AWS S3 and compatible software (forked Actions)'
-author: 'whywaita'
+description: 'actions/cache@v4 for AWS S3 and compatible software (forked Actions)'
+author: 'sparebank1utvikling'
 inputs:
   path:
     description: 'A list of files, directories, and wildcard patterns to cache and restore'
@@ -48,6 +48,10 @@ inputs:
     description: 'Whether to force path style URLs for S3 objects.'
     required: false
     default: 'false'
+  s3-stream-download:
+    description: 'Stream s3 download instead of downloading the whole file at once.'
+    required: false
+    default: 'true'
 outputs:
   cache-hit:
     description: 'A boolean value to indicate an exact match was found for the primary key'

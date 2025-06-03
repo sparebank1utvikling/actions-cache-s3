@@ -29,6 +29,7 @@ export function setInputs(input: CacheInput): void {
     setInput(Inputs.AWSRegion, "eu-north-1");
     setInput(Inputs.AWSAccessKeyId, "LSIAQAAAAAAVNCBMPNSG");
     setInput(Inputs.AWSSecretAccessKey, "LSIAQAAAAAAVNCBMPNSG");
+    setInput(Inputs.S3StreamDownload, "true");
     input.restoreKeys &&
         setInput(Inputs.RestoreKeys, input.restoreKeys.join("\n"));
     input.enableCrossOsArchive !== undefined &&

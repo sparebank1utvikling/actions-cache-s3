@@ -5,6 +5,7 @@ import * as cacheClient from "./cache/internal/cacheClient";
 import { isGhes } from "./cache/internal/config";
 import { DownloadOptions, UploadOptions } from "./cache/options";
 import { createTar, extractTar, listTar } from "./cache/internal/tar";
+import { downloadAndExtractCacheFromS3Stream } from "./cache/internal/downloadUtils";
 import { S3ClientConfig } from "@aws-sdk/client-s3";
 import { Timer } from "./cache/internal/timeUtils";
 
@@ -141,30 +142,43 @@ async function restoreCacheS3(
             utils.getCacheFileName(compressionMethod)
         );
         core.debug(`Archive Path: ${archivePath}`);
+        if (!(options?.s3StreamDownload ?? true)) {
+            // Download the cache from the cache entry
+            await cacheClient.downloadCache(
+                cacheEntry,
+                archivePath,
+                s3Options,
+                s3BucketName
+            );
 
-        // Download the cache from the cache entry
-        await cacheClient.downloadCache(
-            cacheEntry,
-            archivePath,
-            s3Options,
-            s3BucketName
-        );
+            if (core.isDebug()) {
+                await listTar(archivePath, compressionMethod);
+            }
 
-        if (core.isDebug()) {
-            await listTar(archivePath, compressionMethod);
+            const archiveFileSize =
+                utils.getArchiveFileSizeInBytes(archivePath);
+            core.info(
+                `Cache Size: ~${Math.round(
+                    archiveFileSize / (1024 * 1024)
+                )} MB (${archiveFileSize} B)`
+            );
+
+            await extractTar(archivePath, compressionMethod);
+            core.info("Cache restored successfully");
+            return cacheEntry.cacheKey;
+        } else {
+            const info = await downloadAndExtractCacheFromS3Stream(
+                primaryKey,
+                s3Options,
+                s3BucketName,
+                compressionMethod
+            );
+            const size = Math.round((info.size ?? 0) / (1024 * 1024));
+            core.info(
+                `Cache restored successfully for key: ${info.key} of size: ${size} MB (${info.size} B) and last modified: ${info.lastModified?.toISOString()}`
+            );
+            return cacheEntry.cacheKey;
         }
-
-        const archiveFileSize = utils.getArchiveFileSizeInBytes(archivePath);
-        core.info(
-            `Cache Size: ~${Math.round(
-                archiveFileSize / (1024 * 1024)
-            )} MB (${archiveFileSize} B)`
-        );
-
-        await extractTar(archivePath, compressionMethod);
-        core.info("Cache restored successfully");
-
-        return cacheEntry.cacheKey;
     } catch (error) {
         const typedError = error as Error;
         if (typedError.name === ValidationError.name) {
