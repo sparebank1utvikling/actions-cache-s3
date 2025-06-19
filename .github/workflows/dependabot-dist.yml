@@ -7,11 +7,14 @@ on:
       - '**.js'
       - '**.ts'
       - '**.json'
+  pull_request:
+    branches: [ "dependabot/**" ]
+
 
 permissions:
   contents: write
   pull-requests: write
-  id-token: write    
+  id-token: write
 
 jobs:
   build:
@@ -19,31 +22,27 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+
     - name: Setup Node.js 22.x
       uses: actions/setup-node@v4
       with:
         node-version: 22.x
         cache: npm
+
     - run: npm ci
+
     - name: Build
       run: npm run build
+
     - name: Commit and push dist/
       run: |
-        #git config --global user.name "dependabot-dist"
         git config user.name github-actions
         git config user.email github-actions@github.com
 
         git status
         git add dist/
-        git commit -m "dependabot dist" || echo "No changes to commit" && exit 0
-        git status
-        git push
-
-    - name: Check if dist/ is up to date
-      run: |
-        npm run build
-        if [ "$(git diff --ignore-space-at-eol ./dist | wc -l)" -gt "0" ]; then
-          echo "Detected uncommitted changes after the build. See the status below:"
-          git diff
-          exit 1
+        if [[ -n "$(git status --porcelain --untracked-files=no)" ]]; then
+          git commit -m "dependabot dist"
+          git status
+          git push
         fi
