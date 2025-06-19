@@ -16,7 +16,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'sparebank1utvikling/actions-cache-s3'
     steps:
     - name: Checkout
       uses: actions/checkout@v4
