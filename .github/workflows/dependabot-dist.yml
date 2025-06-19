@@ -33,8 +33,10 @@ jobs:
         git config user.name github-actions
         git config user.email github-actions@github.com
 
+        git status
         git add dist/
         git commit -m "dependabot dist" || echo "No changes to commit" && exit 0
+        git status
         git push
 
     - name: Check if dist/ is up to date
