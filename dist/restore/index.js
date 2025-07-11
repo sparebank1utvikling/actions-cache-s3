@@ -4713,7 +4713,7 @@ Object.defineProperty(exports, "AwsCrc32c", ({ enumerable: true, get: function (
 // SPDX-License-Identifier: Apache-2.0
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.convertToBuffer = void 0;
-var util_utf8_1 = __nccwpck_require__(1577);
+var util_utf8_1 = __nccwpck_require__(7515);
 // Quick polyfill
 var fromUtf8 = typeof Buffer !== "undefined" && Buffer.from
     ? function (input) { return Buffer.from(input, "utf8"); }
@@ -4825,6 +4825,162 @@ exports.uint32ArrayFrom = uint32ArrayFrom;
 
 /***/ }),
 
+/***/ 6375:
+/***/ ((module) => {
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.ts
+var src_exports = {};
+__export(src_exports, {
+  isArrayBuffer: () => isArrayBuffer
+});
+module.exports = __toCommonJS(src_exports);
+var isArrayBuffer = /* @__PURE__ */ __name((arg) => typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer || Object.prototype.toString.call(arg) === "[object ArrayBuffer]", "isArrayBuffer");
+// Annotate the CommonJS export names for ESM import in node:
+
+0 && (0);
+
+
+
+/***/ }),
+
+/***/ 9077:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.ts
+var src_exports = {};
+__export(src_exports, {
+  fromArrayBuffer: () => fromArrayBuffer,
+  fromString: () => fromString
+});
+module.exports = __toCommonJS(src_exports);
+var import_is_array_buffer = __nccwpck_require__(6375);
+var import_buffer = __nccwpck_require__(181);
+var fromArrayBuffer = /* @__PURE__ */ __name((input, offset = 0, length = input.byteLength - offset) => {
+  if (!(0, import_is_array_buffer.isArrayBuffer)(input)) {
+    throw new TypeError(`The "input" argument must be ArrayBuffer. Received type ${typeof input} (${input})`);
+  }
+  return import_buffer.Buffer.from(input, offset, length);
+}, "fromArrayBuffer");
+var fromString = /* @__PURE__ */ __name((input, encoding) => {
+  if (typeof input !== "string") {
+    throw new TypeError(`The "input" argument must be of type string. Received type ${typeof input} (${input})`);
+  }
+  return encoding ? import_buffer.Buffer.from(input, encoding) : import_buffer.Buffer.from(input);
+}, "fromString");
+// Annotate the CommonJS export names for ESM import in node:
+
+0 && (0);
+
+
+
+/***/ }),
+
+/***/ 7515:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.ts
+var src_exports = {};
+__export(src_exports, {
+  fromUtf8: () => fromUtf8,
+  toUint8Array: () => toUint8Array,
+  toUtf8: () => toUtf8
+});
+module.exports = __toCommonJS(src_exports);
+
+// src/fromUtf8.ts
+var import_util_buffer_from = __nccwpck_require__(9077);
+var fromUtf8 = /* @__PURE__ */ __name((input) => {
+  const buf = (0, import_util_buffer_from.fromString)(input, "utf8");
+  return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength / Uint8Array.BYTES_PER_ELEMENT);
+}, "fromUtf8");
+
+// src/toUint8Array.ts
+var toUint8Array = /* @__PURE__ */ __name((data) => {
+  if (typeof data === "string") {
+    return fromUtf8(data);
+  }
+  if (ArrayBuffer.isView(data)) {
+    return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
+  }
+  return new Uint8Array(data);
+}, "toUint8Array");
+
+// src/toUtf8.ts
+
+var toUtf8 = /* @__PURE__ */ __name((input) => {
+  if (typeof input === "string") {
+    return input;
+  }
+  if (typeof input !== "object" || typeof input.byteOffset !== "number" || typeof input.byteLength !== "number") {
+    throw new Error("@smithy/util-utf8: toUtf8 encoder function only accepts string | Uint8Array.");
+  }
+  return (0, import_util_buffer_from.fromArrayBuffer)(input.buffer, input.byteOffset, input.byteLength).toString("utf8");
+}, "toUtf8");
+// Annotate the CommonJS export names for ESM import in node:
+
+0 && (0);
+
+
+
+/***/ }),
+
 /***/ 7168:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
@@ -4911,7 +5067,7 @@ const createEndpointRuleSetHttpAuthSchemeProvider = (defaultEndpointResolver, de
                     const name = s.name.toLowerCase();
                     return name !== "sigv4a" && name.startsWith("sigv4");
                 });
-                if (!signature_v4_multi_region_1.signatureV4CrtContainer.CrtSignerV4 && sigv4Present) {
+                if (signature_v4_multi_region_1.SignatureV4MultiRegion.sigv4aDependency() === "none" && sigv4Present) {
                     continue;
                 }
             }
@@ -5142,6 +5298,7 @@ __export(index_exports, {
   HeadObjectCommand: () => HeadObjectCommand,
   HeadObjectOutputFilterSensitiveLog: () => HeadObjectOutputFilterSensitiveLog,
   HeadObjectRequestFilterSensitiveLog: () => HeadObjectRequestFilterSensitiveLog,
+  IdempotencyParameterMismatch: () => IdempotencyParameterMismatch,
   IntelligentTieringAccessTier: () => IntelligentTieringAccessTier,
   IntelligentTieringStatus: () => IntelligentTieringStatus,
   InvalidObjectState: () => InvalidObjectState,
@@ -5227,6 +5384,7 @@ __export(index_exports, {
   PutObjectTaggingCommand: () => PutObjectTaggingCommand,
   PutPublicAccessBlockCommand: () => PutPublicAccessBlockCommand,
   QuoteFields: () => QuoteFields,
+  RenameObjectCommand: () => RenameObjectCommand,
   ReplicaModificationsStatus: () => ReplicaModificationsStatus,
   ReplicationRuleStatus: () => ReplicationRuleStatus,
   ReplicationStatus: () => ReplicationStatus,
@@ -5402,6 +5560,7 @@ var ChecksumType = {
 };
 var ServerSideEncryption = {
   AES256: "AES256",
+  aws_fsx: "aws:fsx",
   aws_kms: "aws:kms",
   aws_kms_dsse: "aws:kms:dsse"
 };
@@ -5436,6 +5595,7 @@ var ObjectLockMode = {
 var StorageClass = {
   DEEP_ARCHIVE: "DEEP_ARCHIVE",
   EXPRESS_ONEZONE: "EXPRESS_ONEZONE",
+  FSX_OPENZFS: "FSX_OPENZFS",
   GLACIER: "GLACIER",
   GLACIER_IR: "GLACIER_IR",
   INTELLIGENT_TIERING: "INTELLIGENT_TIERING",
@@ -5840,6 +6000,7 @@ var EncodingType = {
 var ObjectStorageClass = {
   DEEP_ARCHIVE: "DEEP_ARCHIVE",
   EXPRESS_ONEZONE: "EXPRESS_ONEZONE",
+  FSX_OPENZFS: "FSX_OPENZFS",
   GLACIER: "GLACIER",
   GLACIER_IR: "GLACIER_IR",
   INTELLIGENT_TIERING: "INTELLIGENT_TIERING",
@@ -5997,6 +6158,7 @@ var import_xml_builder = __nccwpck_require__(4274);
 var import_core2 = __nccwpck_require__(402);
 var import_protocol_http = __nccwpck_require__(2356);
 
+var import_uuid = __nccwpck_require__(2048);
 
 // src/models/models_1.ts
 
@@ -6074,6 +6236,24 @@ var TooManyParts = class _TooManyParts extends S3ServiceException {
       ...opts
     });
     Object.setPrototypeOf(this, _TooManyParts.prototype);
+  }
+};
+var IdempotencyParameterMismatch = class _IdempotencyParameterMismatch extends S3ServiceException {
+  static {
+    __name(this, "IdempotencyParameterMismatch");
+  }
+  name = "IdempotencyParameterMismatch";
+  $fault = "client";
+  /**
+   * @internal
+   */
+  constructor(opts) {
+    super({
+      name: "IdempotencyParameterMismatch",
+      $fault: "client",
+      ...opts
+    });
+    Object.setPrototypeOf(this, _IdempotencyParameterMismatch.prototype);
   }
 };
 var ObjectAlreadyInActiveTierError = class _ObjectAlreadyInActiveTierError extends S3ServiceException {
@@ -6499,7 +6679,9 @@ var se_DeleteBucketEncryptionCommand = /* @__PURE__ */ __name(async (input, cont
 }, "se_DeleteBucketEncryptionCommand");
 var se_DeleteBucketIntelligentTieringConfigurationCommand = /* @__PURE__ */ __name(async (input, context) => {
   const b = (0, import_core2.requestBuilder)(input, context);
-  const headers = {};
+  const headers = (0, import_smithy_client.map)({}, import_smithy_client.isSerializableHeaderValue, {
+    [_xaebo]: input[_EBO]
+  });
   b.bp("/");
   b.p("Bucket", () => input.Bucket, "{Bucket}", false);
   const query = (0, import_smithy_client.map)({
@@ -6791,7 +6973,9 @@ var se_GetBucketEncryptionCommand = /* @__PURE__ */ __name(async (input, context
 }, "se_GetBucketEncryptionCommand");
 var se_GetBucketIntelligentTieringConfigurationCommand = /* @__PURE__ */ __name(async (input, context) => {
   const b = (0, import_core2.requestBuilder)(input, context);
-  const headers = {};
+  const headers = (0, import_smithy_client.map)({}, import_smithy_client.isSerializableHeaderValue, {
+    [_xaebo]: input[_EBO]
+  });
   b.bp("/");
   b.p("Bucket", () => input.Bucket, "{Bucket}", false);
   const query = (0, import_smithy_client.map)({
@@ -7246,7 +7430,9 @@ var se_ListBucketAnalyticsConfigurationsCommand = /* @__PURE__ */ __name(async (
 }, "se_ListBucketAnalyticsConfigurationsCommand");
 var se_ListBucketIntelligentTieringConfigurationsCommand = /* @__PURE__ */ __name(async (input, context) => {
   const b = (0, import_core2.requestBuilder)(input, context);
-  const headers = {};
+  const headers = (0, import_smithy_client.map)({}, import_smithy_client.isSerializableHeaderValue, {
+    [_xaebo]: input[_EBO]
+  });
   b.bp("/");
   b.p("Bucket", () => input.Bucket, "{Bucket}", false);
   const query = (0, import_smithy_client.map)({
@@ -7552,9 +7738,10 @@ var se_PutBucketEncryptionCommand = /* @__PURE__ */ __name(async (input, context
 }, "se_PutBucketEncryptionCommand");
 var se_PutBucketIntelligentTieringConfigurationCommand = /* @__PURE__ */ __name(async (input, context) => {
   const b = (0, import_core2.requestBuilder)(input, context);
-  const headers = {
-    "content-type": "application/xml"
-  };
+  const headers = (0, import_smithy_client.map)({}, import_smithy_client.isSerializableHeaderValue, {
+    "content-type": "application/xml",
+    [_xaebo]: input[_EBO]
+  });
   b.bp("/");
   b.p("Bucket", () => input.Bucket, "{Bucket}", false);
   const query = (0, import_smithy_client.map)({
@@ -8086,6 +8273,30 @@ var se_PutPublicAccessBlockCommand = /* @__PURE__ */ __name(async (input, contex
   b.m("PUT").h(headers).q(query).b(body);
   return b.build();
 }, "se_PutPublicAccessBlockCommand");
+var se_RenameObjectCommand = /* @__PURE__ */ __name(async (input, context) => {
+  const b = (0, import_core2.requestBuilder)(input, context);
+  const headers = (0, import_smithy_client.map)({}, import_smithy_client.isSerializableHeaderValue, {
+    [_xars]: input[_RS],
+    [_im]: input[_DIM],
+    [_inm]: input[_DINM],
+    [_ims]: [() => (0, import_smithy_client.isSerializableHeaderValue)(input[_DIMS]), () => (0, import_smithy_client.dateToUtcString)(input[_DIMS]).toString()],
+    [_ius]: [() => (0, import_smithy_client.isSerializableHeaderValue)(input[_DIUS]), () => (0, import_smithy_client.dateToUtcString)(input[_DIUS]).toString()],
+    [_xarsim]: input[_SIM],
+    [_xarsinm]: input[_SINM],
+    [_xarsims]: [() => (0, import_smithy_client.isSerializableHeaderValue)(input[_SIMS]), () => (0, import_smithy_client.dateToUtcString)(input[_SIMS]).toString()],
+    [_xarsius]: [() => (0, import_smithy_client.isSerializableHeaderValue)(input[_SIUS]), () => (0, import_smithy_client.dateToUtcString)(input[_SIUS]).toString()],
+    [_xact_]: input[_CTl] ?? (0, import_uuid.v4)()
+  });
+  b.bp("/{Key+}");
+  b.p("Bucket", () => input.Bucket, "{Bucket}", false);
+  b.p("Key", () => input.Key, "{Key+}", true);
+  const query = (0, import_smithy_client.map)({
+    [_rO]: [, ""]
+  });
+  let body;
+  b.m("PUT").h(headers).q(query).b(body);
+  return b.build();
+}, "se_RenameObjectCommand");
 var se_RestoreObjectCommand = /* @__PURE__ */ __name(async (input, context) => {
   const b = (0, import_core2.requestBuilder)(input, context);
   const headers = (0, import_smithy_client.map)({}, import_smithy_client.isSerializableHeaderValue, {
@@ -8256,7 +8467,7 @@ var se_WriteGetObjectResponseCommand = /* @__PURE__ */ __name(async (input, cont
       () => (0, import_smithy_client.serializeDateTime)(input[_OLRUD]).toString()
     ],
     [_xafhxampc]: [() => (0, import_smithy_client.isSerializableHeaderValue)(input[_PC]), () => input[_PC].toString()],
-    [_xafhxars]: input[_RS],
+    [_xafhxars]: input[_RSe],
     [_xafhxarc]: input[_RC],
     [_xafhxar]: input[_Re],
     [_xafhxasse]: input[_SSE],
@@ -8374,7 +8585,8 @@ var de_CreateBucketCommand = /* @__PURE__ */ __name(async (output, context) => {
   }
   const contents = (0, import_smithy_client.map)({
     $metadata: deserializeMetadata(output),
-    [_L]: [, output.headers[_lo]]
+    [_L]: [, output.headers[_lo]],
+    [_BA]: [, output.headers[_xaba]]
   });
   await (0, import_smithy_client.collectBody)(output.body, context);
   return contents;
@@ -8966,7 +9178,7 @@ var de_GetObjectCommand = /* @__PURE__ */ __name(async (output, context) => {
     [_BKE]: [() => void 0 !== output.headers[_xassebke], () => (0, import_smithy_client.parseBoolean)(output.headers[_xassebke])],
     [_SC]: [, output.headers[_xasc]],
     [_RC]: [, output.headers[_xarc]],
-    [_RS]: [, output.headers[_xars]],
+    [_RSe]: [, output.headers[_xars_]],
     [_PC]: [() => void 0 !== output.headers[_xampc], () => (0, import_smithy_client.strictParseInt32)(output.headers[_xampc])],
     [_TC]: [() => void 0 !== output.headers[_xatc], () => (0, import_smithy_client.strictParseInt32)(output.headers[_xatc])],
     [_OLM]: [, output.headers[_xaolm]],
@@ -9115,6 +9327,7 @@ var de_HeadBucketCommand = /* @__PURE__ */ __name(async (output, context) => {
   }
   const contents = (0, import_smithy_client.map)({
     $metadata: deserializeMetadata(output),
+    [_BA]: [, output.headers[_xaba]],
     [_BLT]: [, output.headers[_xablt]],
     [_BLN]: [, output.headers[_xabln]],
     [_BR]: [, output.headers[_xabr]],
@@ -9161,8 +9374,9 @@ var de_HeadObjectCommand = /* @__PURE__ */ __name(async (output, context) => {
     [_BKE]: [() => void 0 !== output.headers[_xassebke], () => (0, import_smithy_client.parseBoolean)(output.headers[_xassebke])],
     [_SC]: [, output.headers[_xasc]],
     [_RC]: [, output.headers[_xarc]],
-    [_RS]: [, output.headers[_xars]],
+    [_RSe]: [, output.headers[_xars_]],
     [_PC]: [() => void 0 !== output.headers[_xampc], () => (0, import_smithy_client.strictParseInt32)(output.headers[_xampc])],
+    [_TC]: [() => void 0 !== output.headers[_xatc], () => (0, import_smithy_client.strictParseInt32)(output.headers[_xatc])],
     [_OLM]: [, output.headers[_xaolm]],
     [_OLRUD]: [
       () => void 0 !== output.headers[_xaolrud],
@@ -9851,6 +10065,16 @@ var de_PutPublicAccessBlockCommand = /* @__PURE__ */ __name(async (output, conte
   await (0, import_smithy_client.collectBody)(output.body, context);
   return contents;
 }, "de_PutPublicAccessBlockCommand");
+var de_RenameObjectCommand = /* @__PURE__ */ __name(async (output, context) => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents = (0, import_smithy_client.map)({
+    $metadata: deserializeMetadata(output)
+  });
+  await (0, import_smithy_client.collectBody)(output.body, context);
+  return contents;
+}, "de_RenameObjectCommand");
 var de_RestoreObjectCommand = /* @__PURE__ */ __name(async (output, context) => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
     return de_CommandError(output, context);
@@ -9967,6 +10191,9 @@ var de_CommandError = /* @__PURE__ */ __name(async (output, context) => {
     case "TooManyParts":
     case "com.amazonaws.s3#TooManyParts":
       throw await de_TooManyPartsRes(parsedOutput, context);
+    case "IdempotencyParameterMismatch":
+    case "com.amazonaws.s3#IdempotencyParameterMismatch":
+      throw await de_IdempotencyParameterMismatchRes(parsedOutput, context);
     case "ObjectAlreadyInActiveTierError":
     case "com.amazonaws.s3#ObjectAlreadyInActiveTierError":
       throw await de_ObjectAlreadyInActiveTierErrorRes(parsedOutput, context);
@@ -10007,6 +10234,15 @@ var de_EncryptionTypeMismatchRes = /* @__PURE__ */ __name(async (parsedOutput, c
   });
   return (0, import_smithy_client.decorateServiceException)(exception, parsedOutput.body);
 }, "de_EncryptionTypeMismatchRes");
+var de_IdempotencyParameterMismatchRes = /* @__PURE__ */ __name(async (parsedOutput, context) => {
+  const contents = (0, import_smithy_client.map)({});
+  const data = parsedOutput.body;
+  const exception = new IdempotencyParameterMismatch({
+    $metadata: deserializeMetadata(parsedOutput),
+    ...contents
+  });
+  return (0, import_smithy_client.decorateServiceException)(exception, parsedOutput.body);
+}, "de_IdempotencyParameterMismatchRes");
 var de_InvalidObjectStateRes = /* @__PURE__ */ __name(async (parsedOutput, context) => {
   const contents = (0, import_smithy_client.map)({});
   const data = parsedOutput.body;
@@ -10130,7 +10366,7 @@ var de_SelectObjectContentEventStream = /* @__PURE__ */ __name((output, context)
         End: await de_EndEvent_event(event["End"], context)
       };
     }
-    return { $unknown: output };
+    return { $unknown: event };
   });
 }, "de_SelectObjectContentEventStream");
 var de_ContinuationEvent_event = /* @__PURE__ */ __name(async (output, context) => {
@@ -10360,6 +10596,7 @@ var se_CreateBucketConfiguration = /* @__PURE__ */ __name((input, context) => {
   if (input[_B] != null) {
     bn.c(se_BucketInfo(input[_B], context).n(_B));
   }
+  bn.lc(input, "Tags", "Tags", () => se_TagSet(input[_Tag], context));
   return bn;
 }, "se_CreateBucketConfiguration");
 var se_CSVInput = /* @__PURE__ */ __name((input, context) => {
@@ -11569,6 +11806,9 @@ var de_Bucket = /* @__PURE__ */ __name((output, context) => {
   if (output[_BR] != null) {
     contents[_BR] = (0, import_smithy_client.expectString)(output[_BR]);
   }
+  if (output[_BA] != null) {
+    contents[_BA] = (0, import_smithy_client.expectString)(output[_BA]);
+  }
   return contents;
 }, "de_Bucket");
 var de_Buckets = /* @__PURE__ */ __name((output, context) => {
@@ -12413,8 +12653,8 @@ var de__Object = /* @__PURE__ */ __name((output, context) => {
   if (output[_O] != null) {
     contents[_O] = de_Owner(output[_O], context);
   }
-  if (output[_RSe] != null) {
-    contents[_RSe] = de_RestoreStatus(output[_RSe], context);
+  if (output[_RSes] != null) {
+    contents[_RSes] = de_RestoreStatus(output[_RSes], context);
   }
   return contents;
 }, "de__Object");
@@ -12516,8 +12756,8 @@ var de_ObjectVersion = /* @__PURE__ */ __name((output, context) => {
   if (output[_O] != null) {
     contents[_O] = de_Owner(output[_O], context);
   }
-  if (output[_RSe] != null) {
-    contents[_RSe] = de_RestoreStatus(output[_RSe], context);
+  if (output[_RSes] != null) {
+    contents[_RSes] = de_RestoreStatus(output[_RSes], context);
   }
   return contents;
 }, "de_ObjectVersion");
@@ -13089,6 +13329,7 @@ var _ASSEBD = "ApplyServerSideEncryptionByDefault";
 var _AT = "AccessTier";
 var _Ac = "Account";
 var _B = "Bucket";
+var _BA = "BucketArn";
 var _BAI = "BucketAccountId";
 var _BAS = "BucketAccelerateStatus";
 var _BGR = "BypassGovernanceRetention";
@@ -13151,6 +13392,7 @@ var _CSVI = "CopySourceVersionId";
 var _CSVIn = "CSVInput";
 var _CSVO = "CSVOutput";
 var _CT = "ChecksumType";
+var _CTl = "ClientToken";
 var _CTo = "ContentType";
 var _CTom = "CompressionType";
 var _CTon = "ContinuationToken";
@@ -13162,6 +13404,10 @@ var _Con = "Condition";
 var _D = "Delimiter";
 var _DAI = "DaysAfterInitiation";
 var _DE = "DataExport";
+var _DIM = "DestinationIfMatch";
+var _DIMS = "DestinationIfModifiedSince";
+var _DINM = "DestinationIfNoneMatch";
+var _DIUS = "DestinationIfUnmodifiedSince";
 var _DM = "DeleteMarker";
 var _DMR = "DeleteMarkerReplication";
 var _DMRS = "DeleteMarkerReplicationStatus";
@@ -13427,8 +13673,9 @@ var _RRe = "ReplicationRule";
 var _RRes = "RestoreRequest";
 var _RRo = "RoutingRules";
 var _RRou = "RoutingRule";
-var _RS = "ReplicationStatus";
-var _RSe = "RestoreStatus";
+var _RS = "RenameSource";
+var _RSe = "ReplicationStatus";
+var _RSes = "RestoreStatus";
 var _RT = "RequestToken";
 var _RTS = "ReplicationTimeStatus";
 var _RTV = "ReplicationTimeValue";
@@ -13449,6 +13696,10 @@ var _SCADE = "StorageClassAnalysisDataExport";
 var _SCASV = "StorageClassAnalysisSchemaVersion";
 var _SCt = "StatusCode";
 var _SDV = "SkipDestinationValidation";
+var _SIM = "SourceIfMatch";
+var _SIMS = "SourceIfModifiedSince";
+var _SINM = "SourceIfNoneMatch";
+var _SIUS = "SourceIfUnmodifiedSince";
 var _SK = "SSE-KMS";
 var _SKEO = "SseKmsEncryptedObjects";
 var _SKEOS = "SseKmsEncryptedObjectsStatus";
@@ -13589,6 +13840,7 @@ var _pS = "policyStatus";
 var _pnm = "part-number-marker";
 var _pr = "prefix";
 var _r = "replication";
+var _rO = "renameObject";
 var _rP = "requestPayment";
 var _ra = "range";
 var _rcc = "response-cache-control";
@@ -13620,6 +13872,7 @@ var _xaad = "x-amz-abort-date";
 var _xaapa = "x-amz-access-point-alias";
 var _xaari = "x-amz-abort-rule-id";
 var _xaas = "x-amz-archive-status";
+var _xaba = "x-amz-bucket-arn";
 var _xabgr = "x-amz-bypass-governance-retention";
 var _xabln = "x-amz-bucket-location-name";
 var _xablt = "x-amz-bucket-location-type";
@@ -13646,6 +13899,7 @@ var _xacssseck = "x-amz-copy-source-server-side-encryption-customer-key";
 var _xacssseckm = "x-amz-copy-source-server-side-encryption-customer-key-md5";
 var _xacsvi = "x-amz-copy-source-version-id";
 var _xact = "x-amz-checksum-type";
+var _xact_ = "x-amz-client-token";
 var _xadm = "x-amz-delete-marker";
 var _xae = "x-amz-expiration";
 var _xaebo = "x-amz-expected-bucket-owner";
@@ -13712,7 +13966,12 @@ var _xarc = "x-amz-request-charged";
 var _xarop = "x-amz-restore-output-path";
 var _xarp = "x-amz-request-payer";
 var _xarr = "x-amz-request-route";
-var _xars = "x-amz-replication-status";
+var _xars = "x-amz-rename-source";
+var _xars_ = "x-amz-replication-status";
+var _xarsim = "x-amz-rename-source-if-match";
+var _xarsims = "x-amz-rename-source-if-modified-since";
+var _xarsinm = "x-amz-rename-source-if-none-match";
+var _xarsius = "x-amz-rename-source-if-unmodified-since";
 var _xart = "x-amz-request-token";
 var _xasc = "x-amz-storage-class";
 var _xasca = "x-amz-sdk-checksum-algorithm";
@@ -15858,9 +16117,30 @@ var PutPublicAccessBlockCommand = class extends import_smithy_client.Command.cla
   }
 };
 
+// src/commands/RenameObjectCommand.ts
+var import_middleware_sdk_s360 = __nccwpck_require__(7445);
+
+
+
+var RenameObjectCommand = class extends import_smithy_client.Command.classBuilder().ep({
+  ...commonParams,
+  Bucket: { type: "contextParams", name: "Bucket" },
+  Key: { type: "contextParams", name: "Key" }
+}).m(function(Command, cs, config, o) {
+  return [
+    (0, import_middleware_serde.getSerdePlugin)(config, this.serialize, this.deserialize),
+    (0, import_middleware_endpoint.getEndpointPlugin)(config, Command.getEndpointParameterInstructions()),
+    (0, import_middleware_sdk_s360.getThrow200ExceptionsPlugin)(config)
+  ];
+}).s("AmazonS3", "RenameObject", {}).n("S3Client", "RenameObjectCommand").f(void 0, void 0).ser(se_RenameObjectCommand).de(de_RenameObjectCommand).build() {
+  static {
+    __name(this, "RenameObjectCommand");
+  }
+};
+
 // src/commands/RestoreObjectCommand.ts
 
-var import_middleware_sdk_s360 = __nccwpck_require__(7445);
+var import_middleware_sdk_s361 = __nccwpck_require__(7445);
 
 
 
@@ -15875,7 +16155,7 @@ var RestoreObjectCommand = class extends import_smithy_client.Command.classBuild
       requestAlgorithmMember: { httpHeader: "x-amz-sdk-checksum-algorithm", name: "ChecksumAlgorithm" },
       requestChecksumRequired: false
     }),
-    (0, import_middleware_sdk_s360.getThrow200ExceptionsPlugin)(config)
+    (0, import_middleware_sdk_s361.getThrow200ExceptionsPlugin)(config)
   ];
 }).s("AmazonS3", "RestoreObject", {}).n("S3Client", "RestoreObjectCommand").f(RestoreObjectRequestFilterSensitiveLog, void 0).ser(se_RestoreObjectCommand).de(de_RestoreObjectCommand).build() {
   static {
@@ -15884,7 +16164,7 @@ var RestoreObjectCommand = class extends import_smithy_client.Command.classBuild
 };
 
 // src/commands/SelectObjectContentCommand.ts
-var import_middleware_sdk_s361 = __nccwpck_require__(7445);
+var import_middleware_sdk_s362 = __nccwpck_require__(7445);
 
 
 
@@ -15896,7 +16176,7 @@ var SelectObjectContentCommand = class extends import_smithy_client.Command.clas
   return [
     (0, import_middleware_serde.getSerdePlugin)(config, this.serialize, this.deserialize),
     (0, import_middleware_endpoint.getEndpointPlugin)(config, Command.getEndpointParameterInstructions()),
-    (0, import_middleware_sdk_s361.getThrow200ExceptionsPlugin)(config),
+    (0, import_middleware_sdk_s362.getThrow200ExceptionsPlugin)(config),
     (0, import_middleware_ssec.getSsecPlugin)(config)
   ];
 }).s("AmazonS3", "SelectObjectContent", {
@@ -15914,7 +16194,7 @@ var SelectObjectContentCommand = class extends import_smithy_client.Command.clas
 
 // src/commands/UploadPartCommand.ts
 
-var import_middleware_sdk_s362 = __nccwpck_require__(7445);
+var import_middleware_sdk_s363 = __nccwpck_require__(7445);
 
 
 
@@ -15931,7 +16211,7 @@ var UploadPartCommand = class extends import_smithy_client.Command.classBuilder(
       requestAlgorithmMember: { httpHeader: "x-amz-sdk-checksum-algorithm", name: "ChecksumAlgorithm" },
       requestChecksumRequired: false
     }),
-    (0, import_middleware_sdk_s362.getThrow200ExceptionsPlugin)(config),
+    (0, import_middleware_sdk_s363.getThrow200ExceptionsPlugin)(config),
     (0, import_middleware_ssec.getSsecPlugin)(config)
   ];
 }).s("AmazonS3", "UploadPart", {}).n("S3Client", "UploadPartCommand").f(UploadPartRequestFilterSensitiveLog, UploadPartOutputFilterSensitiveLog).ser(se_UploadPartCommand).de(de_UploadPartCommand).build() {
@@ -15941,7 +16221,7 @@ var UploadPartCommand = class extends import_smithy_client.Command.classBuilder(
 };
 
 // src/commands/UploadPartCopyCommand.ts
-var import_middleware_sdk_s363 = __nccwpck_require__(7445);
+var import_middleware_sdk_s364 = __nccwpck_require__(7445);
 
 
 
@@ -15954,7 +16234,7 @@ var UploadPartCopyCommand = class extends import_smithy_client.Command.classBuil
   return [
     (0, import_middleware_serde.getSerdePlugin)(config, this.serialize, this.deserialize),
     (0, import_middleware_endpoint.getEndpointPlugin)(config, Command.getEndpointParameterInstructions()),
-    (0, import_middleware_sdk_s363.getThrow200ExceptionsPlugin)(config),
+    (0, import_middleware_sdk_s364.getThrow200ExceptionsPlugin)(config),
     (0, import_middleware_ssec.getSsecPlugin)(config)
   ];
 }).s("AmazonS3", "UploadPartCopy", {}).n("S3Client", "UploadPartCopyCommand").f(UploadPartCopyRequestFilterSensitiveLog, UploadPartCopyOutputFilterSensitiveLog).ser(se_UploadPartCopyCommand).de(de_UploadPartCopyCommand).build() {
@@ -16076,6 +16356,7 @@ var commands = {
   PutObjectRetentionCommand,
   PutObjectTaggingCommand,
   PutPublicAccessBlockCommand,
+  RenameObjectCommand,
   RestoreObjectCommand,
   SelectObjectContentCommand,
   UploadPartCommand,
@@ -16307,7 +16588,7 @@ const smithy_client_1 = __nccwpck_require__(1411);
 const url_parser_1 = __nccwpck_require__(4494);
 const util_base64_1 = __nccwpck_require__(8385);
 const util_stream_1 = __nccwpck_require__(4252);
-const util_utf8_1 = __nccwpck_require__(5994);
+const util_utf8_1 = __nccwpck_require__(1577);
 const httpAuthSchemeProvider_1 = __nccwpck_require__(7168);
 const endpointResolver_1 = __nccwpck_require__(7526);
 const getRuntimeConfig = (config) => {
@@ -16338,168 +16619,12 @@ const getRuntimeConfig = (config) => {
         signerConstructor: config?.signerConstructor ?? signature_v4_multi_region_1.SignatureV4MultiRegion,
         signingEscapePath: config?.signingEscapePath ?? false,
         urlParser: config?.urlParser ?? url_parser_1.parseUrl,
-        useArnRegion: config?.useArnRegion ?? false,
+        useArnRegion: config?.useArnRegion ?? undefined,
         utf8Decoder: config?.utf8Decoder ?? util_utf8_1.fromUtf8,
         utf8Encoder: config?.utf8Encoder ?? util_utf8_1.toUtf8,
     };
 };
 exports.getRuntimeConfig = getRuntimeConfig;
-
-
-/***/ }),
-
-/***/ 79:
-/***/ ((module) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  isArrayBuffer: () => isArrayBuffer
-});
-module.exports = __toCommonJS(src_exports);
-var isArrayBuffer = /* @__PURE__ */ __name((arg) => typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer || Object.prototype.toString.call(arg) === "[object ArrayBuffer]", "isArrayBuffer");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 9756:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromArrayBuffer: () => fromArrayBuffer,
-  fromString: () => fromString
-});
-module.exports = __toCommonJS(src_exports);
-var import_is_array_buffer = __nccwpck_require__(79);
-var import_buffer = __nccwpck_require__(181);
-var fromArrayBuffer = /* @__PURE__ */ __name((input, offset = 0, length = input.byteLength - offset) => {
-  if (!(0, import_is_array_buffer.isArrayBuffer)(input)) {
-    throw new TypeError(`The "input" argument must be ArrayBuffer. Received type ${typeof input} (${input})`);
-  }
-  return import_buffer.Buffer.from(input, offset, length);
-}, "fromArrayBuffer");
-var fromString = /* @__PURE__ */ __name((input, encoding) => {
-  if (typeof input !== "string") {
-    throw new TypeError(`The "input" argument must be of type string. Received type ${typeof input} (${input})`);
-  }
-  return encoding ? import_buffer.Buffer.from(input, encoding) : import_buffer.Buffer.from(input);
-}, "fromString");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 5994:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromUtf8: () => fromUtf8,
-  toUint8Array: () => toUint8Array,
-  toUtf8: () => toUtf8
-});
-module.exports = __toCommonJS(src_exports);
-
-// src/fromUtf8.ts
-var import_util_buffer_from = __nccwpck_require__(9756);
-var fromUtf8 = /* @__PURE__ */ __name((input) => {
-  const buf = (0, import_util_buffer_from.fromString)(input, "utf8");
-  return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-}, "fromUtf8");
-
-// src/toUint8Array.ts
-var toUint8Array = /* @__PURE__ */ __name((data) => {
-  if (typeof data === "string") {
-    return fromUtf8(data);
-  }
-  if (ArrayBuffer.isView(data)) {
-    return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-  }
-  return new Uint8Array(data);
-}, "toUint8Array");
-
-// src/toUtf8.ts
-
-var toUtf8 = /* @__PURE__ */ __name((input) => {
-  if (typeof input === "string") {
-    return input;
-  }
-  if (typeof input !== "object" || typeof input.byteOffset !== "number" || typeof input.byteLength !== "number") {
-    throw new Error("@smithy/util-utf8: toUtf8 encoder function only accepts string | Uint8Array.");
-  }
-  return (0, import_util_buffer_from.fromArrayBuffer)(input.buffer, input.byteOffset, input.byteLength).toString("utf8");
-}, "toUtf8");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
 
 
 /***/ }),
@@ -17306,7 +17431,7 @@ const core_2 = __nccwpck_require__(402);
 const smithy_client_1 = __nccwpck_require__(1411);
 const url_parser_1 = __nccwpck_require__(4494);
 const util_base64_1 = __nccwpck_require__(8385);
-const util_utf8_1 = __nccwpck_require__(5969);
+const util_utf8_1 = __nccwpck_require__(1577);
 const httpAuthSchemeProvider_1 = __nccwpck_require__(2041);
 const endpointResolver_1 = __nccwpck_require__(3903);
 const getRuntimeConfig = (config) => {
@@ -17338,162 +17463,6 @@ const getRuntimeConfig = (config) => {
     };
 };
 exports.getRuntimeConfig = getRuntimeConfig;
-
-
-/***/ }),
-
-/***/ 6186:
-/***/ ((module) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  isArrayBuffer: () => isArrayBuffer
-});
-module.exports = __toCommonJS(src_exports);
-var isArrayBuffer = /* @__PURE__ */ __name((arg) => typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer || Object.prototype.toString.call(arg) === "[object ArrayBuffer]", "isArrayBuffer");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 4351:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromArrayBuffer: () => fromArrayBuffer,
-  fromString: () => fromString
-});
-module.exports = __toCommonJS(src_exports);
-var import_is_array_buffer = __nccwpck_require__(6186);
-var import_buffer = __nccwpck_require__(181);
-var fromArrayBuffer = /* @__PURE__ */ __name((input, offset = 0, length = input.byteLength - offset) => {
-  if (!(0, import_is_array_buffer.isArrayBuffer)(input)) {
-    throw new TypeError(`The "input" argument must be ArrayBuffer. Received type ${typeof input} (${input})`);
-  }
-  return import_buffer.Buffer.from(input, offset, length);
-}, "fromArrayBuffer");
-var fromString = /* @__PURE__ */ __name((input, encoding) => {
-  if (typeof input !== "string") {
-    throw new TypeError(`The "input" argument must be of type string. Received type ${typeof input} (${input})`);
-  }
-  return encoding ? import_buffer.Buffer.from(input, encoding) : import_buffer.Buffer.from(input);
-}, "fromString");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 5969:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromUtf8: () => fromUtf8,
-  toUint8Array: () => toUint8Array,
-  toUtf8: () => toUtf8
-});
-module.exports = __toCommonJS(src_exports);
-
-// src/fromUtf8.ts
-var import_util_buffer_from = __nccwpck_require__(4351);
-var fromUtf8 = /* @__PURE__ */ __name((input) => {
-  const buf = (0, import_util_buffer_from.fromString)(input, "utf8");
-  return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-}, "fromUtf8");
-
-// src/toUint8Array.ts
-var toUint8Array = /* @__PURE__ */ __name((data) => {
-  if (typeof data === "string") {
-    return fromUtf8(data);
-  }
-  if (ArrayBuffer.isView(data)) {
-    return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-  }
-  return new Uint8Array(data);
-}, "toUint8Array");
-
-// src/toUtf8.ts
-
-var toUtf8 = /* @__PURE__ */ __name((input) => {
-  if (typeof input === "string") {
-    return input;
-  }
-  if (typeof input !== "object" || typeof input.byteOffset !== "number" || typeof input.byteLength !== "number") {
-    throw new Error("@smithy/util-utf8: toUtf8 encoder function only accepts string | Uint8Array.");
-  }
-  return (0, import_util_buffer_from.fromArrayBuffer)(input.buffer, input.byteOffset, input.byteLength).toString("utf8");
-}, "toUtf8");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
 
 
 /***/ }),
@@ -17542,6 +17511,7 @@ __export(index_exports, {
   emitWarningIfUnsupportedVersion: () => emitWarningIfUnsupportedVersion,
   setCredentialFeature: () => setCredentialFeature,
   setFeature: () => setFeature,
+  setTokenFeature: () => setTokenFeature,
   state: () => state
 });
 module.exports = __toCommonJS(index_exports);
@@ -17587,6 +17557,16 @@ function setFeature(context, feature, value) {
   context.__aws_sdk_context.features[feature] = value;
 }
 __name(setFeature, "setFeature");
+
+// src/submodules/client/setTokenFeature.ts
+function setTokenFeature(token, feature, value) {
+  if (!token.$source) {
+    token.$source = {};
+  }
+  token.$source[feature] = value;
+  return token;
+}
+__name(setTokenFeature, "setTokenFeature");
 // Annotate the CommonJS export names for ESM import in node:
 0 && (0);
 
@@ -18008,6 +17988,19 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/submodules/protocols/index.ts
 var index_exports = {};
 __export(index_exports, {
+  AwsEc2QueryProtocol: () => AwsEc2QueryProtocol,
+  AwsJson1_0Protocol: () => AwsJson1_0Protocol,
+  AwsJson1_1Protocol: () => AwsJson1_1Protocol,
+  AwsJsonRpcProtocol: () => AwsJsonRpcProtocol,
+  AwsQueryProtocol: () => AwsQueryProtocol,
+  AwsRestJsonProtocol: () => AwsRestJsonProtocol,
+  AwsRestXmlProtocol: () => AwsRestXmlProtocol,
+  JsonCodec: () => JsonCodec,
+  JsonShapeDeserializer: () => JsonShapeDeserializer,
+  JsonShapeSerializer: () => JsonShapeSerializer,
+  XmlCodec: () => XmlCodec,
+  XmlShapeDeserializer: () => XmlShapeDeserializer,
+  XmlShapeSerializer: () => XmlShapeSerializer,
   _toBool: () => _toBool,
   _toNum: () => _toNum,
   _toStr: () => _toStr,
@@ -18076,21 +18069,50 @@ var _toNum = /* @__PURE__ */ __name((val) => {
   return val;
 }, "_toNum");
 
-// src/submodules/protocols/json/awsExpectUnion.ts
-var import_smithy_client = __nccwpck_require__(1411);
-var awsExpectUnion = /* @__PURE__ */ __name((value) => {
-  if (value == null) {
-    return void 0;
+// src/submodules/protocols/json/AwsJsonRpcProtocol.ts
+var import_protocols = __nccwpck_require__(3422);
+var import_schema3 = __nccwpck_require__(6890);
+var import_util_body_length_browser = __nccwpck_require__(2098);
+
+// src/submodules/protocols/ConfigurableSerdeContext.ts
+var SerdeContextConfig = class {
+  static {
+    __name(this, "SerdeContextConfig");
   }
-  if (typeof value === "object" && "__type" in value) {
-    delete value.__type;
+  serdeContext;
+  setSerdeContext(serdeContext) {
+    this.serdeContext = serdeContext;
   }
-  return (0, import_smithy_client.expectUnion)(value);
-}, "awsExpectUnion");
+};
+
+// src/submodules/protocols/json/JsonShapeDeserializer.ts
+var import_schema = __nccwpck_require__(6890);
+var import_serde2 = __nccwpck_require__(2430);
+var import_util_base64 = __nccwpck_require__(8385);
+
+// src/submodules/protocols/json/jsonReviver.ts
+var import_serde = __nccwpck_require__(2430);
+function jsonReviver(key, value, context) {
+  if (context?.source) {
+    const numericString = context.source;
+    if (typeof value === "number") {
+      if (value > Number.MAX_SAFE_INTEGER || value < Number.MIN_SAFE_INTEGER || numericString !== String(value)) {
+        const isFractional = numericString.includes(".");
+        if (isFractional) {
+          return new import_serde.NumericValue(numericString, "bigDecimal");
+        } else {
+          return BigInt(numericString);
+        }
+      }
+    }
+  }
+  return value;
+}
+__name(jsonReviver, "jsonReviver");
 
 // src/submodules/protocols/common.ts
-var import_smithy_client2 = __nccwpck_require__(1411);
-var collectBodyString = /* @__PURE__ */ __name((streamBody, context) => (0, import_smithy_client2.collectBody)(streamBody, context).then((body) => context.utf8Encoder(body)), "collectBodyString");
+var import_smithy_client = __nccwpck_require__(1411);
+var collectBodyString = /* @__PURE__ */ __name((streamBody, context) => (0, import_smithy_client.collectBody)(streamBody, context).then((body) => context.utf8Encoder(body)), "collectBodyString");
 
 // src/submodules/protocols/json/parseJsonBody.ts
 var parseJsonBody = /* @__PURE__ */ __name((streamBody, context) => collectBodyString(streamBody, context).then((encoded) => {
@@ -18146,12 +18168,1028 @@ var loadRestJsonErrorCode = /* @__PURE__ */ __name((output, data) => {
   }
 }, "loadRestJsonErrorCode");
 
-// src/submodules/protocols/xml/parseXmlBody.ts
+// src/submodules/protocols/json/JsonShapeDeserializer.ts
+var JsonShapeDeserializer = class extends SerdeContextConfig {
+  constructor(settings) {
+    super();
+    this.settings = settings;
+  }
+  static {
+    __name(this, "JsonShapeDeserializer");
+  }
+  async read(schema, data) {
+    return this._read(
+      schema,
+      typeof data === "string" ? JSON.parse(data, jsonReviver) : await parseJsonBody(data, this.serdeContext)
+    );
+  }
+  readObject(schema, data) {
+    return this._read(schema, data);
+  }
+  _read(schema, value) {
+    const isObject = value !== null && typeof value === "object";
+    const ns = import_schema.NormalizedSchema.of(schema);
+    if (ns.isListSchema() && Array.isArray(value)) {
+      const listMember = ns.getValueSchema();
+      const out = [];
+      const sparse = !!ns.getMergedTraits().sparse;
+      for (const item of value) {
+        if (sparse || item != null) {
+          out.push(this._read(listMember, item));
+        }
+      }
+      return out;
+    } else if (ns.isMapSchema() && isObject) {
+      const mapMember = ns.getValueSchema();
+      const out = {};
+      const sparse = !!ns.getMergedTraits().sparse;
+      for (const [_k, _v] of Object.entries(value)) {
+        if (sparse || _v != null) {
+          out[_k] = this._read(mapMember, _v);
+        }
+      }
+      return out;
+    } else if (ns.isStructSchema() && isObject) {
+      const out = {};
+      for (const [memberName, memberSchema] of ns.structIterator()) {
+        const fromKey = this.settings.jsonName ? memberSchema.getMergedTraits().jsonName ?? memberName : memberName;
+        const deserializedValue = this._read(memberSchema, value[fromKey]);
+        if (deserializedValue != null) {
+          out[memberName] = deserializedValue;
+        }
+      }
+      return out;
+    }
+    if (ns.isBlobSchema() && typeof value === "string") {
+      return (0, import_util_base64.fromBase64)(value);
+    }
+    const mediaType = ns.getMergedTraits().mediaType;
+    if (ns.isStringSchema() && typeof value === "string" && mediaType) {
+      const isJson = mediaType === "application/json" || mediaType.endsWith("+json");
+      if (isJson) {
+        return import_serde2.LazyJsonString.from(value);
+      }
+    }
+    if (ns.isTimestampSchema()) {
+      const options = this.settings.timestampFormat;
+      const format = options.useTrait ? ns.getSchema() === import_schema.SCHEMA.TIMESTAMP_DEFAULT ? options.default : ns.getSchema() ?? options.default : options.default;
+      switch (format) {
+        case import_schema.SCHEMA.TIMESTAMP_DATE_TIME:
+          return (0, import_serde2.parseRfc3339DateTimeWithOffset)(value);
+        case import_schema.SCHEMA.TIMESTAMP_HTTP_DATE:
+          return (0, import_serde2.parseRfc7231DateTime)(value);
+        case import_schema.SCHEMA.TIMESTAMP_EPOCH_SECONDS:
+          return (0, import_serde2.parseEpochTimestamp)(value);
+        default:
+          console.warn("Missing timestamp format, parsing value with Date constructor:", value);
+          return new Date(value);
+      }
+    }
+    if (ns.isBigIntegerSchema() && (typeof value === "number" || typeof value === "string")) {
+      return BigInt(value);
+    }
+    if (ns.isBigDecimalSchema() && value != void 0) {
+      if (value instanceof import_serde2.NumericValue) {
+        return value;
+      }
+      return new import_serde2.NumericValue(String(value), "bigDecimal");
+    }
+    if (ns.isNumericSchema() && typeof value === "string") {
+      switch (value) {
+        case "Infinity":
+          return Infinity;
+        case "-Infinity":
+          return -Infinity;
+        case "NaN":
+          return NaN;
+      }
+    }
+    return value;
+  }
+};
+
+// src/submodules/protocols/json/JsonShapeSerializer.ts
+var import_schema2 = __nccwpck_require__(6890);
+var import_serde4 = __nccwpck_require__(2430);
+var import_serde5 = __nccwpck_require__(2430);
+
+// src/submodules/protocols/json/jsonReplacer.ts
+var import_serde3 = __nccwpck_require__(2430);
+var NUMERIC_CONTROL_CHAR = String.fromCharCode(925);
+var JsonReplacer = class {
+  static {
+    __name(this, "JsonReplacer");
+  }
+  /**
+   * Stores placeholder key to true serialized value lookup.
+   */
+  values = /* @__PURE__ */ new Map();
+  counter = 0;
+  stage = 0;
+  /**
+   * Creates a jsonReplacer function that reserves big integer and big decimal values
+   * for later replacement.
+   */
+  createReplacer() {
+    if (this.stage === 1) {
+      throw new Error("@aws-sdk/core/protocols - JsonReplacer already created.");
+    }
+    if (this.stage === 2) {
+      throw new Error("@aws-sdk/core/protocols - JsonReplacer exhausted.");
+    }
+    this.stage = 1;
+    return (key, value) => {
+      if (value instanceof import_serde3.NumericValue) {
+        const v = `${NUMERIC_CONTROL_CHAR + +"nv" + this.counter++}_` + value.string;
+        this.values.set(`"${v}"`, value.string);
+        return v;
+      }
+      if (typeof value === "bigint") {
+        const s = value.toString();
+        const v = `${NUMERIC_CONTROL_CHAR + "b" + this.counter++}_` + s;
+        this.values.set(`"${v}"`, s);
+        return v;
+      }
+      return value;
+    };
+  }
+  /**
+   * Replaces placeholder keys with their true values.
+   */
+  replaceInJson(json) {
+    if (this.stage === 0) {
+      throw new Error("@aws-sdk/core/protocols - JsonReplacer not created yet.");
+    }
+    if (this.stage === 2) {
+      throw new Error("@aws-sdk/core/protocols - JsonReplacer exhausted.");
+    }
+    this.stage = 2;
+    if (this.counter === 0) {
+      return json;
+    }
+    for (const [key, value] of this.values) {
+      json = json.replace(key, value);
+    }
+    return json;
+  }
+};
+
+// src/submodules/protocols/json/JsonShapeSerializer.ts
+var JsonShapeSerializer = class extends SerdeContextConfig {
+  constructor(settings) {
+    super();
+    this.settings = settings;
+  }
+  static {
+    __name(this, "JsonShapeSerializer");
+  }
+  buffer;
+  rootSchema;
+  write(schema, value) {
+    this.rootSchema = import_schema2.NormalizedSchema.of(schema);
+    this.buffer = this._write(this.rootSchema, value);
+  }
+  flush() {
+    if (this.rootSchema?.isStructSchema() || this.rootSchema?.isDocumentSchema()) {
+      const replacer = new JsonReplacer();
+      return replacer.replaceInJson(JSON.stringify(this.buffer, replacer.createReplacer(), 0));
+    }
+    return this.buffer;
+  }
+  _write(schema, value, container) {
+    const isObject = value !== null && typeof value === "object";
+    const ns = import_schema2.NormalizedSchema.of(schema);
+    if (ns.isListSchema() && Array.isArray(value)) {
+      const listMember = ns.getValueSchema();
+      const out = [];
+      const sparse = !!ns.getMergedTraits().sparse;
+      for (const item of value) {
+        if (sparse || item != null) {
+          out.push(this._write(listMember, item));
+        }
+      }
+      return out;
+    } else if (ns.isMapSchema() && isObject) {
+      const mapMember = ns.getValueSchema();
+      const out = {};
+      const sparse = !!ns.getMergedTraits().sparse;
+      for (const [_k, _v] of Object.entries(value)) {
+        if (sparse || _v != null) {
+          out[_k] = this._write(mapMember, _v);
+        }
+      }
+      return out;
+    } else if (ns.isStructSchema() && isObject) {
+      const out = {};
+      for (const [memberName, memberSchema] of ns.structIterator()) {
+        const targetKey = this.settings.jsonName ? memberSchema.getMergedTraits().jsonName ?? memberName : memberName;
+        const serializableValue = this._write(memberSchema, value[memberName], ns);
+        if (serializableValue !== void 0) {
+          out[targetKey] = serializableValue;
+        }
+      }
+      return out;
+    }
+    if (value === null && container?.isStructSchema()) {
+      return void 0;
+    }
+    if (ns.isBlobSchema() && (value instanceof Uint8Array || typeof value === "string")) {
+      if (ns === this.rootSchema) {
+        return value;
+      }
+      if (!this.serdeContext?.base64Encoder) {
+        throw new Error("Missing base64Encoder in serdeContext");
+      }
+      return this.serdeContext?.base64Encoder(value);
+    }
+    if (ns.isTimestampSchema() && value instanceof Date) {
+      const options = this.settings.timestampFormat;
+      const format = options.useTrait ? ns.getSchema() === import_schema2.SCHEMA.TIMESTAMP_DEFAULT ? options.default : ns.getSchema() ?? options.default : options.default;
+      switch (format) {
+        case import_schema2.SCHEMA.TIMESTAMP_DATE_TIME:
+          return value.toISOString().replace(".000Z", "Z");
+        case import_schema2.SCHEMA.TIMESTAMP_HTTP_DATE:
+          return (0, import_serde4.dateToUtcString)(value);
+        case import_schema2.SCHEMA.TIMESTAMP_EPOCH_SECONDS:
+          return value.getTime() / 1e3;
+        default:
+          console.warn("Missing timestamp format, using epoch seconds", value);
+          return value.getTime() / 1e3;
+      }
+    }
+    if (ns.isNumericSchema() && typeof value === "number") {
+      if (Math.abs(value) === Infinity || isNaN(value)) {
+        return String(value);
+      }
+    }
+    const mediaType = ns.getMergedTraits().mediaType;
+    if (ns.isStringSchema() && typeof value === "string" && mediaType) {
+      const isJson = mediaType === "application/json" || mediaType.endsWith("+json");
+      if (isJson) {
+        return import_serde5.LazyJsonString.from(value);
+      }
+    }
+    return value;
+  }
+};
+
+// src/submodules/protocols/json/JsonCodec.ts
+var JsonCodec = class extends SerdeContextConfig {
+  constructor(settings) {
+    super();
+    this.settings = settings;
+  }
+  static {
+    __name(this, "JsonCodec");
+  }
+  createSerializer() {
+    const serializer = new JsonShapeSerializer(this.settings);
+    serializer.setSerdeContext(this.serdeContext);
+    return serializer;
+  }
+  createDeserializer() {
+    const deserializer = new JsonShapeDeserializer(this.settings);
+    deserializer.setSerdeContext(this.serdeContext);
+    return deserializer;
+  }
+};
+
+// src/submodules/protocols/json/AwsJsonRpcProtocol.ts
+var AwsJsonRpcProtocol = class extends import_protocols.RpcProtocol {
+  static {
+    __name(this, "AwsJsonRpcProtocol");
+  }
+  serializer;
+  deserializer;
+  codec;
+  constructor({ defaultNamespace }) {
+    super({
+      defaultNamespace
+    });
+    this.codec = new JsonCodec({
+      timestampFormat: {
+        useTrait: true,
+        default: import_schema3.SCHEMA.TIMESTAMP_EPOCH_SECONDS
+      },
+      jsonName: false
+    });
+    this.serializer = this.codec.createSerializer();
+    this.deserializer = this.codec.createDeserializer();
+  }
+  async serializeRequest(operationSchema, input, context) {
+    const request = await super.serializeRequest(operationSchema, input, context);
+    if (!request.path.endsWith("/")) {
+      request.path += "/";
+    }
+    Object.assign(request.headers, {
+      "content-type": `application/x-amz-json-${this.getJsonRpcVersion()}`,
+      "x-amz-target": (this.getJsonRpcVersion() === "1.0" ? `JsonRpc10.` : `JsonProtocol.`) + import_schema3.NormalizedSchema.of(operationSchema).getName()
+    });
+    if ((0, import_schema3.deref)(operationSchema.input) === "unit" || !request.body) {
+      request.body = "{}";
+    }
+    try {
+      request.headers["content-length"] = String((0, import_util_body_length_browser.calculateBodyLength)(request.body));
+    } catch (e) {
+    }
+    return request;
+  }
+  getPayloadCodec() {
+    return this.codec;
+  }
+  async handleError(operationSchema, context, response, dataObject, metadata) {
+    const errorIdentifier = loadRestJsonErrorCode(response, dataObject) ?? "Unknown";
+    let namespace = this.options.defaultNamespace;
+    let errorName = errorIdentifier;
+    if (errorIdentifier.includes("#")) {
+      [namespace, errorName] = errorIdentifier.split("#");
+    }
+    const registry = import_schema3.TypeRegistry.for(namespace);
+    let errorSchema;
+    try {
+      errorSchema = registry.getSchema(errorIdentifier);
+    } catch (e) {
+      const baseExceptionSchema = import_schema3.TypeRegistry.for("smithy.ts.sdk.synthetic." + namespace).getBaseException();
+      if (baseExceptionSchema) {
+        const ErrorCtor = baseExceptionSchema.ctor;
+        throw Object.assign(new ErrorCtor(errorName), dataObject);
+      }
+      throw new Error(errorName);
+    }
+    const ns = import_schema3.NormalizedSchema.of(errorSchema);
+    const message = dataObject.message ?? dataObject.Message ?? "Unknown";
+    const exception = new errorSchema.ctor(message);
+    await this.deserializeHttpMessage(errorSchema, context, response, dataObject);
+    const output = {};
+    for (const [name, member] of ns.structIterator()) {
+      const target = member.getMergedTraits().jsonName ?? name;
+      output[name] = this.codec.createDeserializer().readObject(member, dataObject[target]);
+    }
+    Object.assign(exception, {
+      $metadata: metadata,
+      $response: response,
+      $fault: ns.getMergedTraits().error,
+      message,
+      ...output
+    });
+    throw exception;
+  }
+};
+
+// src/submodules/protocols/json/AwsJson1_0Protocol.ts
+var AwsJson1_0Protocol = class extends AwsJsonRpcProtocol {
+  static {
+    __name(this, "AwsJson1_0Protocol");
+  }
+  constructor({ defaultNamespace }) {
+    super({
+      defaultNamespace
+    });
+  }
+  getShapeId() {
+    return "aws.protocols#awsJson1_0";
+  }
+  getJsonRpcVersion() {
+    return "1.0";
+  }
+};
+
+// src/submodules/protocols/json/AwsJson1_1Protocol.ts
+var AwsJson1_1Protocol = class extends AwsJsonRpcProtocol {
+  static {
+    __name(this, "AwsJson1_1Protocol");
+  }
+  constructor({ defaultNamespace }) {
+    super({
+      defaultNamespace
+    });
+  }
+  getShapeId() {
+    return "aws.protocols#awsJson1_1";
+  }
+  getJsonRpcVersion() {
+    return "1.1";
+  }
+};
+
+// src/submodules/protocols/json/AwsRestJsonProtocol.ts
+var import_protocols2 = __nccwpck_require__(3422);
+var import_schema4 = __nccwpck_require__(6890);
+var import_util_body_length_browser2 = __nccwpck_require__(2098);
+var AwsRestJsonProtocol = class extends import_protocols2.HttpBindingProtocol {
+  static {
+    __name(this, "AwsRestJsonProtocol");
+  }
+  serializer;
+  deserializer;
+  codec;
+  constructor({ defaultNamespace }) {
+    super({
+      defaultNamespace
+    });
+    const settings = {
+      timestampFormat: {
+        useTrait: true,
+        default: import_schema4.SCHEMA.TIMESTAMP_EPOCH_SECONDS
+      },
+      httpBindings: true,
+      jsonName: true
+    };
+    this.codec = new JsonCodec(settings);
+    this.serializer = new import_protocols2.HttpInterceptingShapeSerializer(this.codec.createSerializer(), settings);
+    this.deserializer = new import_protocols2.HttpInterceptingShapeDeserializer(this.codec.createDeserializer(), settings);
+  }
+  getShapeId() {
+    return "aws.protocols#restJson1";
+  }
+  getPayloadCodec() {
+    return this.codec;
+  }
+  setSerdeContext(serdeContext) {
+    this.codec.setSerdeContext(serdeContext);
+    super.setSerdeContext(serdeContext);
+  }
+  async serializeRequest(operationSchema, input, context) {
+    const request = await super.serializeRequest(operationSchema, input, context);
+    const inputSchema = import_schema4.NormalizedSchema.of(operationSchema.input);
+    const members = inputSchema.getMemberSchemas();
+    if (!request.headers["content-type"]) {
+      const httpPayloadMember = Object.values(members).find((m) => {
+        return !!m.getMergedTraits().httpPayload;
+      });
+      if (httpPayloadMember) {
+        const mediaType = httpPayloadMember.getMergedTraits().mediaType;
+        if (mediaType) {
+          request.headers["content-type"] = mediaType;
+        } else if (httpPayloadMember.isStringSchema()) {
+          request.headers["content-type"] = "text/plain";
+        } else if (httpPayloadMember.isBlobSchema()) {
+          request.headers["content-type"] = "application/octet-stream";
+        } else {
+          request.headers["content-type"] = "application/json";
+        }
+      } else if (!inputSchema.isUnitSchema()) {
+        const hasBody = Object.values(members).find((m) => {
+          const { httpQuery, httpQueryParams, httpHeader, httpLabel, httpPrefixHeaders } = m.getMergedTraits();
+          return !httpQuery && !httpQueryParams && !httpHeader && !httpLabel && httpPrefixHeaders === void 0;
+        });
+        if (hasBody) {
+          request.headers["content-type"] = "application/json";
+        }
+      }
+    }
+    if (request.headers["content-type"] && !request.body) {
+      request.body = "{}";
+    }
+    if (request.body) {
+      try {
+        request.headers["content-length"] = String((0, import_util_body_length_browser2.calculateBodyLength)(request.body));
+      } catch (e) {
+      }
+    }
+    return request;
+  }
+  async handleError(operationSchema, context, response, dataObject, metadata) {
+    const errorIdentifier = loadRestJsonErrorCode(response, dataObject) ?? "Unknown";
+    let namespace = this.options.defaultNamespace;
+    let errorName = errorIdentifier;
+    if (errorIdentifier.includes("#")) {
+      [namespace, errorName] = errorIdentifier.split("#");
+    }
+    const registry = import_schema4.TypeRegistry.for(namespace);
+    let errorSchema;
+    try {
+      errorSchema = registry.getSchema(errorIdentifier);
+    } catch (e) {
+      const baseExceptionSchema = import_schema4.TypeRegistry.for("smithy.ts.sdk.synthetic." + namespace).getBaseException();
+      if (baseExceptionSchema) {
+        const ErrorCtor = baseExceptionSchema.ctor;
+        throw Object.assign(new ErrorCtor(errorName), dataObject);
+      }
+      throw new Error(errorName);
+    }
+    const ns = import_schema4.NormalizedSchema.of(errorSchema);
+    const message = dataObject.message ?? dataObject.Message ?? "Unknown";
+    const exception = new errorSchema.ctor(message);
+    await this.deserializeHttpMessage(errorSchema, context, response, dataObject);
+    const output = {};
+    for (const [name, member] of ns.structIterator()) {
+      const target = member.getMergedTraits().jsonName ?? name;
+      output[name] = this.codec.createDeserializer().readObject(member, dataObject[target]);
+    }
+    Object.assign(exception, {
+      $metadata: metadata,
+      $response: response,
+      $fault: ns.getMergedTraits().error,
+      message,
+      ...output
+    });
+    throw exception;
+  }
+};
+
+// src/submodules/protocols/json/awsExpectUnion.ts
+var import_smithy_client2 = __nccwpck_require__(1411);
+var awsExpectUnion = /* @__PURE__ */ __name((value) => {
+  if (value == null) {
+    return void 0;
+  }
+  if (typeof value === "object" && "__type" in value) {
+    delete value.__type;
+  }
+  return (0, import_smithy_client2.expectUnion)(value);
+}, "awsExpectUnion");
+
+// src/submodules/protocols/query/AwsQueryProtocol.ts
+var import_protocols5 = __nccwpck_require__(3422);
+var import_schema7 = __nccwpck_require__(6890);
+var import_util_body_length_browser3 = __nccwpck_require__(2098);
+
+// src/submodules/protocols/xml/XmlShapeDeserializer.ts
+var import_protocols3 = __nccwpck_require__(3422);
+var import_schema5 = __nccwpck_require__(6890);
 var import_smithy_client3 = __nccwpck_require__(1411);
-var import_fast_xml_parser = __nccwpck_require__(9741);
+var import_util_utf8 = __nccwpck_require__(1577);
+var import_fast_xml_parser = __nccwpck_require__(591);
+var XmlShapeDeserializer = class extends SerdeContextConfig {
+  constructor(settings) {
+    super();
+    this.settings = settings;
+    this.stringDeserializer = new import_protocols3.FromStringShapeDeserializer(settings);
+  }
+  static {
+    __name(this, "XmlShapeDeserializer");
+  }
+  stringDeserializer;
+  setSerdeContext(serdeContext) {
+    this.serdeContext = serdeContext;
+    this.stringDeserializer.setSerdeContext(serdeContext);
+  }
+  /**
+   * @param schema - describing the data.
+   * @param bytes - serialized data.
+   * @param key - used by AwsQuery to step one additional depth into the object before reading it.
+   */
+  read(schema, bytes, key) {
+    const ns = import_schema5.NormalizedSchema.of(schema);
+    const memberSchemas = ns.getMemberSchemas();
+    const isEventPayload = ns.isStructSchema() && ns.isMemberSchema() && !!Object.values(memberSchemas).find((memberNs) => {
+      return !!memberNs.getMemberTraits().eventPayload;
+    });
+    if (isEventPayload) {
+      const output = {};
+      const memberName = Object.keys(memberSchemas)[0];
+      const eventMemberSchema = memberSchemas[memberName];
+      if (eventMemberSchema.isBlobSchema()) {
+        output[memberName] = bytes;
+      } else {
+        output[memberName] = this.read(memberSchemas[memberName], bytes);
+      }
+      return output;
+    }
+    const xmlString = (this.serdeContext?.utf8Encoder ?? import_util_utf8.toUtf8)(bytes);
+    const parsedObject = this.parseXml(xmlString);
+    return this.readSchema(schema, key ? parsedObject[key] : parsedObject);
+  }
+  readSchema(_schema, value) {
+    const ns = import_schema5.NormalizedSchema.of(_schema);
+    const traits = ns.getMergedTraits();
+    const schema = ns.getSchema();
+    if (ns.isListSchema() && !Array.isArray(value)) {
+      return this.readSchema(schema, [value]);
+    }
+    if (value == null) {
+      return value;
+    }
+    if (typeof value === "object") {
+      const sparse = !!traits.sparse;
+      const flat = !!traits.xmlFlattened;
+      if (ns.isListSchema()) {
+        const listValue = ns.getValueSchema();
+        const buffer2 = [];
+        const sourceKey = listValue.getMergedTraits().xmlName ?? "member";
+        const source = flat ? value : (value[0] ?? value)[sourceKey];
+        const sourceArray = Array.isArray(source) ? source : [source];
+        for (const v of sourceArray) {
+          if (v != null || sparse) {
+            buffer2.push(this.readSchema(listValue, v));
+          }
+        }
+        return buffer2;
+      }
+      const buffer = {};
+      if (ns.isMapSchema()) {
+        const keyNs = ns.getKeySchema();
+        const memberNs = ns.getValueSchema();
+        let entries;
+        if (flat) {
+          entries = Array.isArray(value) ? value : [value];
+        } else {
+          entries = Array.isArray(value.entry) ? value.entry : [value.entry];
+        }
+        const keyProperty = keyNs.getMergedTraits().xmlName ?? "key";
+        const valueProperty = memberNs.getMergedTraits().xmlName ?? "value";
+        for (const entry of entries) {
+          const key = entry[keyProperty];
+          const value2 = entry[valueProperty];
+          if (value2 != null || sparse) {
+            buffer[key] = this.readSchema(memberNs, value2);
+          }
+        }
+        return buffer;
+      }
+      if (ns.isStructSchema()) {
+        for (const [memberName, memberSchema] of ns.structIterator()) {
+          const memberTraits = memberSchema.getMergedTraits();
+          const xmlObjectKey = !memberTraits.httpPayload ? memberSchema.getMemberTraits().xmlName ?? memberName : memberTraits.xmlName ?? memberSchema.getName();
+          if (value[xmlObjectKey] != null) {
+            buffer[memberName] = this.readSchema(memberSchema, value[xmlObjectKey]);
+          }
+        }
+        return buffer;
+      }
+      if (ns.isDocumentSchema()) {
+        return value;
+      }
+      throw new Error(`@aws-sdk/core/protocols - xml deserializer unhandled schema type for ${ns.getName(true)}`);
+    } else {
+      if (ns.isListSchema()) {
+        return [];
+      } else if (ns.isMapSchema() || ns.isStructSchema()) {
+        return {};
+      }
+      return this.stringDeserializer.read(ns, value);
+    }
+  }
+  parseXml(xml) {
+    if (xml.length) {
+      const parser = new import_fast_xml_parser.XMLParser({
+        attributeNamePrefix: "",
+        htmlEntities: true,
+        ignoreAttributes: false,
+        ignoreDeclaration: true,
+        parseTagValue: false,
+        trimValues: false,
+        tagValueProcessor: /* @__PURE__ */ __name((_, val) => val.trim() === "" && val.includes("\n") ? "" : void 0, "tagValueProcessor")
+      });
+      parser.addEntity("#xD", "\r");
+      parser.addEntity("#10", "\n");
+      let parsedObj;
+      try {
+        parsedObj = parser.parse(xml, true);
+      } catch (e) {
+        if (e && typeof e === "object") {
+          Object.defineProperty(e, "$responseBodyText", {
+            value: xml
+          });
+        }
+        throw e;
+      }
+      const textNodeName = "#text";
+      const key = Object.keys(parsedObj)[0];
+      const parsedObjToReturn = parsedObj[key];
+      if (parsedObjToReturn[textNodeName]) {
+        parsedObjToReturn[key] = parsedObjToReturn[textNodeName];
+        delete parsedObjToReturn[textNodeName];
+      }
+      return (0, import_smithy_client3.getValueFromTextNode)(parsedObjToReturn);
+    }
+    return {};
+  }
+};
+
+// src/submodules/protocols/query/QueryShapeSerializer.ts
+var import_protocols4 = __nccwpck_require__(3422);
+var import_schema6 = __nccwpck_require__(6890);
+var import_serde6 = __nccwpck_require__(2430);
+var import_smithy_client4 = __nccwpck_require__(1411);
+var import_util_base642 = __nccwpck_require__(8385);
+var QueryShapeSerializer = class extends SerdeContextConfig {
+  constructor(settings) {
+    super();
+    this.settings = settings;
+  }
+  static {
+    __name(this, "QueryShapeSerializer");
+  }
+  buffer;
+  write(schema, value, prefix = "") {
+    if (this.buffer === void 0) {
+      this.buffer = "";
+    }
+    const ns = import_schema6.NormalizedSchema.of(schema);
+    if (prefix && !prefix.endsWith(".")) {
+      prefix += ".";
+    }
+    if (ns.isBlobSchema()) {
+      if (typeof value === "string" || value instanceof Uint8Array) {
+        this.writeKey(prefix);
+        this.writeValue((this.serdeContext?.base64Encoder ?? import_util_base642.toBase64)(value));
+      }
+    } else if (ns.isBooleanSchema() || ns.isNumericSchema() || ns.isStringSchema()) {
+      if (value != null) {
+        this.writeKey(prefix);
+        this.writeValue(String(value));
+      }
+    } else if (ns.isBigIntegerSchema()) {
+      if (value != null) {
+        this.writeKey(prefix);
+        this.writeValue(String(value));
+      }
+    } else if (ns.isBigDecimalSchema()) {
+      if (value != null) {
+        this.writeKey(prefix);
+        this.writeValue(value instanceof import_serde6.NumericValue ? value.string : String(value));
+      }
+    } else if (ns.isTimestampSchema()) {
+      if (value instanceof Date) {
+        this.writeKey(prefix);
+        const format = (0, import_protocols4.determineTimestampFormat)(ns, this.settings);
+        switch (format) {
+          case import_schema6.SCHEMA.TIMESTAMP_DATE_TIME:
+            this.writeValue(value.toISOString().replace(".000Z", "Z"));
+            break;
+          case import_schema6.SCHEMA.TIMESTAMP_HTTP_DATE:
+            this.writeValue((0, import_smithy_client4.dateToUtcString)(value));
+            break;
+          case import_schema6.SCHEMA.TIMESTAMP_EPOCH_SECONDS:
+            this.writeValue(String(value.getTime() / 1e3));
+            break;
+        }
+      }
+    } else if (ns.isDocumentSchema()) {
+      throw new Error(`@aws-sdk/core/protocols - QuerySerializer unsupported document type ${ns.getName(true)}`);
+    } else if (ns.isListSchema()) {
+      if (Array.isArray(value)) {
+        if (value.length === 0) {
+          if (this.settings.serializeEmptyLists) {
+            this.writeKey(prefix);
+            this.writeValue("");
+          }
+        } else {
+          const member = ns.getValueSchema();
+          const flat = this.settings.flattenLists || ns.getMergedTraits().xmlFlattened;
+          let i = 1;
+          for (const item of value) {
+            if (item == null) {
+              continue;
+            }
+            const suffix = this.getKey("member", member.getMergedTraits().xmlName);
+            const key = flat ? `${prefix}${i}` : `${prefix}${suffix}.${i}`;
+            this.write(member, item, key);
+            ++i;
+          }
+        }
+      }
+    } else if (ns.isMapSchema()) {
+      if (value && typeof value === "object") {
+        const keySchema = ns.getKeySchema();
+        const memberSchema = ns.getValueSchema();
+        const flat = ns.getMergedTraits().xmlFlattened;
+        let i = 1;
+        for (const [k, v] of Object.entries(value)) {
+          if (v == null) {
+            continue;
+          }
+          const keySuffix = this.getKey("key", keySchema.getMergedTraits().xmlName);
+          const key = flat ? `${prefix}${i}.${keySuffix}` : `${prefix}entry.${i}.${keySuffix}`;
+          const valueSuffix = this.getKey("value", memberSchema.getMergedTraits().xmlName);
+          const valueKey = flat ? `${prefix}${i}.${valueSuffix}` : `${prefix}entry.${i}.${valueSuffix}`;
+          this.write(keySchema, k, key);
+          this.write(memberSchema, v, valueKey);
+          ++i;
+        }
+      }
+    } else if (ns.isStructSchema()) {
+      if (value && typeof value === "object") {
+        for (const [memberName, member] of ns.structIterator()) {
+          if (value[memberName] == null) {
+            continue;
+          }
+          const suffix = this.getKey(memberName, member.getMergedTraits().xmlName);
+          const key = `${prefix}${suffix}`;
+          this.write(member, value[memberName], key);
+        }
+      }
+    } else if (ns.isUnitSchema()) {
+    } else {
+      throw new Error(`@aws-sdk/core/protocols - QuerySerializer unrecognized schema type ${ns.getName(true)}`);
+    }
+  }
+  flush() {
+    if (this.buffer === void 0) {
+      throw new Error("@aws-sdk/core/protocols - QuerySerializer cannot flush with nothing written to buffer.");
+    }
+    const str = this.buffer;
+    delete this.buffer;
+    return str;
+  }
+  getKey(memberName, xmlName) {
+    const key = xmlName ?? memberName;
+    if (this.settings.capitalizeKeys) {
+      return key[0].toUpperCase() + key.slice(1);
+    }
+    return key;
+  }
+  writeKey(key) {
+    if (key.endsWith(".")) {
+      key = key.slice(0, key.length - 1);
+    }
+    this.buffer += `&${(0, import_protocols4.extendedEncodeURIComponent)(key)}=`;
+  }
+  writeValue(value) {
+    this.buffer += (0, import_protocols4.extendedEncodeURIComponent)(value);
+  }
+};
+
+// src/submodules/protocols/query/AwsQueryProtocol.ts
+var AwsQueryProtocol = class extends import_protocols5.RpcProtocol {
+  constructor(options) {
+    super({
+      defaultNamespace: options.defaultNamespace
+    });
+    this.options = options;
+    const settings = {
+      timestampFormat: {
+        useTrait: true,
+        default: import_schema7.SCHEMA.TIMESTAMP_DATE_TIME
+      },
+      httpBindings: false,
+      xmlNamespace: options.xmlNamespace,
+      serviceNamespace: options.defaultNamespace,
+      serializeEmptyLists: true
+    };
+    this.serializer = new QueryShapeSerializer(settings);
+    this.deserializer = new XmlShapeDeserializer(settings);
+  }
+  static {
+    __name(this, "AwsQueryProtocol");
+  }
+  serializer;
+  deserializer;
+  getShapeId() {
+    return "aws.protocols#awsQuery";
+  }
+  setSerdeContext(serdeContext) {
+    this.serializer.setSerdeContext(serdeContext);
+    this.deserializer.setSerdeContext(serdeContext);
+  }
+  getPayloadCodec() {
+    throw new Error("AWSQuery protocol has no payload codec.");
+  }
+  async serializeRequest(operationSchema, input, context) {
+    const request = await super.serializeRequest(operationSchema, input, context);
+    if (!request.path.endsWith("/")) {
+      request.path += "/";
+    }
+    Object.assign(request.headers, {
+      "content-type": `application/x-www-form-urlencoded`
+    });
+    if ((0, import_schema7.deref)(operationSchema.input) === "unit" || !request.body) {
+      request.body = "";
+    }
+    request.body = `Action=${operationSchema.name.split("#")[1]}&Version=${this.options.version}` + request.body;
+    if (request.body.endsWith("&")) {
+      request.body = request.body.slice(-1);
+    }
+    try {
+      request.headers["content-length"] = String((0, import_util_body_length_browser3.calculateBodyLength)(request.body));
+    } catch (e) {
+    }
+    return request;
+  }
+  async deserializeResponse(operationSchema, context, response) {
+    const deserializer = this.deserializer;
+    const ns = import_schema7.NormalizedSchema.of(operationSchema.output);
+    const dataObject = {};
+    if (response.statusCode >= 300) {
+      const bytes2 = await (0, import_protocols5.collectBody)(response.body, context);
+      if (bytes2.byteLength > 0) {
+        Object.assign(dataObject, await deserializer.read(import_schema7.SCHEMA.DOCUMENT, bytes2));
+      }
+      await this.handleError(operationSchema, context, response, dataObject, this.deserializeMetadata(response));
+    }
+    for (const header in response.headers) {
+      const value = response.headers[header];
+      delete response.headers[header];
+      response.headers[header.toLowerCase()] = value;
+    }
+    const awsQueryResultKey = ns.isStructSchema() && this.useNestedResult() ? operationSchema.name.split("#")[1] + "Result" : void 0;
+    const bytes = await (0, import_protocols5.collectBody)(response.body, context);
+    if (bytes.byteLength > 0) {
+      Object.assign(dataObject, await deserializer.read(ns, bytes, awsQueryResultKey));
+    }
+    const output = {
+      $metadata: this.deserializeMetadata(response),
+      ...dataObject
+    };
+    return output;
+  }
+  /**
+   * EC2 Query overrides this.
+   */
+  useNestedResult() {
+    return true;
+  }
+  async handleError(operationSchema, context, response, dataObject, metadata) {
+    const errorIdentifier = this.loadQueryErrorCode(response, dataObject) ?? "Unknown";
+    let namespace = this.options.defaultNamespace;
+    let errorName = errorIdentifier;
+    if (errorIdentifier.includes("#")) {
+      [namespace, errorName] = errorIdentifier.split("#");
+    }
+    const errorDataSource = this.loadQueryError(dataObject);
+    const registry = import_schema7.TypeRegistry.for(namespace);
+    let errorSchema;
+    try {
+      errorSchema = registry.find(
+        (schema) => import_schema7.NormalizedSchema.of(schema).getMergedTraits().awsQueryError?.[0] === errorName
+      );
+      if (!errorSchema) {
+        errorSchema = registry.getSchema(errorIdentifier);
+      }
+    } catch (e) {
+      const baseExceptionSchema = import_schema7.TypeRegistry.for("smithy.ts.sdk.synthetic." + namespace).getBaseException();
+      if (baseExceptionSchema) {
+        const ErrorCtor = baseExceptionSchema.ctor;
+        throw Object.assign(new ErrorCtor(errorName), errorDataSource);
+      }
+      throw new Error(errorName);
+    }
+    const ns = import_schema7.NormalizedSchema.of(errorSchema);
+    const message = this.loadQueryErrorMessage(dataObject);
+    const exception = new errorSchema.ctor(message);
+    const output = {};
+    for (const [name, member] of ns.structIterator()) {
+      const target = member.getMergedTraits().xmlName ?? name;
+      const value = errorDataSource[target] ?? dataObject[target];
+      output[name] = this.deserializer.readSchema(member, value);
+    }
+    Object.assign(exception, {
+      $metadata: metadata,
+      $response: response,
+      $fault: ns.getMergedTraits().error,
+      message,
+      ...output
+    });
+    throw exception;
+  }
+  /**
+   * The variations in the error and error message locations are attributed to
+   * divergence between AWS Query and EC2 Query behavior.
+   */
+  loadQueryErrorCode(output, data) {
+    const code = (data.Errors?.[0]?.Error ?? data.Errors?.Error ?? data.Error)?.Code;
+    if (code !== void 0) {
+      return code;
+    }
+    if (output.statusCode == 404) {
+      return "NotFound";
+    }
+  }
+  loadQueryError(data) {
+    return data.Errors?.[0]?.Error ?? data.Errors?.Error ?? data.Error;
+  }
+  loadQueryErrorMessage(data) {
+    const errorData = this.loadQueryError(data);
+    return errorData?.message ?? errorData?.Message ?? data.message ?? data.Message ?? "Unknown";
+  }
+};
+
+// src/submodules/protocols/query/AwsEc2QueryProtocol.ts
+var AwsEc2QueryProtocol = class extends AwsQueryProtocol {
+  constructor(options) {
+    super(options);
+    this.options = options;
+    const ec2Settings = {
+      capitalizeKeys: true,
+      flattenLists: true,
+      serializeEmptyLists: false
+    };
+    Object.assign(this.serializer.settings, ec2Settings);
+  }
+  static {
+    __name(this, "AwsEc2QueryProtocol");
+  }
+  /**
+   * EC2 Query reads XResponse.XResult instead of XResponse directly.
+   */
+  useNestedResult() {
+    return false;
+  }
+};
+
+// src/submodules/protocols/xml/AwsRestXmlProtocol.ts
+var import_protocols6 = __nccwpck_require__(3422);
+var import_schema9 = __nccwpck_require__(6890);
+var import_util_body_length_browser4 = __nccwpck_require__(2098);
+
+// src/submodules/protocols/xml/parseXmlBody.ts
+var import_smithy_client5 = __nccwpck_require__(1411);
+var import_fast_xml_parser2 = __nccwpck_require__(591);
 var parseXmlBody = /* @__PURE__ */ __name((streamBody, context) => collectBodyString(streamBody, context).then((encoded) => {
   if (encoded.length) {
-    const parser = new import_fast_xml_parser.XMLParser({
+    const parser = new import_fast_xml_parser2.XMLParser({
       attributeNamePrefix: "",
       htmlEntities: true,
       ignoreAttributes: false,
@@ -18180,7 +19218,7 @@ var parseXmlBody = /* @__PURE__ */ __name((streamBody, context) => collectBodySt
       parsedObjToReturn[key] = parsedObjToReturn[textNodeName];
       delete parsedObjToReturn[textNodeName];
     }
-    return (0, import_smithy_client3.getValueFromTextNode)(parsedObjToReturn);
+    return (0, import_smithy_client5.getValueFromTextNode)(parsedObjToReturn);
   }
   return {};
 }), "parseXmlBody");
@@ -18202,6 +19240,417 @@ var loadRestXmlErrorCode = /* @__PURE__ */ __name((output, data) => {
     return "NotFound";
   }
 }, "loadRestXmlErrorCode");
+
+// src/submodules/protocols/xml/XmlShapeSerializer.ts
+var import_xml_builder = __nccwpck_require__(4274);
+var import_schema8 = __nccwpck_require__(6890);
+var import_serde7 = __nccwpck_require__(2430);
+var import_smithy_client6 = __nccwpck_require__(1411);
+var import_util_base643 = __nccwpck_require__(8385);
+var XmlShapeSerializer = class extends SerdeContextConfig {
+  constructor(settings) {
+    super();
+    this.settings = settings;
+  }
+  static {
+    __name(this, "XmlShapeSerializer");
+  }
+  stringBuffer;
+  byteBuffer;
+  buffer;
+  write(schema, value) {
+    const ns = import_schema8.NormalizedSchema.of(schema);
+    if (ns.isStringSchema() && typeof value === "string") {
+      this.stringBuffer = value;
+    } else if (ns.isBlobSchema()) {
+      this.byteBuffer = "byteLength" in value ? value : (this.serdeContext?.base64Decoder ?? import_util_base643.fromBase64)(value);
+    } else {
+      this.buffer = this.writeStruct(ns, value, void 0);
+      const traits = ns.getMergedTraits();
+      if (traits.httpPayload && !traits.xmlName) {
+        this.buffer.withName(ns.getName());
+      }
+    }
+  }
+  flush() {
+    if (this.byteBuffer !== void 0) {
+      const bytes = this.byteBuffer;
+      delete this.byteBuffer;
+      return bytes;
+    }
+    if (this.stringBuffer !== void 0) {
+      const str = this.stringBuffer;
+      delete this.stringBuffer;
+      return str;
+    }
+    const buffer = this.buffer;
+    if (this.settings.xmlNamespace) {
+      if (!buffer?.attributes?.["xmlns"]) {
+        buffer.addAttribute("xmlns", this.settings.xmlNamespace);
+      }
+    }
+    delete this.buffer;
+    return buffer.toString();
+  }
+  writeStruct(ns, value, parentXmlns) {
+    const traits = ns.getMergedTraits();
+    const name = ns.isMemberSchema() && !traits.httpPayload ? ns.getMemberTraits().xmlName ?? ns.getMemberName() : traits.xmlName ?? ns.getName();
+    if (!name || !ns.isStructSchema()) {
+      throw new Error(
+        `@aws-sdk/core/protocols - xml serializer, cannot write struct with empty name or non-struct, schema=${ns.getName(
+          true
+        )}.`
+      );
+    }
+    const structXmlNode = import_xml_builder.XmlNode.of(name);
+    const [xmlnsAttr, xmlns] = this.getXmlnsAttribute(ns, parentXmlns);
+    if (xmlns) {
+      structXmlNode.addAttribute(xmlnsAttr, xmlns);
+    }
+    for (const [memberName, memberSchema] of ns.structIterator()) {
+      const val = value[memberName];
+      if (val != null) {
+        if (memberSchema.getMergedTraits().xmlAttribute) {
+          structXmlNode.addAttribute(
+            memberSchema.getMergedTraits().xmlName ?? memberName,
+            this.writeSimple(memberSchema, val)
+          );
+          continue;
+        }
+        if (memberSchema.isListSchema()) {
+          this.writeList(memberSchema, val, structXmlNode, xmlns);
+        } else if (memberSchema.isMapSchema()) {
+          this.writeMap(memberSchema, val, structXmlNode, xmlns);
+        } else if (memberSchema.isStructSchema()) {
+          structXmlNode.addChildNode(this.writeStruct(memberSchema, val, xmlns));
+        } else {
+          const memberNode = import_xml_builder.XmlNode.of(memberSchema.getMergedTraits().xmlName ?? memberSchema.getMemberName());
+          this.writeSimpleInto(memberSchema, val, memberNode, xmlns);
+          structXmlNode.addChildNode(memberNode);
+        }
+      }
+    }
+    return structXmlNode;
+  }
+  writeList(listMember, array, container, parentXmlns) {
+    if (!listMember.isMemberSchema()) {
+      throw new Error(
+        `@aws-sdk/core/protocols - xml serializer, cannot write non-member list: ${listMember.getName(true)}`
+      );
+    }
+    const listTraits = listMember.getMergedTraits();
+    const listValueSchema = listMember.getValueSchema();
+    const listValueTraits = listValueSchema.getMergedTraits();
+    const sparse = !!listValueTraits.sparse;
+    const flat = !!listTraits.xmlFlattened;
+    const [xmlnsAttr, xmlns] = this.getXmlnsAttribute(listMember, parentXmlns);
+    const writeItem = /* @__PURE__ */ __name((container2, value) => {
+      if (listValueSchema.isListSchema()) {
+        this.writeList(listValueSchema, Array.isArray(value) ? value : [value], container2, xmlns);
+      } else if (listValueSchema.isMapSchema()) {
+        this.writeMap(listValueSchema, value, container2, xmlns);
+      } else if (listValueSchema.isStructSchema()) {
+        const struct = this.writeStruct(listValueSchema, value, xmlns);
+        container2.addChildNode(
+          struct.withName(flat ? listTraits.xmlName ?? listMember.getMemberName() : listValueTraits.xmlName ?? "member")
+        );
+      } else {
+        const listItemNode = import_xml_builder.XmlNode.of(
+          flat ? listTraits.xmlName ?? listMember.getMemberName() : listValueTraits.xmlName ?? "member"
+        );
+        this.writeSimpleInto(listValueSchema, value, listItemNode, xmlns);
+        container2.addChildNode(listItemNode);
+      }
+    }, "writeItem");
+    if (flat) {
+      for (const value of array) {
+        if (sparse || value != null) {
+          writeItem(container, value);
+        }
+      }
+    } else {
+      const listNode = import_xml_builder.XmlNode.of(listTraits.xmlName ?? listMember.getMemberName());
+      if (xmlns) {
+        listNode.addAttribute(xmlnsAttr, xmlns);
+      }
+      for (const value of array) {
+        if (sparse || value != null) {
+          writeItem(listNode, value);
+        }
+      }
+      container.addChildNode(listNode);
+    }
+  }
+  writeMap(mapMember, map, container, parentXmlns, containerIsMap = false) {
+    if (!mapMember.isMemberSchema()) {
+      throw new Error(
+        `@aws-sdk/core/protocols - xml serializer, cannot write non-member map: ${mapMember.getName(true)}`
+      );
+    }
+    const mapTraits = mapMember.getMergedTraits();
+    const mapKeySchema = mapMember.getKeySchema();
+    const mapKeyTraits = mapKeySchema.getMergedTraits();
+    const keyTag = mapKeyTraits.xmlName ?? "key";
+    const mapValueSchema = mapMember.getValueSchema();
+    const mapValueTraits = mapValueSchema.getMergedTraits();
+    const valueTag = mapValueTraits.xmlName ?? "value";
+    const sparse = !!mapValueTraits.sparse;
+    const flat = !!mapTraits.xmlFlattened;
+    const [xmlnsAttr, xmlns] = this.getXmlnsAttribute(mapMember, parentXmlns);
+    const addKeyValue = /* @__PURE__ */ __name((entry, key, val) => {
+      const keyNode = import_xml_builder.XmlNode.of(keyTag, key);
+      const [keyXmlnsAttr, keyXmlns] = this.getXmlnsAttribute(mapKeySchema, xmlns);
+      if (keyXmlns) {
+        keyNode.addAttribute(keyXmlnsAttr, keyXmlns);
+      }
+      entry.addChildNode(keyNode);
+      let valueNode = import_xml_builder.XmlNode.of(valueTag);
+      if (mapValueSchema.isListSchema()) {
+        this.writeList(mapValueSchema, val, valueNode, xmlns);
+      } else if (mapValueSchema.isMapSchema()) {
+        this.writeMap(mapValueSchema, val, valueNode, xmlns, true);
+      } else if (mapValueSchema.isStructSchema()) {
+        valueNode = this.writeStruct(mapValueSchema, val, xmlns);
+      } else {
+        this.writeSimpleInto(mapValueSchema, val, valueNode, xmlns);
+      }
+      entry.addChildNode(valueNode);
+    }, "addKeyValue");
+    if (flat) {
+      for (const [key, val] of Object.entries(map)) {
+        if (sparse || val != null) {
+          const entry = import_xml_builder.XmlNode.of(mapTraits.xmlName ?? mapMember.getMemberName());
+          addKeyValue(entry, key, val);
+          container.addChildNode(entry);
+        }
+      }
+    } else {
+      let mapNode;
+      if (!containerIsMap) {
+        mapNode = import_xml_builder.XmlNode.of(mapTraits.xmlName ?? mapMember.getMemberName());
+        if (xmlns) {
+          mapNode.addAttribute(xmlnsAttr, xmlns);
+        }
+        container.addChildNode(mapNode);
+      }
+      for (const [key, val] of Object.entries(map)) {
+        if (sparse || val != null) {
+          const entry = import_xml_builder.XmlNode.of("entry");
+          addKeyValue(entry, key, val);
+          (containerIsMap ? container : mapNode).addChildNode(entry);
+        }
+      }
+    }
+  }
+  writeSimple(_schema, value) {
+    if (null === value) {
+      throw new Error("@aws-sdk/core/protocols - (XML serializer) cannot write null value.");
+    }
+    const ns = import_schema8.NormalizedSchema.of(_schema);
+    let nodeContents = null;
+    if (value && typeof value === "object") {
+      if (ns.isBlobSchema()) {
+        nodeContents = (this.serdeContext?.base64Encoder ?? import_util_base643.toBase64)(value);
+      } else if (ns.isTimestampSchema() && value instanceof Date) {
+        const options = this.settings.timestampFormat;
+        const format = options.useTrait ? ns.getSchema() === import_schema8.SCHEMA.TIMESTAMP_DEFAULT ? options.default : ns.getSchema() ?? options.default : options.default;
+        switch (format) {
+          case import_schema8.SCHEMA.TIMESTAMP_DATE_TIME:
+            nodeContents = value.toISOString().replace(".000Z", "Z");
+            break;
+          case import_schema8.SCHEMA.TIMESTAMP_HTTP_DATE:
+            nodeContents = (0, import_smithy_client6.dateToUtcString)(value);
+            break;
+          case import_schema8.SCHEMA.TIMESTAMP_EPOCH_SECONDS:
+            nodeContents = String(value.getTime() / 1e3);
+            break;
+          default:
+            console.warn("Missing timestamp format, using http date", value);
+            nodeContents = (0, import_smithy_client6.dateToUtcString)(value);
+            break;
+        }
+      } else if (ns.isBigDecimalSchema() && value) {
+        if (value instanceof import_serde7.NumericValue) {
+          return value.string;
+        }
+        return String(value);
+      } else if (ns.isMapSchema() || ns.isListSchema()) {
+        throw new Error(
+          "@aws-sdk/core/protocols - xml serializer, cannot call _write() on List/Map schema, call writeList or writeMap() instead."
+        );
+      } else {
+        throw new Error(
+          `@aws-sdk/core/protocols - xml serializer, unhandled schema type for object value and schema: ${ns.getName(
+            true
+          )}`
+        );
+      }
+    }
+    if (ns.isStringSchema() || ns.isBooleanSchema() || ns.isNumericSchema() || ns.isBigIntegerSchema() || ns.isBigDecimalSchema()) {
+      nodeContents = String(value);
+    }
+    if (nodeContents === null) {
+      throw new Error(`Unhandled schema-value pair ${ns.getName(true)}=${value}`);
+    }
+    return nodeContents;
+  }
+  writeSimpleInto(_schema, value, into, parentXmlns) {
+    const nodeContents = this.writeSimple(_schema, value);
+    const ns = import_schema8.NormalizedSchema.of(_schema);
+    const content = new import_xml_builder.XmlText(nodeContents);
+    const [xmlnsAttr, xmlns] = this.getXmlnsAttribute(ns, parentXmlns);
+    if (xmlns) {
+      into.addAttribute(xmlnsAttr, xmlns);
+    }
+    into.addChildNode(content);
+  }
+  getXmlnsAttribute(ns, parentXmlns) {
+    const traits = ns.getMergedTraits();
+    const [prefix, xmlns] = traits.xmlNamespace ?? [];
+    if (xmlns && xmlns !== parentXmlns) {
+      return [prefix ? `xmlns:${prefix}` : "xmlns", xmlns];
+    }
+    return [void 0, void 0];
+  }
+};
+
+// src/submodules/protocols/xml/XmlCodec.ts
+var XmlCodec = class extends SerdeContextConfig {
+  constructor(settings) {
+    super();
+    this.settings = settings;
+  }
+  static {
+    __name(this, "XmlCodec");
+  }
+  createSerializer() {
+    const serializer = new XmlShapeSerializer(this.settings);
+    serializer.setSerdeContext(this.serdeContext);
+    return serializer;
+  }
+  createDeserializer() {
+    const deserializer = new XmlShapeDeserializer(this.settings);
+    deserializer.setSerdeContext(this.serdeContext);
+    return deserializer;
+  }
+};
+
+// src/submodules/protocols/xml/AwsRestXmlProtocol.ts
+var AwsRestXmlProtocol = class extends import_protocols6.HttpBindingProtocol {
+  static {
+    __name(this, "AwsRestXmlProtocol");
+  }
+  codec;
+  serializer;
+  deserializer;
+  constructor(options) {
+    super(options);
+    const settings = {
+      timestampFormat: {
+        useTrait: true,
+        default: import_schema9.SCHEMA.TIMESTAMP_DATE_TIME
+      },
+      httpBindings: true,
+      xmlNamespace: options.xmlNamespace,
+      serviceNamespace: options.defaultNamespace
+    };
+    this.codec = new XmlCodec(settings);
+    this.serializer = new import_protocols6.HttpInterceptingShapeSerializer(this.codec.createSerializer(), settings);
+    this.deserializer = new import_protocols6.HttpInterceptingShapeDeserializer(this.codec.createDeserializer(), settings);
+  }
+  getPayloadCodec() {
+    return this.codec;
+  }
+  getShapeId() {
+    return "aws.protocols#restXml";
+  }
+  async serializeRequest(operationSchema, input, context) {
+    const request = await super.serializeRequest(operationSchema, input, context);
+    const ns = import_schema9.NormalizedSchema.of(operationSchema.input);
+    const members = ns.getMemberSchemas();
+    request.path = String(request.path).split("/").filter((segment) => {
+      return segment !== "{Bucket}";
+    }).join("/") || "/";
+    if (!request.headers["content-type"]) {
+      const httpPayloadMember = Object.values(members).find((m) => {
+        return !!m.getMergedTraits().httpPayload;
+      });
+      if (httpPayloadMember) {
+        const mediaType = httpPayloadMember.getMergedTraits().mediaType;
+        if (mediaType) {
+          request.headers["content-type"] = mediaType;
+        } else if (httpPayloadMember.isStringSchema()) {
+          request.headers["content-type"] = "text/plain";
+        } else if (httpPayloadMember.isBlobSchema()) {
+          request.headers["content-type"] = "application/octet-stream";
+        } else {
+          request.headers["content-type"] = "application/xml";
+        }
+      } else if (!ns.isUnitSchema()) {
+        const hasBody = Object.values(members).find((m) => {
+          const { httpQuery, httpQueryParams, httpHeader, httpLabel, httpPrefixHeaders } = m.getMergedTraits();
+          return !httpQuery && !httpQueryParams && !httpHeader && !httpLabel && httpPrefixHeaders === void 0;
+        });
+        if (hasBody) {
+          request.headers["content-type"] = "application/xml";
+        }
+      }
+    }
+    if (request.headers["content-type"] === "application/xml") {
+      if (typeof request.body === "string") {
+        request.body = '<?xml version="1.0" encoding="UTF-8"?>' + request.body;
+      }
+    }
+    if (request.body) {
+      try {
+        request.headers["content-length"] = String((0, import_util_body_length_browser4.calculateBodyLength)(request.body));
+      } catch (e) {
+      }
+    }
+    return request;
+  }
+  async deserializeResponse(operationSchema, context, response) {
+    return super.deserializeResponse(operationSchema, context, response);
+  }
+  async handleError(operationSchema, context, response, dataObject, metadata) {
+    const errorIdentifier = loadRestXmlErrorCode(response, dataObject) ?? "Unknown";
+    let namespace = this.options.defaultNamespace;
+    let errorName = errorIdentifier;
+    if (errorIdentifier.includes("#")) {
+      [namespace, errorName] = errorIdentifier.split("#");
+    }
+    const registry = import_schema9.TypeRegistry.for(namespace);
+    let errorSchema;
+    try {
+      errorSchema = registry.getSchema(errorIdentifier);
+    } catch (e) {
+      const baseExceptionSchema = import_schema9.TypeRegistry.for("smithy.ts.sdk.synthetic." + namespace).getBaseException();
+      if (baseExceptionSchema) {
+        const ErrorCtor = baseExceptionSchema.ctor;
+        throw Object.assign(new ErrorCtor(errorName), dataObject);
+      }
+      throw new Error(errorName);
+    }
+    const ns = import_schema9.NormalizedSchema.of(errorSchema);
+    const message = dataObject.Error?.message ?? dataObject.Error?.Message ?? dataObject.message ?? dataObject.Message ?? "Unknown";
+    const exception = new errorSchema.ctor(message);
+    await this.deserializeHttpMessage(errorSchema, context, response, dataObject);
+    const output = {};
+    for (const [name, member] of ns.structIterator()) {
+      const target = member.getMergedTraits().xmlName ?? name;
+      const value = dataObject.Error?.[target] ?? dataObject[target];
+      output[name] = this.codec.createDeserializer().readSchema(member, value);
+    }
+    Object.assign(exception, {
+      $metadata: metadata,
+      $response: response,
+      $fault: ns.getMergedTraits().error,
+      message,
+      ...output
+    });
+    throw exception;
+  }
+};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (0);
 
@@ -20069,7 +21518,11 @@ var NODE_USE_ARN_REGION_INI_NAME = "s3_use_arn_region";
 var NODE_USE_ARN_REGION_CONFIG_OPTIONS = {
   environmentVariableSelector: /* @__PURE__ */ __name((env) => (0, import_util_config_provider.booleanSelector)(env, NODE_USE_ARN_REGION_ENV_NAME, import_util_config_provider.SelectorType.ENV), "environmentVariableSelector"),
   configFileSelector: /* @__PURE__ */ __name((profile) => (0, import_util_config_provider.booleanSelector)(profile, NODE_USE_ARN_REGION_INI_NAME, import_util_config_provider.SelectorType.CONFIG), "configFileSelector"),
-  default: false
+  /**
+   * useArnRegion has specific behavior when undefined instead of false.
+   * We therefore use undefined as the default value instead of false.
+   */
+  default: void 0
 };
 
 // src/bucketEndpointMiddleware.ts
@@ -20124,26 +21577,12 @@ var validatePartition = /* @__PURE__ */ __name((partition, options) => {
   }
 }, "validatePartition");
 var validateRegion = /* @__PURE__ */ __name((region, options) => {
-  if (region === "") {
-    throw new Error("ARN region is empty");
-  }
-  if (options.useFipsEndpoint) {
-    if (!options.allowFipsRegion) {
-      throw new Error("FIPS region is not supported");
-    } else if (!isEqualRegions(region, options.clientRegion)) {
-      throw new Error(`Client FIPS region ${options.clientRegion} doesn't match region ${region} in ARN`);
-    }
-  }
-  if (!options.useArnRegion && !isEqualRegions(region, options.clientRegion || "") && !isEqualRegions(region, options.clientSigningRegion || "")) {
-    throw new Error(`Region in ARN is incompatible, got ${region} but expected ${options.clientRegion}`);
-  }
 }, "validateRegion");
 var validateRegionalClient = /* @__PURE__ */ __name((region) => {
   if (["s3-external-1", "aws-global"].includes(region)) {
     throw new Error(`Client region ${region} is not regional`);
   }
 }, "validateRegionalClient");
-var isEqualRegions = /* @__PURE__ */ __name((regionA, regionB) => regionA === regionB, "isEqualRegions");
 var validateAccountId = /* @__PURE__ */ __name((accountId) => {
   if (!/[0-9]{12}/.exec(accountId)) {
     throw new Error("Access point ARN accountID does not match regex '[0-9]{12}'");
@@ -20181,8 +21620,6 @@ var getArnResources = /* @__PURE__ */ __name((resource) => {
   }
 }, "getArnResources");
 var validateNoDualstack = /* @__PURE__ */ __name((dualstackEndpoint) => {
-  if (dualstackEndpoint)
-    throw new Error("Dualstack endpoint is not supported with Outpost or Multi-region Access Point ARN.");
 }, "validateNoDualstack");
 var validateNoFIPS = /* @__PURE__ */ __name((useFipsEndpoint) => {
   if (useFipsEndpoint) throw new Error(`FIPS region is not supported with Outpost.`);
@@ -20277,14 +21714,6 @@ var getEndpointFromObjectLambdaArn = /* @__PURE__ */ __name(({
 }) => {
   const { accountId, region, service } = bucketName;
   validateRegionalClient(clientRegion);
-  validateRegion(region, {
-    useArnRegion,
-    clientRegion,
-    clientSigningRegion,
-    allowFipsRegion: true,
-    useFipsEndpoint: fipsEndpoint
-  });
-  validateNoDualstack(dualstackEndpoint);
   const DNSHostLabel = `${accesspointName}-${accountId}`;
   validateDNSHostLabel(DNSHostLabel, { tlsCompatible });
   const endpointRegion = useArnRegion ? region : clientRegion;
@@ -20307,7 +21736,6 @@ var getEndpointFromMRAPArn = /* @__PURE__ */ __name(({
     throw new Error("SDK is attempting to use a MRAP ARN. Please enable to feature.");
   }
   validateMrapAlias(mrapAlias);
-  validateNoDualstack(dualstackEndpoint);
   return {
     bucketEndpoint: true,
     hostname: `${mrapAlias}${isCustomEndpoint ? "" : `.accesspoint.s3-global`}.${hostnameSuffix}`,
@@ -20328,14 +21756,12 @@ var getEndpointFromOutpostArn = /* @__PURE__ */ __name(({
   hostnameSuffix
 }) => {
   validateRegionalClient(clientRegion);
-  validateRegion(bucketName.region, { useArnRegion, clientRegion, clientSigningRegion, useFipsEndpoint: fipsEndpoint });
   const DNSHostLabel = `${accesspointName}-${bucketName.accountId}`;
   validateDNSHostLabel(DNSHostLabel, { tlsCompatible });
   const endpointRegion = useArnRegion ? bucketName.region : clientRegion;
   const signingRegion = useArnRegion ? bucketName.region : clientSigningRegion;
   validateOutpostService(bucketName.service);
   validateDNSHostLabel(outpostId, { tlsCompatible });
-  validateNoDualstack(dualstackEndpoint);
   validateNoFIPS(fipsEndpoint);
   const hostnamePrefix = `${DNSHostLabel}.${outpostId}`;
   return {
@@ -20358,13 +21784,6 @@ var getEndpointFromAccessPointArn = /* @__PURE__ */ __name(({
   hostnameSuffix
 }) => {
   validateRegionalClient(clientRegion);
-  validateRegion(bucketName.region, {
-    useArnRegion,
-    clientRegion,
-    clientSigningRegion,
-    allowFipsRegion: true,
-    useFipsEndpoint: fipsEndpoint
-  });
   const hostnamePrefix = `${accesspointName}-${bucketName.accountId}`;
   validateDNSHostLabel(hostnamePrefix, { tlsCompatible });
   const endpointRegion = useArnRegion ? bucketName.region : clientRegion;
@@ -20466,7 +21885,8 @@ function resolveBucketEndpointConfig(input) {
     bucketEndpoint = false,
     forcePathStyle = false,
     useAccelerateEndpoint = false,
-    useArnRegion = false,
+    // useArnRegion has specific behavior when undefined instead of false.
+    useArnRegion,
     disableMultiregionAccessPoints = false
   } = input;
   return Object.assign(input, {
@@ -20786,7 +22206,7 @@ var hasHeaderWithPrefix = /* @__PURE__ */ __name((headerPrefix, headers) => {
 }, "hasHeaderWithPrefix");
 
 // src/isStreaming.ts
-var import_is_array_buffer = __nccwpck_require__(9996);
+var import_is_array_buffer = __nccwpck_require__(6130);
 var isStreaming = /* @__PURE__ */ __name((body) => body !== void 0 && typeof body !== "string" && !ArrayBuffer.isView(body) && !(0, import_is_array_buffer.isArrayBuffer)(body), "isStreaming");
 
 // src/selectChecksumAlgorithmFunction.ts
@@ -20819,7 +22239,7 @@ For more information please go to https://github.com/aws/aws-sdk-js-v3#functiona
 }, "selectChecksumAlgorithmFunction");
 
 // src/stringHasher.ts
-var import_util_utf8 = __nccwpck_require__(3491);
+var import_util_utf8 = __nccwpck_require__(1577);
 var stringHasher = /* @__PURE__ */ __name((checksumAlgorithmFn, body) => {
   const hash = new checksumAlgorithmFn();
   hash.update((0, import_util_utf8.toUint8Array)(body || ""));
@@ -21096,162 +22516,6 @@ var resolveFlexibleChecksumsConfig = /* @__PURE__ */ __name((input) => {
     requestStreamBufferSize: Number(requestStreamBufferSize ?? 0)
   });
 }, "resolveFlexibleChecksumsConfig");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 9996:
-/***/ ((module) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  isArrayBuffer: () => isArrayBuffer
-});
-module.exports = __toCommonJS(src_exports);
-var isArrayBuffer = /* @__PURE__ */ __name((arg) => typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer || Object.prototype.toString.call(arg) === "[object ArrayBuffer]", "isArrayBuffer");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 1629:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromArrayBuffer: () => fromArrayBuffer,
-  fromString: () => fromString
-});
-module.exports = __toCommonJS(src_exports);
-var import_is_array_buffer = __nccwpck_require__(9996);
-var import_buffer = __nccwpck_require__(181);
-var fromArrayBuffer = /* @__PURE__ */ __name((input, offset = 0, length = input.byteLength - offset) => {
-  if (!(0, import_is_array_buffer.isArrayBuffer)(input)) {
-    throw new TypeError(`The "input" argument must be ArrayBuffer. Received type ${typeof input} (${input})`);
-  }
-  return import_buffer.Buffer.from(input, offset, length);
-}, "fromArrayBuffer");
-var fromString = /* @__PURE__ */ __name((input, encoding) => {
-  if (typeof input !== "string") {
-    throw new TypeError(`The "input" argument must be of type string. Received type ${typeof input} (${input})`);
-  }
-  return encoding ? import_buffer.Buffer.from(input, encoding) : import_buffer.Buffer.from(input);
-}, "fromString");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 3491:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromUtf8: () => fromUtf8,
-  toUint8Array: () => toUint8Array,
-  toUtf8: () => toUtf8
-});
-module.exports = __toCommonJS(src_exports);
-
-// src/fromUtf8.ts
-var import_util_buffer_from = __nccwpck_require__(1629);
-var fromUtf8 = /* @__PURE__ */ __name((input) => {
-  const buf = (0, import_util_buffer_from.fromString)(input, "utf8");
-  return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-}, "fromUtf8");
-
-// src/toUint8Array.ts
-var toUint8Array = /* @__PURE__ */ __name((data) => {
-  if (typeof data === "string") {
-    return fromUtf8(data);
-  }
-  if (ArrayBuffer.isView(data)) {
-    return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-  }
-  return new Uint8Array(data);
-}, "toUint8Array");
-
-// src/toUtf8.ts
-
-var toUtf8 = /* @__PURE__ */ __name((input) => {
-  if (typeof input === "string") {
-    return input;
-  }
-  if (typeof input !== "object" || typeof input.byteOffset !== "number" || typeof input.byteLength !== "number") {
-    throw new Error("@smithy/util-utf8: toUtf8 encoder function only accepts string | Uint8Array.");
-  }
-  return (0, import_util_buffer_from.fromArrayBuffer)(input.buffer, input.byteOffset, input.byteLength).toString("utf8");
-}, "toUtf8");
 // Annotate the CommonJS export names for ESM import in node:
 
 0 && (0);
@@ -23604,7 +24868,7 @@ const core_2 = __nccwpck_require__(402);
 const smithy_client_1 = __nccwpck_require__(1411);
 const url_parser_1 = __nccwpck_require__(4494);
 const util_base64_1 = __nccwpck_require__(8385);
-const util_utf8_1 = __nccwpck_require__(6090);
+const util_utf8_1 = __nccwpck_require__(1577);
 const httpAuthSchemeProvider_1 = __nccwpck_require__(8396);
 const endpointResolver_1 = __nccwpck_require__(546);
 const getRuntimeConfig = (config) => {
@@ -24915,7 +26179,7 @@ const core_2 = __nccwpck_require__(402);
 const smithy_client_1 = __nccwpck_require__(1411);
 const url_parser_1 = __nccwpck_require__(4494);
 const util_base64_1 = __nccwpck_require__(8385);
-const util_utf8_1 = __nccwpck_require__(6090);
+const util_utf8_1 = __nccwpck_require__(1577);
 const httpAuthSchemeProvider_1 = __nccwpck_require__(7851);
 const endpointResolver_1 = __nccwpck_require__(9765);
 const getRuntimeConfig = (config) => {
@@ -24968,162 +26232,6 @@ const resolveRuntimeExtensions = (runtimeConfig, extensions) => {
     return Object.assign(runtimeConfig, (0, region_config_resolver_1.resolveAwsRegionExtensionConfiguration)(extensionConfiguration), (0, smithy_client_1.resolveDefaultRuntimeConfig)(extensionConfiguration), (0, protocol_http_1.resolveHttpHandlerRuntimeConfig)(extensionConfiguration), (0, httpAuthExtensionConfiguration_1.resolveHttpAuthRuntimeConfig)(extensionConfiguration));
 };
 exports.resolveRuntimeExtensions = resolveRuntimeExtensions;
-
-
-/***/ }),
-
-/***/ 1109:
-/***/ ((module) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  isArrayBuffer: () => isArrayBuffer
-});
-module.exports = __toCommonJS(src_exports);
-var isArrayBuffer = /* @__PURE__ */ __name((arg) => typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer || Object.prototype.toString.call(arg) === "[object ArrayBuffer]", "isArrayBuffer");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 1266:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromArrayBuffer: () => fromArrayBuffer,
-  fromString: () => fromString
-});
-module.exports = __toCommonJS(src_exports);
-var import_is_array_buffer = __nccwpck_require__(1109);
-var import_buffer = __nccwpck_require__(181);
-var fromArrayBuffer = /* @__PURE__ */ __name((input, offset = 0, length = input.byteLength - offset) => {
-  if (!(0, import_is_array_buffer.isArrayBuffer)(input)) {
-    throw new TypeError(`The "input" argument must be ArrayBuffer. Received type ${typeof input} (${input})`);
-  }
-  return import_buffer.Buffer.from(input, offset, length);
-}, "fromArrayBuffer");
-var fromString = /* @__PURE__ */ __name((input, encoding) => {
-  if (typeof input !== "string") {
-    throw new TypeError(`The "input" argument must be of type string. Received type ${typeof input} (${input})`);
-  }
-  return encoding ? import_buffer.Buffer.from(input, encoding) : import_buffer.Buffer.from(input);
-}, "fromString");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 6090:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromUtf8: () => fromUtf8,
-  toUint8Array: () => toUint8Array,
-  toUtf8: () => toUtf8
-});
-module.exports = __toCommonJS(src_exports);
-
-// src/fromUtf8.ts
-var import_util_buffer_from = __nccwpck_require__(1266);
-var fromUtf8 = /* @__PURE__ */ __name((input) => {
-  const buf = (0, import_util_buffer_from.fromString)(input, "utf8");
-  return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-}, "fromUtf8");
-
-// src/toUint8Array.ts
-var toUint8Array = /* @__PURE__ */ __name((data) => {
-  if (typeof data === "string") {
-    return fromUtf8(data);
-  }
-  if (ArrayBuffer.isView(data)) {
-    return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-  }
-  return new Uint8Array(data);
-}, "toUint8Array");
-
-// src/toUtf8.ts
-
-var toUtf8 = /* @__PURE__ */ __name((input) => {
-  if (typeof input === "string") {
-    return input;
-  }
-  if (typeof input !== "object" || typeof input.byteOffset !== "number" || typeof input.byteLength !== "number") {
-    throw new Error("@smithy/util-utf8: toUtf8 encoder function only accepts string | Uint8Array.");
-  }
-  return (0, import_util_buffer_from.fromArrayBuffer)(input.buffer, input.byteOffset, input.byteLength).toString("utf8");
-}, "toUtf8");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
 
 
 /***/ }),
@@ -25282,6 +26390,14 @@ var SignatureV4MultiRegion = class {
   sigv4aSigner;
   sigv4Signer;
   signerOptions;
+  static sigv4aDependency() {
+    if (typeof signatureV4CrtContainer.CrtSignerV4 === "function") {
+      return "crt";
+    } else if (typeof import_signature_v4.signatureV4aContainer.SignatureV4a === "function") {
+      return "js";
+    }
+    return "none";
+  }
   constructor(options) {
     this.sigv4Signer = new import_middleware_sdk_s3.SignatureV4S3Express(options);
     this.signerOptions = options;
@@ -25425,18 +26541,21 @@ __export(index_exports, {
 module.exports = __toCommonJS(index_exports);
 
 // src/fromEnvSigningName.ts
-var import_core = __nccwpck_require__(8704);
+var import_client = __nccwpck_require__(5152);
+var import_httpAuthSchemes = __nccwpck_require__(7523);
 var import_property_provider = __nccwpck_require__(1238);
 var fromEnvSigningName = /* @__PURE__ */ __name(({ logger, signingName } = {}) => async () => {
   logger?.debug?.("@aws-sdk/token-providers - fromEnvSigningName");
   if (!signingName) {
     throw new import_property_provider.TokenProviderError("Please pass 'signingName' to compute environment variable key", { logger });
   }
-  const bearerTokenKey = (0, import_core.getBearerTokenEnvKey)(signingName);
+  const bearerTokenKey = (0, import_httpAuthSchemes.getBearerTokenEnvKey)(signingName);
   if (!(bearerTokenKey in process.env)) {
     throw new import_property_provider.TokenProviderError(`Token not present in '${bearerTokenKey}' environment variable`, { logger });
   }
-  return { token: process.env[bearerTokenKey] };
+  const token = { token: process.env[bearerTokenKey] };
+  (0, import_client.setTokenFeature)(token, "BEARER_SERVICE_ENV_VARS", "3");
+  return token;
 }, "fromEnvSigningName");
 
 // src/fromSso.ts
@@ -25737,8 +26856,10 @@ __export(index_exports, {
   getUserAgentPrefix: () => getUserAgentPrefix,
   isIpAddress: () => import_util_endpoints.isIpAddress,
   partition: () => partition,
+  resolveDefaultAwsRegionalEndpointsConfig: () => resolveDefaultAwsRegionalEndpointsConfig,
   resolveEndpoint: () => import_util_endpoints.resolveEndpoint,
   setPartitionInfo: () => setPartitionInfo,
+  toEndpointV1: () => toEndpointV1,
   useDefaultPartitionInfo: () => useDefaultPartitionInfo
 });
 module.exports = __toCommonJS(index_exports);
@@ -25814,6 +26935,9 @@ var partitions_default = {
       },
       "ap-east-1": {
         description: "Asia Pacific (Hong Kong)"
+      },
+      "ap-east-2": {
+        description: "Asia Pacific (Taipei)"
       },
       "ap-northeast-1": {
         description: "Asia Pacific (Tokyo)"
@@ -26105,6 +27229,32 @@ var awsEndpointFunctions = {
   partition
 };
 import_util_endpoints.customEndpointFunctions.aws = awsEndpointFunctions;
+
+// src/resolveDefaultAwsRegionalEndpointsConfig.ts
+var import_url_parser = __nccwpck_require__(4494);
+var resolveDefaultAwsRegionalEndpointsConfig = /* @__PURE__ */ __name((input) => {
+  if (typeof input.endpointProvider !== "function") {
+    throw new Error("@aws-sdk/util-endpoint - endpointProvider and endpoint missing in config for this client.");
+  }
+  const { endpoint } = input;
+  if (endpoint === void 0) {
+    input.endpoint = async () => {
+      return toEndpointV1(
+        input.endpointProvider(
+          {
+            Region: typeof input.region === "function" ? await input.region() : input.region,
+            UseDualStack: typeof input.useDualstackEndpoint === "function" ? await input.useDualstackEndpoint() : input.useDualstackEndpoint,
+            UseFIPS: typeof input.useFipsEndpoint === "function" ? await input.useFipsEndpoint() : input.useFipsEndpoint,
+            Endpoint: void 0
+          },
+          { logger: input.logger }
+        )
+      );
+    };
+  }
+  return input;
+}, "resolveDefaultAwsRegionalEndpointsConfig");
+var toEndpointV1 = /* @__PURE__ */ __name((endpoint) => (0, import_url_parser.parseUrl)(endpoint.url), "toEndpointV1");
 
 // src/resolveEndpoint.ts
 
@@ -27300,7 +28450,13 @@ var HttpProtocol = class {
       cfId: output.headers["x-amz-cf-id"]
     };
   }
-  async deserializeHttpMessage(schema, context, response, headerBindings, dataObject) {
+  async deserializeHttpMessage(schema, context, response, arg4, arg5) {
+    let dataObject;
+    if (arg4 instanceof Set) {
+      dataObject = arg5;
+    } else {
+      dataObject = arg4;
+    }
     const deserializer = this.deserializer;
     const ns = import_schema.NormalizedSchema.of(schema);
     const nonHttpBindingMembers = [];
@@ -27364,7 +28520,7 @@ var HttpProtocol = class {
       } else if (memberTraits.httpPrefixHeaders !== void 0) {
         dataObject[memberName] = {};
         for (const [header, value] of Object.entries(response.headers)) {
-          if (!headerBindings.has(header) && header.startsWith(memberTraits.httpPrefixHeaders)) {
+          if (header.startsWith(memberTraits.httpPrefixHeaders)) {
             dataObject[memberName][header.slice(memberTraits.httpPrefixHeaders.length)] = await deserializer.read(
               [memberSchema.getValueSchema(), { httpHeader: header }],
               value
@@ -27383,7 +28539,10 @@ var HttpProtocol = class {
 
 // src/submodules/protocols/HttpBindingProtocol.ts
 var HttpBindingProtocol = class extends HttpProtocol {
-  async serializeRequest(operationSchema, input, context) {
+  async serializeRequest(operationSchema, _input, context) {
+    const input = {
+      ..._input ?? {}
+    };
     const serializer = this.serializer;
     const query = {};
     const headers = {};
@@ -27418,16 +28577,12 @@ var HttpBindingProtocol = class extends HttpProtocol {
         Object.assign(query, Object.fromEntries(traitSearchParams));
       }
     }
-    const _input = {
-      ...input
-    };
-    for (const memberName of Object.keys(_input)) {
-      const memberNs = ns.getMemberSchema(memberName);
-      if (memberNs === void 0) {
+    for (const [memberName, memberNs] of ns.structIterator()) {
+      const memberTraits = memberNs.getMergedTraits() ?? {};
+      const inputMemberValue = input[memberName];
+      if (inputMemberValue == null) {
         continue;
       }
-      const memberTraits = memberNs.getMergedTraits();
-      const inputMember = _input[memberName];
       if (memberTraits.httpPayload) {
         const isStreaming = memberNs.isStreaming();
         if (isStreaming) {
@@ -27435,14 +28590,15 @@ var HttpBindingProtocol = class extends HttpProtocol {
           if (isEventStream) {
             throw new Error("serialization of event streams is not yet implemented");
           } else {
-            payload = inputMember;
+            payload = inputMemberValue;
           }
         } else {
-          serializer.write(memberNs, inputMember);
+          serializer.write(memberNs, inputMemberValue);
           payload = serializer.flush();
         }
+        delete input[memberName];
       } else if (memberTraits.httpLabel) {
-        serializer.write(memberNs, inputMember);
+        serializer.write(memberNs, inputMemberValue);
         const replacement = serializer.flush();
         if (request.path.includes(`{${memberName}+}`)) {
           request.path = request.path.replace(
@@ -27452,27 +28608,27 @@ var HttpBindingProtocol = class extends HttpProtocol {
         } else if (request.path.includes(`{${memberName}}`)) {
           request.path = request.path.replace(`{${memberName}}`, extendedEncodeURIComponent(replacement));
         }
-        delete _input[memberName];
+        delete input[memberName];
       } else if (memberTraits.httpHeader) {
-        serializer.write(memberNs, inputMember);
+        serializer.write(memberNs, inputMemberValue);
         headers[memberTraits.httpHeader.toLowerCase()] = String(serializer.flush());
-        delete _input[memberName];
+        delete input[memberName];
       } else if (typeof memberTraits.httpPrefixHeaders === "string") {
-        for (const [key, val] of Object.entries(inputMember)) {
+        for (const [key, val] of Object.entries(inputMemberValue)) {
           const amalgam = memberTraits.httpPrefixHeaders + key;
           serializer.write([memberNs.getValueSchema(), { httpHeader: amalgam }], val);
           headers[amalgam.toLowerCase()] = serializer.flush();
         }
-        delete _input[memberName];
+        delete input[memberName];
       } else if (memberTraits.httpQuery || memberTraits.httpQueryParams) {
-        this.serializeQuery(memberNs, inputMember, query);
-        delete _input[memberName];
+        this.serializeQuery(memberNs, inputMemberValue, query);
+        delete input[memberName];
       } else {
         hasNonHttpBindingMember = true;
       }
     }
     if (hasNonHttpBindingMember && input) {
-      serializer.write(schema, _input);
+      serializer.write(schema, input);
       payload = serializer.flush();
     }
     request.headers = headers;
@@ -27537,12 +28693,7 @@ var HttpBindingProtocol = class extends HttpProtocol {
       delete response.headers[header];
       response.headers[header.toLowerCase()] = value;
     }
-    const headerBindings = new Set(
-      Object.values(ns.getMemberSchemas()).map((schema) => {
-        return schema.getMergedTraits().httpHeader;
-      }).filter(Boolean)
-    );
-    const nonHttpBindingMembers = await this.deserializeHttpMessage(ns, context, response, headerBindings, dataObject);
+    const nonHttpBindingMembers = await this.deserializeHttpMessage(ns, context, response, dataObject);
     if (nonHttpBindingMembers.length) {
       const bytes = await collectBody(response.body, context);
       if (bytes.byteLength > 0) {
@@ -27740,7 +28891,7 @@ var RequestBuilder = class {
 var import_schema5 = __nccwpck_require__(6890);
 var import_serde2 = __nccwpck_require__(2430);
 var import_util_base64 = __nccwpck_require__(8385);
-var import_util_utf8 = __nccwpck_require__(4989);
+var import_util_utf8 = __nccwpck_require__(1577);
 
 // src/submodules/protocols/serde/determineTimestampFormat.ts
 var import_schema4 = __nccwpck_require__(6890);
@@ -27818,7 +28969,7 @@ var FromStringShapeDeserializer = class {
 
 // src/submodules/protocols/serde/HttpInterceptingShapeDeserializer.ts
 var import_schema6 = __nccwpck_require__(6890);
-var import_util_utf82 = __nccwpck_require__(4989);
+var import_util_utf82 = __nccwpck_require__(1577);
 var HttpInterceptingShapeDeserializer = class {
   constructor(codecDeserializer, codecSettings) {
     this.codecDeserializer = codecDeserializer;
@@ -28194,7 +29345,7 @@ var TypeRegistry = class _TypeRegistry {
    */
   getBaseException() {
     for (const [id, schema] of this.schemas.entries()) {
-      if (id.startsWith("smithyts.client.synthetic.") && id.endsWith("ServiceException")) {
+      if (id.startsWith("smithy.ts.sdk.synthetic.") && id.endsWith("ServiceException")) {
         return schema;
       }
     }
@@ -28234,12 +29385,24 @@ var Schema = class {
 };
 
 // src/submodules/schema/schemas/ListSchema.ts
-var ListSchema = class extends Schema {
+var ListSchema = class _ListSchema extends Schema {
   constructor(name, traits, valueSchema) {
     super(name, traits);
     this.name = name;
     this.traits = traits;
     this.valueSchema = valueSchema;
+    this.symbol = _ListSchema.symbol;
+  }
+  static {
+    this.symbol = Symbol.for("@smithy/core/schema::ListSchema");
+  }
+  static [Symbol.hasInstance](lhs) {
+    const isPrototype = _ListSchema.prototype.isPrototypeOf(lhs);
+    if (!isPrototype && typeof lhs === "object" && lhs !== null) {
+      const list2 = lhs;
+      return list2.symbol === _ListSchema.symbol;
+    }
+    return isPrototype;
   }
 };
 function list(namespace, name, traits = {}, valueSchema) {
@@ -28253,13 +29416,25 @@ function list(namespace, name, traits = {}, valueSchema) {
 }
 
 // src/submodules/schema/schemas/MapSchema.ts
-var MapSchema = class extends Schema {
+var MapSchema = class _MapSchema extends Schema {
   constructor(name, traits, keySchema, valueSchema) {
     super(name, traits);
     this.name = name;
     this.traits = traits;
     this.keySchema = keySchema;
     this.valueSchema = valueSchema;
+    this.symbol = _MapSchema.symbol;
+  }
+  static {
+    this.symbol = Symbol.for("@smithy/core/schema::MapSchema");
+  }
+  static [Symbol.hasInstance](lhs) {
+    const isPrototype = _MapSchema.prototype.isPrototypeOf(lhs);
+    if (!isPrototype && typeof lhs === "object" && lhs !== null) {
+      const map2 = lhs;
+      return map2.symbol === _MapSchema.symbol;
+    }
+    return isPrototype;
   }
 };
 function map(namespace, name, traits = {}, keySchema, valueSchema) {
@@ -28290,17 +29465,29 @@ function op(namespace, name, traits = {}, input, output) {
 }
 
 // src/submodules/schema/schemas/StructureSchema.ts
-var StructureSchema = class extends Schema {
+var StructureSchema = class _StructureSchema extends Schema {
   constructor(name, traits, memberNames, memberList) {
     super(name, traits);
     this.name = name;
     this.traits = traits;
     this.memberNames = memberNames;
     this.memberList = memberList;
+    this.symbol = _StructureSchema.symbol;
     this.members = {};
     for (let i = 0; i < memberNames.length; ++i) {
       this.members[memberNames[i]] = Array.isArray(memberList[i]) ? memberList[i] : [memberList[i], 0];
     }
+  }
+  static {
+    this.symbol = Symbol.for("@smithy/core/schema::StructureSchema");
+  }
+  static [Symbol.hasInstance](lhs) {
+    const isPrototype = _StructureSchema.prototype.isPrototypeOf(lhs);
+    if (!isPrototype && typeof lhs === "object" && lhs !== null) {
+      const struct2 = lhs;
+      return struct2.symbol === _StructureSchema.symbol;
+    }
+    return isPrototype;
   }
 };
 function struct(namespace, name, traits, memberNames, memberList) {
@@ -28310,7 +29497,7 @@ function struct(namespace, name, traits, memberNames, memberList) {
 }
 
 // src/submodules/schema/schemas/ErrorSchema.ts
-var ErrorSchema = class extends StructureSchema {
+var ErrorSchema = class _ErrorSchema extends StructureSchema {
   constructor(name, traits, memberNames, memberList, ctor) {
     super(name, traits, memberNames, memberList);
     this.name = name;
@@ -28318,6 +29505,18 @@ var ErrorSchema = class extends StructureSchema {
     this.memberNames = memberNames;
     this.memberList = memberList;
     this.ctor = ctor;
+    this.symbol = _ErrorSchema.symbol;
+  }
+  static {
+    this.symbol = Symbol.for("@smithy/core/schema::ErrorSchema");
+  }
+  static [Symbol.hasInstance](lhs) {
+    const isPrototype = _ErrorSchema.prototype.isPrototypeOf(lhs);
+    if (!isPrototype && typeof lhs === "object" && lhs !== null) {
+      const err = lhs;
+      return err.symbol === _ErrorSchema.symbol;
+    }
+    return isPrototype;
   }
 };
 function error(namespace, name, traits = {}, memberNames, memberList, ctor) {
@@ -28359,12 +29558,24 @@ var SCHEMA = {
 };
 
 // src/submodules/schema/schemas/SimpleSchema.ts
-var SimpleSchema = class extends Schema {
+var SimpleSchema = class _SimpleSchema extends Schema {
   constructor(name, schemaRef, traits) {
     super(name, traits);
     this.name = name;
     this.schemaRef = schemaRef;
     this.traits = traits;
+    this.symbol = _SimpleSchema.symbol;
+  }
+  static {
+    this.symbol = Symbol.for("@smithy/core/schema::SimpleSchema");
+  }
+  static [Symbol.hasInstance](lhs) {
+    const isPrototype = _SimpleSchema.prototype.isPrototypeOf(lhs);
+    if (!isPrototype && typeof lhs === "object" && lhs !== null) {
+      const sim2 = lhs;
+      return sim2.symbol === _SimpleSchema.symbol;
+    }
+    return isPrototype;
   }
 };
 function sim(namespace, name, schemaRef, traits) {
@@ -28382,6 +29593,7 @@ var NormalizedSchema = class _NormalizedSchema {
   constructor(ref, memberName) {
     this.ref = ref;
     this.memberName = memberName;
+    this.symbol = _NormalizedSchema.symbol;
     const traitStack = [];
     let _ref = ref;
     let schema = ref;
@@ -28421,9 +29633,22 @@ var NormalizedSchema = class _NormalizedSchema {
     this.name = (typeof this.schema === "object" ? this.schema?.name : void 0) ?? this.memberName ?? this.getSchemaName();
     if (this._isMemberSchema && !memberName) {
       throw new Error(
-        `@smithy/core/schema - NormalizedSchema member schema ${this.getName(true)} must initialize with memberName argument.`
+        `@smithy/core/schema - NormalizedSchema member schema ${this.getName(
+          true
+        )} must initialize with memberName argument.`
       );
     }
+  }
+  static {
+    this.symbol = Symbol.for("@smithy/core/schema::NormalizedSchema");
+  }
+  static [Symbol.hasInstance](lhs) {
+    const isPrototype = _NormalizedSchema.prototype.isPrototypeOf(lhs);
+    if (!isPrototype && typeof lhs === "object" && lhs !== null) {
+      const ns = lhs;
+      return ns.symbol === _NormalizedSchema.symbol;
+    }
+    return isPrototype;
   }
   /**
    * Static constructor that attempts to avoid wrapping a NormalizedSchema within another.
@@ -28702,6 +29927,9 @@ var NormalizedSchema = class _NormalizedSchema {
    * This avoids the overhead of calling Object.entries(ns.getMemberSchemas()).
    */
   *structIterator() {
+    if (this.isUnitSchema()) {
+      return;
+    }
     if (!this.isStructSchema()) {
       throw new Error("@smithy/core/schema - cannot acquire structIterator on non-struct schema.");
     }
@@ -29415,169 +30643,45 @@ var NumericValue = class {
   constructor(string, type) {
     this.string = string;
     this.type = type;
+    let dot = 0;
+    for (let i = 0; i < string.length; ++i) {
+      const char = string.charCodeAt(i);
+      if (i === 0 && char === 45) {
+        continue;
+      }
+      if (char === 46) {
+        if (dot) {
+          throw new Error("@smithy/core/serde - NumericValue must contain at most one decimal point.");
+        }
+        dot = 1;
+        continue;
+      }
+      if (char < 48 || char > 57) {
+        throw new Error(
+          `@smithy/core/serde - NumericValue must only contain [0-9], at most one decimal point ".", and an optional negation prefix "-".`
+        );
+      }
+    }
+  }
+  toString() {
+    return this.string;
+  }
+  [Symbol.hasInstance](object) {
+    if (!object || typeof object !== "object") {
+      return false;
+    }
+    const _nv = object;
+    if (typeof _nv.string === "string" && typeof _nv.type === "string" && _nv.constructor?.name === "NumericValue") {
+      return true;
+    }
+    return false;
   }
 };
-function nv(string) {
-  return new NumericValue(string, "bigDecimal");
+function nv(input) {
+  return new NumericValue(String(input), "bigDecimal");
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (0);
-
-
-/***/ }),
-
-/***/ 4926:
-/***/ ((module) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  isArrayBuffer: () => isArrayBuffer
-});
-module.exports = __toCommonJS(src_exports);
-var isArrayBuffer = /* @__PURE__ */ __name((arg) => typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer || Object.prototype.toString.call(arg) === "[object ArrayBuffer]", "isArrayBuffer");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 1515:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromArrayBuffer: () => fromArrayBuffer,
-  fromString: () => fromString
-});
-module.exports = __toCommonJS(src_exports);
-var import_is_array_buffer = __nccwpck_require__(4926);
-var import_buffer = __nccwpck_require__(181);
-var fromArrayBuffer = /* @__PURE__ */ __name((input, offset = 0, length = input.byteLength - offset) => {
-  if (!(0, import_is_array_buffer.isArrayBuffer)(input)) {
-    throw new TypeError(`The "input" argument must be ArrayBuffer. Received type ${typeof input} (${input})`);
-  }
-  return import_buffer.Buffer.from(input, offset, length);
-}, "fromArrayBuffer");
-var fromString = /* @__PURE__ */ __name((input, encoding) => {
-  if (typeof input !== "string") {
-    throw new TypeError(`The "input" argument must be of type string. Received type ${typeof input} (${input})`);
-  }
-  return encoding ? import_buffer.Buffer.from(input, encoding) : import_buffer.Buffer.from(input);
-}, "fromString");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 4989:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromUtf8: () => fromUtf8,
-  toUint8Array: () => toUint8Array,
-  toUtf8: () => toUtf8
-});
-module.exports = __toCommonJS(src_exports);
-
-// src/fromUtf8.ts
-var import_util_buffer_from = __nccwpck_require__(1515);
-var fromUtf8 = /* @__PURE__ */ __name((input) => {
-  const buf = (0, import_util_buffer_from.fromString)(input, "utf8");
-  return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-}, "fromUtf8");
-
-// src/toUint8Array.ts
-var toUint8Array = /* @__PURE__ */ __name((data) => {
-  if (typeof data === "string") {
-    return fromUtf8(data);
-  }
-  if (ArrayBuffer.isView(data)) {
-    return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-  }
-  return new Uint8Array(data);
-}, "toUint8Array");
-
-// src/toUtf8.ts
-
-var toUtf8 = /* @__PURE__ */ __name((input) => {
-  if (typeof input === "string") {
-    return input;
-  }
-  if (typeof input !== "object" || typeof input.byteOffset !== "number" || typeof input.byteLength !== "number") {
-    throw new Error("@smithy/util-utf8: toUtf8 encoder function only accepts string | Uint8Array.");
-  }
-  return (0, import_util_buffer_from.fromArrayBuffer)(input.buffer, input.byteOffset, input.byteLength).toString("utf8");
-}, "toUtf8");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
 
 
 /***/ }),
@@ -30905,11 +32009,11 @@ var FetchHttpHandler = class _FetchHttpHandler {
   }
   destroy() {
   }
-  async handle(request, { abortSignal } = {}) {
+  async handle(request, { abortSignal, requestTimeout: requestTimeout2 } = {}) {
     if (!this.config) {
       this.config = await this.configProvider;
     }
-    const requestTimeoutInMs = this.config.requestTimeout;
+    const requestTimeoutInMs = requestTimeout2 ?? this.config.requestTimeout;
     const keepAlive = this.config.keepAlive === true;
     const credentials = this.config.credentials;
     if (abortSignal?.aborted) {
@@ -31112,8 +32216,8 @@ __export(src_exports, {
   Hash: () => Hash
 });
 module.exports = __toCommonJS(src_exports);
-var import_util_buffer_from = __nccwpck_require__(4677);
-var import_util_utf8 = __nccwpck_require__(2155);
+var import_util_buffer_from = __nccwpck_require__(4151);
+var import_util_utf8 = __nccwpck_require__(1577);
 var import_buffer = __nccwpck_require__(181);
 var import_crypto = __nccwpck_require__(6982);
 var Hash = class {
@@ -31156,162 +32260,6 @@ __name(castSourceData, "castSourceData");
 
 /***/ }),
 
-/***/ 8628:
-/***/ ((module) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  isArrayBuffer: () => isArrayBuffer
-});
-module.exports = __toCommonJS(src_exports);
-var isArrayBuffer = /* @__PURE__ */ __name((arg) => typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer || Object.prototype.toString.call(arg) === "[object ArrayBuffer]", "isArrayBuffer");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 4677:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromArrayBuffer: () => fromArrayBuffer,
-  fromString: () => fromString
-});
-module.exports = __toCommonJS(src_exports);
-var import_is_array_buffer = __nccwpck_require__(8628);
-var import_buffer = __nccwpck_require__(181);
-var fromArrayBuffer = /* @__PURE__ */ __name((input, offset = 0, length = input.byteLength - offset) => {
-  if (!(0, import_is_array_buffer.isArrayBuffer)(input)) {
-    throw new TypeError(`The "input" argument must be ArrayBuffer. Received type ${typeof input} (${input})`);
-  }
-  return import_buffer.Buffer.from(input, offset, length);
-}, "fromArrayBuffer");
-var fromString = /* @__PURE__ */ __name((input, encoding) => {
-  if (typeof input !== "string") {
-    throw new TypeError(`The "input" argument must be of type string. Received type ${typeof input} (${input})`);
-  }
-  return encoding ? import_buffer.Buffer.from(input, encoding) : import_buffer.Buffer.from(input);
-}, "fromString");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 2155:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromUtf8: () => fromUtf8,
-  toUint8Array: () => toUint8Array,
-  toUtf8: () => toUtf8
-});
-module.exports = __toCommonJS(src_exports);
-
-// src/fromUtf8.ts
-var import_util_buffer_from = __nccwpck_require__(4677);
-var fromUtf8 = /* @__PURE__ */ __name((input) => {
-  const buf = (0, import_util_buffer_from.fromString)(input, "utf8");
-  return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-}, "fromUtf8");
-
-// src/toUint8Array.ts
-var toUint8Array = /* @__PURE__ */ __name((data) => {
-  if (typeof data === "string") {
-    return fromUtf8(data);
-  }
-  if (ArrayBuffer.isView(data)) {
-    return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-  }
-  return new Uint8Array(data);
-}, "toUint8Array");
-
-// src/toUtf8.ts
-
-var toUtf8 = /* @__PURE__ */ __name((input) => {
-  if (typeof input === "string") {
-    return input;
-  }
-  if (typeof input !== "object" || typeof input.byteOffset !== "number" || typeof input.byteLength !== "number") {
-    throw new Error("@smithy/util-utf8: toUtf8 encoder function only accepts string | Uint8Array.");
-  }
-  return (0, import_util_buffer_from.fromArrayBuffer)(input.buffer, input.byteOffset, input.byteLength).toString("utf8");
-}, "toUtf8");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
 /***/ 7698:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -31346,7 +32294,7 @@ module.exports = __toCommonJS(src_exports);
 var import_fs = __nccwpck_require__(9896);
 
 // src/HashCalculator.ts
-var import_util_utf8 = __nccwpck_require__(9812);
+var import_util_utf8 = __nccwpck_require__(1577);
 var import_stream = __nccwpck_require__(2203);
 var HashCalculator = class extends import_stream.Writable {
   constructor(hash, options) {
@@ -31409,162 +32357,6 @@ var readableStreamHasher = /* @__PURE__ */ __name((hashCtor, readableStream) => 
     });
   });
 }, "readableStreamHasher");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 8655:
-/***/ ((module) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  isArrayBuffer: () => isArrayBuffer
-});
-module.exports = __toCommonJS(src_exports);
-var isArrayBuffer = /* @__PURE__ */ __name((arg) => typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer || Object.prototype.toString.call(arg) === "[object ArrayBuffer]", "isArrayBuffer");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 2264:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromArrayBuffer: () => fromArrayBuffer,
-  fromString: () => fromString
-});
-module.exports = __toCommonJS(src_exports);
-var import_is_array_buffer = __nccwpck_require__(8655);
-var import_buffer = __nccwpck_require__(181);
-var fromArrayBuffer = /* @__PURE__ */ __name((input, offset = 0, length = input.byteLength - offset) => {
-  if (!(0, import_is_array_buffer.isArrayBuffer)(input)) {
-    throw new TypeError(`The "input" argument must be ArrayBuffer. Received type ${typeof input} (${input})`);
-  }
-  return import_buffer.Buffer.from(input, offset, length);
-}, "fromArrayBuffer");
-var fromString = /* @__PURE__ */ __name((input, encoding) => {
-  if (typeof input !== "string") {
-    throw new TypeError(`The "input" argument must be of type string. Received type ${typeof input} (${input})`);
-  }
-  return encoding ? import_buffer.Buffer.from(input, encoding) : import_buffer.Buffer.from(input);
-}, "fromString");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 9812:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromUtf8: () => fromUtf8,
-  toUint8Array: () => toUint8Array,
-  toUtf8: () => toUtf8
-});
-module.exports = __toCommonJS(src_exports);
-
-// src/fromUtf8.ts
-var import_util_buffer_from = __nccwpck_require__(2264);
-var fromUtf8 = /* @__PURE__ */ __name((input) => {
-  const buf = (0, import_util_buffer_from.fromString)(input, "utf8");
-  return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-}, "fromUtf8");
-
-// src/toUint8Array.ts
-var toUint8Array = /* @__PURE__ */ __name((data) => {
-  if (typeof data === "string") {
-    return fromUtf8(data);
-  }
-  if (ArrayBuffer.isView(data)) {
-    return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-  }
-  return new Uint8Array(data);
-}, "toUint8Array");
-
-// src/toUtf8.ts
-
-var toUtf8 = /* @__PURE__ */ __name((input) => {
-  if (typeof input === "string") {
-    return input;
-  }
-  if (typeof input !== "object" || typeof input.byteOffset !== "number" || typeof input.byteLength !== "number") {
-    throw new Error("@smithy/util-utf8: toUtf8 encoder function only accepts string | Uint8Array.");
-  }
-  return (0, import_util_buffer_from.fromArrayBuffer)(input.buffer, input.byteOffset, input.byteLength).toString("utf8");
-}, "toUtf8");
 // Annotate the CommonJS export names for ESM import in node:
 
 0 && (0);
@@ -31772,6 +32564,7 @@ __export(src_exports, {
   getEndpointFromInstructions: () => getEndpointFromInstructions,
   getEndpointPlugin: () => getEndpointPlugin,
   resolveEndpointConfig: () => resolveEndpointConfig,
+  resolveEndpointRequiredConfig: () => resolveEndpointRequiredConfig,
   resolveParams: () => resolveParams,
   toEndpointV1: () => toEndpointV1
 });
@@ -31835,6 +32628,9 @@ var createConfigValueProvider = /* @__PURE__ */ __name((configKey, canonicalEndp
   }
   if (configKey === "endpoint" || canonicalEndpointParamKey === "endpoint") {
     return async () => {
+      if (config.isCustomEndpoint === false) {
+        return void 0;
+      }
       const endpoint = await configProvider();
       if (endpoint && typeof endpoint === "object") {
         if ("url" in endpoint) {
@@ -31868,7 +32664,7 @@ var toEndpointV1 = /* @__PURE__ */ __name((endpoint) => {
 
 // src/adaptors/getEndpointFromInstructions.ts
 var getEndpointFromInstructions = /* @__PURE__ */ __name(async (commandInput, instructionsSupplier, clientConfig, context) => {
-  if (!clientConfig.endpoint) {
+  if (!clientConfig.isCustomEndpoint) {
     let endpointFromConfig;
     if (clientConfig.serviceConfiguredEndpoint) {
       endpointFromConfig = await clientConfig.serviceConfiguredEndpoint();
@@ -31925,7 +32721,7 @@ var endpointMiddleware = /* @__PURE__ */ __name(({
   instructions
 }) => {
   return (next, context) => async (args) => {
-    if (config.endpoint) {
+    if (config.isCustomEndpoint) {
       (0, import_core.setFeature)(context, "ENDPOINT_OVERRIDE", "N");
     }
     const endpoint = await getEndpointFromInstructions(
@@ -32012,6 +32808,19 @@ var resolveEndpointConfig = /* @__PURE__ */ __name((input) => {
   };
   return resolvedConfig;
 }, "resolveEndpointConfig");
+
+// src/resolveEndpointRequiredConfig.ts
+var resolveEndpointRequiredConfig = /* @__PURE__ */ __name((input) => {
+  const { endpoint } = input;
+  if (endpoint === void 0) {
+    input.endpoint = async () => {
+      throw new Error(
+        "@smithy/middleware-endpoint: (default endpointRuleSet) endpoint is not set - you must configure an endpoint."
+      );
+    };
+  }
+  return input;
+}, "resolveEndpointRequiredConfig");
 // Annotate the CommonJS export names for ESM import in node:
 
 0 && (0);
@@ -33308,7 +34117,7 @@ or increase socketAcquisitionWarningTimeout=(millis) in the NodeHttpHandler conf
     this.config?.httpAgent?.destroy();
     this.config?.httpsAgent?.destroy();
   }
-  async handle(request, { abortSignal } = {}) {
+  async handle(request, { abortSignal, requestTimeout } = {}) {
     if (!this.config) {
       this.config = await this.configProvider;
     }
@@ -33409,8 +34218,9 @@ or increase socketAcquisitionWarningTimeout=(millis) in the NodeHttpHandler conf
           abortSignal.onabort = onAbort;
         }
       }
+      const effectiveRequestTimeout = requestTimeout ?? this.config.requestTimeout;
       timeouts.push(setConnectionTimeout(req, reject, this.config.connectionTimeout));
-      timeouts.push(setSocketTimeout(req, reject, this.config.requestTimeout));
+      timeouts.push(setSocketTimeout(req, reject, effectiveRequestTimeout));
       const httpAgent = nodeHttpsOptions.agent;
       if (typeof httpAgent === "object" && "keepAlive" in httpAgent) {
         timeouts.push(
@@ -33422,7 +34232,7 @@ or increase socketAcquisitionWarningTimeout=(millis) in the NodeHttpHandler conf
           })
         );
       }
-      writeRequestBodyPromise = writeRequestBody(req, request, this.config.requestTimeout).catch((e) => {
+      writeRequestBodyPromise = writeRequestBody(req, request, effectiveRequestTimeout).catch((e) => {
         timeouts.forEach(timing.clearTimeout);
         return _reject(e);
       });
@@ -33611,7 +34421,7 @@ var NodeHttp2Handler = class _NodeHttp2Handler {
   destroy() {
     this.connectionManager.destroy();
   }
-  async handle(request, { abortSignal } = {}) {
+  async handle(request, { abortSignal, requestTimeout } = {}) {
     if (!this.config) {
       this.config = await this.configProvider;
       this.connectionManager.setDisableConcurrentStreams(this.config.disableConcurrentStreams || false);
@@ -33619,7 +34429,8 @@ var NodeHttp2Handler = class _NodeHttp2Handler {
         this.connectionManager.setMaxConcurrentStreams(this.config.maxConcurrentStreams);
       }
     }
-    const { requestTimeout, disableConcurrentStreams } = this.config;
+    const { requestTimeout: configRequestTimeout, disableConcurrentStreams } = this.config;
+    const effectiveRequestTimeout = requestTimeout ?? configRequestTimeout;
     return new Promise((_resolve, _reject) => {
       let fulfilled = false;
       let writeRequestBodyPromise = void 0;
@@ -33685,10 +34496,10 @@ var NodeHttp2Handler = class _NodeHttp2Handler {
           this.connectionManager.deleteSession(authority, session);
         }
       });
-      if (requestTimeout) {
-        req.setTimeout(requestTimeout, () => {
+      if (effectiveRequestTimeout) {
+        req.setTimeout(effectiveRequestTimeout, () => {
           req.close();
-          const timeoutError = new Error(`Stream timed out because of no activity for ${requestTimeout} ms`);
+          const timeoutError = new Error(`Stream timed out because of no activity for ${effectiveRequestTimeout} ms`);
           timeoutError.name = "TimeoutError";
           rejectWithDestroy(timeoutError);
         });
@@ -33726,7 +34537,7 @@ var NodeHttp2Handler = class _NodeHttp2Handler {
           rejectWithDestroy(new Error("Unexpected error: http2 request did not get a response"));
         }
       });
-      writeRequestBodyPromise = writeRequestBody(req, request, requestTimeout);
+      writeRequestBodyPromise = writeRequestBody(req, request, effectiveRequestTimeout);
     });
   }
   updateHttpClientConfig(key, value) {
@@ -34428,6 +35239,7 @@ var THROTTLING_ERROR_CODES = [
 var TRANSIENT_ERROR_CODES = ["TimeoutError", "RequestTimeout", "RequestTimeoutException"];
 var TRANSIENT_ERROR_STATUS_CODES = [500, 502, 503, 504];
 var NODEJS_TIMEOUT_ERROR_CODES = ["ECONNRESET", "ECONNREFUSED", "EPIPE", "ETIMEDOUT"];
+var NODEJS_NETWORK_ERROR_CODES = ["EHOSTUNREACH", "ENETUNREACH", "ENOTFOUND"];
 
 // src/index.ts
 var isRetryableByTrait = /* @__PURE__ */ __name((error) => error.$retryable !== void 0, "isRetryableByTrait");
@@ -34453,7 +35265,7 @@ var isBrowserNetworkError = /* @__PURE__ */ __name((error) => {
   return errorMessages.has(error.message);
 }, "isBrowserNetworkError");
 var isThrottlingError = /* @__PURE__ */ __name((error) => error.$metadata?.httpStatusCode === 429 || THROTTLING_ERROR_CODES.includes(error.name) || error.$retryable?.throttling == true, "isThrottlingError");
-var isTransientError = /* @__PURE__ */ __name((error, depth = 0) => isClockSkewCorrectedError(error) || TRANSIENT_ERROR_CODES.includes(error.name) || NODEJS_TIMEOUT_ERROR_CODES.includes(error?.code || "") || TRANSIENT_ERROR_STATUS_CODES.includes(error.$metadata?.httpStatusCode || 0) || isBrowserNetworkError(error) || error.cause !== void 0 && depth <= 10 && isTransientError(error.cause, depth + 1), "isTransientError");
+var isTransientError = /* @__PURE__ */ __name((error, depth = 0) => isClockSkewCorrectedError(error) || TRANSIENT_ERROR_CODES.includes(error.name) || NODEJS_TIMEOUT_ERROR_CODES.includes(error?.code || "") || NODEJS_NETWORK_ERROR_CODES.includes(error?.code || "") || TRANSIENT_ERROR_STATUS_CODES.includes(error.$metadata?.httpStatusCode || 0) || isBrowserNetworkError(error) || error.cause !== void 0 && depth <= 10 && isTransientError(error.cause, depth + 1), "isTransientError");
 var isServerError = /* @__PURE__ */ __name((error) => {
   if (error.$metadata?.httpStatusCode !== void 0) {
     const statusCode = error.$metadata.httpStatusCode;
@@ -34838,7 +35650,7 @@ module.exports = __toCommonJS(src_exports);
 
 // src/SignatureV4.ts
 
-var import_util_utf85 = __nccwpck_require__(7529);
+var import_util_utf85 = __nccwpck_require__(1577);
 
 // src/constants.ts
 var ALGORITHM_QUERY_PARAM = "X-Amz-Algorithm";
@@ -34887,7 +35699,7 @@ var MAX_PRESIGNED_TTL = 60 * 60 * 24 * 7;
 
 // src/credentialDerivation.ts
 var import_util_hex_encoding = __nccwpck_require__(6435);
-var import_util_utf8 = __nccwpck_require__(7529);
+var import_util_utf8 = __nccwpck_require__(1577);
 var signingKeyCache = {};
 var cacheQueue = [];
 var createScope = /* @__PURE__ */ __name((shortDate, region, service) => `${shortDate}/${region}/${service}/${KEY_TYPE_IDENTIFIER}`, "createScope");
@@ -34938,9 +35750,9 @@ var getCanonicalHeaders = /* @__PURE__ */ __name(({ headers }, unsignableHeaders
 }, "getCanonicalHeaders");
 
 // src/getPayloadHash.ts
-var import_is_array_buffer = __nccwpck_require__(2706);
+var import_is_array_buffer = __nccwpck_require__(6130);
 
-var import_util_utf82 = __nccwpck_require__(7529);
+var import_util_utf82 = __nccwpck_require__(1577);
 var getPayloadHash = /* @__PURE__ */ __name(async ({ headers, body }, hashConstructor) => {
   for (const headerName of Object.keys(headers)) {
     if (headerName.toLowerCase() === SHA256_HEADER) {
@@ -34959,7 +35771,7 @@ var getPayloadHash = /* @__PURE__ */ __name(async ({ headers, body }, hashConstr
 
 // src/HeaderFormatter.ts
 
-var import_util_utf83 = __nccwpck_require__(7529);
+var import_util_utf83 = __nccwpck_require__(1577);
 var HeaderFormatter = class {
   static {
     __name(this, "HeaderFormatter");
@@ -35126,7 +35938,7 @@ var prepareRequest = /* @__PURE__ */ __name((request) => {
 
 var import_util_middleware = __nccwpck_require__(6324);
 
-var import_util_utf84 = __nccwpck_require__(7529);
+var import_util_utf84 = __nccwpck_require__(1577);
 
 // src/getCanonicalQuery.ts
 var import_util_uri_escape = __nccwpck_require__(146);
@@ -35410,162 +36222,6 @@ var SignatureV4 = class extends SignatureV4Base {
 var signatureV4aContainer = {
   SignatureV4a: null
 };
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 2706:
-/***/ ((module) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  isArrayBuffer: () => isArrayBuffer
-});
-module.exports = __toCommonJS(src_exports);
-var isArrayBuffer = /* @__PURE__ */ __name((arg) => typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer || Object.prototype.toString.call(arg) === "[object ArrayBuffer]", "isArrayBuffer");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 1207:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromArrayBuffer: () => fromArrayBuffer,
-  fromString: () => fromString
-});
-module.exports = __toCommonJS(src_exports);
-var import_is_array_buffer = __nccwpck_require__(2706);
-var import_buffer = __nccwpck_require__(181);
-var fromArrayBuffer = /* @__PURE__ */ __name((input, offset = 0, length = input.byteLength - offset) => {
-  if (!(0, import_is_array_buffer.isArrayBuffer)(input)) {
-    throw new TypeError(`The "input" argument must be ArrayBuffer. Received type ${typeof input} (${input})`);
-  }
-  return import_buffer.Buffer.from(input, offset, length);
-}, "fromArrayBuffer");
-var fromString = /* @__PURE__ */ __name((input, encoding) => {
-  if (typeof input !== "string") {
-    throw new TypeError(`The "input" argument must be of type string. Received type ${typeof input} (${input})`);
-  }
-  return encoding ? import_buffer.Buffer.from(input, encoding) : import_buffer.Buffer.from(input);
-}, "fromString");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 7529:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromUtf8: () => fromUtf8,
-  toUint8Array: () => toUint8Array,
-  toUtf8: () => toUtf8
-});
-module.exports = __toCommonJS(src_exports);
-
-// src/fromUtf8.ts
-var import_util_buffer_from = __nccwpck_require__(1207);
-var fromUtf8 = /* @__PURE__ */ __name((input) => {
-  const buf = (0, import_util_buffer_from.fromString)(input, "utf8");
-  return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-}, "fromUtf8");
-
-// src/toUint8Array.ts
-var toUint8Array = /* @__PURE__ */ __name((data) => {
-  if (typeof data === "string") {
-    return fromUtf8(data);
-  }
-  if (ArrayBuffer.isView(data)) {
-    return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-  }
-  return new Uint8Array(data);
-}, "toUint8Array");
-
-// src/toUtf8.ts
-
-var toUtf8 = /* @__PURE__ */ __name((input) => {
-  if (typeof input === "string") {
-    return input;
-  }
-  if (typeof input !== "object" || typeof input.byteOffset !== "number" || typeof input.byteLength !== "number") {
-    throw new Error("@smithy/util-utf8: toUtf8 encoder function only accepts string | Uint8Array.");
-  }
-  return (0, import_util_buffer_from.fromArrayBuffer)(input.buffer, input.byteOffset, input.byteLength).toString("utf8");
-}, "toUtf8");
 // Annotate the CommonJS export names for ESM import in node:
 
 0 && (0);
@@ -36463,7 +37119,7 @@ var parseUrl = /* @__PURE__ */ __name((url) => {
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.fromBase64 = void 0;
-const util_buffer_from_1 = __nccwpck_require__(5428);
+const util_buffer_from_1 = __nccwpck_require__(4151);
 const BASE64_REGEX = /^[A-Za-z0-9+/]*={0,2}$/;
 const fromBase64 = (input) => {
     if ((input.length * 3) % 4 !== 0) {
@@ -36518,8 +37174,8 @@ __reExport(src_exports, __nccwpck_require__(4871), module.exports);
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.toBase64 = void 0;
-const util_buffer_from_1 = __nccwpck_require__(5428);
-const util_utf8_1 = __nccwpck_require__(2656);
+const util_buffer_from_1 = __nccwpck_require__(4151);
+const util_utf8_1 = __nccwpck_require__(1577);
 const toBase64 = (_input) => {
     let input;
     if (typeof _input === "string") {
@@ -36538,7 +37194,7 @@ exports.toBase64 = toBase64;
 
 /***/ }),
 
-/***/ 7539:
+/***/ 2098:
 /***/ ((module) => {
 
 var __defProp = Object.defineProperty;
@@ -36563,129 +37219,35 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.ts
 var src_exports = {};
 __export(src_exports, {
-  isArrayBuffer: () => isArrayBuffer
-});
-module.exports = __toCommonJS(src_exports);
-var isArrayBuffer = /* @__PURE__ */ __name((arg) => typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer || Object.prototype.toString.call(arg) === "[object ArrayBuffer]", "isArrayBuffer");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 5428:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromArrayBuffer: () => fromArrayBuffer,
-  fromString: () => fromString
-});
-module.exports = __toCommonJS(src_exports);
-var import_is_array_buffer = __nccwpck_require__(7539);
-var import_buffer = __nccwpck_require__(181);
-var fromArrayBuffer = /* @__PURE__ */ __name((input, offset = 0, length = input.byteLength - offset) => {
-  if (!(0, import_is_array_buffer.isArrayBuffer)(input)) {
-    throw new TypeError(`The "input" argument must be ArrayBuffer. Received type ${typeof input} (${input})`);
-  }
-  return import_buffer.Buffer.from(input, offset, length);
-}, "fromArrayBuffer");
-var fromString = /* @__PURE__ */ __name((input, encoding) => {
-  if (typeof input !== "string") {
-    throw new TypeError(`The "input" argument must be of type string. Received type ${typeof input} (${input})`);
-  }
-  return encoding ? import_buffer.Buffer.from(input, encoding) : import_buffer.Buffer.from(input);
-}, "fromString");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 2656:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromUtf8: () => fromUtf8,
-  toUint8Array: () => toUint8Array,
-  toUtf8: () => toUtf8
+  calculateBodyLength: () => calculateBodyLength
 });
 module.exports = __toCommonJS(src_exports);
 
-// src/fromUtf8.ts
-var import_util_buffer_from = __nccwpck_require__(5428);
-var fromUtf8 = /* @__PURE__ */ __name((input) => {
-  const buf = (0, import_util_buffer_from.fromString)(input, "utf8");
-  return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-}, "fromUtf8");
-
-// src/toUint8Array.ts
-var toUint8Array = /* @__PURE__ */ __name((data) => {
-  if (typeof data === "string") {
-    return fromUtf8(data);
+// src/calculateBodyLength.ts
+var TEXT_ENCODER = typeof TextEncoder == "function" ? new TextEncoder() : null;
+var calculateBodyLength = /* @__PURE__ */ __name((body) => {
+  if (typeof body === "string") {
+    if (TEXT_ENCODER) {
+      return TEXT_ENCODER.encode(body).byteLength;
+    }
+    let len = body.length;
+    for (let i = len - 1; i >= 0; i--) {
+      const code = body.charCodeAt(i);
+      if (code > 127 && code <= 2047)
+        len++;
+      else if (code > 2047 && code <= 65535)
+        len += 2;
+      if (code >= 56320 && code <= 57343)
+        i--;
+    }
+    return len;
+  } else if (typeof body.byteLength === "number") {
+    return body.byteLength;
+  } else if (typeof body.size === "number") {
+    return body.size;
   }
-  if (ArrayBuffer.isView(data)) {
-    return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-  }
-  return new Uint8Array(data);
-}, "toUint8Array");
-
-// src/toUtf8.ts
-
-var toUtf8 = /* @__PURE__ */ __name((input) => {
-  if (typeof input === "string") {
-    return input;
-  }
-  if (typeof input !== "object" || typeof input.byteOffset !== "number" || typeof input.byteLength !== "number") {
-    throw new Error("@smithy/util-utf8: toUtf8 encoder function only accepts string | Uint8Array.");
-  }
-  return (0, import_util_buffer_from.fromArrayBuffer)(input.buffer, input.byteOffset, input.byteLength).toString("utf8");
-}, "toUtf8");
+  throw new Error(`Body Length computation failed for ${body}`);
+}, "calculateBodyLength");
 // Annotate the CommonJS export names for ESM import in node:
 
 0 && (0);
@@ -38536,7 +39098,7 @@ module.exports = __toCommonJS(src_exports);
 
 // src/blob/transforms.ts
 var import_util_base64 = __nccwpck_require__(8385);
-var import_util_utf8 = __nccwpck_require__(1475);
+var import_util_utf8 = __nccwpck_require__(1577);
 function transformToString(payload, encoding = "utf-8") {
   if (encoding === "base64") {
     return (0, import_util_base64.toBase64)(payload);
@@ -38613,7 +39175,7 @@ exports.sdkStreamMixin = void 0;
 const fetch_http_handler_1 = __nccwpck_require__(7809);
 const util_base64_1 = __nccwpck_require__(8385);
 const util_hex_encoding_1 = __nccwpck_require__(6435);
-const util_utf8_1 = __nccwpck_require__(1475);
+const util_utf8_1 = __nccwpck_require__(1577);
 const stream_type_check_1 = __nccwpck_require__(4414);
 const ERR_MSG_STREAM_HAS_BEEN_TRANSFORMED = "The stream has already been transformed.";
 const sdkStreamMixin = (stream) => {
@@ -38688,7 +39250,7 @@ const isBlobInstance = (stream) => typeof Blob === "function" && stream instance
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.sdkStreamMixin = void 0;
 const node_http_handler_1 = __nccwpck_require__(1279);
-const util_buffer_from_1 = __nccwpck_require__(3325);
+const util_buffer_from_1 = __nccwpck_require__(4151);
 const stream_1 = __nccwpck_require__(2203);
 const sdk_stream_mixin_browser_1 = __nccwpck_require__(2207);
 const ERR_MSG_STREAM_HAS_BEEN_TRANSFORMED = "The stream has already been transformed.";
@@ -38807,162 +39369,6 @@ exports.isBlob = isBlob;
 
 /***/ }),
 
-/***/ 6220:
-/***/ ((module) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  isArrayBuffer: () => isArrayBuffer
-});
-module.exports = __toCommonJS(src_exports);
-var isArrayBuffer = /* @__PURE__ */ __name((arg) => typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer || Object.prototype.toString.call(arg) === "[object ArrayBuffer]", "isArrayBuffer");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 3325:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromArrayBuffer: () => fromArrayBuffer,
-  fromString: () => fromString
-});
-module.exports = __toCommonJS(src_exports);
-var import_is_array_buffer = __nccwpck_require__(6220);
-var import_buffer = __nccwpck_require__(181);
-var fromArrayBuffer = /* @__PURE__ */ __name((input, offset = 0, length = input.byteLength - offset) => {
-  if (!(0, import_is_array_buffer.isArrayBuffer)(input)) {
-    throw new TypeError(`The "input" argument must be ArrayBuffer. Received type ${typeof input} (${input})`);
-  }
-  return import_buffer.Buffer.from(input, offset, length);
-}, "fromArrayBuffer");
-var fromString = /* @__PURE__ */ __name((input, encoding) => {
-  if (typeof input !== "string") {
-    throw new TypeError(`The "input" argument must be of type string. Received type ${typeof input} (${input})`);
-  }
-  return encoding ? import_buffer.Buffer.from(input, encoding) : import_buffer.Buffer.from(input);
-}, "fromString");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
-/***/ 1475:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  fromUtf8: () => fromUtf8,
-  toUint8Array: () => toUint8Array,
-  toUtf8: () => toUtf8
-});
-module.exports = __toCommonJS(src_exports);
-
-// src/fromUtf8.ts
-var import_util_buffer_from = __nccwpck_require__(3325);
-var fromUtf8 = /* @__PURE__ */ __name((input) => {
-  const buf = (0, import_util_buffer_from.fromString)(input, "utf8");
-  return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-}, "fromUtf8");
-
-// src/toUint8Array.ts
-var toUint8Array = /* @__PURE__ */ __name((data) => {
-  if (typeof data === "string") {
-    return fromUtf8(data);
-  }
-  if (ArrayBuffer.isView(data)) {
-    return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-  }
-  return new Uint8Array(data);
-}, "toUint8Array");
-
-// src/toUtf8.ts
-
-var toUtf8 = /* @__PURE__ */ __name((input) => {
-  if (typeof input === "string") {
-    return input;
-  }
-  if (typeof input !== "object" || typeof input.byteOffset !== "number" || typeof input.byteLength !== "number") {
-    throw new Error("@smithy/util-utf8: toUtf8 encoder function only accepts string | Uint8Array.");
-  }
-  return (0, import_util_buffer_from.fromArrayBuffer)(input.buffer, input.byteOffset, input.byteLength).toString("utf8");
-}, "toUtf8");
-// Annotate the CommonJS export names for ESM import in node:
-
-0 && (0);
-
-
-
-/***/ }),
-
 /***/ 146:
 /***/ ((module) => {
 
@@ -39061,7 +39467,15 @@ var toUint8Array = /* @__PURE__ */ __name((data) => {
 
 // src/toUtf8.ts
 
-var toUtf8 = /* @__PURE__ */ __name((input) => (0, import_util_buffer_from.fromArrayBuffer)(input.buffer, input.byteOffset, input.byteLength).toString("utf8"), "toUtf8");
+var toUtf8 = /* @__PURE__ */ __name((input) => {
+  if (typeof input === "string") {
+    return input;
+  }
+  if (typeof input !== "object" || typeof input.byteOffset !== "number" || typeof input.byteLength !== "number") {
+    throw new Error("@smithy/util-utf8: toUtf8 encoder function only accepts string | Uint8Array.");
+  }
+  return (0, import_util_buffer_from.fromArrayBuffer)(input.buffer, input.byteOffset, input.byteLength).toString("utf8");
+}, "toUtf8");
 // Annotate the CommonJS export names for ESM import in node:
 
 0 && (0);
@@ -39224,15 +39638,24 @@ var validateWaiterOptions = /* @__PURE__ */ __name((options) => {
 }, "validateWaiterOptions");
 
 // src/createWaiter.ts
-var abortTimeout = /* @__PURE__ */ __name(async (abortSignal) => {
-  return new Promise((resolve) => {
-    const onAbort = /* @__PURE__ */ __name(() => resolve({ state: "ABORTED" /* ABORTED */ }), "onAbort");
+var abortTimeout = /* @__PURE__ */ __name((abortSignal) => {
+  let onAbort;
+  const promise = new Promise((resolve) => {
+    onAbort = /* @__PURE__ */ __name(() => resolve({ state: "ABORTED" /* ABORTED */ }), "onAbort");
     if (typeof abortSignal.addEventListener === "function") {
       abortSignal.addEventListener("abort", onAbort);
     } else {
       abortSignal.onabort = onAbort;
     }
   });
+  return {
+    clearListener() {
+      if (typeof abortSignal.removeEventListener === "function") {
+        abortSignal.removeEventListener("abort", onAbort);
+      }
+    },
+    aborted: promise
+  };
 }, "abortTimeout");
 var createWaiter = /* @__PURE__ */ __name(async (options, input, acceptorChecks) => {
   const params = {
@@ -39241,13 +39664,23 @@ var createWaiter = /* @__PURE__ */ __name(async (options, input, acceptorChecks)
   };
   validateWaiterOptions(params);
   const exitConditions = [runPolling(params, input, acceptorChecks)];
-  if (options.abortController) {
-    exitConditions.push(abortTimeout(options.abortController.signal));
-  }
+  const finalize = [];
   if (options.abortSignal) {
-    exitConditions.push(abortTimeout(options.abortSignal));
+    const { aborted, clearListener } = abortTimeout(options.abortSignal);
+    finalize.push(clearListener);
+    exitConditions.push(aborted);
   }
-  return Promise.race(exitConditions);
+  if (options.abortController?.signal) {
+    const { aborted, clearListener } = abortTimeout(options.abortController.signal);
+    finalize.push(clearListener);
+    exitConditions.push(aborted);
+  }
+  return Promise.race(exitConditions).then((result) => {
+    for (const fn of finalize) {
+      fn();
+    }
+    return result;
+  });
 }, "createWaiter");
 // Annotate the CommonJS export names for ESM import in node:
 
@@ -39441,7 +39874,7 @@ function expand(str, isTop) {
   var isOptions = m.body.indexOf(',') >= 0;
   if (!isSequence && !isOptions) {
     // {a},b}
-    if (m.post.match(/,.*\}/)) {
+    if (m.post.match(/,(?!,).*\}/)) {
       str = m.pre + '{' + m.body + escClose + m.post;
       return expand(str);
     }
@@ -39552,2007 +39985,6 @@ var isArray = Array.isArray || function (xs) {
     return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-
-/***/ }),
-
-/***/ 9741:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-
-
-const validator = __nccwpck_require__(9433);
-const XMLParser = __nccwpck_require__(9844);
-const XMLBuilder = __nccwpck_require__(659);
-
-module.exports = {
-  XMLParser: XMLParser,
-  XMLValidator: validator,
-  XMLBuilder: XMLBuilder
-}
-
-/***/ }),
-
-/***/ 7019:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-
-const nameStartChar = ':A-Za-z_\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD';
-const nameChar = nameStartChar + '\\-.\\d\\u00B7\\u0300-\\u036F\\u203F-\\u2040';
-const nameRegexp = '[' + nameStartChar + '][' + nameChar + ']*'
-const regexName = new RegExp('^' + nameRegexp + '$');
-
-const getAllMatches = function(string, regex) {
-  const matches = [];
-  let match = regex.exec(string);
-  while (match) {
-    const allmatches = [];
-    allmatches.startIndex = regex.lastIndex - match[0].length;
-    const len = match.length;
-    for (let index = 0; index < len; index++) {
-      allmatches.push(match[index]);
-    }
-    matches.push(allmatches);
-    match = regex.exec(string);
-  }
-  return matches;
-};
-
-const isName = function(string) {
-  const match = regexName.exec(string);
-  return !(match === null || typeof match === 'undefined');
-};
-
-exports.isExist = function(v) {
-  return typeof v !== 'undefined';
-};
-
-exports.isEmptyObject = function(obj) {
-  return Object.keys(obj).length === 0;
-};
-
-/**
- * Copy all the properties of a into b.
- * @param {*} target
- * @param {*} a
- */
-exports.merge = function(target, a, arrayMode) {
-  if (a) {
-    const keys = Object.keys(a); // will return an array of own properties
-    const len = keys.length; //don't make it inline
-    for (let i = 0; i < len; i++) {
-      if (arrayMode === 'strict') {
-        target[keys[i]] = [ a[keys[i]] ];
-      } else {
-        target[keys[i]] = a[keys[i]];
-      }
-    }
-  }
-};
-/* exports.merge =function (b,a){
-  return Object.assign(b,a);
-} */
-
-exports.getValue = function(v) {
-  if (exports.isExist(v)) {
-    return v;
-  } else {
-    return '';
-  }
-};
-
-// const fakeCall = function(a) {return a;};
-// const fakeCallNoReturn = function() {};
-
-exports.isName = isName;
-exports.getAllMatches = getAllMatches;
-exports.nameRegexp = nameRegexp;
-
-
-/***/ }),
-
-/***/ 9433:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-"use strict";
-
-
-const util = __nccwpck_require__(7019);
-
-const defaultOptions = {
-  allowBooleanAttributes: false, //A tag can have attributes without any value
-  unpairedTags: []
-};
-
-//const tagsPattern = new RegExp("<\\/?([\\w:\\-_\.]+)\\s*\/?>","g");
-exports.validate = function (xmlData, options) {
-  options = Object.assign({}, defaultOptions, options);
-
-  //xmlData = xmlData.replace(/(\r\n|\n|\r)/gm,"");//make it single line
-  //xmlData = xmlData.replace(/(^\s*<\?xml.*?\?>)/g,"");//Remove XML starting tag
-  //xmlData = xmlData.replace(/(<!DOCTYPE[\s\w\"\.\/\-\:]+(\[.*\])*\s*>)/g,"");//Remove DOCTYPE
-  const tags = [];
-  let tagFound = false;
-
-  //indicates that the root tag has been closed (aka. depth 0 has been reached)
-  let reachedRoot = false;
-
-  if (xmlData[0] === '\ufeff') {
-    // check for byte order mark (BOM)
-    xmlData = xmlData.substr(1);
-  }
-  
-  for (let i = 0; i < xmlData.length; i++) {
-
-    if (xmlData[i] === '<' && xmlData[i+1] === '?') {
-      i+=2;
-      i = readPI(xmlData,i);
-      if (i.err) return i;
-    }else if (xmlData[i] === '<') {
-      //starting of tag
-      //read until you reach to '>' avoiding any '>' in attribute value
-      let tagStartPos = i;
-      i++;
-      
-      if (xmlData[i] === '!') {
-        i = readCommentAndCDATA(xmlData, i);
-        continue;
-      } else {
-        let closingTag = false;
-        if (xmlData[i] === '/') {
-          //closing tag
-          closingTag = true;
-          i++;
-        }
-        //read tagname
-        let tagName = '';
-        for (; i < xmlData.length &&
-          xmlData[i] !== '>' &&
-          xmlData[i] !== ' ' &&
-          xmlData[i] !== '\t' &&
-          xmlData[i] !== '\n' &&
-          xmlData[i] !== '\r'; i++
-        ) {
-          tagName += xmlData[i];
-        }
-        tagName = tagName.trim();
-        //console.log(tagName);
-
-        if (tagName[tagName.length - 1] === '/') {
-          //self closing tag without attributes
-          tagName = tagName.substring(0, tagName.length - 1);
-          //continue;
-          i--;
-        }
-        if (!validateTagName(tagName)) {
-          let msg;
-          if (tagName.trim().length === 0) {
-            msg = "Invalid space after '<'.";
-          } else {
-            msg = "Tag '"+tagName+"' is an invalid name.";
-          }
-          return getErrorObject('InvalidTag', msg, getLineNumberForPosition(xmlData, i));
-        }
-
-        const result = readAttributeStr(xmlData, i);
-        if (result === false) {
-          return getErrorObject('InvalidAttr', "Attributes for '"+tagName+"' have open quote.", getLineNumberForPosition(xmlData, i));
-        }
-        let attrStr = result.value;
-        i = result.index;
-
-        if (attrStr[attrStr.length - 1] === '/') {
-          //self closing tag
-          const attrStrStart = i - attrStr.length;
-          attrStr = attrStr.substring(0, attrStr.length - 1);
-          const isValid = validateAttributeString(attrStr, options);
-          if (isValid === true) {
-            tagFound = true;
-            //continue; //text may presents after self closing tag
-          } else {
-            //the result from the nested function returns the position of the error within the attribute
-            //in order to get the 'true' error line, we need to calculate the position where the attribute begins (i - attrStr.length) and then add the position within the attribute
-            //this gives us the absolute index in the entire xml, which we can use to find the line at last
-            return getErrorObject(isValid.err.code, isValid.err.msg, getLineNumberForPosition(xmlData, attrStrStart + isValid.err.line));
-          }
-        } else if (closingTag) {
-          if (!result.tagClosed) {
-            return getErrorObject('InvalidTag', "Closing tag '"+tagName+"' doesn't have proper closing.", getLineNumberForPosition(xmlData, i));
-          } else if (attrStr.trim().length > 0) {
-            return getErrorObject('InvalidTag', "Closing tag '"+tagName+"' can't have attributes or invalid starting.", getLineNumberForPosition(xmlData, tagStartPos));
-          } else if (tags.length === 0) {
-            return getErrorObject('InvalidTag', "Closing tag '"+tagName+"' has not been opened.", getLineNumberForPosition(xmlData, tagStartPos));
-          } else {
-            const otg = tags.pop();
-            if (tagName !== otg.tagName) {
-              let openPos = getLineNumberForPosition(xmlData, otg.tagStartPos);
-              return getErrorObject('InvalidTag',
-                "Expected closing tag '"+otg.tagName+"' (opened in line "+openPos.line+", col "+openPos.col+") instead of closing tag '"+tagName+"'.",
-                getLineNumberForPosition(xmlData, tagStartPos));
-            }
-
-            //when there are no more tags, we reached the root level.
-            if (tags.length == 0) {
-              reachedRoot = true;
-            }
-          }
-        } else {
-          const isValid = validateAttributeString(attrStr, options);
-          if (isValid !== true) {
-            //the result from the nested function returns the position of the error within the attribute
-            //in order to get the 'true' error line, we need to calculate the position where the attribute begins (i - attrStr.length) and then add the position within the attribute
-            //this gives us the absolute index in the entire xml, which we can use to find the line at last
-            return getErrorObject(isValid.err.code, isValid.err.msg, getLineNumberForPosition(xmlData, i - attrStr.length + isValid.err.line));
-          }
-
-          //if the root level has been reached before ...
-          if (reachedRoot === true) {
-            return getErrorObject('InvalidXml', 'Multiple possible root nodes found.', getLineNumberForPosition(xmlData, i));
-          } else if(options.unpairedTags.indexOf(tagName) !== -1){
-            //don't push into stack
-          } else {
-            tags.push({tagName, tagStartPos});
-          }
-          tagFound = true;
-        }
-
-        //skip tag text value
-        //It may include comments and CDATA value
-        for (i++; i < xmlData.length; i++) {
-          if (xmlData[i] === '<') {
-            if (xmlData[i + 1] === '!') {
-              //comment or CADATA
-              i++;
-              i = readCommentAndCDATA(xmlData, i);
-              continue;
-            } else if (xmlData[i+1] === '?') {
-              i = readPI(xmlData, ++i);
-              if (i.err) return i;
-            } else{
-              break;
-            }
-          } else if (xmlData[i] === '&') {
-            const afterAmp = validateAmpersand(xmlData, i);
-            if (afterAmp == -1)
-              return getErrorObject('InvalidChar', "char '&' is not expected.", getLineNumberForPosition(xmlData, i));
-            i = afterAmp;
-          }else{
-            if (reachedRoot === true && !isWhiteSpace(xmlData[i])) {
-              return getErrorObject('InvalidXml', "Extra text at the end", getLineNumberForPosition(xmlData, i));
-            }
-          }
-        } //end of reading tag text value
-        if (xmlData[i] === '<') {
-          i--;
-        }
-      }
-    } else {
-      if ( isWhiteSpace(xmlData[i])) {
-        continue;
-      }
-      return getErrorObject('InvalidChar', "char '"+xmlData[i]+"' is not expected.", getLineNumberForPosition(xmlData, i));
-    }
-  }
-
-  if (!tagFound) {
-    return getErrorObject('InvalidXml', 'Start tag expected.', 1);
-  }else if (tags.length == 1) {
-      return getErrorObject('InvalidTag', "Unclosed tag '"+tags[0].tagName+"'.", getLineNumberForPosition(xmlData, tags[0].tagStartPos));
-  }else if (tags.length > 0) {
-      return getErrorObject('InvalidXml', "Invalid '"+
-          JSON.stringify(tags.map(t => t.tagName), null, 4).replace(/\r?\n/g, '')+
-          "' found.", {line: 1, col: 1});
-  }
-
-  return true;
-};
-
-function isWhiteSpace(char){
-  return char === ' ' || char === '\t' || char === '\n'  || char === '\r';
-}
-/**
- * Read Processing insstructions and skip
- * @param {*} xmlData
- * @param {*} i
- */
-function readPI(xmlData, i) {
-  const start = i;
-  for (; i < xmlData.length; i++) {
-    if (xmlData[i] == '?' || xmlData[i] == ' ') {
-      //tagname
-      const tagname = xmlData.substr(start, i - start);
-      if (i > 5 && tagname === 'xml') {
-        return getErrorObject('InvalidXml', 'XML declaration allowed only at the start of the document.', getLineNumberForPosition(xmlData, i));
-      } else if (xmlData[i] == '?' && xmlData[i + 1] == '>') {
-        //check if valid attribut string
-        i++;
-        break;
-      } else {
-        continue;
-      }
-    }
-  }
-  return i;
-}
-
-function readCommentAndCDATA(xmlData, i) {
-  if (xmlData.length > i + 5 && xmlData[i + 1] === '-' && xmlData[i + 2] === '-') {
-    //comment
-    for (i += 3; i < xmlData.length; i++) {
-      if (xmlData[i] === '-' && xmlData[i + 1] === '-' && xmlData[i + 2] === '>') {
-        i += 2;
-        break;
-      }
-    }
-  } else if (
-    xmlData.length > i + 8 &&
-    xmlData[i + 1] === 'D' &&
-    xmlData[i + 2] === 'O' &&
-    xmlData[i + 3] === 'C' &&
-    xmlData[i + 4] === 'T' &&
-    xmlData[i + 5] === 'Y' &&
-    xmlData[i + 6] === 'P' &&
-    xmlData[i + 7] === 'E'
-  ) {
-    let angleBracketsCount = 1;
-    for (i += 8; i < xmlData.length; i++) {
-      if (xmlData[i] === '<') {
-        angleBracketsCount++;
-      } else if (xmlData[i] === '>') {
-        angleBracketsCount--;
-        if (angleBracketsCount === 0) {
-          break;
-        }
-      }
-    }
-  } else if (
-    xmlData.length > i + 9 &&
-    xmlData[i + 1] === '[' &&
-    xmlData[i + 2] === 'C' &&
-    xmlData[i + 3] === 'D' &&
-    xmlData[i + 4] === 'A' &&
-    xmlData[i + 5] === 'T' &&
-    xmlData[i + 6] === 'A' &&
-    xmlData[i + 7] === '['
-  ) {
-    for (i += 8; i < xmlData.length; i++) {
-      if (xmlData[i] === ']' && xmlData[i + 1] === ']' && xmlData[i + 2] === '>') {
-        i += 2;
-        break;
-      }
-    }
-  }
-
-  return i;
-}
-
-const doubleQuote = '"';
-const singleQuote = "'";
-
-/**
- * Keep reading xmlData until '<' is found outside the attribute value.
- * @param {string} xmlData
- * @param {number} i
- */
-function readAttributeStr(xmlData, i) {
-  let attrStr = '';
-  let startChar = '';
-  let tagClosed = false;
-  for (; i < xmlData.length; i++) {
-    if (xmlData[i] === doubleQuote || xmlData[i] === singleQuote) {
-      if (startChar === '') {
-        startChar = xmlData[i];
-      } else if (startChar !== xmlData[i]) {
-        //if vaue is enclosed with double quote then single quotes are allowed inside the value and vice versa
-      } else {
-        startChar = '';
-      }
-    } else if (xmlData[i] === '>') {
-      if (startChar === '') {
-        tagClosed = true;
-        break;
-      }
-    }
-    attrStr += xmlData[i];
-  }
-  if (startChar !== '') {
-    return false;
-  }
-
-  return {
-    value: attrStr,
-    index: i,
-    tagClosed: tagClosed
-  };
-}
-
-/**
- * Select all the attributes whether valid or invalid.
- */
-const validAttrStrRegxp = new RegExp('(\\s*)([^\\s=]+)(\\s*=)?(\\s*([\'"])(([\\s\\S])*?)\\5)?', 'g');
-
-//attr, ="sd", a="amit's", a="sd"b="saf", ab  cd=""
-
-function validateAttributeString(attrStr, options) {
-  //console.log("start:"+attrStr+":end");
-
-  //if(attrStr.trim().length === 0) return true; //empty string
-
-  const matches = util.getAllMatches(attrStr, validAttrStrRegxp);
-  const attrNames = {};
-
-  for (let i = 0; i < matches.length; i++) {
-    if (matches[i][1].length === 0) {
-      //nospace before attribute name: a="sd"b="saf"
-      return getErrorObject('InvalidAttr', "Attribute '"+matches[i][2]+"' has no space in starting.", getPositionFromMatch(matches[i]))
-    } else if (matches[i][3] !== undefined && matches[i][4] === undefined) {
-      return getErrorObject('InvalidAttr', "Attribute '"+matches[i][2]+"' is without value.", getPositionFromMatch(matches[i]));
-    } else if (matches[i][3] === undefined && !options.allowBooleanAttributes) {
-      //independent attribute: ab
-      return getErrorObject('InvalidAttr', "boolean attribute '"+matches[i][2]+"' is not allowed.", getPositionFromMatch(matches[i]));
-    }
-    /* else if(matches[i][6] === undefined){//attribute without value: ab=
-                    return { err: { code:"InvalidAttr",msg:"attribute " + matches[i][2] + " has no value assigned."}};
-                } */
-    const attrName = matches[i][2];
-    if (!validateAttrName(attrName)) {
-      return getErrorObject('InvalidAttr', "Attribute '"+attrName+"' is an invalid name.", getPositionFromMatch(matches[i]));
-    }
-    if (!attrNames.hasOwnProperty(attrName)) {
-      //check for duplicate attribute.
-      attrNames[attrName] = 1;
-    } else {
-      return getErrorObject('InvalidAttr', "Attribute '"+attrName+"' is repeated.", getPositionFromMatch(matches[i]));
-    }
-  }
-
-  return true;
-}
-
-function validateNumberAmpersand(xmlData, i) {
-  let re = /\d/;
-  if (xmlData[i] === 'x') {
-    i++;
-    re = /[\da-fA-F]/;
-  }
-  for (; i < xmlData.length; i++) {
-    if (xmlData[i] === ';')
-      return i;
-    if (!xmlData[i].match(re))
-      break;
-  }
-  return -1;
-}
-
-function validateAmpersand(xmlData, i) {
-  // https://www.w3.org/TR/xml/#dt-charref
-  i++;
-  if (xmlData[i] === ';')
-    return -1;
-  if (xmlData[i] === '#') {
-    i++;
-    return validateNumberAmpersand(xmlData, i);
-  }
-  let count = 0;
-  for (; i < xmlData.length; i++, count++) {
-    if (xmlData[i].match(/\w/) && count < 20)
-      continue;
-    if (xmlData[i] === ';')
-      break;
-    return -1;
-  }
-  return i;
-}
-
-function getErrorObject(code, message, lineNumber) {
-  return {
-    err: {
-      code: code,
-      msg: message,
-      line: lineNumber.line || lineNumber,
-      col: lineNumber.col,
-    },
-  };
-}
-
-function validateAttrName(attrName) {
-  return util.isName(attrName);
-}
-
-// const startsWithXML = /^xml/i;
-
-function validateTagName(tagname) {
-  return util.isName(tagname) /* && !tagname.match(startsWithXML) */;
-}
-
-//this function returns the line number for the character at the given index
-function getLineNumberForPosition(xmlData, index) {
-  const lines = xmlData.substring(0, index).split(/\r?\n/);
-  return {
-    line: lines.length,
-
-    // column number is last line's length + 1, because column numbering starts at 1:
-    col: lines[lines.length - 1].length + 1
-  };
-}
-
-//this function returns the position of the first character of match within attrStr
-function getPositionFromMatch(match) {
-  return match.startIndex + match[1].length;
-}
-
-
-/***/ }),
-
-/***/ 659:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-
-//parse Empty Node as self closing node
-const buildFromOrderedJs = __nccwpck_require__(3997);
-
-const defaultOptions = {
-  attributeNamePrefix: '@_',
-  attributesGroupName: false,
-  textNodeName: '#text',
-  ignoreAttributes: true,
-  cdataPropName: false,
-  format: false,
-  indentBy: '  ',
-  suppressEmptyNode: false,
-  suppressUnpairedNode: true,
-  suppressBooleanAttributes: true,
-  tagValueProcessor: function(key, a) {
-    return a;
-  },
-  attributeValueProcessor: function(attrName, a) {
-    return a;
-  },
-  preserveOrder: false,
-  commentPropName: false,
-  unpairedTags: [],
-  entities: [
-    { regex: new RegExp("&", "g"), val: "&amp;" },//it must be on top
-    { regex: new RegExp(">", "g"), val: "&gt;" },
-    { regex: new RegExp("<", "g"), val: "&lt;" },
-    { regex: new RegExp("\'", "g"), val: "&apos;" },
-    { regex: new RegExp("\"", "g"), val: "&quot;" }
-  ],
-  processEntities: true,
-  stopNodes: [],
-  // transformTagName: false,
-  // transformAttributeName: false,
-  oneListGroup: false
-};
-
-function Builder(options) {
-  this.options = Object.assign({}, defaultOptions, options);
-  if (this.options.ignoreAttributes || this.options.attributesGroupName) {
-    this.isAttribute = function(/*a*/) {
-      return false;
-    };
-  } else {
-    this.attrPrefixLen = this.options.attributeNamePrefix.length;
-    this.isAttribute = isAttribute;
-  }
-
-  this.processTextOrObjNode = processTextOrObjNode
-
-  if (this.options.format) {
-    this.indentate = indentate;
-    this.tagEndChar = '>\n';
-    this.newLine = '\n';
-  } else {
-    this.indentate = function() {
-      return '';
-    };
-    this.tagEndChar = '>';
-    this.newLine = '';
-  }
-}
-
-Builder.prototype.build = function(jObj) {
-  if(this.options.preserveOrder){
-    return buildFromOrderedJs(jObj, this.options);
-  }else {
-    if(Array.isArray(jObj) && this.options.arrayNodeName && this.options.arrayNodeName.length > 1){
-      jObj = {
-        [this.options.arrayNodeName] : jObj
-      }
-    }
-    return this.j2x(jObj, 0).val;
-  }
-};
-
-Builder.prototype.j2x = function(jObj, level) {
-  let attrStr = '';
-  let val = '';
-  for (let key in jObj) {
-    if(!Object.prototype.hasOwnProperty.call(jObj, key)) continue;
-    if (typeof jObj[key] === 'undefined') {
-      // supress undefined node only if it is not an attribute
-      if (this.isAttribute(key)) {
-        val += '';
-      }
-    } else if (jObj[key] === null) {
-      // null attribute should be ignored by the attribute list, but should not cause the tag closing
-      if (this.isAttribute(key)) {
-        val += '';
-      } else if (key[0] === '?') {
-        val += this.indentate(level) + '<' + key + '?' + this.tagEndChar;
-      } else {
-        val += this.indentate(level) + '<' + key + '/' + this.tagEndChar;
-      }
-      // val += this.indentate(level) + '<' + key + '/' + this.tagEndChar;
-    } else if (jObj[key] instanceof Date) {
-      val += this.buildTextValNode(jObj[key], key, '', level);
-    } else if (typeof jObj[key] !== 'object') {
-      //premitive type
-      const attr = this.isAttribute(key);
-      if (attr) {
-        attrStr += this.buildAttrPairStr(attr, '' + jObj[key]);
-      }else {
-        //tag value
-        if (key === this.options.textNodeName) {
-          let newval = this.options.tagValueProcessor(key, '' + jObj[key]);
-          val += this.replaceEntitiesValue(newval);
-        } else {
-          val += this.buildTextValNode(jObj[key], key, '', level);
-        }
-      }
-    } else if (Array.isArray(jObj[key])) {
-      //repeated nodes
-      const arrLen = jObj[key].length;
-      let listTagVal = "";
-      let listTagAttr = "";
-      for (let j = 0; j < arrLen; j++) {
-        const item = jObj[key][j];
-        if (typeof item === 'undefined') {
-          // supress undefined node
-        } else if (item === null) {
-          if(key[0] === "?") val += this.indentate(level) + '<' + key + '?' + this.tagEndChar;
-          else val += this.indentate(level) + '<' + key + '/' + this.tagEndChar;
-          // val += this.indentate(level) + '<' + key + '/' + this.tagEndChar;
-        } else if (typeof item === 'object') {
-          if(this.options.oneListGroup){
-            const result = this.j2x(item, level + 1);
-            listTagVal += result.val;
-            if (this.options.attributesGroupName && item.hasOwnProperty(this.options.attributesGroupName)) {
-              listTagAttr += result.attrStr
-            }
-          }else{
-            listTagVal += this.processTextOrObjNode(item, key, level)
-          }
-        } else {
-          if (this.options.oneListGroup) {
-            let textValue = this.options.tagValueProcessor(key, item);
-            textValue = this.replaceEntitiesValue(textValue);
-            listTagVal += textValue;
-          } else {
-            listTagVal += this.buildTextValNode(item, key, '', level);
-          }
-        }
-      }
-      if(this.options.oneListGroup){
-        listTagVal = this.buildObjectNode(listTagVal, key, listTagAttr, level);
-      }
-      val += listTagVal;
-    } else {
-      //nested node
-      if (this.options.attributesGroupName && key === this.options.attributesGroupName) {
-        const Ks = Object.keys(jObj[key]);
-        const L = Ks.length;
-        for (let j = 0; j < L; j++) {
-          attrStr += this.buildAttrPairStr(Ks[j], '' + jObj[key][Ks[j]]);
-        }
-      } else {
-        val += this.processTextOrObjNode(jObj[key], key, level)
-      }
-    }
-  }
-  return {attrStr: attrStr, val: val};
-};
-
-Builder.prototype.buildAttrPairStr = function(attrName, val){
-  val = this.options.attributeValueProcessor(attrName, '' + val);
-  val = this.replaceEntitiesValue(val);
-  if (this.options.suppressBooleanAttributes && val === "true") {
-    return ' ' + attrName;
-  } else return ' ' + attrName + '="' + val + '"';
-}
-
-function processTextOrObjNode (object, key, level) {
-  const result = this.j2x(object, level + 1);
-  if (object[this.options.textNodeName] !== undefined && Object.keys(object).length === 1) {
-    return this.buildTextValNode(object[this.options.textNodeName], key, result.attrStr, level);
-  } else {
-    return this.buildObjectNode(result.val, key, result.attrStr, level);
-  }
-}
-
-Builder.prototype.buildObjectNode = function(val, key, attrStr, level) {
-  if(val === ""){
-    if(key[0] === "?") return  this.indentate(level) + '<' + key + attrStr+ '?' + this.tagEndChar;
-    else {
-      return this.indentate(level) + '<' + key + attrStr + this.closeTag(key) + this.tagEndChar;
-    }
-  }else{
-
-    let tagEndExp = '</' + key + this.tagEndChar;
-    let piClosingChar = "";
-    
-    if(key[0] === "?") {
-      piClosingChar = "?";
-      tagEndExp = "";
-    }
-  
-    // attrStr is an empty string in case the attribute came as undefined or null
-    if ((attrStr || attrStr === '') && val.indexOf('<') === -1) {
-      return ( this.indentate(level) + '<' +  key + attrStr + piClosingChar + '>' + val + tagEndExp );
-    } else if (this.options.commentPropName !== false && key === this.options.commentPropName && piClosingChar.length === 0) {
-      return this.indentate(level) + `<!--${val}-->` + this.newLine;
-    }else {
-      return (
-        this.indentate(level) + '<' + key + attrStr + piClosingChar + this.tagEndChar +
-        val +
-        this.indentate(level) + tagEndExp    );
-    }
-  }
-}
-
-Builder.prototype.closeTag = function(key){
-  let closeTag = "";
-  if(this.options.unpairedTags.indexOf(key) !== -1){ //unpaired
-    if(!this.options.suppressUnpairedNode) closeTag = "/"
-  }else if(this.options.suppressEmptyNode){ //empty
-    closeTag = "/";
-  }else{
-    closeTag = `></${key}`
-  }
-  return closeTag;
-}
-
-function buildEmptyObjNode(val, key, attrStr, level) {
-  if (val !== '') {
-    return this.buildObjectNode(val, key, attrStr, level);
-  } else {
-    if(key[0] === "?") return  this.indentate(level) + '<' + key + attrStr+ '?' + this.tagEndChar;
-    else {
-      return  this.indentate(level) + '<' + key + attrStr + '/' + this.tagEndChar;
-      // return this.buildTagStr(level,key, attrStr);
-    }
-  }
-}
-
-Builder.prototype.buildTextValNode = function(val, key, attrStr, level) {
-  if (this.options.cdataPropName !== false && key === this.options.cdataPropName) {
-    return this.indentate(level) + `<![CDATA[${val}]]>` +  this.newLine;
-  }else if (this.options.commentPropName !== false && key === this.options.commentPropName) {
-    return this.indentate(level) + `<!--${val}-->` +  this.newLine;
-  }else if(key[0] === "?") {//PI tag
-    return  this.indentate(level) + '<' + key + attrStr+ '?' + this.tagEndChar; 
-  }else{
-    let textValue = this.options.tagValueProcessor(key, val);
-    textValue = this.replaceEntitiesValue(textValue);
-  
-    if( textValue === ''){
-      return this.indentate(level) + '<' + key + attrStr + this.closeTag(key) + this.tagEndChar;
-    }else{
-      return this.indentate(level) + '<' + key + attrStr + '>' +
-         textValue +
-        '</' + key + this.tagEndChar;
-    }
-  }
-}
-
-Builder.prototype.replaceEntitiesValue = function(textValue){
-  if(textValue && textValue.length > 0 && this.options.processEntities){
-    for (let i=0; i<this.options.entities.length; i++) {
-      const entity = this.options.entities[i];
-      textValue = textValue.replace(entity.regex, entity.val);
-    }
-  }
-  return textValue;
-}
-
-function indentate(level) {
-  return this.options.indentBy.repeat(level);
-}
-
-function isAttribute(name /*, options*/) {
-  if (name.startsWith(this.options.attributeNamePrefix) && name !== this.options.textNodeName) {
-    return name.substr(this.attrPrefixLen);
-  } else {
-    return false;
-  }
-}
-
-module.exports = Builder;
-
-
-/***/ }),
-
-/***/ 3997:
-/***/ ((module) => {
-
-const EOL = "\n";
-
-/**
- * 
- * @param {array} jArray 
- * @param {any} options 
- * @returns 
- */
-function toXml(jArray, options) {
-    let indentation = "";
-    if (options.format && options.indentBy.length > 0) {
-        indentation = EOL;
-    }
-    return arrToStr(jArray, options, "", indentation);
-}
-
-function arrToStr(arr, options, jPath, indentation) {
-    let xmlStr = "";
-    let isPreviousElementTag = false;
-
-    for (let i = 0; i < arr.length; i++) {
-        const tagObj = arr[i];
-        const tagName = propName(tagObj);
-        if(tagName === undefined) continue;
-
-        let newJPath = "";
-        if (jPath.length === 0) newJPath = tagName
-        else newJPath = `${jPath}.${tagName}`;
-
-        if (tagName === options.textNodeName) {
-            let tagText = tagObj[tagName];
-            if (!isStopNode(newJPath, options)) {
-                tagText = options.tagValueProcessor(tagName, tagText);
-                tagText = replaceEntitiesValue(tagText, options);
-            }
-            if (isPreviousElementTag) {
-                xmlStr += indentation;
-            }
-            xmlStr += tagText;
-            isPreviousElementTag = false;
-            continue;
-        } else if (tagName === options.cdataPropName) {
-            if (isPreviousElementTag) {
-                xmlStr += indentation;
-            }
-            xmlStr += `<![CDATA[${tagObj[tagName][0][options.textNodeName]}]]>`;
-            isPreviousElementTag = false;
-            continue;
-        } else if (tagName === options.commentPropName) {
-            xmlStr += indentation + `<!--${tagObj[tagName][0][options.textNodeName]}-->`;
-            isPreviousElementTag = true;
-            continue;
-        } else if (tagName[0] === "?") {
-            const attStr = attr_to_str(tagObj[":@"], options);
-            const tempInd = tagName === "?xml" ? "" : indentation;
-            let piTextNodeName = tagObj[tagName][0][options.textNodeName];
-            piTextNodeName = piTextNodeName.length !== 0 ? " " + piTextNodeName : ""; //remove extra spacing
-            xmlStr += tempInd + `<${tagName}${piTextNodeName}${attStr}?>`;
-            isPreviousElementTag = true;
-            continue;
-        }
-        let newIdentation = indentation;
-        if (newIdentation !== "") {
-            newIdentation += options.indentBy;
-        }
-        const attStr = attr_to_str(tagObj[":@"], options);
-        const tagStart = indentation + `<${tagName}${attStr}`;
-        const tagValue = arrToStr(tagObj[tagName], options, newJPath, newIdentation);
-        if (options.unpairedTags.indexOf(tagName) !== -1) {
-            if (options.suppressUnpairedNode) xmlStr += tagStart + ">";
-            else xmlStr += tagStart + "/>";
-        } else if ((!tagValue || tagValue.length === 0) && options.suppressEmptyNode) {
-            xmlStr += tagStart + "/>";
-        } else if (tagValue && tagValue.endsWith(">")) {
-            xmlStr += tagStart + `>${tagValue}${indentation}</${tagName}>`;
-        } else {
-            xmlStr += tagStart + ">";
-            if (tagValue && indentation !== "" && (tagValue.includes("/>") || tagValue.includes("</"))) {
-                xmlStr += indentation + options.indentBy + tagValue + indentation;
-            } else {
-                xmlStr += tagValue;
-            }
-            xmlStr += `</${tagName}>`;
-        }
-        isPreviousElementTag = true;
-    }
-
-    return xmlStr;
-}
-
-function propName(obj) {
-    const keys = Object.keys(obj);
-    for (let i = 0; i < keys.length; i++) {
-        const key = keys[i];
-        if(!obj.hasOwnProperty(key)) continue;
-        if (key !== ":@") return key;
-    }
-}
-
-function attr_to_str(attrMap, options) {
-    let attrStr = "";
-    if (attrMap && !options.ignoreAttributes) {
-        for (let attr in attrMap) {
-            if(!attrMap.hasOwnProperty(attr)) continue;
-            let attrVal = options.attributeValueProcessor(attr, attrMap[attr]);
-            attrVal = replaceEntitiesValue(attrVal, options);
-            if (attrVal === true && options.suppressBooleanAttributes) {
-                attrStr += ` ${attr.substr(options.attributeNamePrefix.length)}`;
-            } else {
-                attrStr += ` ${attr.substr(options.attributeNamePrefix.length)}="${attrVal}"`;
-            }
-        }
-    }
-    return attrStr;
-}
-
-function isStopNode(jPath, options) {
-    jPath = jPath.substr(0, jPath.length - options.textNodeName.length - 1);
-    let tagName = jPath.substr(jPath.lastIndexOf(".") + 1);
-    for (let index in options.stopNodes) {
-        if (options.stopNodes[index] === jPath || options.stopNodes[index] === "*." + tagName) return true;
-    }
-    return false;
-}
-
-function replaceEntitiesValue(textValue, options) {
-    if (textValue && textValue.length > 0 && options.processEntities) {
-        for (let i = 0; i < options.entities.length; i++) {
-            const entity = options.entities[i];
-            textValue = textValue.replace(entity.regex, entity.val);
-        }
-    }
-    return textValue;
-}
-module.exports = toXml;
-
-
-/***/ }),
-
-/***/ 151:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const util = __nccwpck_require__(7019);
-
-//TODO: handle comments
-function readDocType(xmlData, i){
-    
-    const entities = {};
-    if( xmlData[i + 3] === 'O' &&
-         xmlData[i + 4] === 'C' &&
-         xmlData[i + 5] === 'T' &&
-         xmlData[i + 6] === 'Y' &&
-         xmlData[i + 7] === 'P' &&
-         xmlData[i + 8] === 'E')
-    {    
-        i = i+9;
-        let angleBracketsCount = 1;
-        let hasBody = false, comment = false;
-        let exp = "";
-        for(;i<xmlData.length;i++){
-            if (xmlData[i] === '<' && !comment) { //Determine the tag type
-                if( hasBody && isEntity(xmlData, i)){
-                    i += 7; 
-                    [entityName, val,i] = readEntityExp(xmlData,i+1);
-                    if(val.indexOf("&") === -1) //Parameter entities are not supported
-                        entities[ validateEntityName(entityName) ] = {
-                            regx : RegExp( `&${entityName};`,"g"),
-                            val: val
-                        };
-                }
-                else if( hasBody && isElement(xmlData, i))  i += 8;//Not supported
-                else if( hasBody && isAttlist(xmlData, i))  i += 8;//Not supported
-                else if( hasBody && isNotation(xmlData, i)) i += 9;//Not supported
-                else if( isComment)                         comment = true;
-                else                                        throw new Error("Invalid DOCTYPE");
-
-                angleBracketsCount++;
-                exp = "";
-            } else if (xmlData[i] === '>') { //Read tag content
-                if(comment){
-                    if( xmlData[i - 1] === "-" && xmlData[i - 2] === "-"){
-                        comment = false;
-                        angleBracketsCount--;
-                    }
-                }else{
-                    angleBracketsCount--;
-                }
-                if (angleBracketsCount === 0) {
-                  break;
-                }
-            }else if( xmlData[i] === '['){
-                hasBody = true;
-            }else{
-                exp += xmlData[i];
-            }
-        }
-        if(angleBracketsCount !== 0){
-            throw new Error(`Unclosed DOCTYPE`);
-        }
-    }else{
-        throw new Error(`Invalid Tag instead of DOCTYPE`);
-    }
-    return {entities, i};
-}
-
-function readEntityExp(xmlData,i){
-    //External entities are not supported
-    //    <!ENTITY ext SYSTEM "http://normal-website.com" >
-
-    //Parameter entities are not supported
-    //    <!ENTITY entityname "&anotherElement;">
-
-    //Internal entities are supported
-    //    <!ENTITY entityname "replacement text">
-    
-    //read EntityName
-    let entityName = "";
-    for (; i < xmlData.length && (xmlData[i] !== "'" && xmlData[i] !== '"' ); i++) {
-        // if(xmlData[i] === " ") continue;
-        // else 
-        entityName += xmlData[i];
-    }
-    entityName = entityName.trim();
-    if(entityName.indexOf(" ") !== -1) throw new Error("External entites are not supported");
-
-    //read Entity Value
-    const startChar = xmlData[i++];
-    let val = ""
-    for (; i < xmlData.length && xmlData[i] !== startChar ; i++) {
-        val += xmlData[i];
-    }
-    return [entityName, val, i];
-}
-
-function isComment(xmlData, i){
-    if(xmlData[i+1] === '!' &&
-    xmlData[i+2] === '-' &&
-    xmlData[i+3] === '-') return true
-    return false
-}
-function isEntity(xmlData, i){
-    if(xmlData[i+1] === '!' &&
-    xmlData[i+2] === 'E' &&
-    xmlData[i+3] === 'N' &&
-    xmlData[i+4] === 'T' &&
-    xmlData[i+5] === 'I' &&
-    xmlData[i+6] === 'T' &&
-    xmlData[i+7] === 'Y') return true
-    return false
-}
-function isElement(xmlData, i){
-    if(xmlData[i+1] === '!' &&
-    xmlData[i+2] === 'E' &&
-    xmlData[i+3] === 'L' &&
-    xmlData[i+4] === 'E' &&
-    xmlData[i+5] === 'M' &&
-    xmlData[i+6] === 'E' &&
-    xmlData[i+7] === 'N' &&
-    xmlData[i+8] === 'T') return true
-    return false
-}
-
-function isAttlist(xmlData, i){
-    if(xmlData[i+1] === '!' &&
-    xmlData[i+2] === 'A' &&
-    xmlData[i+3] === 'T' &&
-    xmlData[i+4] === 'T' &&
-    xmlData[i+5] === 'L' &&
-    xmlData[i+6] === 'I' &&
-    xmlData[i+7] === 'S' &&
-    xmlData[i+8] === 'T') return true
-    return false
-}
-function isNotation(xmlData, i){
-    if(xmlData[i+1] === '!' &&
-    xmlData[i+2] === 'N' &&
-    xmlData[i+3] === 'O' &&
-    xmlData[i+4] === 'T' &&
-    xmlData[i+5] === 'A' &&
-    xmlData[i+6] === 'T' &&
-    xmlData[i+7] === 'I' &&
-    xmlData[i+8] === 'O' &&
-    xmlData[i+9] === 'N') return true
-    return false
-}
-
-function validateEntityName(name){
-    if (util.isName(name))
-	return name;
-    else
-        throw new Error(`Invalid entity name ${name}`);
-}
-
-module.exports = readDocType;
-
-
-/***/ }),
-
-/***/ 4769:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-const defaultOptions = {
-    preserveOrder: false,
-    attributeNamePrefix: '@_',
-    attributesGroupName: false,
-    textNodeName: '#text',
-    ignoreAttributes: true,
-    removeNSPrefix: false, // remove NS from tag name or attribute name if true
-    allowBooleanAttributes: false, //a tag can have attributes without any value
-    //ignoreRootElement : false,
-    parseTagValue: true,
-    parseAttributeValue: false,
-    trimValues: true, //Trim string values of tag and attributes
-    cdataPropName: false,
-    numberParseOptions: {
-      hex: true,
-      leadingZeros: true,
-      eNotation: true
-    },
-    tagValueProcessor: function(tagName, val) {
-      return val;
-    },
-    attributeValueProcessor: function(attrName, val) {
-      return val;
-    },
-    stopNodes: [], //nested tags will not be parsed even for errors
-    alwaysCreateTextNode: false,
-    isArray: () => false,
-    commentPropName: false,
-    unpairedTags: [],
-    processEntities: true,
-    htmlEntities: false,
-    ignoreDeclaration: false,
-    ignorePiTags: false,
-    transformTagName: false,
-    transformAttributeName: false,
-    updateTag: function(tagName, jPath, attrs){
-      return tagName
-    },
-    // skipEmptyListItem: false
-};
-   
-const buildOptions = function(options) {
-    return Object.assign({}, defaultOptions, options);
-};
-
-exports.buildOptions = buildOptions;
-exports.defaultOptions = defaultOptions;
-
-/***/ }),
-
-/***/ 3017:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-
-///@ts-check
-
-const util = __nccwpck_require__(7019);
-const xmlNode = __nccwpck_require__(9307);
-const readDocType = __nccwpck_require__(151);
-const toNumber = __nccwpck_require__(6496);
-
-// const regx =
-//   '<((!\\[CDATA\\[([\\s\\S]*?)(]]>))|((NAME:)?(NAME))([^>]*)>|((\\/)(NAME)\\s*>))([^<]*)'
-//   .replace(/NAME/g, util.nameRegexp);
-
-//const tagsRegx = new RegExp("<(\\/?[\\w:\\-\._]+)([^>]*)>(\\s*"+cdataRegx+")*([^<]+)?","g");
-//const tagsRegx = new RegExp("<(\\/?)((\\w*:)?([\\w:\\-\._]+))([^>]*)>([^<]*)("+cdataRegx+"([^<]*))*([^<]+)?","g");
-
-class OrderedObjParser{
-  constructor(options){
-    this.options = options;
-    this.currentNode = null;
-    this.tagsNodeStack = [];
-    this.docTypeEntities = {};
-    this.lastEntities = {
-      "apos" : { regex: /&(apos|#39|#x27);/g, val : "'"},
-      "gt" : { regex: /&(gt|#62|#x3E);/g, val : ">"},
-      "lt" : { regex: /&(lt|#60|#x3C);/g, val : "<"},
-      "quot" : { regex: /&(quot|#34|#x22);/g, val : "\""},
-    };
-    this.ampEntity = { regex: /&(amp|#38|#x26);/g, val : "&"};
-    this.htmlEntities = {
-      "space": { regex: /&(nbsp|#160);/g, val: " " },
-      // "lt" : { regex: /&(lt|#60);/g, val: "<" },
-      // "gt" : { regex: /&(gt|#62);/g, val: ">" },
-      // "amp" : { regex: /&(amp|#38);/g, val: "&" },
-      // "quot" : { regex: /&(quot|#34);/g, val: "\"" },
-      // "apos" : { regex: /&(apos|#39);/g, val: "'" },
-      "cent" : { regex: /&(cent|#162);/g, val: "¢" },
-      "pound" : { regex: /&(pound|#163);/g, val: "£" },
-      "yen" : { regex: /&(yen|#165);/g, val: "¥" },
-      "euro" : { regex: /&(euro|#8364);/g, val: "€" },
-      "copyright" : { regex: /&(copy|#169);/g, val: "©" },
-      "reg" : { regex: /&(reg|#174);/g, val: "®" },
-      "inr" : { regex: /&(inr|#8377);/g, val: "₹" },
-      "num_dec": { regex: /&#([0-9]{1,7});/g, val : (_, str) => String.fromCharCode(Number.parseInt(str, 10)) },
-      "num_hex": { regex: /&#x([0-9a-fA-F]{1,6});/g, val : (_, str) => String.fromCharCode(Number.parseInt(str, 16)) },
-    };
-    this.addExternalEntities = addExternalEntities;
-    this.parseXml = parseXml;
-    this.parseTextData = parseTextData;
-    this.resolveNameSpace = resolveNameSpace;
-    this.buildAttributesMap = buildAttributesMap;
-    this.isItStopNode = isItStopNode;
-    this.replaceEntitiesValue = replaceEntitiesValue;
-    this.readStopNodeData = readStopNodeData;
-    this.saveTextToParentTag = saveTextToParentTag;
-    this.addChild = addChild;
-  }
-
-}
-
-function addExternalEntities(externalEntities){
-  const entKeys = Object.keys(externalEntities);
-  for (let i = 0; i < entKeys.length; i++) {
-    const ent = entKeys[i];
-    this.lastEntities[ent] = {
-       regex: new RegExp("&"+ent+";","g"),
-       val : externalEntities[ent]
-    }
-  }
-}
-
-/**
- * @param {string} val
- * @param {string} tagName
- * @param {string} jPath
- * @param {boolean} dontTrim
- * @param {boolean} hasAttributes
- * @param {boolean} isLeafNode
- * @param {boolean} escapeEntities
- */
-function parseTextData(val, tagName, jPath, dontTrim, hasAttributes, isLeafNode, escapeEntities) {
-  if (val !== undefined) {
-    if (this.options.trimValues && !dontTrim) {
-      val = val.trim();
-    }
-    if(val.length > 0){
-      if(!escapeEntities) val = this.replaceEntitiesValue(val);
-      
-      const newval = this.options.tagValueProcessor(tagName, val, jPath, hasAttributes, isLeafNode);
-      if(newval === null || newval === undefined){
-        //don't parse
-        return val;
-      }else if(typeof newval !== typeof val || newval !== val){
-        //overwrite
-        return newval;
-      }else if(this.options.trimValues){
-        return parseValue(val, this.options.parseTagValue, this.options.numberParseOptions);
-      }else{
-        const trimmedVal = val.trim();
-        if(trimmedVal === val){
-          return parseValue(val, this.options.parseTagValue, this.options.numberParseOptions);
-        }else{
-          return val;
-        }
-      }
-    }
-  }
-}
-
-function resolveNameSpace(tagname) {
-  if (this.options.removeNSPrefix) {
-    const tags = tagname.split(':');
-    const prefix = tagname.charAt(0) === '/' ? '/' : '';
-    if (tags[0] === 'xmlns') {
-      return '';
-    }
-    if (tags.length === 2) {
-      tagname = prefix + tags[1];
-    }
-  }
-  return tagname;
-}
-
-//TODO: change regex to capture NS
-//const attrsRegx = new RegExp("([\\w\\-\\.\\:]+)\\s*=\\s*(['\"])((.|\n)*?)\\2","gm");
-const attrsRegx = new RegExp('([^\\s=]+)\\s*(=\\s*([\'"])([\\s\\S]*?)\\3)?', 'gm');
-
-function buildAttributesMap(attrStr, jPath, tagName) {
-  if (!this.options.ignoreAttributes && typeof attrStr === 'string') {
-    // attrStr = attrStr.replace(/\r?\n/g, ' ');
-    //attrStr = attrStr || attrStr.trim();
-
-    const matches = util.getAllMatches(attrStr, attrsRegx);
-    const len = matches.length; //don't make it inline
-    const attrs = {};
-    for (let i = 0; i < len; i++) {
-      const attrName = this.resolveNameSpace(matches[i][1]);
-      let oldVal = matches[i][4];
-      let aName = this.options.attributeNamePrefix + attrName;
-      if (attrName.length) {
-        if (this.options.transformAttributeName) {
-          aName = this.options.transformAttributeName(aName);
-        }
-        if(aName === "__proto__") aName  = "#__proto__";
-        if (oldVal !== undefined) {
-          if (this.options.trimValues) {
-            oldVal = oldVal.trim();
-          }
-          oldVal = this.replaceEntitiesValue(oldVal);
-          const newVal = this.options.attributeValueProcessor(attrName, oldVal, jPath);
-          if(newVal === null || newVal === undefined){
-            //don't parse
-            attrs[aName] = oldVal;
-          }else if(typeof newVal !== typeof oldVal || newVal !== oldVal){
-            //overwrite
-            attrs[aName] = newVal;
-          }else{
-            //parse
-            attrs[aName] = parseValue(
-              oldVal,
-              this.options.parseAttributeValue,
-              this.options.numberParseOptions
-            );
-          }
-        } else if (this.options.allowBooleanAttributes) {
-          attrs[aName] = true;
-        }
-      }
-    }
-    if (!Object.keys(attrs).length) {
-      return;
-    }
-    if (this.options.attributesGroupName) {
-      const attrCollection = {};
-      attrCollection[this.options.attributesGroupName] = attrs;
-      return attrCollection;
-    }
-    return attrs
-  }
-}
-
-const parseXml = function(xmlData) {
-  xmlData = xmlData.replace(/\r\n?/g, "\n"); //TODO: remove this line
-  const xmlObj = new xmlNode('!xml');
-  let currentNode = xmlObj;
-  let textData = "";
-  let jPath = "";
-  for(let i=0; i< xmlData.length; i++){//for each char in XML data
-    const ch = xmlData[i];
-    if(ch === '<'){
-      // const nextIndex = i+1;
-      // const _2ndChar = xmlData[nextIndex];
-      if( xmlData[i+1] === '/') {//Closing Tag
-        const closeIndex = findClosingIndex(xmlData, ">", i, "Closing Tag is not closed.")
-        let tagName = xmlData.substring(i+2,closeIndex).trim();
-
-        if(this.options.removeNSPrefix){
-          const colonIndex = tagName.indexOf(":");
-          if(colonIndex !== -1){
-            tagName = tagName.substr(colonIndex+1);
-          }
-        }
-
-        if(this.options.transformTagName) {
-          tagName = this.options.transformTagName(tagName);
-        }
-
-        if(currentNode){
-          textData = this.saveTextToParentTag(textData, currentNode, jPath);
-        }
-
-        //check if last tag of nested tag was unpaired tag
-        const lastTagName = jPath.substring(jPath.lastIndexOf(".")+1);
-        if(tagName && this.options.unpairedTags.indexOf(tagName) !== -1 ){
-          throw new Error(`Unpaired tag can not be used as closing tag: </${tagName}>`);
-        }
-        let propIndex = 0
-        if(lastTagName && this.options.unpairedTags.indexOf(lastTagName) !== -1 ){
-          propIndex = jPath.lastIndexOf('.', jPath.lastIndexOf('.')-1)
-          this.tagsNodeStack.pop();
-        }else{
-          propIndex = jPath.lastIndexOf(".");
-        }
-        jPath = jPath.substring(0, propIndex);
-
-        currentNode = this.tagsNodeStack.pop();//avoid recursion, set the parent tag scope
-        textData = "";
-        i = closeIndex;
-      } else if( xmlData[i+1] === '?') {
-
-        let tagData = readTagExp(xmlData,i, false, "?>");
-        if(!tagData) throw new Error("Pi Tag is not closed.");
-
-        textData = this.saveTextToParentTag(textData, currentNode, jPath);
-        if( (this.options.ignoreDeclaration && tagData.tagName === "?xml") || this.options.ignorePiTags){
-
-        }else{
-  
-          const childNode = new xmlNode(tagData.tagName);
-          childNode.add(this.options.textNodeName, "");
-          
-          if(tagData.tagName !== tagData.tagExp && tagData.attrExpPresent){
-            childNode[":@"] = this.buildAttributesMap(tagData.tagExp, jPath, tagData.tagName);
-          }
-          this.addChild(currentNode, childNode, jPath)
-
-        }
-
-
-        i = tagData.closeIndex + 1;
-      } else if(xmlData.substr(i + 1, 3) === '!--') {
-        const endIndex = findClosingIndex(xmlData, "-->", i+4, "Comment is not closed.")
-        if(this.options.commentPropName){
-          const comment = xmlData.substring(i + 4, endIndex - 2);
-
-          textData = this.saveTextToParentTag(textData, currentNode, jPath);
-
-          currentNode.add(this.options.commentPropName, [ { [this.options.textNodeName] : comment } ]);
-        }
-        i = endIndex;
-      } else if( xmlData.substr(i + 1, 2) === '!D') {
-        const result = readDocType(xmlData, i);
-        this.docTypeEntities = result.entities;
-        i = result.i;
-      }else if(xmlData.substr(i + 1, 2) === '![') {
-        const closeIndex = findClosingIndex(xmlData, "]]>", i, "CDATA is not closed.") - 2;
-        const tagExp = xmlData.substring(i + 9,closeIndex);
-
-        textData = this.saveTextToParentTag(textData, currentNode, jPath);
-
-        let val = this.parseTextData(tagExp, currentNode.tagname, jPath, true, false, true, true);
-        if(val == undefined) val = "";
-
-        //cdata should be set even if it is 0 length string
-        if(this.options.cdataPropName){
-          currentNode.add(this.options.cdataPropName, [ { [this.options.textNodeName] : tagExp } ]);
-        }else{
-          currentNode.add(this.options.textNodeName, val);
-        }
-        
-        i = closeIndex + 2;
-      }else {//Opening tag
-        let result = readTagExp(xmlData,i, this.options.removeNSPrefix);
-        let tagName= result.tagName;
-        const rawTagName = result.rawTagName;
-        let tagExp = result.tagExp;
-        let attrExpPresent = result.attrExpPresent;
-        let closeIndex = result.closeIndex;
-
-        if (this.options.transformTagName) {
-          tagName = this.options.transformTagName(tagName);
-        }
-        
-        //save text as child node
-        if (currentNode && textData) {
-          if(currentNode.tagname !== '!xml'){
-            //when nested tag is found
-            textData = this.saveTextToParentTag(textData, currentNode, jPath, false);
-          }
-        }
-
-        //check if last tag was unpaired tag
-        const lastTag = currentNode;
-        if(lastTag && this.options.unpairedTags.indexOf(lastTag.tagname) !== -1 ){
-          currentNode = this.tagsNodeStack.pop();
-          jPath = jPath.substring(0, jPath.lastIndexOf("."));
-        }
-        if(tagName !== xmlObj.tagname){
-          jPath += jPath ? "." + tagName : tagName;
-        }
-        if (this.isItStopNode(this.options.stopNodes, jPath, tagName)) {
-          let tagContent = "";
-          //self-closing tag
-          if(tagExp.length > 0 && tagExp.lastIndexOf("/") === tagExp.length - 1){
-            if(tagName[tagName.length - 1] === "/"){ //remove trailing '/'
-              tagName = tagName.substr(0, tagName.length - 1);
-              jPath = jPath.substr(0, jPath.length - 1);
-              tagExp = tagName;
-            }else{
-              tagExp = tagExp.substr(0, tagExp.length - 1);
-            }
-            i = result.closeIndex;
-          }
-          //unpaired tag
-          else if(this.options.unpairedTags.indexOf(tagName) !== -1){
-            
-            i = result.closeIndex;
-          }
-          //normal tag
-          else{
-            //read until closing tag is found
-            const result = this.readStopNodeData(xmlData, rawTagName, closeIndex + 1);
-            if(!result) throw new Error(`Unexpected end of ${rawTagName}`);
-            i = result.i;
-            tagContent = result.tagContent;
-          }
-
-          const childNode = new xmlNode(tagName);
-          if(tagName !== tagExp && attrExpPresent){
-            childNode[":@"] = this.buildAttributesMap(tagExp, jPath, tagName);
-          }
-          if(tagContent) {
-            tagContent = this.parseTextData(tagContent, tagName, jPath, true, attrExpPresent, true, true);
-          }
-          
-          jPath = jPath.substr(0, jPath.lastIndexOf("."));
-          childNode.add(this.options.textNodeName, tagContent);
-          
-          this.addChild(currentNode, childNode, jPath)
-        }else{
-  //selfClosing tag
-          if(tagExp.length > 0 && tagExp.lastIndexOf("/") === tagExp.length - 1){
-            if(tagName[tagName.length - 1] === "/"){ //remove trailing '/'
-              tagName = tagName.substr(0, tagName.length - 1);
-              jPath = jPath.substr(0, jPath.length - 1);
-              tagExp = tagName;
-            }else{
-              tagExp = tagExp.substr(0, tagExp.length - 1);
-            }
-            
-            if(this.options.transformTagName) {
-              tagName = this.options.transformTagName(tagName);
-            }
-
-            const childNode = new xmlNode(tagName);
-            if(tagName !== tagExp && attrExpPresent){
-              childNode[":@"] = this.buildAttributesMap(tagExp, jPath, tagName);
-            }
-            this.addChild(currentNode, childNode, jPath)
-            jPath = jPath.substr(0, jPath.lastIndexOf("."));
-          }
-    //opening tag
-          else{
-            const childNode = new xmlNode( tagName);
-            this.tagsNodeStack.push(currentNode);
-            
-            if(tagName !== tagExp && attrExpPresent){
-              childNode[":@"] = this.buildAttributesMap(tagExp, jPath, tagName);
-            }
-            this.addChild(currentNode, childNode, jPath)
-            currentNode = childNode;
-          }
-          textData = "";
-          i = closeIndex;
-        }
-      }
-    }else{
-      textData += xmlData[i];
-    }
-  }
-  return xmlObj.child;
-}
-
-function addChild(currentNode, childNode, jPath){
-  const result = this.options.updateTag(childNode.tagname, jPath, childNode[":@"])
-  if(result === false){
-  }else if(typeof result === "string"){
-    childNode.tagname = result
-    currentNode.addChild(childNode);
-  }else{
-    currentNode.addChild(childNode);
-  }
-}
-
-const replaceEntitiesValue = function(val){
-
-  if(this.options.processEntities){
-    for(let entityName in this.docTypeEntities){
-      const entity = this.docTypeEntities[entityName];
-      val = val.replace( entity.regx, entity.val);
-    }
-    for(let entityName in this.lastEntities){
-      const entity = this.lastEntities[entityName];
-      val = val.replace( entity.regex, entity.val);
-    }
-    if(this.options.htmlEntities){
-      for(let entityName in this.htmlEntities){
-        const entity = this.htmlEntities[entityName];
-        val = val.replace( entity.regex, entity.val);
-      }
-    }
-    val = val.replace( this.ampEntity.regex, this.ampEntity.val);
-  }
-  return val;
-}
-function saveTextToParentTag(textData, currentNode, jPath, isLeafNode) {
-  if (textData) { //store previously collected data as textNode
-    if(isLeafNode === undefined) isLeafNode = Object.keys(currentNode.child).length === 0
-    
-    textData = this.parseTextData(textData,
-      currentNode.tagname,
-      jPath,
-      false,
-      currentNode[":@"] ? Object.keys(currentNode[":@"]).length !== 0 : false,
-      isLeafNode);
-
-    if (textData !== undefined && textData !== "")
-      currentNode.add(this.options.textNodeName, textData);
-    textData = "";
-  }
-  return textData;
-}
-
-//TODO: use jPath to simplify the logic
-/**
- * 
- * @param {string[]} stopNodes 
- * @param {string} jPath
- * @param {string} currentTagName 
- */
-function isItStopNode(stopNodes, jPath, currentTagName){
-  const allNodesExp = "*." + currentTagName;
-  for (const stopNodePath in stopNodes) {
-    const stopNodeExp = stopNodes[stopNodePath];
-    if( allNodesExp === stopNodeExp || jPath === stopNodeExp  ) return true;
-  }
-  return false;
-}
-
-/**
- * Returns the tag Expression and where it is ending handling single-double quotes situation
- * @param {string} xmlData 
- * @param {number} i starting index
- * @returns 
- */
-function tagExpWithClosingIndex(xmlData, i, closingChar = ">"){
-  let attrBoundary;
-  let tagExp = "";
-  for (let index = i; index < xmlData.length; index++) {
-    let ch = xmlData[index];
-    if (attrBoundary) {
-        if (ch === attrBoundary) attrBoundary = "";//reset
-    } else if (ch === '"' || ch === "'") {
-        attrBoundary = ch;
-    } else if (ch === closingChar[0]) {
-      if(closingChar[1]){
-        if(xmlData[index + 1] === closingChar[1]){
-          return {
-            data: tagExp,
-            index: index
-          }
-        }
-      }else{
-        return {
-          data: tagExp,
-          index: index
-        }
-      }
-    } else if (ch === '\t') {
-      ch = " "
-    }
-    tagExp += ch;
-  }
-}
-
-function findClosingIndex(xmlData, str, i, errMsg){
-  const closingIndex = xmlData.indexOf(str, i);
-  if(closingIndex === -1){
-    throw new Error(errMsg)
-  }else{
-    return closingIndex + str.length - 1;
-  }
-}
-
-function readTagExp(xmlData,i, removeNSPrefix, closingChar = ">"){
-  const result = tagExpWithClosingIndex(xmlData, i+1, closingChar);
-  if(!result) return;
-  let tagExp = result.data;
-  const closeIndex = result.index;
-  const separatorIndex = tagExp.search(/\s/);
-  let tagName = tagExp;
-  let attrExpPresent = true;
-  if(separatorIndex !== -1){//separate tag name and attributes expression
-    tagName = tagExp.substring(0, separatorIndex);
-    tagExp = tagExp.substring(separatorIndex + 1).trimStart();
-  }
-
-  const rawTagName = tagName;
-  if(removeNSPrefix){
-    const colonIndex = tagName.indexOf(":");
-    if(colonIndex !== -1){
-      tagName = tagName.substr(colonIndex+1);
-      attrExpPresent = tagName !== result.data.substr(colonIndex + 1);
-    }
-  }
-
-  return {
-    tagName: tagName,
-    tagExp: tagExp,
-    closeIndex: closeIndex,
-    attrExpPresent: attrExpPresent,
-    rawTagName: rawTagName,
-  }
-}
-/**
- * find paired tag for a stop node
- * @param {string} xmlData 
- * @param {string} tagName 
- * @param {number} i 
- */
-function readStopNodeData(xmlData, tagName, i){
-  const startIndex = i;
-  // Starting at 1 since we already have an open tag
-  let openTagCount = 1;
-
-  for (; i < xmlData.length; i++) {
-    if( xmlData[i] === "<"){ 
-      if (xmlData[i+1] === "/") {//close tag
-          const closeIndex = findClosingIndex(xmlData, ">", i, `${tagName} is not closed`);
-          let closeTagName = xmlData.substring(i+2,closeIndex).trim();
-          if(closeTagName === tagName){
-            openTagCount--;
-            if (openTagCount === 0) {
-              return {
-                tagContent: xmlData.substring(startIndex, i),
-                i : closeIndex
-              }
-            }
-          }
-          i=closeIndex;
-        } else if(xmlData[i+1] === '?') { 
-          const closeIndex = findClosingIndex(xmlData, "?>", i+1, "StopNode is not closed.")
-          i=closeIndex;
-        } else if(xmlData.substr(i + 1, 3) === '!--') { 
-          const closeIndex = findClosingIndex(xmlData, "-->", i+3, "StopNode is not closed.")
-          i=closeIndex;
-        } else if(xmlData.substr(i + 1, 2) === '![') { 
-          const closeIndex = findClosingIndex(xmlData, "]]>", i, "StopNode is not closed.") - 2;
-          i=closeIndex;
-        } else {
-          const tagData = readTagExp(xmlData, i, '>')
-
-          if (tagData) {
-            const openTagName = tagData && tagData.tagName;
-            if (openTagName === tagName && tagData.tagExp[tagData.tagExp.length-1] !== "/") {
-              openTagCount++;
-            }
-            i=tagData.closeIndex;
-          }
-        }
-      }
-  }//end for loop
-}
-
-function parseValue(val, shouldParse, options) {
-  if (shouldParse && typeof val === 'string') {
-    //console.log(options)
-    const newval = val.trim();
-    if(newval === 'true' ) return true;
-    else if(newval === 'false' ) return false;
-    else return toNumber(val, options);
-  } else {
-    if (util.isExist(val)) {
-      return val;
-    } else {
-      return '';
-    }
-  }
-}
-
-
-module.exports = OrderedObjParser;
-
-
-/***/ }),
-
-/***/ 9844:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const { buildOptions} = __nccwpck_require__(4769);
-const OrderedObjParser = __nccwpck_require__(3017);
-const { prettify} = __nccwpck_require__(7594);
-const validator = __nccwpck_require__(9433);
-
-class XMLParser{
-    
-    constructor(options){
-        this.externalEntities = {};
-        this.options = buildOptions(options);
-        
-    }
-    /**
-     * Parse XML dats to JS object 
-     * @param {string|Buffer} xmlData 
-     * @param {boolean|Object} validationOption 
-     */
-    parse(xmlData,validationOption){
-        if(typeof xmlData === "string"){
-        }else if( xmlData.toString){
-            xmlData = xmlData.toString();
-        }else{
-            throw new Error("XML data is accepted in String or Bytes[] form.")
-        }
-        if( validationOption){
-            if(validationOption === true) validationOption = {}; //validate with default options
-            
-            const result = validator.validate(xmlData, validationOption);
-            if (result !== true) {
-              throw Error( `${result.err.msg}:${result.err.line}:${result.err.col}` )
-            }
-          }
-        const orderedObjParser = new OrderedObjParser(this.options);
-        orderedObjParser.addExternalEntities(this.externalEntities);
-        const orderedResult = orderedObjParser.parseXml(xmlData);
-        if(this.options.preserveOrder || orderedResult === undefined) return orderedResult;
-        else return prettify(orderedResult, this.options);
-    }
-
-    /**
-     * Add Entity which is not by default supported by this library
-     * @param {string} key 
-     * @param {string} value 
-     */
-    addEntity(key, value){
-        if(value.indexOf("&") !== -1){
-            throw new Error("Entity value can't have '&'")
-        }else if(key.indexOf("&") !== -1 || key.indexOf(";") !== -1){
-            throw new Error("An entity must be set without '&' and ';'. Eg. use '#xD' for '&#xD;'")
-        }else if(value === "&"){
-            throw new Error("An entity with value '&' is not permitted");
-        }else{
-            this.externalEntities[key] = value;
-        }
-    }
-}
-
-module.exports = XMLParser;
-
-/***/ }),
-
-/***/ 7594:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-
-/**
- * 
- * @param {array} node 
- * @param {any} options 
- * @returns 
- */
-function prettify(node, options){
-  return compress( node, options);
-}
-
-/**
- * 
- * @param {array} arr 
- * @param {object} options 
- * @param {string} jPath 
- * @returns object
- */
-function compress(arr, options, jPath){
-  let text;
-  const compressedObj = {};
-  for (let i = 0; i < arr.length; i++) {
-    const tagObj = arr[i];
-    const property = propName(tagObj);
-    let newJpath = "";
-    if(jPath === undefined) newJpath = property;
-    else newJpath = jPath + "." + property;
-
-    if(property === options.textNodeName){
-      if(text === undefined) text = tagObj[property];
-      else text += "" + tagObj[property];
-    }else if(property === undefined){
-      continue;
-    }else if(tagObj[property]){
-      
-      let val = compress(tagObj[property], options, newJpath);
-      const isLeaf = isLeafTag(val, options);
-
-      if(tagObj[":@"]){
-        assignAttributes( val, tagObj[":@"], newJpath, options);
-      }else if(Object.keys(val).length === 1 && val[options.textNodeName] !== undefined && !options.alwaysCreateTextNode){
-        val = val[options.textNodeName];
-      }else if(Object.keys(val).length === 0){
-        if(options.alwaysCreateTextNode) val[options.textNodeName] = "";
-        else val = "";
-      }
-
-      if(compressedObj[property] !== undefined && compressedObj.hasOwnProperty(property)) {
-        if(!Array.isArray(compressedObj[property])) {
-            compressedObj[property] = [ compressedObj[property] ];
-        }
-        compressedObj[property].push(val);
-      }else{
-        //TODO: if a node is not an array, then check if it should be an array
-        //also determine if it is a leaf node
-        if (options.isArray(property, newJpath, isLeaf )) {
-          compressedObj[property] = [val];
-        }else{
-          compressedObj[property] = val;
-        }
-      }
-    }
-    
-  }
-  // if(text && text.length > 0) compressedObj[options.textNodeName] = text;
-  if(typeof text === "string"){
-    if(text.length > 0) compressedObj[options.textNodeName] = text;
-  }else if(text !== undefined) compressedObj[options.textNodeName] = text;
-  return compressedObj;
-}
-
-function propName(obj){
-  const keys = Object.keys(obj);
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i];
-    if(key !== ":@") return key;
-  }
-}
-
-function assignAttributes(obj, attrMap, jpath, options){
-  if (attrMap) {
-    const keys = Object.keys(attrMap);
-    const len = keys.length; //don't make it inline
-    for (let i = 0; i < len; i++) {
-      const atrrName = keys[i];
-      if (options.isArray(atrrName, jpath + "." + atrrName, true, true)) {
-        obj[atrrName] = [ attrMap[atrrName] ];
-      } else {
-        obj[atrrName] = attrMap[atrrName];
-      }
-    }
-  }
-}
-
-function isLeafTag(obj, options){
-  const { textNodeName } = options;
-  const propCount = Object.keys(obj).length;
-  
-  if (propCount === 0) {
-    return true;
-  }
-
-  if (
-    propCount === 1 &&
-    (obj[textNodeName] || typeof obj[textNodeName] === "boolean" || obj[textNodeName] === 0)
-  ) {
-    return true;
-  }
-
-  return false;
-}
-exports.prettify = prettify;
-
-
-/***/ }),
-
-/***/ 9307:
-/***/ ((module) => {
-
-"use strict";
-
-
-class XmlNode{
-  constructor(tagname) {
-    this.tagname = tagname;
-    this.child = []; //nested tags, text, cdata, comments in order
-    this[":@"] = {}; //attributes map
-  }
-  add(key,val){
-    // this.child.push( {name : key, val: val, isCdata: isCdata });
-    if(key === "__proto__") key = "#__proto__";
-    this.child.push( {[key]: val });
-  }
-  addChild(node) {
-    if(node.tagname === "__proto__") node.tagname = "#__proto__";
-    if(node[":@"] && Object.keys(node[":@"]).length > 0){
-      this.child.push( { [node.tagname]: node.child, [":@"]: node[":@"] });
-    }else{
-      this.child.push( { [node.tagname]: node.child });
-    }
-  };
-};
-
-
-module.exports = XmlNode;
 
 /***/ }),
 
@@ -42510,1067 +40942,405 @@ function regExpEscape (s) {
 
 /***/ }),
 
-/***/ 9318:
-/***/ ((module, exports) => {
+/***/ 9379:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-exports = module.exports = SemVer
+"use strict";
 
-var debug
-/* istanbul ignore next */
-if (typeof process === 'object' &&
-    process.env &&
-    process.env.NODE_DEBUG &&
-    /\bsemver\b/i.test(process.env.NODE_DEBUG)) {
-  debug = function () {
-    var args = Array.prototype.slice.call(arguments, 0)
-    args.unshift('SEMVER')
-    console.log.apply(console, args)
-  }
-} else {
-  debug = function () {}
-}
 
-// Note: this is the semver.org version of the spec that it implements
-// Not necessarily the package version of this code.
-exports.SEMVER_SPEC_VERSION = '2.0.0'
-
-var MAX_LENGTH = 256
-var MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER ||
-  /* istanbul ignore next */ 9007199254740991
-
-// Max safe segment length for coercion.
-var MAX_SAFE_COMPONENT_LENGTH = 16
-
-var MAX_SAFE_BUILD_LENGTH = MAX_LENGTH - 6
-
-// The actual regexps go on exports.re
-var re = exports.re = []
-var safeRe = exports.safeRe = []
-var src = exports.src = []
-var t = exports.tokens = {}
-var R = 0
-
-function tok (n) {
-  t[n] = R++
-}
-
-var LETTERDASHNUMBER = '[a-zA-Z0-9-]'
-
-// Replace some greedy regex tokens to prevent regex dos issues. These regex are
-// used internally via the safeRe object since all inputs in this library get
-// normalized first to trim and collapse all extra whitespace. The original
-// regexes are exported for userland consumption and lower level usage. A
-// future breaking change could export the safer regex only with a note that
-// all input should have extra whitespace removed.
-var safeRegexReplacements = [
-  ['\\s', 1],
-  ['\\d', MAX_LENGTH],
-  [LETTERDASHNUMBER, MAX_SAFE_BUILD_LENGTH],
-]
-
-function makeSafeRe (value) {
-  for (var i = 0; i < safeRegexReplacements.length; i++) {
-    var token = safeRegexReplacements[i][0]
-    var max = safeRegexReplacements[i][1]
-    value = value
-      .split(token + '*').join(token + '{0,' + max + '}')
-      .split(token + '+').join(token + '{1,' + max + '}')
-  }
-  return value
-}
-
-// The following Regular Expressions can be used for tokenizing,
-// validating, and parsing SemVer version strings.
-
-// ## Numeric Identifier
-// A single `0`, or a non-zero digit followed by zero or more digits.
-
-tok('NUMERICIDENTIFIER')
-src[t.NUMERICIDENTIFIER] = '0|[1-9]\\d*'
-tok('NUMERICIDENTIFIERLOOSE')
-src[t.NUMERICIDENTIFIERLOOSE] = '\\d+'
-
-// ## Non-numeric Identifier
-// Zero or more digits, followed by a letter or hyphen, and then zero or
-// more letters, digits, or hyphens.
-
-tok('NONNUMERICIDENTIFIER')
-src[t.NONNUMERICIDENTIFIER] = '\\d*[a-zA-Z-]' + LETTERDASHNUMBER + '*'
-
-// ## Main Version
-// Three dot-separated numeric identifiers.
-
-tok('MAINVERSION')
-src[t.MAINVERSION] = '(' + src[t.NUMERICIDENTIFIER] + ')\\.' +
-                   '(' + src[t.NUMERICIDENTIFIER] + ')\\.' +
-                   '(' + src[t.NUMERICIDENTIFIER] + ')'
-
-tok('MAINVERSIONLOOSE')
-src[t.MAINVERSIONLOOSE] = '(' + src[t.NUMERICIDENTIFIERLOOSE] + ')\\.' +
-                        '(' + src[t.NUMERICIDENTIFIERLOOSE] + ')\\.' +
-                        '(' + src[t.NUMERICIDENTIFIERLOOSE] + ')'
-
-// ## Pre-release Version Identifier
-// A numeric identifier, or a non-numeric identifier.
-
-tok('PRERELEASEIDENTIFIER')
-src[t.PRERELEASEIDENTIFIER] = '(?:' + src[t.NUMERICIDENTIFIER] +
-                            '|' + src[t.NONNUMERICIDENTIFIER] + ')'
-
-tok('PRERELEASEIDENTIFIERLOOSE')
-src[t.PRERELEASEIDENTIFIERLOOSE] = '(?:' + src[t.NUMERICIDENTIFIERLOOSE] +
-                                 '|' + src[t.NONNUMERICIDENTIFIER] + ')'
-
-// ## Pre-release Version
-// Hyphen, followed by one or more dot-separated pre-release version
-// identifiers.
-
-tok('PRERELEASE')
-src[t.PRERELEASE] = '(?:-(' + src[t.PRERELEASEIDENTIFIER] +
-                  '(?:\\.' + src[t.PRERELEASEIDENTIFIER] + ')*))'
-
-tok('PRERELEASELOOSE')
-src[t.PRERELEASELOOSE] = '(?:-?(' + src[t.PRERELEASEIDENTIFIERLOOSE] +
-                       '(?:\\.' + src[t.PRERELEASEIDENTIFIERLOOSE] + ')*))'
-
-// ## Build Metadata Identifier
-// Any combination of digits, letters, or hyphens.
-
-tok('BUILDIDENTIFIER')
-src[t.BUILDIDENTIFIER] = LETTERDASHNUMBER + '+'
-
-// ## Build Metadata
-// Plus sign, followed by one or more period-separated build metadata
-// identifiers.
-
-tok('BUILD')
-src[t.BUILD] = '(?:\\+(' + src[t.BUILDIDENTIFIER] +
-             '(?:\\.' + src[t.BUILDIDENTIFIER] + ')*))'
-
-// ## Full Version String
-// A main version, followed optionally by a pre-release version and
-// build metadata.
-
-// Note that the only major, minor, patch, and pre-release sections of
-// the version string are capturing groups.  The build metadata is not a
-// capturing group, because it should not ever be used in version
-// comparison.
-
-tok('FULL')
-tok('FULLPLAIN')
-src[t.FULLPLAIN] = 'v?' + src[t.MAINVERSION] +
-                  src[t.PRERELEASE] + '?' +
-                  src[t.BUILD] + '?'
-
-src[t.FULL] = '^' + src[t.FULLPLAIN] + '$'
-
-// like full, but allows v1.2.3 and =1.2.3, which people do sometimes.
-// also, 1.0.0alpha1 (prerelease without the hyphen) which is pretty
-// common in the npm registry.
-tok('LOOSEPLAIN')
-src[t.LOOSEPLAIN] = '[v=\\s]*' + src[t.MAINVERSIONLOOSE] +
-                  src[t.PRERELEASELOOSE] + '?' +
-                  src[t.BUILD] + '?'
-
-tok('LOOSE')
-src[t.LOOSE] = '^' + src[t.LOOSEPLAIN] + '$'
-
-tok('GTLT')
-src[t.GTLT] = '((?:<|>)?=?)'
-
-// Something like "2.*" or "1.2.x".
-// Note that "x.x" is a valid xRange identifer, meaning "any version"
-// Only the first item is strictly required.
-tok('XRANGEIDENTIFIERLOOSE')
-src[t.XRANGEIDENTIFIERLOOSE] = src[t.NUMERICIDENTIFIERLOOSE] + '|x|X|\\*'
-tok('XRANGEIDENTIFIER')
-src[t.XRANGEIDENTIFIER] = src[t.NUMERICIDENTIFIER] + '|x|X|\\*'
-
-tok('XRANGEPLAIN')
-src[t.XRANGEPLAIN] = '[v=\\s]*(' + src[t.XRANGEIDENTIFIER] + ')' +
-                   '(?:\\.(' + src[t.XRANGEIDENTIFIER] + ')' +
-                   '(?:\\.(' + src[t.XRANGEIDENTIFIER] + ')' +
-                   '(?:' + src[t.PRERELEASE] + ')?' +
-                   src[t.BUILD] + '?' +
-                   ')?)?'
-
-tok('XRANGEPLAINLOOSE')
-src[t.XRANGEPLAINLOOSE] = '[v=\\s]*(' + src[t.XRANGEIDENTIFIERLOOSE] + ')' +
-                        '(?:\\.(' + src[t.XRANGEIDENTIFIERLOOSE] + ')' +
-                        '(?:\\.(' + src[t.XRANGEIDENTIFIERLOOSE] + ')' +
-                        '(?:' + src[t.PRERELEASELOOSE] + ')?' +
-                        src[t.BUILD] + '?' +
-                        ')?)?'
-
-tok('XRANGE')
-src[t.XRANGE] = '^' + src[t.GTLT] + '\\s*' + src[t.XRANGEPLAIN] + '$'
-tok('XRANGELOOSE')
-src[t.XRANGELOOSE] = '^' + src[t.GTLT] + '\\s*' + src[t.XRANGEPLAINLOOSE] + '$'
-
-// Coercion.
-// Extract anything that could conceivably be a part of a valid semver
-tok('COERCE')
-src[t.COERCE] = '(^|[^\\d])' +
-              '(\\d{1,' + MAX_SAFE_COMPONENT_LENGTH + '})' +
-              '(?:\\.(\\d{1,' + MAX_SAFE_COMPONENT_LENGTH + '}))?' +
-              '(?:\\.(\\d{1,' + MAX_SAFE_COMPONENT_LENGTH + '}))?' +
-              '(?:$|[^\\d])'
-tok('COERCERTL')
-re[t.COERCERTL] = new RegExp(src[t.COERCE], 'g')
-safeRe[t.COERCERTL] = new RegExp(makeSafeRe(src[t.COERCE]), 'g')
-
-// Tilde ranges.
-// Meaning is "reasonably at or greater than"
-tok('LONETILDE')
-src[t.LONETILDE] = '(?:~>?)'
-
-tok('TILDETRIM')
-src[t.TILDETRIM] = '(\\s*)' + src[t.LONETILDE] + '\\s+'
-re[t.TILDETRIM] = new RegExp(src[t.TILDETRIM], 'g')
-safeRe[t.TILDETRIM] = new RegExp(makeSafeRe(src[t.TILDETRIM]), 'g')
-var tildeTrimReplace = '$1~'
-
-tok('TILDE')
-src[t.TILDE] = '^' + src[t.LONETILDE] + src[t.XRANGEPLAIN] + '$'
-tok('TILDELOOSE')
-src[t.TILDELOOSE] = '^' + src[t.LONETILDE] + src[t.XRANGEPLAINLOOSE] + '$'
-
-// Caret ranges.
-// Meaning is "at least and backwards compatible with"
-tok('LONECARET')
-src[t.LONECARET] = '(?:\\^)'
-
-tok('CARETTRIM')
-src[t.CARETTRIM] = '(\\s*)' + src[t.LONECARET] + '\\s+'
-re[t.CARETTRIM] = new RegExp(src[t.CARETTRIM], 'g')
-safeRe[t.CARETTRIM] = new RegExp(makeSafeRe(src[t.CARETTRIM]), 'g')
-var caretTrimReplace = '$1^'
-
-tok('CARET')
-src[t.CARET] = '^' + src[t.LONECARET] + src[t.XRANGEPLAIN] + '$'
-tok('CARETLOOSE')
-src[t.CARETLOOSE] = '^' + src[t.LONECARET] + src[t.XRANGEPLAINLOOSE] + '$'
-
-// A simple gt/lt/eq thing, or just "" to indicate "any version"
-tok('COMPARATORLOOSE')
-src[t.COMPARATORLOOSE] = '^' + src[t.GTLT] + '\\s*(' + src[t.LOOSEPLAIN] + ')$|^$'
-tok('COMPARATOR')
-src[t.COMPARATOR] = '^' + src[t.GTLT] + '\\s*(' + src[t.FULLPLAIN] + ')$|^$'
-
-// An expression to strip any whitespace between the gtlt and the thing
-// it modifies, so that `> 1.2.3` ==> `>1.2.3`
-tok('COMPARATORTRIM')
-src[t.COMPARATORTRIM] = '(\\s*)' + src[t.GTLT] +
-                      '\\s*(' + src[t.LOOSEPLAIN] + '|' + src[t.XRANGEPLAIN] + ')'
-
-// this one has to use the /g flag
-re[t.COMPARATORTRIM] = new RegExp(src[t.COMPARATORTRIM], 'g')
-safeRe[t.COMPARATORTRIM] = new RegExp(makeSafeRe(src[t.COMPARATORTRIM]), 'g')
-var comparatorTrimReplace = '$1$2$3'
-
-// Something like `1.2.3 - 1.2.4`
-// Note that these all use the loose form, because they'll be
-// checked against either the strict or loose comparator form
-// later.
-tok('HYPHENRANGE')
-src[t.HYPHENRANGE] = '^\\s*(' + src[t.XRANGEPLAIN] + ')' +
-                   '\\s+-\\s+' +
-                   '(' + src[t.XRANGEPLAIN] + ')' +
-                   '\\s*$'
-
-tok('HYPHENRANGELOOSE')
-src[t.HYPHENRANGELOOSE] = '^\\s*(' + src[t.XRANGEPLAINLOOSE] + ')' +
-                        '\\s+-\\s+' +
-                        '(' + src[t.XRANGEPLAINLOOSE] + ')' +
-                        '\\s*$'
-
-// Star ranges basically just allow anything at all.
-tok('STAR')
-src[t.STAR] = '(<|>)?=?\\s*\\*'
-
-// Compile to actual regexp objects.
-// All are flag-free, unless they were created above with a flag.
-for (var i = 0; i < R; i++) {
-  debug(i, src[i])
-  if (!re[i]) {
-    re[i] = new RegExp(src[i])
-
-    // Replace all greedy whitespace to prevent regex dos issues. These regex are
-    // used internally via the safeRe object since all inputs in this library get
-    // normalized first to trim and collapse all extra whitespace. The original
-    // regexes are exported for userland consumption and lower level usage. A
-    // future breaking change could export the safer regex only with a note that
-    // all input should have extra whitespace removed.
-    safeRe[i] = new RegExp(makeSafeRe(src[i]))
-  }
-}
-
-exports.parse = parse
-function parse (version, options) {
-  if (!options || typeof options !== 'object') {
-    options = {
-      loose: !!options,
-      includePrerelease: false
-    }
+const ANY = Symbol('SemVer ANY')
+// hoisted class for cyclic dependency
+class Comparator {
+  static get ANY () {
+    return ANY
   }
 
-  if (version instanceof SemVer) {
-    return version
-  }
+  constructor (comp, options) {
+    options = parseOptions(options)
 
-  if (typeof version !== 'string') {
-    return null
-  }
-
-  if (version.length > MAX_LENGTH) {
-    return null
-  }
-
-  var r = options.loose ? safeRe[t.LOOSE] : safeRe[t.FULL]
-  if (!r.test(version)) {
-    return null
-  }
-
-  try {
-    return new SemVer(version, options)
-  } catch (er) {
-    return null
-  }
-}
-
-exports.valid = valid
-function valid (version, options) {
-  var v = parse(version, options)
-  return v ? v.version : null
-}
-
-exports.clean = clean
-function clean (version, options) {
-  var s = parse(version.trim().replace(/^[=v]+/, ''), options)
-  return s ? s.version : null
-}
-
-exports.SemVer = SemVer
-
-function SemVer (version, options) {
-  if (!options || typeof options !== 'object') {
-    options = {
-      loose: !!options,
-      includePrerelease: false
-    }
-  }
-  if (version instanceof SemVer) {
-    if (version.loose === options.loose) {
-      return version
-    } else {
-      version = version.version
-    }
-  } else if (typeof version !== 'string') {
-    throw new TypeError('Invalid Version: ' + version)
-  }
-
-  if (version.length > MAX_LENGTH) {
-    throw new TypeError('version is longer than ' + MAX_LENGTH + ' characters')
-  }
-
-  if (!(this instanceof SemVer)) {
-    return new SemVer(version, options)
-  }
-
-  debug('SemVer', version, options)
-  this.options = options
-  this.loose = !!options.loose
-
-  var m = version.trim().match(options.loose ? safeRe[t.LOOSE] : safeRe[t.FULL])
-
-  if (!m) {
-    throw new TypeError('Invalid Version: ' + version)
-  }
-
-  this.raw = version
-
-  // these are actually numbers
-  this.major = +m[1]
-  this.minor = +m[2]
-  this.patch = +m[3]
-
-  if (this.major > MAX_SAFE_INTEGER || this.major < 0) {
-    throw new TypeError('Invalid major version')
-  }
-
-  if (this.minor > MAX_SAFE_INTEGER || this.minor < 0) {
-    throw new TypeError('Invalid minor version')
-  }
-
-  if (this.patch > MAX_SAFE_INTEGER || this.patch < 0) {
-    throw new TypeError('Invalid patch version')
-  }
-
-  // numberify any prerelease numeric ids
-  if (!m[4]) {
-    this.prerelease = []
-  } else {
-    this.prerelease = m[4].split('.').map(function (id) {
-      if (/^[0-9]+$/.test(id)) {
-        var num = +id
-        if (num >= 0 && num < MAX_SAFE_INTEGER) {
-          return num
-        }
-      }
-      return id
-    })
-  }
-
-  this.build = m[5] ? m[5].split('.') : []
-  this.format()
-}
-
-SemVer.prototype.format = function () {
-  this.version = this.major + '.' + this.minor + '.' + this.patch
-  if (this.prerelease.length) {
-    this.version += '-' + this.prerelease.join('.')
-  }
-  return this.version
-}
-
-SemVer.prototype.toString = function () {
-  return this.version
-}
-
-SemVer.prototype.compare = function (other) {
-  debug('SemVer.compare', this.version, this.options, other)
-  if (!(other instanceof SemVer)) {
-    other = new SemVer(other, this.options)
-  }
-
-  return this.compareMain(other) || this.comparePre(other)
-}
-
-SemVer.prototype.compareMain = function (other) {
-  if (!(other instanceof SemVer)) {
-    other = new SemVer(other, this.options)
-  }
-
-  return compareIdentifiers(this.major, other.major) ||
-         compareIdentifiers(this.minor, other.minor) ||
-         compareIdentifiers(this.patch, other.patch)
-}
-
-SemVer.prototype.comparePre = function (other) {
-  if (!(other instanceof SemVer)) {
-    other = new SemVer(other, this.options)
-  }
-
-  // NOT having a prerelease is > having one
-  if (this.prerelease.length && !other.prerelease.length) {
-    return -1
-  } else if (!this.prerelease.length && other.prerelease.length) {
-    return 1
-  } else if (!this.prerelease.length && !other.prerelease.length) {
-    return 0
-  }
-
-  var i = 0
-  do {
-    var a = this.prerelease[i]
-    var b = other.prerelease[i]
-    debug('prerelease compare', i, a, b)
-    if (a === undefined && b === undefined) {
-      return 0
-    } else if (b === undefined) {
-      return 1
-    } else if (a === undefined) {
-      return -1
-    } else if (a === b) {
-      continue
-    } else {
-      return compareIdentifiers(a, b)
-    }
-  } while (++i)
-}
-
-SemVer.prototype.compareBuild = function (other) {
-  if (!(other instanceof SemVer)) {
-    other = new SemVer(other, this.options)
-  }
-
-  var i = 0
-  do {
-    var a = this.build[i]
-    var b = other.build[i]
-    debug('prerelease compare', i, a, b)
-    if (a === undefined && b === undefined) {
-      return 0
-    } else if (b === undefined) {
-      return 1
-    } else if (a === undefined) {
-      return -1
-    } else if (a === b) {
-      continue
-    } else {
-      return compareIdentifiers(a, b)
-    }
-  } while (++i)
-}
-
-// preminor will bump the version up to the next minor release, and immediately
-// down to pre-release. premajor and prepatch work the same way.
-SemVer.prototype.inc = function (release, identifier) {
-  switch (release) {
-    case 'premajor':
-      this.prerelease.length = 0
-      this.patch = 0
-      this.minor = 0
-      this.major++
-      this.inc('pre', identifier)
-      break
-    case 'preminor':
-      this.prerelease.length = 0
-      this.patch = 0
-      this.minor++
-      this.inc('pre', identifier)
-      break
-    case 'prepatch':
-      // If this is already a prerelease, it will bump to the next version
-      // drop any prereleases that might already exist, since they are not
-      // relevant at this point.
-      this.prerelease.length = 0
-      this.inc('patch', identifier)
-      this.inc('pre', identifier)
-      break
-    // If the input is a non-prerelease version, this acts the same as
-    // prepatch.
-    case 'prerelease':
-      if (this.prerelease.length === 0) {
-        this.inc('patch', identifier)
-      }
-      this.inc('pre', identifier)
-      break
-
-    case 'major':
-      // If this is a pre-major version, bump up to the same major version.
-      // Otherwise increment major.
-      // 1.0.0-5 bumps to 1.0.0
-      // 1.1.0 bumps to 2.0.0
-      if (this.minor !== 0 ||
-          this.patch !== 0 ||
-          this.prerelease.length === 0) {
-        this.major++
-      }
-      this.minor = 0
-      this.patch = 0
-      this.prerelease = []
-      break
-    case 'minor':
-      // If this is a pre-minor version, bump up to the same minor version.
-      // Otherwise increment minor.
-      // 1.2.0-5 bumps to 1.2.0
-      // 1.2.1 bumps to 1.3.0
-      if (this.patch !== 0 || this.prerelease.length === 0) {
-        this.minor++
-      }
-      this.patch = 0
-      this.prerelease = []
-      break
-    case 'patch':
-      // If this is not a pre-release version, it will increment the patch.
-      // If it is a pre-release it will bump up to the same patch version.
-      // 1.2.0-5 patches to 1.2.0
-      // 1.2.0 patches to 1.2.1
-      if (this.prerelease.length === 0) {
-        this.patch++
-      }
-      this.prerelease = []
-      break
-    // This probably shouldn't be used publicly.
-    // 1.0.0 "pre" would become 1.0.0-0 which is the wrong direction.
-    case 'pre':
-      if (this.prerelease.length === 0) {
-        this.prerelease = [0]
+    if (comp instanceof Comparator) {
+      if (comp.loose === !!options.loose) {
+        return comp
       } else {
-        var i = this.prerelease.length
-        while (--i >= 0) {
-          if (typeof this.prerelease[i] === 'number') {
-            this.prerelease[i]++
-            i = -2
-          }
-        }
-        if (i === -1) {
-          // didn't increment anything
-          this.prerelease.push(0)
-        }
-      }
-      if (identifier) {
-        // 1.2.0-beta.1 bumps to 1.2.0-beta.2,
-        // 1.2.0-beta.fooblz or 1.2.0-beta bumps to 1.2.0-beta.0
-        if (this.prerelease[0] === identifier) {
-          if (isNaN(this.prerelease[1])) {
-            this.prerelease = [identifier, 0]
-          }
-        } else {
-          this.prerelease = [identifier, 0]
-        }
-      }
-      break
-
-    default:
-      throw new Error('invalid increment argument: ' + release)
-  }
-  this.format()
-  this.raw = this.version
-  return this
-}
-
-exports.inc = inc
-function inc (version, release, loose, identifier) {
-  if (typeof (loose) === 'string') {
-    identifier = loose
-    loose = undefined
-  }
-
-  try {
-    return new SemVer(version, loose).inc(release, identifier).version
-  } catch (er) {
-    return null
-  }
-}
-
-exports.diff = diff
-function diff (version1, version2) {
-  if (eq(version1, version2)) {
-    return null
-  } else {
-    var v1 = parse(version1)
-    var v2 = parse(version2)
-    var prefix = ''
-    if (v1.prerelease.length || v2.prerelease.length) {
-      prefix = 'pre'
-      var defaultResult = 'prerelease'
-    }
-    for (var key in v1) {
-      if (key === 'major' || key === 'minor' || key === 'patch') {
-        if (v1[key] !== v2[key]) {
-          return prefix + key
-        }
+        comp = comp.value
       }
     }
-    return defaultResult // may be undefined
-  }
-}
 
-exports.compareIdentifiers = compareIdentifiers
+    comp = comp.trim().split(/\s+/).join(' ')
+    debug('comparator', comp, options)
+    this.options = options
+    this.loose = !!options.loose
+    this.parse(comp)
 
-var numeric = /^[0-9]+$/
-function compareIdentifiers (a, b) {
-  var anum = numeric.test(a)
-  var bnum = numeric.test(b)
-
-  if (anum && bnum) {
-    a = +a
-    b = +b
-  }
-
-  return a === b ? 0
-    : (anum && !bnum) ? -1
-    : (bnum && !anum) ? 1
-    : a < b ? -1
-    : 1
-}
-
-exports.rcompareIdentifiers = rcompareIdentifiers
-function rcompareIdentifiers (a, b) {
-  return compareIdentifiers(b, a)
-}
-
-exports.major = major
-function major (a, loose) {
-  return new SemVer(a, loose).major
-}
-
-exports.minor = minor
-function minor (a, loose) {
-  return new SemVer(a, loose).minor
-}
-
-exports.patch = patch
-function patch (a, loose) {
-  return new SemVer(a, loose).patch
-}
-
-exports.compare = compare
-function compare (a, b, loose) {
-  return new SemVer(a, loose).compare(new SemVer(b, loose))
-}
-
-exports.compareLoose = compareLoose
-function compareLoose (a, b) {
-  return compare(a, b, true)
-}
-
-exports.compareBuild = compareBuild
-function compareBuild (a, b, loose) {
-  var versionA = new SemVer(a, loose)
-  var versionB = new SemVer(b, loose)
-  return versionA.compare(versionB) || versionA.compareBuild(versionB)
-}
-
-exports.rcompare = rcompare
-function rcompare (a, b, loose) {
-  return compare(b, a, loose)
-}
-
-exports.sort = sort
-function sort (list, loose) {
-  return list.sort(function (a, b) {
-    return exports.compareBuild(a, b, loose)
-  })
-}
-
-exports.rsort = rsort
-function rsort (list, loose) {
-  return list.sort(function (a, b) {
-    return exports.compareBuild(b, a, loose)
-  })
-}
-
-exports.gt = gt
-function gt (a, b, loose) {
-  return compare(a, b, loose) > 0
-}
-
-exports.lt = lt
-function lt (a, b, loose) {
-  return compare(a, b, loose) < 0
-}
-
-exports.eq = eq
-function eq (a, b, loose) {
-  return compare(a, b, loose) === 0
-}
-
-exports.neq = neq
-function neq (a, b, loose) {
-  return compare(a, b, loose) !== 0
-}
-
-exports.gte = gte
-function gte (a, b, loose) {
-  return compare(a, b, loose) >= 0
-}
-
-exports.lte = lte
-function lte (a, b, loose) {
-  return compare(a, b, loose) <= 0
-}
-
-exports.cmp = cmp
-function cmp (a, op, b, loose) {
-  switch (op) {
-    case '===':
-      if (typeof a === 'object')
-        a = a.version
-      if (typeof b === 'object')
-        b = b.version
-      return a === b
-
-    case '!==':
-      if (typeof a === 'object')
-        a = a.version
-      if (typeof b === 'object')
-        b = b.version
-      return a !== b
-
-    case '':
-    case '=':
-    case '==':
-      return eq(a, b, loose)
-
-    case '!=':
-      return neq(a, b, loose)
-
-    case '>':
-      return gt(a, b, loose)
-
-    case '>=':
-      return gte(a, b, loose)
-
-    case '<':
-      return lt(a, b, loose)
-
-    case '<=':
-      return lte(a, b, loose)
-
-    default:
-      throw new TypeError('Invalid operator: ' + op)
-  }
-}
-
-exports.Comparator = Comparator
-function Comparator (comp, options) {
-  if (!options || typeof options !== 'object') {
-    options = {
-      loose: !!options,
-      includePrerelease: false
-    }
-  }
-
-  if (comp instanceof Comparator) {
-    if (comp.loose === !!options.loose) {
-      return comp
+    if (this.semver === ANY) {
+      this.value = ''
     } else {
-      comp = comp.value
+      this.value = this.operator + this.semver.version
+    }
+
+    debug('comp', this)
+  }
+
+  parse (comp) {
+    const r = this.options.loose ? re[t.COMPARATORLOOSE] : re[t.COMPARATOR]
+    const m = comp.match(r)
+
+    if (!m) {
+      throw new TypeError(`Invalid comparator: ${comp}`)
+    }
+
+    this.operator = m[1] !== undefined ? m[1] : ''
+    if (this.operator === '=') {
+      this.operator = ''
+    }
+
+    // if it literally is just '>' or '' then allow anything.
+    if (!m[2]) {
+      this.semver = ANY
+    } else {
+      this.semver = new SemVer(m[2], this.options.loose)
     }
   }
 
-  if (!(this instanceof Comparator)) {
-    return new Comparator(comp, options)
+  toString () {
+    return this.value
   }
 
-  comp = comp.trim().split(/\s+/).join(' ')
-  debug('comparator', comp, options)
-  this.options = options
-  this.loose = !!options.loose
-  this.parse(comp)
+  test (version) {
+    debug('Comparator.test', version, this.options.loose)
 
-  if (this.semver === ANY) {
-    this.value = ''
-  } else {
-    this.value = this.operator + this.semver.version
+    if (this.semver === ANY || version === ANY) {
+      return true
+    }
+
+    if (typeof version === 'string') {
+      try {
+        version = new SemVer(version, this.options)
+      } catch (er) {
+        return false
+      }
+    }
+
+    return cmp(version, this.operator, this.semver, this.options)
   }
 
-  debug('comp', this)
-}
+  intersects (comp, options) {
+    if (!(comp instanceof Comparator)) {
+      throw new TypeError('a Comparator is required')
+    }
 
-var ANY = {}
-Comparator.prototype.parse = function (comp) {
-  var r = this.options.loose ? safeRe[t.COMPARATORLOOSE] : safeRe[t.COMPARATOR]
-  var m = comp.match(r)
+    if (this.operator === '') {
+      if (this.value === '') {
+        return true
+      }
+      return new Range(comp.value, options).test(this.value)
+    } else if (comp.operator === '') {
+      if (comp.value === '') {
+        return true
+      }
+      return new Range(this.value, options).test(comp.semver)
+    }
 
-  if (!m) {
-    throw new TypeError('Invalid comparator: ' + comp)
-  }
+    options = parseOptions(options)
 
-  this.operator = m[1] !== undefined ? m[1] : ''
-  if (this.operator === '=') {
-    this.operator = ''
-  }
-
-  // if it literally is just '>' or '' then allow anything.
-  if (!m[2]) {
-    this.semver = ANY
-  } else {
-    this.semver = new SemVer(m[2], this.options.loose)
-  }
-}
-
-Comparator.prototype.toString = function () {
-  return this.value
-}
-
-Comparator.prototype.test = function (version) {
-  debug('Comparator.test', version, this.options.loose)
-
-  if (this.semver === ANY || version === ANY) {
-    return true
-  }
-
-  if (typeof version === 'string') {
-    try {
-      version = new SemVer(version, this.options)
-    } catch (er) {
+    // Special cases where nothing can possibly be lower
+    if (options.includePrerelease &&
+      (this.value === '<0.0.0-0' || comp.value === '<0.0.0-0')) {
       return false
     }
-  }
-
-  return cmp(version, this.operator, this.semver, this.options)
-}
-
-Comparator.prototype.intersects = function (comp, options) {
-  if (!(comp instanceof Comparator)) {
-    throw new TypeError('a Comparator is required')
-  }
-
-  if (!options || typeof options !== 'object') {
-    options = {
-      loose: !!options,
-      includePrerelease: false
+    if (!options.includePrerelease &&
+      (this.value.startsWith('<0.0.0') || comp.value.startsWith('<0.0.0'))) {
+      return false
     }
-  }
 
-  var rangeTmp
-
-  if (this.operator === '') {
-    if (this.value === '') {
+    // Same direction increasing (> or >=)
+    if (this.operator.startsWith('>') && comp.operator.startsWith('>')) {
       return true
     }
-    rangeTmp = new Range(comp.value, options)
-    return satisfies(this.value, rangeTmp, options)
-  } else if (comp.operator === '') {
-    if (comp.value === '') {
+    // Same direction decreasing (< or <=)
+    if (this.operator.startsWith('<') && comp.operator.startsWith('<')) {
       return true
     }
-    rangeTmp = new Range(this.value, options)
-    return satisfies(comp.semver, rangeTmp, options)
-  }
-
-  var sameDirectionIncreasing =
-    (this.operator === '>=' || this.operator === '>') &&
-    (comp.operator === '>=' || comp.operator === '>')
-  var sameDirectionDecreasing =
-    (this.operator === '<=' || this.operator === '<') &&
-    (comp.operator === '<=' || comp.operator === '<')
-  var sameSemVer = this.semver.version === comp.semver.version
-  var differentDirectionsInclusive =
-    (this.operator === '>=' || this.operator === '<=') &&
-    (comp.operator === '>=' || comp.operator === '<=')
-  var oppositeDirectionsLessThan =
-    cmp(this.semver, '<', comp.semver, options) &&
-    ((this.operator === '>=' || this.operator === '>') &&
-    (comp.operator === '<=' || comp.operator === '<'))
-  var oppositeDirectionsGreaterThan =
-    cmp(this.semver, '>', comp.semver, options) &&
-    ((this.operator === '<=' || this.operator === '<') &&
-    (comp.operator === '>=' || comp.operator === '>'))
-
-  return sameDirectionIncreasing || sameDirectionDecreasing ||
-    (sameSemVer && differentDirectionsInclusive) ||
-    oppositeDirectionsLessThan || oppositeDirectionsGreaterThan
-}
-
-exports.Range = Range
-function Range (range, options) {
-  if (!options || typeof options !== 'object') {
-    options = {
-      loose: !!options,
-      includePrerelease: false
+    // same SemVer and both sides are inclusive (<= or >=)
+    if (
+      (this.semver.version === comp.semver.version) &&
+      this.operator.includes('=') && comp.operator.includes('=')) {
+      return true
     }
-  }
-
-  if (range instanceof Range) {
-    if (range.loose === !!options.loose &&
-        range.includePrerelease === !!options.includePrerelease) {
-      return range
-    } else {
-      return new Range(range.raw, options)
+    // opposite directions less than
+    if (cmp(this.semver, '<', comp.semver, options) &&
+      this.operator.startsWith('>') && comp.operator.startsWith('<')) {
+      return true
     }
+    // opposite directions greater than
+    if (cmp(this.semver, '>', comp.semver, options) &&
+      this.operator.startsWith('<') && comp.operator.startsWith('>')) {
+      return true
+    }
+    return false
   }
-
-  if (range instanceof Comparator) {
-    return new Range(range.value, options)
-  }
-
-  if (!(this instanceof Range)) {
-    return new Range(range, options)
-  }
-
-  this.options = options
-  this.loose = !!options.loose
-  this.includePrerelease = !!options.includePrerelease
-
-  // First reduce all whitespace as much as possible so we do not have to rely
-  // on potentially slow regexes like \s*. This is then stored and used for
-  // future error messages as well.
-  this.raw = range
-    .trim()
-    .split(/\s+/)
-    .join(' ')
-
-  // First, split based on boolean or ||
-  this.set = this.raw.split('||').map(function (range) {
-    return this.parseRange(range.trim())
-  }, this).filter(function (c) {
-    // throw out any that are not relevant for whatever reason
-    return c.length
-  })
-
-  if (!this.set.length) {
-    throw new TypeError('Invalid SemVer Range: ' + this.raw)
-  }
-
-  this.format()
 }
 
-Range.prototype.format = function () {
-  this.range = this.set.map(function (comps) {
-    return comps.join(' ').trim()
-  }).join('||').trim()
-  return this.range
-}
+module.exports = Comparator
 
-Range.prototype.toString = function () {
-  return this.range
-}
+const parseOptions = __nccwpck_require__(356)
+const { safeRe: re, t } = __nccwpck_require__(5471)
+const cmp = __nccwpck_require__(8646)
+const debug = __nccwpck_require__(1159)
+const SemVer = __nccwpck_require__(7163)
+const Range = __nccwpck_require__(6782)
 
-Range.prototype.parseRange = function (range) {
-  var loose = this.options.loose
-  // `1.2.3 - 1.2.4` => `>=1.2.3 <=1.2.4`
-  var hr = loose ? safeRe[t.HYPHENRANGELOOSE] : safeRe[t.HYPHENRANGE]
-  range = range.replace(hr, hyphenReplace)
-  debug('hyphen replace', range)
-  // `> 1.2.3 < 1.2.5` => `>1.2.3 <1.2.5`
-  range = range.replace(safeRe[t.COMPARATORTRIM], comparatorTrimReplace)
-  debug('comparator trim', range, safeRe[t.COMPARATORTRIM])
 
-  // `~ 1.2.3` => `~1.2.3`
-  range = range.replace(safeRe[t.TILDETRIM], tildeTrimReplace)
+/***/ }),
 
-  // `^ 1.2.3` => `^1.2.3`
-  range = range.replace(safeRe[t.CARETTRIM], caretTrimReplace)
+/***/ 6782:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-  // normalize spaces
-  range = range.split(/\s+/).join(' ')
+"use strict";
 
-  // At this point, the range is completely trimmed and
-  // ready to be split into comparators.
 
-  var compRe = loose ? safeRe[t.COMPARATORLOOSE] : safeRe[t.COMPARATOR]
-  var set = range.split(' ').map(function (comp) {
-    return parseComparator(comp, this.options)
-  }, this).join(' ').split(/\s+/)
-  if (this.options.loose) {
-    // in loose mode, throw out any that are not valid comparators
-    set = set.filter(function (comp) {
-      return !!comp.match(compRe)
+const SPACE_CHARACTERS = /\s+/g
+
+// hoisted class for cyclic dependency
+class Range {
+  constructor (range, options) {
+    options = parseOptions(options)
+
+    if (range instanceof Range) {
+      if (
+        range.loose === !!options.loose &&
+        range.includePrerelease === !!options.includePrerelease
+      ) {
+        return range
+      } else {
+        return new Range(range.raw, options)
+      }
+    }
+
+    if (range instanceof Comparator) {
+      // just put it in the set and return
+      this.raw = range.value
+      this.set = [[range]]
+      this.formatted = undefined
+      return this
+    }
+
+    this.options = options
+    this.loose = !!options.loose
+    this.includePrerelease = !!options.includePrerelease
+
+    // First reduce all whitespace as much as possible so we do not have to rely
+    // on potentially slow regexes like \s*. This is then stored and used for
+    // future error messages as well.
+    this.raw = range.trim().replace(SPACE_CHARACTERS, ' ')
+
+    // First, split on ||
+    this.set = this.raw
+      .split('||')
+      // map the range to a 2d array of comparators
+      .map(r => this.parseRange(r.trim()))
+      // throw out any comparator lists that are empty
+      // this generally means that it was not a valid range, which is allowed
+      // in loose mode, but will still throw if the WHOLE range is invalid.
+      .filter(c => c.length)
+
+    if (!this.set.length) {
+      throw new TypeError(`Invalid SemVer Range: ${this.raw}`)
+    }
+
+    // if we have any that are not the null set, throw out null sets.
+    if (this.set.length > 1) {
+      // keep the first one, in case they're all null sets
+      const first = this.set[0]
+      this.set = this.set.filter(c => !isNullSet(c[0]))
+      if (this.set.length === 0) {
+        this.set = [first]
+      } else if (this.set.length > 1) {
+        // if we have any that are *, then the range is just *
+        for (const c of this.set) {
+          if (c.length === 1 && isAny(c[0])) {
+            this.set = [c]
+            break
+          }
+        }
+      }
+    }
+
+    this.formatted = undefined
+  }
+
+  get range () {
+    if (this.formatted === undefined) {
+      this.formatted = ''
+      for (let i = 0; i < this.set.length; i++) {
+        if (i > 0) {
+          this.formatted += '||'
+        }
+        const comps = this.set[i]
+        for (let k = 0; k < comps.length; k++) {
+          if (k > 0) {
+            this.formatted += ' '
+          }
+          this.formatted += comps[k].toString().trim()
+        }
+      }
+    }
+    return this.formatted
+  }
+
+  format () {
+    return this.range
+  }
+
+  toString () {
+    return this.range
+  }
+
+  parseRange (range) {
+    // memoize range parsing for performance.
+    // this is a very hot path, and fully deterministic.
+    const memoOpts =
+      (this.options.includePrerelease && FLAG_INCLUDE_PRERELEASE) |
+      (this.options.loose && FLAG_LOOSE)
+    const memoKey = memoOpts + ':' + range
+    const cached = cache.get(memoKey)
+    if (cached) {
+      return cached
+    }
+
+    const loose = this.options.loose
+    // `1.2.3 - 1.2.4` => `>=1.2.3 <=1.2.4`
+    const hr = loose ? re[t.HYPHENRANGELOOSE] : re[t.HYPHENRANGE]
+    range = range.replace(hr, hyphenReplace(this.options.includePrerelease))
+    debug('hyphen replace', range)
+
+    // `> 1.2.3 < 1.2.5` => `>1.2.3 <1.2.5`
+    range = range.replace(re[t.COMPARATORTRIM], comparatorTrimReplace)
+    debug('comparator trim', range)
+
+    // `~ 1.2.3` => `~1.2.3`
+    range = range.replace(re[t.TILDETRIM], tildeTrimReplace)
+    debug('tilde trim', range)
+
+    // `^ 1.2.3` => `^1.2.3`
+    range = range.replace(re[t.CARETTRIM], caretTrimReplace)
+    debug('caret trim', range)
+
+    // At this point, the range is completely trimmed and
+    // ready to be split into comparators.
+
+    let rangeList = range
+      .split(' ')
+      .map(comp => parseComparator(comp, this.options))
+      .join(' ')
+      .split(/\s+/)
+      // >=0.0.0 is equivalent to *
+      .map(comp => replaceGTE0(comp, this.options))
+
+    if (loose) {
+      // in loose mode, throw out any that are not valid comparators
+      rangeList = rangeList.filter(comp => {
+        debug('loose invalid filter', comp, this.options)
+        return !!comp.match(re[t.COMPARATORLOOSE])
+      })
+    }
+    debug('range list', rangeList)
+
+    // if any comparators are the null set, then replace with JUST null set
+    // if more than one comparator, remove any * comparators
+    // also, don't include the same comparator more than once
+    const rangeMap = new Map()
+    const comparators = rangeList.map(comp => new Comparator(comp, this.options))
+    for (const comp of comparators) {
+      if (isNullSet(comp)) {
+        return [comp]
+      }
+      rangeMap.set(comp.value, comp)
+    }
+    if (rangeMap.size > 1 && rangeMap.has('')) {
+      rangeMap.delete('')
+    }
+
+    const result = [...rangeMap.values()]
+    cache.set(memoKey, result)
+    return result
+  }
+
+  intersects (range, options) {
+    if (!(range instanceof Range)) {
+      throw new TypeError('a Range is required')
+    }
+
+    return this.set.some((thisComparators) => {
+      return (
+        isSatisfiable(thisComparators, options) &&
+        range.set.some((rangeComparators) => {
+          return (
+            isSatisfiable(rangeComparators, options) &&
+            thisComparators.every((thisComparator) => {
+              return rangeComparators.every((rangeComparator) => {
+                return thisComparator.intersects(rangeComparator, options)
+              })
+            })
+          )
+        })
+      )
     })
   }
-  set = set.map(function (comp) {
-    return new Comparator(comp, this.options)
-  }, this)
 
-  return set
-}
+  // if ANY of the sets match ALL of its comparators, then pass
+  test (version) {
+    if (!version) {
+      return false
+    }
 
-Range.prototype.intersects = function (range, options) {
-  if (!(range instanceof Range)) {
-    throw new TypeError('a Range is required')
+    if (typeof version === 'string') {
+      try {
+        version = new SemVer(version, this.options)
+      } catch (er) {
+        return false
+      }
+    }
+
+    for (let i = 0; i < this.set.length; i++) {
+      if (testSet(this.set[i], version, this.options)) {
+        return true
+      }
+    }
+    return false
   }
-
-  return this.set.some(function (thisComparators) {
-    return (
-      isSatisfiable(thisComparators, options) &&
-      range.set.some(function (rangeComparators) {
-        return (
-          isSatisfiable(rangeComparators, options) &&
-          thisComparators.every(function (thisComparator) {
-            return rangeComparators.every(function (rangeComparator) {
-              return thisComparator.intersects(rangeComparator, options)
-            })
-          })
-        )
-      })
-    )
-  })
 }
+
+module.exports = Range
+
+const LRU = __nccwpck_require__(1383)
+const cache = new LRU()
+
+const parseOptions = __nccwpck_require__(356)
+const Comparator = __nccwpck_require__(9379)
+const debug = __nccwpck_require__(1159)
+const SemVer = __nccwpck_require__(7163)
+const {
+  safeRe: re,
+  t,
+  comparatorTrimReplace,
+  tildeTrimReplace,
+  caretTrimReplace,
+} = __nccwpck_require__(5471)
+const { FLAG_INCLUDE_PRERELEASE, FLAG_LOOSE } = __nccwpck_require__(5101)
+
+const isNullSet = c => c.value === '<0.0.0-0'
+const isAny = c => c.value === ''
 
 // take a set of comparators and determine whether there
 // exists a version which can satisfy it
-function isSatisfiable (comparators, options) {
-  var result = true
-  var remainingComparators = comparators.slice()
-  var testComparator = remainingComparators.pop()
+const isSatisfiable = (comparators, options) => {
+  let result = true
+  const remainingComparators = comparators.slice()
+  let testComparator = remainingComparators.pop()
 
   while (result && remainingComparators.length) {
-    result = remainingComparators.every(function (otherComparator) {
+    result = remainingComparators.every((otherComparator) => {
       return testComparator.intersects(otherComparator, options)
     })
 
@@ -43580,20 +41350,10 @@ function isSatisfiable (comparators, options) {
   return result
 }
 
-// Mostly just for testing and legacy API reasons
-exports.toComparators = toComparators
-function toComparators (range, options) {
-  return new Range(range, options).set.map(function (comp) {
-    return comp.map(function (c) {
-      return c.value
-    }).join(' ').trim().split(' ')
-  })
-}
-
 // comprised of xranges, tildes, stars, and gtlt's at this point.
 // already replaced the hyphen ranges
 // turn into a set of JUST comparators.
-function parseComparator (comp, options) {
+const parseComparator = (comp, options) => {
   debug('comp', comp, options)
   comp = replaceCarets(comp, options)
   debug('caret', comp)
@@ -43606,43 +41366,44 @@ function parseComparator (comp, options) {
   return comp
 }
 
-function isX (id) {
-  return !id || id.toLowerCase() === 'x' || id === '*'
-}
+const isX = id => !id || id.toLowerCase() === 'x' || id === '*'
 
 // ~, ~> --> * (any, kinda silly)
-// ~2, ~2.x, ~2.x.x, ~>2, ~>2.x ~>2.x.x --> >=2.0.0 <3.0.0
-// ~2.0, ~2.0.x, ~>2.0, ~>2.0.x --> >=2.0.0 <2.1.0
-// ~1.2, ~1.2.x, ~>1.2, ~>1.2.x --> >=1.2.0 <1.3.0
-// ~1.2.3, ~>1.2.3 --> >=1.2.3 <1.3.0
-// ~1.2.0, ~>1.2.0 --> >=1.2.0 <1.3.0
-function replaceTildes (comp, options) {
-  return comp.trim().split(/\s+/).map(function (comp) {
-    return replaceTilde(comp, options)
-  }).join(' ')
+// ~2, ~2.x, ~2.x.x, ~>2, ~>2.x ~>2.x.x --> >=2.0.0 <3.0.0-0
+// ~2.0, ~2.0.x, ~>2.0, ~>2.0.x --> >=2.0.0 <2.1.0-0
+// ~1.2, ~1.2.x, ~>1.2, ~>1.2.x --> >=1.2.0 <1.3.0-0
+// ~1.2.3, ~>1.2.3 --> >=1.2.3 <1.3.0-0
+// ~1.2.0, ~>1.2.0 --> >=1.2.0 <1.3.0-0
+// ~0.0.1 --> >=0.0.1 <0.1.0-0
+const replaceTildes = (comp, options) => {
+  return comp
+    .trim()
+    .split(/\s+/)
+    .map((c) => replaceTilde(c, options))
+    .join(' ')
 }
 
-function replaceTilde (comp, options) {
-  var r = options.loose ? safeRe[t.TILDELOOSE] : safeRe[t.TILDE]
-  return comp.replace(r, function (_, M, m, p, pr) {
+const replaceTilde = (comp, options) => {
+  const r = options.loose ? re[t.TILDELOOSE] : re[t.TILDE]
+  return comp.replace(r, (_, M, m, p, pr) => {
     debug('tilde', comp, _, M, m, p, pr)
-    var ret
+    let ret
 
     if (isX(M)) {
       ret = ''
     } else if (isX(m)) {
-      ret = '>=' + M + '.0.0 <' + (+M + 1) + '.0.0'
+      ret = `>=${M}.0.0 <${+M + 1}.0.0-0`
     } else if (isX(p)) {
-      // ~1.2 == >=1.2.0 <1.3.0
-      ret = '>=' + M + '.' + m + '.0 <' + M + '.' + (+m + 1) + '.0'
+      // ~1.2 == >=1.2.0 <1.3.0-0
+      ret = `>=${M}.${m}.0 <${M}.${+m + 1}.0-0`
     } else if (pr) {
       debug('replaceTilde pr', pr)
-      ret = '>=' + M + '.' + m + '.' + p + '-' + pr +
-            ' <' + M + '.' + (+m + 1) + '.0'
+      ret = `>=${M}.${m}.${p}-${pr
+      } <${M}.${+m + 1}.0-0`
     } else {
-      // ~1.2.3 == >=1.2.3 <1.3.0
-      ret = '>=' + M + '.' + m + '.' + p +
-            ' <' + M + '.' + (+m + 1) + '.0'
+      // ~1.2.3 == >=1.2.3 <1.3.0-0
+      ret = `>=${M}.${m}.${p
+      } <${M}.${+m + 1}.0-0`
     }
 
     debug('tilde return', ret)
@@ -43651,61 +41412,66 @@ function replaceTilde (comp, options) {
 }
 
 // ^ --> * (any, kinda silly)
-// ^2, ^2.x, ^2.x.x --> >=2.0.0 <3.0.0
-// ^2.0, ^2.0.x --> >=2.0.0 <3.0.0
-// ^1.2, ^1.2.x --> >=1.2.0 <2.0.0
-// ^1.2.3 --> >=1.2.3 <2.0.0
-// ^1.2.0 --> >=1.2.0 <2.0.0
-function replaceCarets (comp, options) {
-  return comp.trim().split(/\s+/).map(function (comp) {
-    return replaceCaret(comp, options)
-  }).join(' ')
+// ^2, ^2.x, ^2.x.x --> >=2.0.0 <3.0.0-0
+// ^2.0, ^2.0.x --> >=2.0.0 <3.0.0-0
+// ^1.2, ^1.2.x --> >=1.2.0 <2.0.0-0
+// ^1.2.3 --> >=1.2.3 <2.0.0-0
+// ^1.2.0 --> >=1.2.0 <2.0.0-0
+// ^0.0.1 --> >=0.0.1 <0.0.2-0
+// ^0.1.0 --> >=0.1.0 <0.2.0-0
+const replaceCarets = (comp, options) => {
+  return comp
+    .trim()
+    .split(/\s+/)
+    .map((c) => replaceCaret(c, options))
+    .join(' ')
 }
 
-function replaceCaret (comp, options) {
+const replaceCaret = (comp, options) => {
   debug('caret', comp, options)
-  var r = options.loose ? safeRe[t.CARETLOOSE] : safeRe[t.CARET]
-  return comp.replace(r, function (_, M, m, p, pr) {
+  const r = options.loose ? re[t.CARETLOOSE] : re[t.CARET]
+  const z = options.includePrerelease ? '-0' : ''
+  return comp.replace(r, (_, M, m, p, pr) => {
     debug('caret', comp, _, M, m, p, pr)
-    var ret
+    let ret
 
     if (isX(M)) {
       ret = ''
     } else if (isX(m)) {
-      ret = '>=' + M + '.0.0 <' + (+M + 1) + '.0.0'
+      ret = `>=${M}.0.0${z} <${+M + 1}.0.0-0`
     } else if (isX(p)) {
       if (M === '0') {
-        ret = '>=' + M + '.' + m + '.0 <' + M + '.' + (+m + 1) + '.0'
+        ret = `>=${M}.${m}.0${z} <${M}.${+m + 1}.0-0`
       } else {
-        ret = '>=' + M + '.' + m + '.0 <' + (+M + 1) + '.0.0'
+        ret = `>=${M}.${m}.0${z} <${+M + 1}.0.0-0`
       }
     } else if (pr) {
       debug('replaceCaret pr', pr)
       if (M === '0') {
         if (m === '0') {
-          ret = '>=' + M + '.' + m + '.' + p + '-' + pr +
-                ' <' + M + '.' + m + '.' + (+p + 1)
+          ret = `>=${M}.${m}.${p}-${pr
+          } <${M}.${m}.${+p + 1}-0`
         } else {
-          ret = '>=' + M + '.' + m + '.' + p + '-' + pr +
-                ' <' + M + '.' + (+m + 1) + '.0'
+          ret = `>=${M}.${m}.${p}-${pr
+          } <${M}.${+m + 1}.0-0`
         }
       } else {
-        ret = '>=' + M + '.' + m + '.' + p + '-' + pr +
-              ' <' + (+M + 1) + '.0.0'
+        ret = `>=${M}.${m}.${p}-${pr
+        } <${+M + 1}.0.0-0`
       }
     } else {
       debug('no pr')
       if (M === '0') {
         if (m === '0') {
-          ret = '>=' + M + '.' + m + '.' + p +
-                ' <' + M + '.' + m + '.' + (+p + 1)
+          ret = `>=${M}.${m}.${p
+          }${z} <${M}.${m}.${+p + 1}-0`
         } else {
-          ret = '>=' + M + '.' + m + '.' + p +
-                ' <' + M + '.' + (+m + 1) + '.0'
+          ret = `>=${M}.${m}.${p
+          }${z} <${M}.${+m + 1}.0-0`
         }
       } else {
-        ret = '>=' + M + '.' + m + '.' + p +
-              ' <' + (+M + 1) + '.0.0'
+        ret = `>=${M}.${m}.${p
+        } <${+M + 1}.0.0-0`
       }
     }
 
@@ -43714,22 +41480,23 @@ function replaceCaret (comp, options) {
   })
 }
 
-function replaceXRanges (comp, options) {
+const replaceXRanges = (comp, options) => {
   debug('replaceXRanges', comp, options)
-  return comp.split(/\s+/).map(function (comp) {
-    return replaceXRange(comp, options)
-  }).join(' ')
+  return comp
+    .split(/\s+/)
+    .map((c) => replaceXRange(c, options))
+    .join(' ')
 }
 
-function replaceXRange (comp, options) {
+const replaceXRange = (comp, options) => {
   comp = comp.trim()
-  var r = options.loose ? safeRe[t.XRANGELOOSE] : safeRe[t.XRANGE]
-  return comp.replace(r, function (ret, gtlt, M, m, p, pr) {
+  const r = options.loose ? re[t.XRANGELOOSE] : re[t.XRANGE]
+  return comp.replace(r, (ret, gtlt, M, m, p, pr) => {
     debug('xRange', comp, ret, gtlt, M, m, p, pr)
-    var xM = isX(M)
-    var xm = xM || isX(m)
-    var xp = xm || isX(p)
-    var anyX = xp
+    const xM = isX(M)
+    const xm = xM || isX(m)
+    const xp = xm || isX(p)
+    const anyX = xp
 
     if (gtlt === '=' && anyX) {
       gtlt = ''
@@ -43758,7 +41525,6 @@ function replaceXRange (comp, options) {
       if (gtlt === '>') {
         // >1 => >=2.0.0
         // >1.2 => >=1.3.0
-        // >1.2.3 => >= 1.2.4
         gtlt = '>='
         if (xm) {
           M = +M + 1
@@ -43779,12 +41545,16 @@ function replaceXRange (comp, options) {
         }
       }
 
-      ret = gtlt + M + '.' + m + '.' + p + pr
+      if (gtlt === '<') {
+        pr = '-0'
+      }
+
+      ret = `${gtlt + M}.${m}.${p}${pr}`
     } else if (xm) {
-      ret = '>=' + M + '.0.0' + pr + ' <' + (+M + 1) + '.0.0' + pr
+      ret = `>=${M}.0.0${pr} <${+M + 1}.0.0-0`
     } else if (xp) {
-      ret = '>=' + M + '.' + m + '.0' + pr +
-        ' <' + M + '.' + (+m + 1) + '.0' + pr
+      ret = `>=${M}.${m}.0${pr
+      } <${M}.${+m + 1}.0-0`
     }
 
     debug('xRange return', ret)
@@ -43795,69 +41565,61 @@ function replaceXRange (comp, options) {
 
 // Because * is AND-ed with everything else in the comparator,
 // and '' means "any version", just remove the *s entirely.
-function replaceStars (comp, options) {
+const replaceStars = (comp, options) => {
   debug('replaceStars', comp, options)
   // Looseness is ignored here.  star is always as loose as it gets!
-  return comp.trim().replace(safeRe[t.STAR], '')
+  return comp
+    .trim()
+    .replace(re[t.STAR], '')
+}
+
+const replaceGTE0 = (comp, options) => {
+  debug('replaceGTE0', comp, options)
+  return comp
+    .trim()
+    .replace(re[options.includePrerelease ? t.GTE0PRE : t.GTE0], '')
 }
 
 // This function is passed to string.replace(re[t.HYPHENRANGE])
 // M, m, patch, prerelease, build
 // 1.2 - 3.4.5 => >=1.2.0 <=3.4.5
-// 1.2.3 - 3.4 => >=1.2.0 <3.5.0 Any 3.4.x will do
-// 1.2 - 3.4 => >=1.2.0 <3.5.0
-function hyphenReplace ($0,
+// 1.2.3 - 3.4 => >=1.2.0 <3.5.0-0 Any 3.4.x will do
+// 1.2 - 3.4 => >=1.2.0 <3.5.0-0
+// TODO build?
+const hyphenReplace = incPr => ($0,
   from, fM, fm, fp, fpr, fb,
-  to, tM, tm, tp, tpr, tb) {
+  to, tM, tm, tp, tpr) => {
   if (isX(fM)) {
     from = ''
   } else if (isX(fm)) {
-    from = '>=' + fM + '.0.0'
+    from = `>=${fM}.0.0${incPr ? '-0' : ''}`
   } else if (isX(fp)) {
-    from = '>=' + fM + '.' + fm + '.0'
+    from = `>=${fM}.${fm}.0${incPr ? '-0' : ''}`
+  } else if (fpr) {
+    from = `>=${from}`
   } else {
-    from = '>=' + from
+    from = `>=${from}${incPr ? '-0' : ''}`
   }
 
   if (isX(tM)) {
     to = ''
   } else if (isX(tm)) {
-    to = '<' + (+tM + 1) + '.0.0'
+    to = `<${+tM + 1}.0.0-0`
   } else if (isX(tp)) {
-    to = '<' + tM + '.' + (+tm + 1) + '.0'
+    to = `<${tM}.${+tm + 1}.0-0`
   } else if (tpr) {
-    to = '<=' + tM + '.' + tm + '.' + tp + '-' + tpr
+    to = `<=${tM}.${tm}.${tp}-${tpr}`
+  } else if (incPr) {
+    to = `<${tM}.${tm}.${+tp + 1}-0`
   } else {
-    to = '<=' + to
+    to = `<=${to}`
   }
 
-  return (from + ' ' + to).trim()
+  return `${from} ${to}`.trim()
 }
 
-// if ANY of the sets match ALL of its comparators, then pass
-Range.prototype.test = function (version) {
-  if (!version) {
-    return false
-  }
-
-  if (typeof version === 'string') {
-    try {
-      version = new SemVer(version, this.options)
-    } catch (er) {
-      return false
-    }
-  }
-
-  for (var i = 0; i < this.set.length; i++) {
-    if (testSet(this.set[i], version, this.options)) {
-      return true
-    }
-  }
-  return false
-}
-
-function testSet (set, version, options) {
-  for (var i = 0; i < set.length; i++) {
+const testSet = (set, version, options) => {
+  for (let i = 0; i < set.length; i++) {
     if (!set[i].test(version)) {
       return false
     }
@@ -43869,14 +41631,14 @@ function testSet (set, version, options) {
     // That should allow `1.2.3-pr.2` to pass.
     // However, `1.2.4-alpha.notready` should NOT be allowed,
     // even though it's within the range set by the comparators.
-    for (i = 0; i < set.length; i++) {
+    for (let i = 0; i < set.length; i++) {
       debug(set[i].semver)
-      if (set[i].semver === ANY) {
+      if (set[i].semver === Comparator.ANY) {
         continue
       }
 
       if (set[i].semver.prerelease.length > 0) {
-        var allowed = set[i].semver
+        const allowed = set[i].semver
         if (allowed.major === version.major &&
             allowed.minor === version.minor &&
             allowed.patch === version.patch) {
@@ -43892,8 +41654,819 @@ function testSet (set, version, options) {
   return true
 }
 
-exports.satisfies = satisfies
-function satisfies (version, range, options) {
+
+/***/ }),
+
+/***/ 7163:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const debug = __nccwpck_require__(1159)
+const { MAX_LENGTH, MAX_SAFE_INTEGER } = __nccwpck_require__(5101)
+const { safeRe: re, t } = __nccwpck_require__(5471)
+
+const parseOptions = __nccwpck_require__(356)
+const { compareIdentifiers } = __nccwpck_require__(3348)
+class SemVer {
+  constructor (version, options) {
+    options = parseOptions(options)
+
+    if (version instanceof SemVer) {
+      if (version.loose === !!options.loose &&
+        version.includePrerelease === !!options.includePrerelease) {
+        return version
+      } else {
+        version = version.version
+      }
+    } else if (typeof version !== 'string') {
+      throw new TypeError(`Invalid version. Must be a string. Got type "${typeof version}".`)
+    }
+
+    if (version.length > MAX_LENGTH) {
+      throw new TypeError(
+        `version is longer than ${MAX_LENGTH} characters`
+      )
+    }
+
+    debug('SemVer', version, options)
+    this.options = options
+    this.loose = !!options.loose
+    // this isn't actually relevant for versions, but keep it so that we
+    // don't run into trouble passing this.options around.
+    this.includePrerelease = !!options.includePrerelease
+
+    const m = version.trim().match(options.loose ? re[t.LOOSE] : re[t.FULL])
+
+    if (!m) {
+      throw new TypeError(`Invalid Version: ${version}`)
+    }
+
+    this.raw = version
+
+    // these are actually numbers
+    this.major = +m[1]
+    this.minor = +m[2]
+    this.patch = +m[3]
+
+    if (this.major > MAX_SAFE_INTEGER || this.major < 0) {
+      throw new TypeError('Invalid major version')
+    }
+
+    if (this.minor > MAX_SAFE_INTEGER || this.minor < 0) {
+      throw new TypeError('Invalid minor version')
+    }
+
+    if (this.patch > MAX_SAFE_INTEGER || this.patch < 0) {
+      throw new TypeError('Invalid patch version')
+    }
+
+    // numberify any prerelease numeric ids
+    if (!m[4]) {
+      this.prerelease = []
+    } else {
+      this.prerelease = m[4].split('.').map((id) => {
+        if (/^[0-9]+$/.test(id)) {
+          const num = +id
+          if (num >= 0 && num < MAX_SAFE_INTEGER) {
+            return num
+          }
+        }
+        return id
+      })
+    }
+
+    this.build = m[5] ? m[5].split('.') : []
+    this.format()
+  }
+
+  format () {
+    this.version = `${this.major}.${this.minor}.${this.patch}`
+    if (this.prerelease.length) {
+      this.version += `-${this.prerelease.join('.')}`
+    }
+    return this.version
+  }
+
+  toString () {
+    return this.version
+  }
+
+  compare (other) {
+    debug('SemVer.compare', this.version, this.options, other)
+    if (!(other instanceof SemVer)) {
+      if (typeof other === 'string' && other === this.version) {
+        return 0
+      }
+      other = new SemVer(other, this.options)
+    }
+
+    if (other.version === this.version) {
+      return 0
+    }
+
+    return this.compareMain(other) || this.comparePre(other)
+  }
+
+  compareMain (other) {
+    if (!(other instanceof SemVer)) {
+      other = new SemVer(other, this.options)
+    }
+
+    return (
+      compareIdentifiers(this.major, other.major) ||
+      compareIdentifiers(this.minor, other.minor) ||
+      compareIdentifiers(this.patch, other.patch)
+    )
+  }
+
+  comparePre (other) {
+    if (!(other instanceof SemVer)) {
+      other = new SemVer(other, this.options)
+    }
+
+    // NOT having a prerelease is > having one
+    if (this.prerelease.length && !other.prerelease.length) {
+      return -1
+    } else if (!this.prerelease.length && other.prerelease.length) {
+      return 1
+    } else if (!this.prerelease.length && !other.prerelease.length) {
+      return 0
+    }
+
+    let i = 0
+    do {
+      const a = this.prerelease[i]
+      const b = other.prerelease[i]
+      debug('prerelease compare', i, a, b)
+      if (a === undefined && b === undefined) {
+        return 0
+      } else if (b === undefined) {
+        return 1
+      } else if (a === undefined) {
+        return -1
+      } else if (a === b) {
+        continue
+      } else {
+        return compareIdentifiers(a, b)
+      }
+    } while (++i)
+  }
+
+  compareBuild (other) {
+    if (!(other instanceof SemVer)) {
+      other = new SemVer(other, this.options)
+    }
+
+    let i = 0
+    do {
+      const a = this.build[i]
+      const b = other.build[i]
+      debug('build compare', i, a, b)
+      if (a === undefined && b === undefined) {
+        return 0
+      } else if (b === undefined) {
+        return 1
+      } else if (a === undefined) {
+        return -1
+      } else if (a === b) {
+        continue
+      } else {
+        return compareIdentifiers(a, b)
+      }
+    } while (++i)
+  }
+
+  // preminor will bump the version up to the next minor release, and immediately
+  // down to pre-release. premajor and prepatch work the same way.
+  inc (release, identifier, identifierBase) {
+    if (release.startsWith('pre')) {
+      if (!identifier && identifierBase === false) {
+        throw new Error('invalid increment argument: identifier is empty')
+      }
+      // Avoid an invalid semver results
+      if (identifier) {
+        const match = `-${identifier}`.match(this.options.loose ? re[t.PRERELEASELOOSE] : re[t.PRERELEASE])
+        if (!match || match[1] !== identifier) {
+          throw new Error(`invalid identifier: ${identifier}`)
+        }
+      }
+    }
+
+    switch (release) {
+      case 'premajor':
+        this.prerelease.length = 0
+        this.patch = 0
+        this.minor = 0
+        this.major++
+        this.inc('pre', identifier, identifierBase)
+        break
+      case 'preminor':
+        this.prerelease.length = 0
+        this.patch = 0
+        this.minor++
+        this.inc('pre', identifier, identifierBase)
+        break
+      case 'prepatch':
+        // If this is already a prerelease, it will bump to the next version
+        // drop any prereleases that might already exist, since they are not
+        // relevant at this point.
+        this.prerelease.length = 0
+        this.inc('patch', identifier, identifierBase)
+        this.inc('pre', identifier, identifierBase)
+        break
+      // If the input is a non-prerelease version, this acts the same as
+      // prepatch.
+      case 'prerelease':
+        if (this.prerelease.length === 0) {
+          this.inc('patch', identifier, identifierBase)
+        }
+        this.inc('pre', identifier, identifierBase)
+        break
+      case 'release':
+        if (this.prerelease.length === 0) {
+          throw new Error(`version ${this.raw} is not a prerelease`)
+        }
+        this.prerelease.length = 0
+        break
+
+      case 'major':
+        // If this is a pre-major version, bump up to the same major version.
+        // Otherwise increment major.
+        // 1.0.0-5 bumps to 1.0.0
+        // 1.1.0 bumps to 2.0.0
+        if (
+          this.minor !== 0 ||
+          this.patch !== 0 ||
+          this.prerelease.length === 0
+        ) {
+          this.major++
+        }
+        this.minor = 0
+        this.patch = 0
+        this.prerelease = []
+        break
+      case 'minor':
+        // If this is a pre-minor version, bump up to the same minor version.
+        // Otherwise increment minor.
+        // 1.2.0-5 bumps to 1.2.0
+        // 1.2.1 bumps to 1.3.0
+        if (this.patch !== 0 || this.prerelease.length === 0) {
+          this.minor++
+        }
+        this.patch = 0
+        this.prerelease = []
+        break
+      case 'patch':
+        // If this is not a pre-release version, it will increment the patch.
+        // If it is a pre-release it will bump up to the same patch version.
+        // 1.2.0-5 patches to 1.2.0
+        // 1.2.0 patches to 1.2.1
+        if (this.prerelease.length === 0) {
+          this.patch++
+        }
+        this.prerelease = []
+        break
+      // This probably shouldn't be used publicly.
+      // 1.0.0 'pre' would become 1.0.0-0 which is the wrong direction.
+      case 'pre': {
+        const base = Number(identifierBase) ? 1 : 0
+
+        if (this.prerelease.length === 0) {
+          this.prerelease = [base]
+        } else {
+          let i = this.prerelease.length
+          while (--i >= 0) {
+            if (typeof this.prerelease[i] === 'number') {
+              this.prerelease[i]++
+              i = -2
+            }
+          }
+          if (i === -1) {
+            // didn't increment anything
+            if (identifier === this.prerelease.join('.') && identifierBase === false) {
+              throw new Error('invalid increment argument: identifier already exists')
+            }
+            this.prerelease.push(base)
+          }
+        }
+        if (identifier) {
+          // 1.2.0-beta.1 bumps to 1.2.0-beta.2,
+          // 1.2.0-beta.fooblz or 1.2.0-beta bumps to 1.2.0-beta.0
+          let prerelease = [identifier, base]
+          if (identifierBase === false) {
+            prerelease = [identifier]
+          }
+          if (compareIdentifiers(this.prerelease[0], identifier) === 0) {
+            if (isNaN(this.prerelease[1])) {
+              this.prerelease = prerelease
+            }
+          } else {
+            this.prerelease = prerelease
+          }
+        }
+        break
+      }
+      default:
+        throw new Error(`invalid increment argument: ${release}`)
+    }
+    this.raw = this.format()
+    if (this.build.length) {
+      this.raw += `+${this.build.join('.')}`
+    }
+    return this
+  }
+}
+
+module.exports = SemVer
+
+
+/***/ }),
+
+/***/ 1799:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const parse = __nccwpck_require__(6353)
+const clean = (version, options) => {
+  const s = parse(version.trim().replace(/^[=v]+/, ''), options)
+  return s ? s.version : null
+}
+module.exports = clean
+
+
+/***/ }),
+
+/***/ 8646:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const eq = __nccwpck_require__(5082)
+const neq = __nccwpck_require__(4974)
+const gt = __nccwpck_require__(6599)
+const gte = __nccwpck_require__(1236)
+const lt = __nccwpck_require__(3872)
+const lte = __nccwpck_require__(6717)
+
+const cmp = (a, op, b, loose) => {
+  switch (op) {
+    case '===':
+      if (typeof a === 'object') {
+        a = a.version
+      }
+      if (typeof b === 'object') {
+        b = b.version
+      }
+      return a === b
+
+    case '!==':
+      if (typeof a === 'object') {
+        a = a.version
+      }
+      if (typeof b === 'object') {
+        b = b.version
+      }
+      return a !== b
+
+    case '':
+    case '=':
+    case '==':
+      return eq(a, b, loose)
+
+    case '!=':
+      return neq(a, b, loose)
+
+    case '>':
+      return gt(a, b, loose)
+
+    case '>=':
+      return gte(a, b, loose)
+
+    case '<':
+      return lt(a, b, loose)
+
+    case '<=':
+      return lte(a, b, loose)
+
+    default:
+      throw new TypeError(`Invalid operator: ${op}`)
+  }
+}
+module.exports = cmp
+
+
+/***/ }),
+
+/***/ 5385:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const SemVer = __nccwpck_require__(7163)
+const parse = __nccwpck_require__(6353)
+const { safeRe: re, t } = __nccwpck_require__(5471)
+
+const coerce = (version, options) => {
+  if (version instanceof SemVer) {
+    return version
+  }
+
+  if (typeof version === 'number') {
+    version = String(version)
+  }
+
+  if (typeof version !== 'string') {
+    return null
+  }
+
+  options = options || {}
+
+  let match = null
+  if (!options.rtl) {
+    match = version.match(options.includePrerelease ? re[t.COERCEFULL] : re[t.COERCE])
+  } else {
+    // Find the right-most coercible string that does not share
+    // a terminus with a more left-ward coercible string.
+    // Eg, '1.2.3.4' wants to coerce '2.3.4', not '3.4' or '4'
+    // With includePrerelease option set, '1.2.3.4-rc' wants to coerce '2.3.4-rc', not '2.3.4'
+    //
+    // Walk through the string checking with a /g regexp
+    // Manually set the index so as to pick up overlapping matches.
+    // Stop when we get a match that ends at the string end, since no
+    // coercible string can be more right-ward without the same terminus.
+    const coerceRtlRegex = options.includePrerelease ? re[t.COERCERTLFULL] : re[t.COERCERTL]
+    let next
+    while ((next = coerceRtlRegex.exec(version)) &&
+        (!match || match.index + match[0].length !== version.length)
+    ) {
+      if (!match ||
+            next.index + next[0].length !== match.index + match[0].length) {
+        match = next
+      }
+      coerceRtlRegex.lastIndex = next.index + next[1].length + next[2].length
+    }
+    // leave it in a clean state
+    coerceRtlRegex.lastIndex = -1
+  }
+
+  if (match === null) {
+    return null
+  }
+
+  const major = match[2]
+  const minor = match[3] || '0'
+  const patch = match[4] || '0'
+  const prerelease = options.includePrerelease && match[5] ? `-${match[5]}` : ''
+  const build = options.includePrerelease && match[6] ? `+${match[6]}` : ''
+
+  return parse(`${major}.${minor}.${patch}${prerelease}${build}`, options)
+}
+module.exports = coerce
+
+
+/***/ }),
+
+/***/ 7648:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const SemVer = __nccwpck_require__(7163)
+const compareBuild = (a, b, loose) => {
+  const versionA = new SemVer(a, loose)
+  const versionB = new SemVer(b, loose)
+  return versionA.compare(versionB) || versionA.compareBuild(versionB)
+}
+module.exports = compareBuild
+
+
+/***/ }),
+
+/***/ 6874:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const compare = __nccwpck_require__(8469)
+const compareLoose = (a, b) => compare(a, b, true)
+module.exports = compareLoose
+
+
+/***/ }),
+
+/***/ 8469:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const SemVer = __nccwpck_require__(7163)
+const compare = (a, b, loose) =>
+  new SemVer(a, loose).compare(new SemVer(b, loose))
+
+module.exports = compare
+
+
+/***/ }),
+
+/***/ 711:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const parse = __nccwpck_require__(6353)
+
+const diff = (version1, version2) => {
+  const v1 = parse(version1, null, true)
+  const v2 = parse(version2, null, true)
+  const comparison = v1.compare(v2)
+
+  if (comparison === 0) {
+    return null
+  }
+
+  const v1Higher = comparison > 0
+  const highVersion = v1Higher ? v1 : v2
+  const lowVersion = v1Higher ? v2 : v1
+  const highHasPre = !!highVersion.prerelease.length
+  const lowHasPre = !!lowVersion.prerelease.length
+
+  if (lowHasPre && !highHasPre) {
+    // Going from prerelease -> no prerelease requires some special casing
+
+    // If the low version has only a major, then it will always be a major
+    // Some examples:
+    // 1.0.0-1 -> 1.0.0
+    // 1.0.0-1 -> 1.1.1
+    // 1.0.0-1 -> 2.0.0
+    if (!lowVersion.patch && !lowVersion.minor) {
+      return 'major'
+    }
+
+    // If the main part has no difference
+    if (lowVersion.compareMain(highVersion) === 0) {
+      if (lowVersion.minor && !lowVersion.patch) {
+        return 'minor'
+      }
+      return 'patch'
+    }
+  }
+
+  // add the `pre` prefix if we are going to a prerelease version
+  const prefix = highHasPre ? 'pre' : ''
+
+  if (v1.major !== v2.major) {
+    return prefix + 'major'
+  }
+
+  if (v1.minor !== v2.minor) {
+    return prefix + 'minor'
+  }
+
+  if (v1.patch !== v2.patch) {
+    return prefix + 'patch'
+  }
+
+  // high and low are preleases
+  return 'prerelease'
+}
+
+module.exports = diff
+
+
+/***/ }),
+
+/***/ 5082:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const compare = __nccwpck_require__(8469)
+const eq = (a, b, loose) => compare(a, b, loose) === 0
+module.exports = eq
+
+
+/***/ }),
+
+/***/ 6599:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const compare = __nccwpck_require__(8469)
+const gt = (a, b, loose) => compare(a, b, loose) > 0
+module.exports = gt
+
+
+/***/ }),
+
+/***/ 1236:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const compare = __nccwpck_require__(8469)
+const gte = (a, b, loose) => compare(a, b, loose) >= 0
+module.exports = gte
+
+
+/***/ }),
+
+/***/ 2338:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const SemVer = __nccwpck_require__(7163)
+
+const inc = (version, release, options, identifier, identifierBase) => {
+  if (typeof (options) === 'string') {
+    identifierBase = identifier
+    identifier = options
+    options = undefined
+  }
+
+  try {
+    return new SemVer(
+      version instanceof SemVer ? version.version : version,
+      options
+    ).inc(release, identifier, identifierBase).version
+  } catch (er) {
+    return null
+  }
+}
+module.exports = inc
+
+
+/***/ }),
+
+/***/ 3872:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const compare = __nccwpck_require__(8469)
+const lt = (a, b, loose) => compare(a, b, loose) < 0
+module.exports = lt
+
+
+/***/ }),
+
+/***/ 6717:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const compare = __nccwpck_require__(8469)
+const lte = (a, b, loose) => compare(a, b, loose) <= 0
+module.exports = lte
+
+
+/***/ }),
+
+/***/ 8511:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const SemVer = __nccwpck_require__(7163)
+const major = (a, loose) => new SemVer(a, loose).major
+module.exports = major
+
+
+/***/ }),
+
+/***/ 2603:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const SemVer = __nccwpck_require__(7163)
+const minor = (a, loose) => new SemVer(a, loose).minor
+module.exports = minor
+
+
+/***/ }),
+
+/***/ 4974:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const compare = __nccwpck_require__(8469)
+const neq = (a, b, loose) => compare(a, b, loose) !== 0
+module.exports = neq
+
+
+/***/ }),
+
+/***/ 6353:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const SemVer = __nccwpck_require__(7163)
+const parse = (version, options, throwErrors = false) => {
+  if (version instanceof SemVer) {
+    return version
+  }
+  try {
+    return new SemVer(version, options)
+  } catch (er) {
+    if (!throwErrors) {
+      return null
+    }
+    throw er
+  }
+}
+
+module.exports = parse
+
+
+/***/ }),
+
+/***/ 8756:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const SemVer = __nccwpck_require__(7163)
+const patch = (a, loose) => new SemVer(a, loose).patch
+module.exports = patch
+
+
+/***/ }),
+
+/***/ 5714:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const parse = __nccwpck_require__(6353)
+const prerelease = (version, options) => {
+  const parsed = parse(version, options)
+  return (parsed && parsed.prerelease.length) ? parsed.prerelease : null
+}
+module.exports = prerelease
+
+
+/***/ }),
+
+/***/ 2173:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const compare = __nccwpck_require__(8469)
+const rcompare = (a, b, loose) => compare(b, a, loose)
+module.exports = rcompare
+
+
+/***/ }),
+
+/***/ 7192:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const compareBuild = __nccwpck_require__(7648)
+const rsort = (list, loose) => list.sort((a, b) => compareBuild(b, a, loose))
+module.exports = rsort
+
+
+/***/ }),
+
+/***/ 8011:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const Range = __nccwpck_require__(6782)
+const satisfies = (version, range, options) => {
   try {
     range = new Range(range, options)
   } catch (er) {
@@ -43901,17 +42474,606 @@ function satisfies (version, range, options) {
   }
   return range.test(version)
 }
+module.exports = satisfies
 
-exports.maxSatisfying = maxSatisfying
-function maxSatisfying (versions, range, options) {
-  var max = null
-  var maxSV = null
+
+/***/ }),
+
+/***/ 9872:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const compareBuild = __nccwpck_require__(7648)
+const sort = (list, loose) => list.sort((a, b) => compareBuild(a, b, loose))
+module.exports = sort
+
+
+/***/ }),
+
+/***/ 8780:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const parse = __nccwpck_require__(6353)
+const valid = (version, options) => {
+  const v = parse(version, options)
+  return v ? v.version : null
+}
+module.exports = valid
+
+
+/***/ }),
+
+/***/ 2088:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+// just pre-load all the stuff that index.js lazily exports
+const internalRe = __nccwpck_require__(5471)
+const constants = __nccwpck_require__(5101)
+const SemVer = __nccwpck_require__(7163)
+const identifiers = __nccwpck_require__(3348)
+const parse = __nccwpck_require__(6353)
+const valid = __nccwpck_require__(8780)
+const clean = __nccwpck_require__(1799)
+const inc = __nccwpck_require__(2338)
+const diff = __nccwpck_require__(711)
+const major = __nccwpck_require__(8511)
+const minor = __nccwpck_require__(2603)
+const patch = __nccwpck_require__(8756)
+const prerelease = __nccwpck_require__(5714)
+const compare = __nccwpck_require__(8469)
+const rcompare = __nccwpck_require__(2173)
+const compareLoose = __nccwpck_require__(6874)
+const compareBuild = __nccwpck_require__(7648)
+const sort = __nccwpck_require__(9872)
+const rsort = __nccwpck_require__(7192)
+const gt = __nccwpck_require__(6599)
+const lt = __nccwpck_require__(3872)
+const eq = __nccwpck_require__(5082)
+const neq = __nccwpck_require__(4974)
+const gte = __nccwpck_require__(1236)
+const lte = __nccwpck_require__(6717)
+const cmp = __nccwpck_require__(8646)
+const coerce = __nccwpck_require__(5385)
+const Comparator = __nccwpck_require__(9379)
+const Range = __nccwpck_require__(6782)
+const satisfies = __nccwpck_require__(8011)
+const toComparators = __nccwpck_require__(4750)
+const maxSatisfying = __nccwpck_require__(5574)
+const minSatisfying = __nccwpck_require__(8595)
+const minVersion = __nccwpck_require__(1866)
+const validRange = __nccwpck_require__(4737)
+const outside = __nccwpck_require__(280)
+const gtr = __nccwpck_require__(2276)
+const ltr = __nccwpck_require__(5213)
+const intersects = __nccwpck_require__(3465)
+const simplifyRange = __nccwpck_require__(2028)
+const subset = __nccwpck_require__(1489)
+module.exports = {
+  parse,
+  valid,
+  clean,
+  inc,
+  diff,
+  major,
+  minor,
+  patch,
+  prerelease,
+  compare,
+  rcompare,
+  compareLoose,
+  compareBuild,
+  sort,
+  rsort,
+  gt,
+  lt,
+  eq,
+  neq,
+  gte,
+  lte,
+  cmp,
+  coerce,
+  Comparator,
+  Range,
+  satisfies,
+  toComparators,
+  maxSatisfying,
+  minSatisfying,
+  minVersion,
+  validRange,
+  outside,
+  gtr,
+  ltr,
+  intersects,
+  simplifyRange,
+  subset,
+  SemVer,
+  re: internalRe.re,
+  src: internalRe.src,
+  tokens: internalRe.t,
+  SEMVER_SPEC_VERSION: constants.SEMVER_SPEC_VERSION,
+  RELEASE_TYPES: constants.RELEASE_TYPES,
+  compareIdentifiers: identifiers.compareIdentifiers,
+  rcompareIdentifiers: identifiers.rcompareIdentifiers,
+}
+
+
+/***/ }),
+
+/***/ 5101:
+/***/ ((module) => {
+
+"use strict";
+
+
+// Note: this is the semver.org version of the spec that it implements
+// Not necessarily the package version of this code.
+const SEMVER_SPEC_VERSION = '2.0.0'
+
+const MAX_LENGTH = 256
+const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER ||
+/* istanbul ignore next */ 9007199254740991
+
+// Max safe segment length for coercion.
+const MAX_SAFE_COMPONENT_LENGTH = 16
+
+// Max safe length for a build identifier. The max length minus 6 characters for
+// the shortest version with a build 0.0.0+BUILD.
+const MAX_SAFE_BUILD_LENGTH = MAX_LENGTH - 6
+
+const RELEASE_TYPES = [
+  'major',
+  'premajor',
+  'minor',
+  'preminor',
+  'patch',
+  'prepatch',
+  'prerelease',
+]
+
+module.exports = {
+  MAX_LENGTH,
+  MAX_SAFE_COMPONENT_LENGTH,
+  MAX_SAFE_BUILD_LENGTH,
+  MAX_SAFE_INTEGER,
+  RELEASE_TYPES,
+  SEMVER_SPEC_VERSION,
+  FLAG_INCLUDE_PRERELEASE: 0b001,
+  FLAG_LOOSE: 0b010,
+}
+
+
+/***/ }),
+
+/***/ 1159:
+/***/ ((module) => {
+
+"use strict";
+
+
+const debug = (
+  typeof process === 'object' &&
+  process.env &&
+  process.env.NODE_DEBUG &&
+  /\bsemver\b/i.test(process.env.NODE_DEBUG)
+) ? (...args) => console.error('SEMVER', ...args)
+  : () => {}
+
+module.exports = debug
+
+
+/***/ }),
+
+/***/ 3348:
+/***/ ((module) => {
+
+"use strict";
+
+
+const numeric = /^[0-9]+$/
+const compareIdentifiers = (a, b) => {
+  const anum = numeric.test(a)
+  const bnum = numeric.test(b)
+
+  if (anum && bnum) {
+    a = +a
+    b = +b
+  }
+
+  return a === b ? 0
+    : (anum && !bnum) ? -1
+    : (bnum && !anum) ? 1
+    : a < b ? -1
+    : 1
+}
+
+const rcompareIdentifiers = (a, b) => compareIdentifiers(b, a)
+
+module.exports = {
+  compareIdentifiers,
+  rcompareIdentifiers,
+}
+
+
+/***/ }),
+
+/***/ 1383:
+/***/ ((module) => {
+
+"use strict";
+
+
+class LRUCache {
+  constructor () {
+    this.max = 1000
+    this.map = new Map()
+  }
+
+  get (key) {
+    const value = this.map.get(key)
+    if (value === undefined) {
+      return undefined
+    } else {
+      // Remove the key from the map and add it to the end
+      this.map.delete(key)
+      this.map.set(key, value)
+      return value
+    }
+  }
+
+  delete (key) {
+    return this.map.delete(key)
+  }
+
+  set (key, value) {
+    const deleted = this.delete(key)
+
+    if (!deleted && value !== undefined) {
+      // If cache is full, delete the least recently used item
+      if (this.map.size >= this.max) {
+        const firstKey = this.map.keys().next().value
+        this.delete(firstKey)
+      }
+
+      this.map.set(key, value)
+    }
+
+    return this
+  }
+}
+
+module.exports = LRUCache
+
+
+/***/ }),
+
+/***/ 356:
+/***/ ((module) => {
+
+"use strict";
+
+
+// parse out just the options we care about
+const looseOption = Object.freeze({ loose: true })
+const emptyOpts = Object.freeze({ })
+const parseOptions = options => {
+  if (!options) {
+    return emptyOpts
+  }
+
+  if (typeof options !== 'object') {
+    return looseOption
+  }
+
+  return options
+}
+module.exports = parseOptions
+
+
+/***/ }),
+
+/***/ 5471:
+/***/ ((module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const {
+  MAX_SAFE_COMPONENT_LENGTH,
+  MAX_SAFE_BUILD_LENGTH,
+  MAX_LENGTH,
+} = __nccwpck_require__(5101)
+const debug = __nccwpck_require__(1159)
+exports = module.exports = {}
+
+// The actual regexps go on exports.re
+const re = exports.re = []
+const safeRe = exports.safeRe = []
+const src = exports.src = []
+const safeSrc = exports.safeSrc = []
+const t = exports.t = {}
+let R = 0
+
+const LETTERDASHNUMBER = '[a-zA-Z0-9-]'
+
+// Replace some greedy regex tokens to prevent regex dos issues. These regex are
+// used internally via the safeRe object since all inputs in this library get
+// normalized first to trim and collapse all extra whitespace. The original
+// regexes are exported for userland consumption and lower level usage. A
+// future breaking change could export the safer regex only with a note that
+// all input should have extra whitespace removed.
+const safeRegexReplacements = [
+  ['\\s', 1],
+  ['\\d', MAX_LENGTH],
+  [LETTERDASHNUMBER, MAX_SAFE_BUILD_LENGTH],
+]
+
+const makeSafeRegex = (value) => {
+  for (const [token, max] of safeRegexReplacements) {
+    value = value
+      .split(`${token}*`).join(`${token}{0,${max}}`)
+      .split(`${token}+`).join(`${token}{1,${max}}`)
+  }
+  return value
+}
+
+const createToken = (name, value, isGlobal) => {
+  const safe = makeSafeRegex(value)
+  const index = R++
+  debug(name, index, value)
+  t[name] = index
+  src[index] = value
+  safeSrc[index] = safe
+  re[index] = new RegExp(value, isGlobal ? 'g' : undefined)
+  safeRe[index] = new RegExp(safe, isGlobal ? 'g' : undefined)
+}
+
+// The following Regular Expressions can be used for tokenizing,
+// validating, and parsing SemVer version strings.
+
+// ## Numeric Identifier
+// A single `0`, or a non-zero digit followed by zero or more digits.
+
+createToken('NUMERICIDENTIFIER', '0|[1-9]\\d*')
+createToken('NUMERICIDENTIFIERLOOSE', '\\d+')
+
+// ## Non-numeric Identifier
+// Zero or more digits, followed by a letter or hyphen, and then zero or
+// more letters, digits, or hyphens.
+
+createToken('NONNUMERICIDENTIFIER', `\\d*[a-zA-Z-]${LETTERDASHNUMBER}*`)
+
+// ## Main Version
+// Three dot-separated numeric identifiers.
+
+createToken('MAINVERSION', `(${src[t.NUMERICIDENTIFIER]})\\.` +
+                   `(${src[t.NUMERICIDENTIFIER]})\\.` +
+                   `(${src[t.NUMERICIDENTIFIER]})`)
+
+createToken('MAINVERSIONLOOSE', `(${src[t.NUMERICIDENTIFIERLOOSE]})\\.` +
+                        `(${src[t.NUMERICIDENTIFIERLOOSE]})\\.` +
+                        `(${src[t.NUMERICIDENTIFIERLOOSE]})`)
+
+// ## Pre-release Version Identifier
+// A numeric identifier, or a non-numeric identifier.
+// Non-numberic identifiers include numberic identifiers but can be longer.
+// Therefore non-numberic identifiers must go first.
+
+createToken('PRERELEASEIDENTIFIER', `(?:${src[t.NONNUMERICIDENTIFIER]
+}|${src[t.NUMERICIDENTIFIER]})`)
+
+createToken('PRERELEASEIDENTIFIERLOOSE', `(?:${src[t.NONNUMERICIDENTIFIER]
+}|${src[t.NUMERICIDENTIFIERLOOSE]})`)
+
+// ## Pre-release Version
+// Hyphen, followed by one or more dot-separated pre-release version
+// identifiers.
+
+createToken('PRERELEASE', `(?:-(${src[t.PRERELEASEIDENTIFIER]
+}(?:\\.${src[t.PRERELEASEIDENTIFIER]})*))`)
+
+createToken('PRERELEASELOOSE', `(?:-?(${src[t.PRERELEASEIDENTIFIERLOOSE]
+}(?:\\.${src[t.PRERELEASEIDENTIFIERLOOSE]})*))`)
+
+// ## Build Metadata Identifier
+// Any combination of digits, letters, or hyphens.
+
+createToken('BUILDIDENTIFIER', `${LETTERDASHNUMBER}+`)
+
+// ## Build Metadata
+// Plus sign, followed by one or more period-separated build metadata
+// identifiers.
+
+createToken('BUILD', `(?:\\+(${src[t.BUILDIDENTIFIER]
+}(?:\\.${src[t.BUILDIDENTIFIER]})*))`)
+
+// ## Full Version String
+// A main version, followed optionally by a pre-release version and
+// build metadata.
+
+// Note that the only major, minor, patch, and pre-release sections of
+// the version string are capturing groups.  The build metadata is not a
+// capturing group, because it should not ever be used in version
+// comparison.
+
+createToken('FULLPLAIN', `v?${src[t.MAINVERSION]
+}${src[t.PRERELEASE]}?${
+  src[t.BUILD]}?`)
+
+createToken('FULL', `^${src[t.FULLPLAIN]}$`)
+
+// like full, but allows v1.2.3 and =1.2.3, which people do sometimes.
+// also, 1.0.0alpha1 (prerelease without the hyphen) which is pretty
+// common in the npm registry.
+createToken('LOOSEPLAIN', `[v=\\s]*${src[t.MAINVERSIONLOOSE]
+}${src[t.PRERELEASELOOSE]}?${
+  src[t.BUILD]}?`)
+
+createToken('LOOSE', `^${src[t.LOOSEPLAIN]}$`)
+
+createToken('GTLT', '((?:<|>)?=?)')
+
+// Something like "2.*" or "1.2.x".
+// Note that "x.x" is a valid xRange identifer, meaning "any version"
+// Only the first item is strictly required.
+createToken('XRANGEIDENTIFIERLOOSE', `${src[t.NUMERICIDENTIFIERLOOSE]}|x|X|\\*`)
+createToken('XRANGEIDENTIFIER', `${src[t.NUMERICIDENTIFIER]}|x|X|\\*`)
+
+createToken('XRANGEPLAIN', `[v=\\s]*(${src[t.XRANGEIDENTIFIER]})` +
+                   `(?:\\.(${src[t.XRANGEIDENTIFIER]})` +
+                   `(?:\\.(${src[t.XRANGEIDENTIFIER]})` +
+                   `(?:${src[t.PRERELEASE]})?${
+                     src[t.BUILD]}?` +
+                   `)?)?`)
+
+createToken('XRANGEPLAINLOOSE', `[v=\\s]*(${src[t.XRANGEIDENTIFIERLOOSE]})` +
+                        `(?:\\.(${src[t.XRANGEIDENTIFIERLOOSE]})` +
+                        `(?:\\.(${src[t.XRANGEIDENTIFIERLOOSE]})` +
+                        `(?:${src[t.PRERELEASELOOSE]})?${
+                          src[t.BUILD]}?` +
+                        `)?)?`)
+
+createToken('XRANGE', `^${src[t.GTLT]}\\s*${src[t.XRANGEPLAIN]}$`)
+createToken('XRANGELOOSE', `^${src[t.GTLT]}\\s*${src[t.XRANGEPLAINLOOSE]}$`)
+
+// Coercion.
+// Extract anything that could conceivably be a part of a valid semver
+createToken('COERCEPLAIN', `${'(^|[^\\d])' +
+              '(\\d{1,'}${MAX_SAFE_COMPONENT_LENGTH}})` +
+              `(?:\\.(\\d{1,${MAX_SAFE_COMPONENT_LENGTH}}))?` +
+              `(?:\\.(\\d{1,${MAX_SAFE_COMPONENT_LENGTH}}))?`)
+createToken('COERCE', `${src[t.COERCEPLAIN]}(?:$|[^\\d])`)
+createToken('COERCEFULL', src[t.COERCEPLAIN] +
+              `(?:${src[t.PRERELEASE]})?` +
+              `(?:${src[t.BUILD]})?` +
+              `(?:$|[^\\d])`)
+createToken('COERCERTL', src[t.COERCE], true)
+createToken('COERCERTLFULL', src[t.COERCEFULL], true)
+
+// Tilde ranges.
+// Meaning is "reasonably at or greater than"
+createToken('LONETILDE', '(?:~>?)')
+
+createToken('TILDETRIM', `(\\s*)${src[t.LONETILDE]}\\s+`, true)
+exports.tildeTrimReplace = '$1~'
+
+createToken('TILDE', `^${src[t.LONETILDE]}${src[t.XRANGEPLAIN]}$`)
+createToken('TILDELOOSE', `^${src[t.LONETILDE]}${src[t.XRANGEPLAINLOOSE]}$`)
+
+// Caret ranges.
+// Meaning is "at least and backwards compatible with"
+createToken('LONECARET', '(?:\\^)')
+
+createToken('CARETTRIM', `(\\s*)${src[t.LONECARET]}\\s+`, true)
+exports.caretTrimReplace = '$1^'
+
+createToken('CARET', `^${src[t.LONECARET]}${src[t.XRANGEPLAIN]}$`)
+createToken('CARETLOOSE', `^${src[t.LONECARET]}${src[t.XRANGEPLAINLOOSE]}$`)
+
+// A simple gt/lt/eq thing, or just "" to indicate "any version"
+createToken('COMPARATORLOOSE', `^${src[t.GTLT]}\\s*(${src[t.LOOSEPLAIN]})$|^$`)
+createToken('COMPARATOR', `^${src[t.GTLT]}\\s*(${src[t.FULLPLAIN]})$|^$`)
+
+// An expression to strip any whitespace between the gtlt and the thing
+// it modifies, so that `> 1.2.3` ==> `>1.2.3`
+createToken('COMPARATORTRIM', `(\\s*)${src[t.GTLT]
+}\\s*(${src[t.LOOSEPLAIN]}|${src[t.XRANGEPLAIN]})`, true)
+exports.comparatorTrimReplace = '$1$2$3'
+
+// Something like `1.2.3 - 1.2.4`
+// Note that these all use the loose form, because they'll be
+// checked against either the strict or loose comparator form
+// later.
+createToken('HYPHENRANGE', `^\\s*(${src[t.XRANGEPLAIN]})` +
+                   `\\s+-\\s+` +
+                   `(${src[t.XRANGEPLAIN]})` +
+                   `\\s*$`)
+
+createToken('HYPHENRANGELOOSE', `^\\s*(${src[t.XRANGEPLAINLOOSE]})` +
+                        `\\s+-\\s+` +
+                        `(${src[t.XRANGEPLAINLOOSE]})` +
+                        `\\s*$`)
+
+// Star ranges basically just allow anything at all.
+createToken('STAR', '(<|>)?=?\\s*\\*')
+// >=0.0.0 is like a star
+createToken('GTE0', '^\\s*>=\\s*0\\.0\\.0\\s*$')
+createToken('GTE0PRE', '^\\s*>=\\s*0\\.0\\.0-0\\s*$')
+
+
+/***/ }),
+
+/***/ 2276:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+// Determine if version is greater than all the versions possible in the range.
+const outside = __nccwpck_require__(280)
+const gtr = (version, range, options) => outside(version, range, '>', options)
+module.exports = gtr
+
+
+/***/ }),
+
+/***/ 3465:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const Range = __nccwpck_require__(6782)
+const intersects = (r1, r2, options) => {
+  r1 = new Range(r1, options)
+  r2 = new Range(r2, options)
+  return r1.intersects(r2, options)
+}
+module.exports = intersects
+
+
+/***/ }),
+
+/***/ 5213:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const outside = __nccwpck_require__(280)
+// Determine if version is less than all the versions possible in the range
+const ltr = (version, range, options) => outside(version, range, '<', options)
+module.exports = ltr
+
+
+/***/ }),
+
+/***/ 5574:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const SemVer = __nccwpck_require__(7163)
+const Range = __nccwpck_require__(6782)
+
+const maxSatisfying = (versions, range, options) => {
+  let max = null
+  let maxSV = null
+  let rangeObj = null
   try {
-    var rangeObj = new Range(range, options)
+    rangeObj = new Range(range, options)
   } catch (er) {
     return null
   }
-  versions.forEach(function (v) {
+  versions.forEach((v) => {
     if (rangeObj.test(v)) {
       // satisfies(v, range, options)
       if (!max || maxSV.compare(v) === -1) {
@@ -43923,17 +43085,29 @@ function maxSatisfying (versions, range, options) {
   })
   return max
 }
+module.exports = maxSatisfying
 
-exports.minSatisfying = minSatisfying
-function minSatisfying (versions, range, options) {
-  var min = null
-  var minSV = null
+
+/***/ }),
+
+/***/ 8595:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const SemVer = __nccwpck_require__(7163)
+const Range = __nccwpck_require__(6782)
+const minSatisfying = (versions, range, options) => {
+  let min = null
+  let minSV = null
+  let rangeObj = null
   try {
-    var rangeObj = new Range(range, options)
+    rangeObj = new Range(range, options)
   } catch (er) {
     return null
   }
-  versions.forEach(function (v) {
+  versions.forEach((v) => {
     if (rangeObj.test(v)) {
       // satisfies(v, range, options)
       if (!min || minSV.compare(v) === 1) {
@@ -43945,12 +43119,25 @@ function minSatisfying (versions, range, options) {
   })
   return min
 }
+module.exports = minSatisfying
 
-exports.minVersion = minVersion
-function minVersion (range, loose) {
+
+/***/ }),
+
+/***/ 1866:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const SemVer = __nccwpck_require__(7163)
+const Range = __nccwpck_require__(6782)
+const gt = __nccwpck_require__(6599)
+
+const minVersion = (range, loose) => {
   range = new Range(range, loose)
 
-  var minver = new SemVer('0.0.0')
+  let minver = new SemVer('0.0.0')
   if (range.test(minver)) {
     return minver
   }
@@ -43961,12 +43148,13 @@ function minVersion (range, loose) {
   }
 
   minver = null
-  for (var i = 0; i < range.set.length; ++i) {
-    var comparators = range.set[i]
+  for (let i = 0; i < range.set.length; ++i) {
+    const comparators = range.set[i]
 
-    comparators.forEach(function (comparator) {
+    let setMin = null
+    comparators.forEach((comparator) => {
       // Clone to avoid manipulating the comparator's semver object.
-      var compver = new SemVer(comparator.semver.version)
+      const compver = new SemVer(comparator.semver.version)
       switch (comparator.operator) {
         case '>':
           if (compver.prerelease.length === 0) {
@@ -43978,8 +43166,8 @@ function minVersion (range, loose) {
           /* fallthrough */
         case '':
         case '>=':
-          if (!minver || gt(minver, compver)) {
-            minver = compver
+          if (!setMin || gt(compver, setMin)) {
+            setMin = compver
           }
           break
         case '<':
@@ -43988,9 +43176,12 @@ function minVersion (range, loose) {
           break
         /* istanbul ignore next */
         default:
-          throw new Error('Unexpected operation: ' + comparator.operator)
+          throw new Error(`Unexpected operation: ${comparator.operator}`)
       }
     })
+    if (setMin && (!minver || gt(minver, setMin))) {
+      minver = setMin
+    }
   }
 
   if (minver && range.test(minver)) {
@@ -43999,36 +43190,32 @@ function minVersion (range, loose) {
 
   return null
 }
+module.exports = minVersion
 
-exports.validRange = validRange
-function validRange (range, options) {
-  try {
-    // Return '*' instead of '' so that truthiness works.
-    // This will throw if it's invalid anyway
-    return new Range(range, options).range || '*'
-  } catch (er) {
-    return null
-  }
-}
 
-// Determine if version is less than all the versions possible in the range
-exports.ltr = ltr
-function ltr (version, range, options) {
-  return outside(version, range, '<', options)
-}
+/***/ }),
 
-// Determine if version is greater than all the versions possible in the range.
-exports.gtr = gtr
-function gtr (version, range, options) {
-  return outside(version, range, '>', options)
-}
+/***/ 280:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-exports.outside = outside
-function outside (version, range, hilo, options) {
+"use strict";
+
+
+const SemVer = __nccwpck_require__(7163)
+const Comparator = __nccwpck_require__(9379)
+const { ANY } = Comparator
+const Range = __nccwpck_require__(6782)
+const satisfies = __nccwpck_require__(8011)
+const gt = __nccwpck_require__(6599)
+const lt = __nccwpck_require__(3872)
+const lte = __nccwpck_require__(6717)
+const gte = __nccwpck_require__(1236)
+
+const outside = (version, range, hilo, options) => {
   version = new SemVer(version, options)
   range = new Range(range, options)
 
-  var gtfn, ltefn, ltfn, comp, ecomp
+  let gtfn, ltefn, ltfn, comp, ecomp
   switch (hilo) {
     case '>':
       gtfn = gt
@@ -44048,7 +43235,7 @@ function outside (version, range, hilo, options) {
       throw new TypeError('Must provide a hilo val of "<" or ">"')
   }
 
-  // If it satisifes the range it is not outside
+  // If it satisfies the range it is not outside
   if (satisfies(version, range, options)) {
     return false
   }
@@ -44056,13 +43243,13 @@ function outside (version, range, hilo, options) {
   // From now on, variable terms are as if we're in "gtr" mode.
   // but note that everything is flipped for the "ltr" function.
 
-  for (var i = 0; i < range.set.length; ++i) {
-    var comparators = range.set[i]
+  for (let i = 0; i < range.set.length; ++i) {
+    const comparators = range.set[i]
 
-    var high = null
-    var low = null
+    let high = null
+    let low = null
 
-    comparators.forEach(function (comparator) {
+    comparators.forEach((comparator) => {
       if (comparator.semver === ANY) {
         comparator = new Comparator('>=0.0.0')
       }
@@ -44093,187 +43280,361 @@ function outside (version, range, hilo, options) {
   return true
 }
 
-exports.prerelease = prerelease
-function prerelease (version, options) {
-  var parsed = parse(version, options)
-  return (parsed && parsed.prerelease.length) ? parsed.prerelease : null
-}
+module.exports = outside
 
-exports.intersects = intersects
-function intersects (r1, r2, options) {
-  r1 = new Range(r1, options)
-  r2 = new Range(r2, options)
-  return r1.intersects(r2)
-}
 
-exports.coerce = coerce
-function coerce (version, options) {
-  if (version instanceof SemVer) {
-    return version
-  }
+/***/ }),
 
-  if (typeof version === 'number') {
-    version = String(version)
-  }
+/***/ 2028:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-  if (typeof version !== 'string') {
-    return null
-  }
+"use strict";
 
-  options = options || {}
 
-  var match = null
-  if (!options.rtl) {
-    match = version.match(safeRe[t.COERCE])
-  } else {
-    // Find the right-most coercible string that does not share
-    // a terminus with a more left-ward coercible string.
-    // Eg, '1.2.3.4' wants to coerce '2.3.4', not '3.4' or '4'
-    //
-    // Walk through the string checking with a /g regexp
-    // Manually set the index so as to pick up overlapping matches.
-    // Stop when we get a match that ends at the string end, since no
-    // coercible string can be more right-ward without the same terminus.
-    var next
-    while ((next = safeRe[t.COERCERTL].exec(version)) &&
-      (!match || match.index + match[0].length !== version.length)
-    ) {
-      if (!match ||
-          next.index + next[0].length !== match.index + match[0].length) {
-        match = next
+// given a set of versions and a range, create a "simplified" range
+// that includes the same versions that the original range does
+// If the original range is shorter than the simplified one, return that.
+const satisfies = __nccwpck_require__(8011)
+const compare = __nccwpck_require__(8469)
+module.exports = (versions, range, options) => {
+  const set = []
+  let first = null
+  let prev = null
+  const v = versions.sort((a, b) => compare(a, b, options))
+  for (const version of v) {
+    const included = satisfies(version, range, options)
+    if (included) {
+      prev = version
+      if (!first) {
+        first = version
       }
-      safeRe[t.COERCERTL].lastIndex = next.index + next[1].length + next[2].length
+    } else {
+      if (prev) {
+        set.push([first, prev])
+      }
+      prev = null
+      first = null
     }
-    // leave it in a clean state
-    safeRe[t.COERCERTL].lastIndex = -1
+  }
+  if (first) {
+    set.push([first, null])
   }
 
-  if (match === null) {
-    return null
+  const ranges = []
+  for (const [min, max] of set) {
+    if (min === max) {
+      ranges.push(min)
+    } else if (!max && min === v[0]) {
+      ranges.push('*')
+    } else if (!max) {
+      ranges.push(`>=${min}`)
+    } else if (min === v[0]) {
+      ranges.push(`<=${max}`)
+    } else {
+      ranges.push(`${min} - ${max}`)
+    }
   }
-
-  return parse(match[2] +
-    '.' + (match[3] || '0') +
-    '.' + (match[4] || '0'), options)
+  const simplified = ranges.join(' || ')
+  const original = typeof range.raw === 'string' ? range.raw : String(range)
+  return simplified.length < original.length ? simplified : range
 }
 
 
 /***/ }),
 
-/***/ 6496:
-/***/ ((module) => {
+/***/ 1489:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const hexRegex = /^[-+]?0x[a-fA-F0-9]+$/;
-const numRegex = /^([\-\+])?(0*)([0-9]*(\.[0-9]*)?)$/;
-// const octRegex = /^0x[a-z0-9]+/;
-// const binRegex = /0x[a-z0-9]+/;
+"use strict";
 
- 
-const consider = {
-    hex :  true,
-    // oct: false,
-    leadingZeros: true,
-    decimalPoint: "\.",
-    eNotation: true,
-    //skipLike: /regex/
-};
 
-function toNumber(str, options = {}){
-    options = Object.assign({}, consider, options );
-    if(!str || typeof str !== "string" ) return str;
-    
-    let trimmedStr  = str.trim();
-    
-    if(options.skipLike !== undefined && options.skipLike.test(trimmedStr)) return str;
-    else if(str==="0") return 0;
-    else if (options.hex && hexRegex.test(trimmedStr)) {
-        return parse_int(trimmedStr, 16);
-    // }else if (options.oct && octRegex.test(str)) {
-    //     return Number.parseInt(val, 8);
-    }else if (trimmedStr.search(/[eE]/)!== -1) { //eNotation
-        const notation = trimmedStr.match(/^([-\+])?(0*)([0-9]*(\.[0-9]*)?[eE][-\+]?[0-9]+)$/); 
-        // +00.123 => [ , '+', '00', '.123', ..
-        if(notation){
-            // console.log(notation)
-            if(options.leadingZeros){ //accept with leading zeros
-                trimmedStr = (notation[1] || "") + notation[3];
-            }else{
-                if(notation[2] === "0" && notation[3][0]=== "."){ //valid number
-                }else{
-                    return str;
-                }
-            }
-            return options.eNotation ? Number(trimmedStr) : str;
-        }else{
-            return str;
-        }
-    // }else if (options.parseBin && binRegex.test(str)) {
-    //     return Number.parseInt(val, 2);
-    }else{
-        //separate negative sign, leading zeros, and rest number
-        const match = numRegex.exec(trimmedStr);
-        // +00.123 => [ , '+', '00', '.123', ..
-        if(match){
-            const sign = match[1];
-            const leadingZeros = match[2];
-            let numTrimmedByZeros = trimZeros(match[3]); //complete num without leading zeros
-            //trim ending zeros for floating number
-            
-            if(!options.leadingZeros && leadingZeros.length > 0 && sign && trimmedStr[2] !== ".") return str; //-0123
-            else if(!options.leadingZeros && leadingZeros.length > 0 && !sign && trimmedStr[1] !== ".") return str; //0123
-            else if(options.leadingZeros && leadingZeros===str) return 0; //00
-            
-            else{//no leading zeros or leading zeros are allowed
-                const num = Number(trimmedStr);
-                const numStr = "" + num;
+const Range = __nccwpck_require__(6782)
+const Comparator = __nccwpck_require__(9379)
+const { ANY } = Comparator
+const satisfies = __nccwpck_require__(8011)
+const compare = __nccwpck_require__(8469)
 
-                if(numStr.search(/[eE]/) !== -1){ //given number is long and parsed to eNotation
-                    if(options.eNotation) return num;
-                    else return str;
-                }else if(trimmedStr.indexOf(".") !== -1){ //floating number
-                    if(numStr === "0" && (numTrimmedByZeros === "") ) return num; //0.0
-                    else if(numStr === numTrimmedByZeros) return num; //0.456. 0.79000
-                    else if( sign && numStr === "-"+numTrimmedByZeros) return num;
-                    else return str;
-                }
-                
-                if(leadingZeros){
-                    return (numTrimmedByZeros === numStr) || (sign+numTrimmedByZeros === numStr) ? num : str
-                }else  {
-                    return (trimmedStr === numStr) || (trimmedStr === sign+numStr) ? num : str
-                }
-            }
-        }else{ //non-numeric string
-            return str;
-        }
+// Complex range `r1 || r2 || ...` is a subset of `R1 || R2 || ...` iff:
+// - Every simple range `r1, r2, ...` is a null set, OR
+// - Every simple range `r1, r2, ...` which is not a null set is a subset of
+//   some `R1, R2, ...`
+//
+// Simple range `c1 c2 ...` is a subset of simple range `C1 C2 ...` iff:
+// - If c is only the ANY comparator
+//   - If C is only the ANY comparator, return true
+//   - Else if in prerelease mode, return false
+//   - else replace c with `[>=0.0.0]`
+// - If C is only the ANY comparator
+//   - if in prerelease mode, return true
+//   - else replace C with `[>=0.0.0]`
+// - Let EQ be the set of = comparators in c
+// - If EQ is more than one, return true (null set)
+// - Let GT be the highest > or >= comparator in c
+// - Let LT be the lowest < or <= comparator in c
+// - If GT and LT, and GT.semver > LT.semver, return true (null set)
+// - If any C is a = range, and GT or LT are set, return false
+// - If EQ
+//   - If GT, and EQ does not satisfy GT, return true (null set)
+//   - If LT, and EQ does not satisfy LT, return true (null set)
+//   - If EQ satisfies every C, return true
+//   - Else return false
+// - If GT
+//   - If GT.semver is lower than any > or >= comp in C, return false
+//   - If GT is >=, and GT.semver does not satisfy every C, return false
+//   - If GT.semver has a prerelease, and not in prerelease mode
+//     - If no C has a prerelease and the GT.semver tuple, return false
+// - If LT
+//   - If LT.semver is greater than any < or <= comp in C, return false
+//   - If LT is <=, and LT.semver does not satisfy every C, return false
+//   - If GT.semver has a prerelease, and not in prerelease mode
+//     - If no C has a prerelease and the LT.semver tuple, return false
+// - Else return true
+
+const subset = (sub, dom, options = {}) => {
+  if (sub === dom) {
+    return true
+  }
+
+  sub = new Range(sub, options)
+  dom = new Range(dom, options)
+  let sawNonNull = false
+
+  OUTER: for (const simpleSub of sub.set) {
+    for (const simpleDom of dom.set) {
+      const isSub = simpleSubset(simpleSub, simpleDom, options)
+      sawNonNull = sawNonNull || isSub !== null
+      if (isSub) {
+        continue OUTER
+      }
     }
-}
-
-/**
- * 
- * @param {string} numStr without leading zeros
- * @returns 
- */
-function trimZeros(numStr){
-    if(numStr && numStr.indexOf(".") !== -1){//float
-        numStr = numStr.replace(/0+$/, ""); //remove ending zeros
-        if(numStr === ".")  numStr = "0";
-        else if(numStr[0] === ".")  numStr = "0"+numStr;
-        else if(numStr[numStr.length-1] === ".")  numStr = numStr.substr(0,numStr.length-1);
-        return numStr;
+    // the null set is a subset of everything, but null simple ranges in
+    // a complex range should be ignored.  so if we saw a non-null range,
+    // then we know this isn't a subset, but if EVERY simple range was null,
+    // then it is a subset.
+    if (sawNonNull) {
+      return false
     }
-    return numStr;
+  }
+  return true
 }
 
-function parse_int(numStr, base){
-    //polyfill
-    if(parseInt) return parseInt(numStr, base);
-    else if(Number.parseInt) return Number.parseInt(numStr, base);
-    else if(window && window.parseInt) return window.parseInt(numStr, base);
-    else throw new Error("parseInt, Number.parseInt, window.parseInt are not supported")
+const minimumVersionWithPreRelease = [new Comparator('>=0.0.0-0')]
+const minimumVersion = [new Comparator('>=0.0.0')]
+
+const simpleSubset = (sub, dom, options) => {
+  if (sub === dom) {
+    return true
+  }
+
+  if (sub.length === 1 && sub[0].semver === ANY) {
+    if (dom.length === 1 && dom[0].semver === ANY) {
+      return true
+    } else if (options.includePrerelease) {
+      sub = minimumVersionWithPreRelease
+    } else {
+      sub = minimumVersion
+    }
+  }
+
+  if (dom.length === 1 && dom[0].semver === ANY) {
+    if (options.includePrerelease) {
+      return true
+    } else {
+      dom = minimumVersion
+    }
+  }
+
+  const eqSet = new Set()
+  let gt, lt
+  for (const c of sub) {
+    if (c.operator === '>' || c.operator === '>=') {
+      gt = higherGT(gt, c, options)
+    } else if (c.operator === '<' || c.operator === '<=') {
+      lt = lowerLT(lt, c, options)
+    } else {
+      eqSet.add(c.semver)
+    }
+  }
+
+  if (eqSet.size > 1) {
+    return null
+  }
+
+  let gtltComp
+  if (gt && lt) {
+    gtltComp = compare(gt.semver, lt.semver, options)
+    if (gtltComp > 0) {
+      return null
+    } else if (gtltComp === 0 && (gt.operator !== '>=' || lt.operator !== '<=')) {
+      return null
+    }
+  }
+
+  // will iterate one or zero times
+  for (const eq of eqSet) {
+    if (gt && !satisfies(eq, String(gt), options)) {
+      return null
+    }
+
+    if (lt && !satisfies(eq, String(lt), options)) {
+      return null
+    }
+
+    for (const c of dom) {
+      if (!satisfies(eq, String(c), options)) {
+        return false
+      }
+    }
+
+    return true
+  }
+
+  let higher, lower
+  let hasDomLT, hasDomGT
+  // if the subset has a prerelease, we need a comparator in the superset
+  // with the same tuple and a prerelease, or it's not a subset
+  let needDomLTPre = lt &&
+    !options.includePrerelease &&
+    lt.semver.prerelease.length ? lt.semver : false
+  let needDomGTPre = gt &&
+    !options.includePrerelease &&
+    gt.semver.prerelease.length ? gt.semver : false
+  // exception: <1.2.3-0 is the same as <1.2.3
+  if (needDomLTPre && needDomLTPre.prerelease.length === 1 &&
+      lt.operator === '<' && needDomLTPre.prerelease[0] === 0) {
+    needDomLTPre = false
+  }
+
+  for (const c of dom) {
+    hasDomGT = hasDomGT || c.operator === '>' || c.operator === '>='
+    hasDomLT = hasDomLT || c.operator === '<' || c.operator === '<='
+    if (gt) {
+      if (needDomGTPre) {
+        if (c.semver.prerelease && c.semver.prerelease.length &&
+            c.semver.major === needDomGTPre.major &&
+            c.semver.minor === needDomGTPre.minor &&
+            c.semver.patch === needDomGTPre.patch) {
+          needDomGTPre = false
+        }
+      }
+      if (c.operator === '>' || c.operator === '>=') {
+        higher = higherGT(gt, c, options)
+        if (higher === c && higher !== gt) {
+          return false
+        }
+      } else if (gt.operator === '>=' && !satisfies(gt.semver, String(c), options)) {
+        return false
+      }
+    }
+    if (lt) {
+      if (needDomLTPre) {
+        if (c.semver.prerelease && c.semver.prerelease.length &&
+            c.semver.major === needDomLTPre.major &&
+            c.semver.minor === needDomLTPre.minor &&
+            c.semver.patch === needDomLTPre.patch) {
+          needDomLTPre = false
+        }
+      }
+      if (c.operator === '<' || c.operator === '<=') {
+        lower = lowerLT(lt, c, options)
+        if (lower === c && lower !== lt) {
+          return false
+        }
+      } else if (lt.operator === '<=' && !satisfies(lt.semver, String(c), options)) {
+        return false
+      }
+    }
+    if (!c.operator && (lt || gt) && gtltComp !== 0) {
+      return false
+    }
+  }
+
+  // if there was a < or >, and nothing in the dom, then must be false
+  // UNLESS it was limited by another range in the other direction.
+  // Eg, >1.0.0 <1.0.1 is still a subset of <2.0.0
+  if (gt && hasDomLT && !lt && gtltComp !== 0) {
+    return false
+  }
+
+  if (lt && hasDomGT && !gt && gtltComp !== 0) {
+    return false
+  }
+
+  // we needed a prerelease range in a specific tuple, but didn't get one
+  // then this isn't a subset.  eg >=1.2.3-pre is not a subset of >=1.0.0,
+  // because it includes prereleases in the 1.2.3 tuple
+  if (needDomGTPre || needDomLTPre) {
+    return false
+  }
+
+  return true
 }
 
-module.exports = toNumber;
+// >=1.2.3 is lower than >1.2.3
+const higherGT = (a, b, options) => {
+  if (!a) {
+    return b
+  }
+  const comp = compare(a.semver, b.semver, options)
+  return comp > 0 ? a
+    : comp < 0 ? b
+    : b.operator === '>' && a.operator === '>=' ? b
+    : a
+}
+
+// <=1.2.3 is higher than <1.2.3
+const lowerLT = (a, b, options) => {
+  if (!a) {
+    return b
+  }
+  const comp = compare(a.semver, b.semver, options)
+  return comp < 0 ? a
+    : comp > 0 ? b
+    : b.operator === '<' && a.operator === '<=' ? b
+    : a
+}
+
+module.exports = subset
+
+
+/***/ }),
+
+/***/ 4750:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const Range = __nccwpck_require__(6782)
+
+// Mostly just for testing and legacy API reasons
+const toComparators = (range, options) =>
+  new Range(range, options).set
+    .map(comp => comp.map(c => c.value).join(' ').trim().split(' '))
+
+module.exports = toComparators
+
+
+/***/ }),
+
+/***/ 4737:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+const Range = __nccwpck_require__(6782)
+const validRange = (range, options) => {
+  try {
+    // Return '*' instead of '' so that truthiness works.
+    // This will throw if it's invalid anyway
+    return new Range(range, options).range || '*'
+  } catch (er) {
+    return null
+  }
+}
+module.exports = validRange
+
 
 /***/ }),
 
@@ -68407,7 +67768,7 @@ const io = __importStar(__nccwpck_require__(4994));
 const crypto = __importStar(__nccwpck_require__(6982));
 const fs = __importStar(__nccwpck_require__(9896));
 const path = __importStar(__nccwpck_require__(6928));
-const semver = __importStar(__nccwpck_require__(9318));
+const semver = __importStar(__nccwpck_require__(2088));
 const util = __importStar(__nccwpck_require__(9023));
 const constants_1 = __nccwpck_require__(379);
 const versionSalt = '1.0';
@@ -71564,11 +70925,18 @@ module.exports = parseParams
 
 /***/ }),
 
+/***/ 591:
+/***/ ((module) => {
+
+(()=>{"use strict";var t={d:(e,n)=>{for(var i in n)t.o(n,i)&&!t.o(e,i)&&Object.defineProperty(e,i,{enumerable:!0,get:n[i]})},o:(t,e)=>Object.prototype.hasOwnProperty.call(t,e),r:t=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})}},e={};t.r(e),t.d(e,{XMLBuilder:()=>ft,XMLParser:()=>st,XMLValidator:()=>mt});const n=":A-Za-z_\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD",i=new RegExp("^["+n+"]["+n+"\\-.\\d\\u00B7\\u0300-\\u036F\\u203F-\\u2040]*$");function s(t,e){const n=[];let i=e.exec(t);for(;i;){const s=[];s.startIndex=e.lastIndex-i[0].length;const r=i.length;for(let t=0;t<r;t++)s.push(i[t]);n.push(s),i=e.exec(t)}return n}const r=function(t){return!(null==i.exec(t))},o={allowBooleanAttributes:!1,unpairedTags:[]};function a(t,e){e=Object.assign({},o,e);const n=[];let i=!1,s=!1;"\ufeff"===t[0]&&(t=t.substr(1));for(let o=0;o<t.length;o++)if("<"===t[o]&&"?"===t[o+1]){if(o+=2,o=u(t,o),o.err)return o}else{if("<"!==t[o]){if(l(t[o]))continue;return x("InvalidChar","char '"+t[o]+"' is not expected.",N(t,o))}{let a=o;if(o++,"!"===t[o]){o=h(t,o);continue}{let d=!1;"/"===t[o]&&(d=!0,o++);let f="";for(;o<t.length&&">"!==t[o]&&" "!==t[o]&&"\t"!==t[o]&&"\n"!==t[o]&&"\r"!==t[o];o++)f+=t[o];if(f=f.trim(),"/"===f[f.length-1]&&(f=f.substring(0,f.length-1),o--),!r(f)){let e;return e=0===f.trim().length?"Invalid space after '<'.":"Tag '"+f+"' is an invalid name.",x("InvalidTag",e,N(t,o))}const p=c(t,o);if(!1===p)return x("InvalidAttr","Attributes for '"+f+"' have open quote.",N(t,o));let b=p.value;if(o=p.index,"/"===b[b.length-1]){const n=o-b.length;b=b.substring(0,b.length-1);const s=g(b,e);if(!0!==s)return x(s.err.code,s.err.msg,N(t,n+s.err.line));i=!0}else if(d){if(!p.tagClosed)return x("InvalidTag","Closing tag '"+f+"' doesn't have proper closing.",N(t,o));if(b.trim().length>0)return x("InvalidTag","Closing tag '"+f+"' can't have attributes or invalid starting.",N(t,a));if(0===n.length)return x("InvalidTag","Closing tag '"+f+"' has not been opened.",N(t,a));{const e=n.pop();if(f!==e.tagName){let n=N(t,e.tagStartPos);return x("InvalidTag","Expected closing tag '"+e.tagName+"' (opened in line "+n.line+", col "+n.col+") instead of closing tag '"+f+"'.",N(t,a))}0==n.length&&(s=!0)}}else{const r=g(b,e);if(!0!==r)return x(r.err.code,r.err.msg,N(t,o-b.length+r.err.line));if(!0===s)return x("InvalidXml","Multiple possible root nodes found.",N(t,o));-1!==e.unpairedTags.indexOf(f)||n.push({tagName:f,tagStartPos:a}),i=!0}for(o++;o<t.length;o++)if("<"===t[o]){if("!"===t[o+1]){o++,o=h(t,o);continue}if("?"!==t[o+1])break;if(o=u(t,++o),o.err)return o}else if("&"===t[o]){const e=m(t,o);if(-1==e)return x("InvalidChar","char '&' is not expected.",N(t,o));o=e}else if(!0===s&&!l(t[o]))return x("InvalidXml","Extra text at the end",N(t,o));"<"===t[o]&&o--}}}return i?1==n.length?x("InvalidTag","Unclosed tag '"+n[0].tagName+"'.",N(t,n[0].tagStartPos)):!(n.length>0)||x("InvalidXml","Invalid '"+JSON.stringify(n.map((t=>t.tagName)),null,4).replace(/\r?\n/g,"")+"' found.",{line:1,col:1}):x("InvalidXml","Start tag expected.",1)}function l(t){return" "===t||"\t"===t||"\n"===t||"\r"===t}function u(t,e){const n=e;for(;e<t.length;e++)if("?"!=t[e]&&" "!=t[e]);else{const i=t.substr(n,e-n);if(e>5&&"xml"===i)return x("InvalidXml","XML declaration allowed only at the start of the document.",N(t,e));if("?"==t[e]&&">"==t[e+1]){e++;break}}return e}function h(t,e){if(t.length>e+5&&"-"===t[e+1]&&"-"===t[e+2]){for(e+=3;e<t.length;e++)if("-"===t[e]&&"-"===t[e+1]&&">"===t[e+2]){e+=2;break}}else if(t.length>e+8&&"D"===t[e+1]&&"O"===t[e+2]&&"C"===t[e+3]&&"T"===t[e+4]&&"Y"===t[e+5]&&"P"===t[e+6]&&"E"===t[e+7]){let n=1;for(e+=8;e<t.length;e++)if("<"===t[e])n++;else if(">"===t[e]&&(n--,0===n))break}else if(t.length>e+9&&"["===t[e+1]&&"C"===t[e+2]&&"D"===t[e+3]&&"A"===t[e+4]&&"T"===t[e+5]&&"A"===t[e+6]&&"["===t[e+7])for(e+=8;e<t.length;e++)if("]"===t[e]&&"]"===t[e+1]&&">"===t[e+2]){e+=2;break}return e}const d='"',f="'";function c(t,e){let n="",i="",s=!1;for(;e<t.length;e++){if(t[e]===d||t[e]===f)""===i?i=t[e]:i!==t[e]||(i="");else if(">"===t[e]&&""===i){s=!0;break}n+=t[e]}return""===i&&{value:n,index:e,tagClosed:s}}const p=new RegExp("(\\s*)([^\\s=]+)(\\s*=)?(\\s*(['\"])(([\\s\\S])*?)\\5)?","g");function g(t,e){const n=s(t,p),i={};for(let t=0;t<n.length;t++){if(0===n[t][1].length)return x("InvalidAttr","Attribute '"+n[t][2]+"' has no space in starting.",E(n[t]));if(void 0!==n[t][3]&&void 0===n[t][4])return x("InvalidAttr","Attribute '"+n[t][2]+"' is without value.",E(n[t]));if(void 0===n[t][3]&&!e.allowBooleanAttributes)return x("InvalidAttr","boolean attribute '"+n[t][2]+"' is not allowed.",E(n[t]));const s=n[t][2];if(!b(s))return x("InvalidAttr","Attribute '"+s+"' is an invalid name.",E(n[t]));if(i.hasOwnProperty(s))return x("InvalidAttr","Attribute '"+s+"' is repeated.",E(n[t]));i[s]=1}return!0}function m(t,e){if(";"===t[++e])return-1;if("#"===t[e])return function(t,e){let n=/\d/;for("x"===t[e]&&(e++,n=/[\da-fA-F]/);e<t.length;e++){if(";"===t[e])return e;if(!t[e].match(n))break}return-1}(t,++e);let n=0;for(;e<t.length;e++,n++)if(!(t[e].match(/\w/)&&n<20)){if(";"===t[e])break;return-1}return e}function x(t,e,n){return{err:{code:t,msg:e,line:n.line||n,col:n.col}}}function b(t){return r(t)}function N(t,e){const n=t.substring(0,e).split(/\r?\n/);return{line:n.length,col:n[n.length-1].length+1}}function E(t){return t.startIndex+t[1].length}const v={preserveOrder:!1,attributeNamePrefix:"@_",attributesGroupName:!1,textNodeName:"#text",ignoreAttributes:!0,removeNSPrefix:!1,allowBooleanAttributes:!1,parseTagValue:!0,parseAttributeValue:!1,trimValues:!0,cdataPropName:!1,numberParseOptions:{hex:!0,leadingZeros:!0,eNotation:!0},tagValueProcessor:function(t,e){return e},attributeValueProcessor:function(t,e){return e},stopNodes:[],alwaysCreateTextNode:!1,isArray:()=>!1,commentPropName:!1,unpairedTags:[],processEntities:!0,htmlEntities:!1,ignoreDeclaration:!1,ignorePiTags:!1,transformTagName:!1,transformAttributeName:!1,updateTag:function(t,e,n){return t},captureMetaData:!1};let y;y="function"!=typeof Symbol?"@@xmlMetadata":Symbol("XML Node Metadata");class T{constructor(t){this.tagname=t,this.child=[],this[":@"]={}}add(t,e){"__proto__"===t&&(t="#__proto__"),this.child.push({[t]:e})}addChild(t,e){"__proto__"===t.tagname&&(t.tagname="#__proto__"),t[":@"]&&Object.keys(t[":@"]).length>0?this.child.push({[t.tagname]:t.child,":@":t[":@"]}):this.child.push({[t.tagname]:t.child}),void 0!==e&&(this.child[this.child.length-1][y]={startIndex:e})}static getMetaDataSymbol(){return y}}function w(t,e){const n={};if("O"!==t[e+3]||"C"!==t[e+4]||"T"!==t[e+5]||"Y"!==t[e+6]||"P"!==t[e+7]||"E"!==t[e+8])throw new Error("Invalid Tag instead of DOCTYPE");{e+=9;let i=1,s=!1,r=!1,o="";for(;e<t.length;e++)if("<"!==t[e]||r)if(">"===t[e]){if(r?"-"===t[e-1]&&"-"===t[e-2]&&(r=!1,i--):i--,0===i)break}else"["===t[e]?s=!0:o+=t[e];else{if(s&&C(t,"!ENTITY",e)){let i,s;e+=7,[i,s,e]=O(t,e+1),-1===s.indexOf("&")&&(n[i]={regx:RegExp(`&${i};`,"g"),val:s})}else if(s&&C(t,"!ELEMENT",e)){e+=8;const{index:n}=S(t,e+1);e=n}else if(s&&C(t,"!ATTLIST",e))e+=8;else if(s&&C(t,"!NOTATION",e)){e+=9;const{index:n}=A(t,e+1);e=n}else{if(!C(t,"!--",e))throw new Error("Invalid DOCTYPE");r=!0}i++,o=""}if(0!==i)throw new Error("Unclosed DOCTYPE")}return{entities:n,i:e}}const P=(t,e)=>{for(;e<t.length&&/\s/.test(t[e]);)e++;return e};function O(t,e){e=P(t,e);let n="";for(;e<t.length&&!/\s/.test(t[e])&&'"'!==t[e]&&"'"!==t[e];)n+=t[e],e++;if($(n),e=P(t,e),"SYSTEM"===t.substring(e,e+6).toUpperCase())throw new Error("External entities are not supported");if("%"===t[e])throw new Error("Parameter entities are not supported");let i="";return[e,i]=I(t,e,"entity"),[n,i,--e]}function A(t,e){e=P(t,e);let n="";for(;e<t.length&&!/\s/.test(t[e]);)n+=t[e],e++;$(n),e=P(t,e);const i=t.substring(e,e+6).toUpperCase();if("SYSTEM"!==i&&"PUBLIC"!==i)throw new Error(`Expected SYSTEM or PUBLIC, found "${i}"`);e+=i.length,e=P(t,e);let s=null,r=null;if("PUBLIC"===i)[e,s]=I(t,e,"publicIdentifier"),'"'!==t[e=P(t,e)]&&"'"!==t[e]||([e,r]=I(t,e,"systemIdentifier"));else if("SYSTEM"===i&&([e,r]=I(t,e,"systemIdentifier"),!r))throw new Error("Missing mandatory system identifier for SYSTEM notation");return{notationName:n,publicIdentifier:s,systemIdentifier:r,index:--e}}function I(t,e,n){let i="";const s=t[e];if('"'!==s&&"'"!==s)throw new Error(`Expected quoted string, found "${s}"`);for(e++;e<t.length&&t[e]!==s;)i+=t[e],e++;if(t[e]!==s)throw new Error(`Unterminated ${n} value`);return[++e,i]}function S(t,e){e=P(t,e);let n="";for(;e<t.length&&!/\s/.test(t[e]);)n+=t[e],e++;if(!$(n))throw new Error(`Invalid element name: "${n}"`);let i="";if("E"===t[e=P(t,e)]&&C(t,"MPTY",e))e+=4;else if("A"===t[e]&&C(t,"NY",e))e+=2;else{if("("!==t[e])throw new Error(`Invalid Element Expression, found "${t[e]}"`);for(e++;e<t.length&&")"!==t[e];)i+=t[e],e++;if(")"!==t[e])throw new Error("Unterminated content model")}return{elementName:n,contentModel:i.trim(),index:e}}function C(t,e,n){for(let i=0;i<e.length;i++)if(e[i]!==t[n+i+1])return!1;return!0}function $(t){if(r(t))return t;throw new Error(`Invalid entity name ${t}`)}const j=/^[-+]?0x[a-fA-F0-9]+$/,D=/^([\-\+])?(0*)([0-9]*(\.[0-9]*)?)$/,V={hex:!0,leadingZeros:!0,decimalPoint:".",eNotation:!0};const M=/^([-+])?(0*)(\d*(\.\d*)?[eE][-\+]?\d+)$/;function _(t){return"function"==typeof t?t:Array.isArray(t)?e=>{for(const n of t){if("string"==typeof n&&e===n)return!0;if(n instanceof RegExp&&n.test(e))return!0}}:()=>!1}class k{constructor(t){this.options=t,this.currentNode=null,this.tagsNodeStack=[],this.docTypeEntities={},this.lastEntities={apos:{regex:/&(apos|#39|#x27);/g,val:"'"},gt:{regex:/&(gt|#62|#x3E);/g,val:">"},lt:{regex:/&(lt|#60|#x3C);/g,val:"<"},quot:{regex:/&(quot|#34|#x22);/g,val:'"'}},this.ampEntity={regex:/&(amp|#38|#x26);/g,val:"&"},this.htmlEntities={space:{regex:/&(nbsp|#160);/g,val:" "},cent:{regex:/&(cent|#162);/g,val:"¢"},pound:{regex:/&(pound|#163);/g,val:"£"},yen:{regex:/&(yen|#165);/g,val:"¥"},euro:{regex:/&(euro|#8364);/g,val:"€"},copyright:{regex:/&(copy|#169);/g,val:"©"},reg:{regex:/&(reg|#174);/g,val:"®"},inr:{regex:/&(inr|#8377);/g,val:"₹"},num_dec:{regex:/&#([0-9]{1,7});/g,val:(t,e)=>String.fromCodePoint(Number.parseInt(e,10))},num_hex:{regex:/&#x([0-9a-fA-F]{1,6});/g,val:(t,e)=>String.fromCodePoint(Number.parseInt(e,16))}},this.addExternalEntities=F,this.parseXml=X,this.parseTextData=L,this.resolveNameSpace=B,this.buildAttributesMap=G,this.isItStopNode=Z,this.replaceEntitiesValue=R,this.readStopNodeData=J,this.saveTextToParentTag=q,this.addChild=Y,this.ignoreAttributesFn=_(this.options.ignoreAttributes)}}function F(t){const e=Object.keys(t);for(let n=0;n<e.length;n++){const i=e[n];this.lastEntities[i]={regex:new RegExp("&"+i+";","g"),val:t[i]}}}function L(t,e,n,i,s,r,o){if(void 0!==t&&(this.options.trimValues&&!i&&(t=t.trim()),t.length>0)){o||(t=this.replaceEntitiesValue(t));const i=this.options.tagValueProcessor(e,t,n,s,r);return null==i?t:typeof i!=typeof t||i!==t?i:this.options.trimValues||t.trim()===t?H(t,this.options.parseTagValue,this.options.numberParseOptions):t}}function B(t){if(this.options.removeNSPrefix){const e=t.split(":"),n="/"===t.charAt(0)?"/":"";if("xmlns"===e[0])return"";2===e.length&&(t=n+e[1])}return t}const U=new RegExp("([^\\s=]+)\\s*(=\\s*(['\"])([\\s\\S]*?)\\3)?","gm");function G(t,e,n){if(!0!==this.options.ignoreAttributes&&"string"==typeof t){const n=s(t,U),i=n.length,r={};for(let t=0;t<i;t++){const i=this.resolveNameSpace(n[t][1]);if(this.ignoreAttributesFn(i,e))continue;let s=n[t][4],o=this.options.attributeNamePrefix+i;if(i.length)if(this.options.transformAttributeName&&(o=this.options.transformAttributeName(o)),"__proto__"===o&&(o="#__proto__"),void 0!==s){this.options.trimValues&&(s=s.trim()),s=this.replaceEntitiesValue(s);const t=this.options.attributeValueProcessor(i,s,e);r[o]=null==t?s:typeof t!=typeof s||t!==s?t:H(s,this.options.parseAttributeValue,this.options.numberParseOptions)}else this.options.allowBooleanAttributes&&(r[o]=!0)}if(!Object.keys(r).length)return;if(this.options.attributesGroupName){const t={};return t[this.options.attributesGroupName]=r,t}return r}}const X=function(t){t=t.replace(/\r\n?/g,"\n");const e=new T("!xml");let n=e,i="",s="";for(let r=0;r<t.length;r++)if("<"===t[r])if("/"===t[r+1]){const e=W(t,">",r,"Closing Tag is not closed.");let o=t.substring(r+2,e).trim();if(this.options.removeNSPrefix){const t=o.indexOf(":");-1!==t&&(o=o.substr(t+1))}this.options.transformTagName&&(o=this.options.transformTagName(o)),n&&(i=this.saveTextToParentTag(i,n,s));const a=s.substring(s.lastIndexOf(".")+1);if(o&&-1!==this.options.unpairedTags.indexOf(o))throw new Error(`Unpaired tag can not be used as closing tag: </${o}>`);let l=0;a&&-1!==this.options.unpairedTags.indexOf(a)?(l=s.lastIndexOf(".",s.lastIndexOf(".")-1),this.tagsNodeStack.pop()):l=s.lastIndexOf("."),s=s.substring(0,l),n=this.tagsNodeStack.pop(),i="",r=e}else if("?"===t[r+1]){let e=z(t,r,!1,"?>");if(!e)throw new Error("Pi Tag is not closed.");if(i=this.saveTextToParentTag(i,n,s),this.options.ignoreDeclaration&&"?xml"===e.tagName||this.options.ignorePiTags);else{const t=new T(e.tagName);t.add(this.options.textNodeName,""),e.tagName!==e.tagExp&&e.attrExpPresent&&(t[":@"]=this.buildAttributesMap(e.tagExp,s,e.tagName)),this.addChild(n,t,s,r)}r=e.closeIndex+1}else if("!--"===t.substr(r+1,3)){const e=W(t,"--\x3e",r+4,"Comment is not closed.");if(this.options.commentPropName){const o=t.substring(r+4,e-2);i=this.saveTextToParentTag(i,n,s),n.add(this.options.commentPropName,[{[this.options.textNodeName]:o}])}r=e}else if("!D"===t.substr(r+1,2)){const e=w(t,r);this.docTypeEntities=e.entities,r=e.i}else if("!["===t.substr(r+1,2)){const e=W(t,"]]>",r,"CDATA is not closed.")-2,o=t.substring(r+9,e);i=this.saveTextToParentTag(i,n,s);let a=this.parseTextData(o,n.tagname,s,!0,!1,!0,!0);null==a&&(a=""),this.options.cdataPropName?n.add(this.options.cdataPropName,[{[this.options.textNodeName]:o}]):n.add(this.options.textNodeName,a),r=e+2}else{let o=z(t,r,this.options.removeNSPrefix),a=o.tagName;const l=o.rawTagName;let u=o.tagExp,h=o.attrExpPresent,d=o.closeIndex;this.options.transformTagName&&(a=this.options.transformTagName(a)),n&&i&&"!xml"!==n.tagname&&(i=this.saveTextToParentTag(i,n,s,!1));const f=n;f&&-1!==this.options.unpairedTags.indexOf(f.tagname)&&(n=this.tagsNodeStack.pop(),s=s.substring(0,s.lastIndexOf("."))),a!==e.tagname&&(s+=s?"."+a:a);const c=r;if(this.isItStopNode(this.options.stopNodes,s,a)){let e="";if(u.length>0&&u.lastIndexOf("/")===u.length-1)"/"===a[a.length-1]?(a=a.substr(0,a.length-1),s=s.substr(0,s.length-1),u=a):u=u.substr(0,u.length-1),r=o.closeIndex;else if(-1!==this.options.unpairedTags.indexOf(a))r=o.closeIndex;else{const n=this.readStopNodeData(t,l,d+1);if(!n)throw new Error(`Unexpected end of ${l}`);r=n.i,e=n.tagContent}const i=new T(a);a!==u&&h&&(i[":@"]=this.buildAttributesMap(u,s,a)),e&&(e=this.parseTextData(e,a,s,!0,h,!0,!0)),s=s.substr(0,s.lastIndexOf(".")),i.add(this.options.textNodeName,e),this.addChild(n,i,s,c)}else{if(u.length>0&&u.lastIndexOf("/")===u.length-1){"/"===a[a.length-1]?(a=a.substr(0,a.length-1),s=s.substr(0,s.length-1),u=a):u=u.substr(0,u.length-1),this.options.transformTagName&&(a=this.options.transformTagName(a));const t=new T(a);a!==u&&h&&(t[":@"]=this.buildAttributesMap(u,s,a)),this.addChild(n,t,s,c),s=s.substr(0,s.lastIndexOf("."))}else{const t=new T(a);this.tagsNodeStack.push(n),a!==u&&h&&(t[":@"]=this.buildAttributesMap(u,s,a)),this.addChild(n,t,s,c),n=t}i="",r=d}}else i+=t[r];return e.child};function Y(t,e,n,i){this.options.captureMetaData||(i=void 0);const s=this.options.updateTag(e.tagname,n,e[":@"]);!1===s||("string"==typeof s?(e.tagname=s,t.addChild(e,i)):t.addChild(e,i))}const R=function(t){if(this.options.processEntities){for(let e in this.docTypeEntities){const n=this.docTypeEntities[e];t=t.replace(n.regx,n.val)}for(let e in this.lastEntities){const n=this.lastEntities[e];t=t.replace(n.regex,n.val)}if(this.options.htmlEntities)for(let e in this.htmlEntities){const n=this.htmlEntities[e];t=t.replace(n.regex,n.val)}t=t.replace(this.ampEntity.regex,this.ampEntity.val)}return t};function q(t,e,n,i){return t&&(void 0===i&&(i=0===e.child.length),void 0!==(t=this.parseTextData(t,e.tagname,n,!1,!!e[":@"]&&0!==Object.keys(e[":@"]).length,i))&&""!==t&&e.add(this.options.textNodeName,t),t=""),t}function Z(t,e,n){const i="*."+n;for(const n in t){const s=t[n];if(i===s||e===s)return!0}return!1}function W(t,e,n,i){const s=t.indexOf(e,n);if(-1===s)throw new Error(i);return s+e.length-1}function z(t,e,n,i=">"){const s=function(t,e,n=">"){let i,s="";for(let r=e;r<t.length;r++){let e=t[r];if(i)e===i&&(i="");else if('"'===e||"'"===e)i=e;else if(e===n[0]){if(!n[1])return{data:s,index:r};if(t[r+1]===n[1])return{data:s,index:r}}else"\t"===e&&(e=" ");s+=e}}(t,e+1,i);if(!s)return;let r=s.data;const o=s.index,a=r.search(/\s/);let l=r,u=!0;-1!==a&&(l=r.substring(0,a),r=r.substring(a+1).trimStart());const h=l;if(n){const t=l.indexOf(":");-1!==t&&(l=l.substr(t+1),u=l!==s.data.substr(t+1))}return{tagName:l,tagExp:r,closeIndex:o,attrExpPresent:u,rawTagName:h}}function J(t,e,n){const i=n;let s=1;for(;n<t.length;n++)if("<"===t[n])if("/"===t[n+1]){const r=W(t,">",n,`${e} is not closed`);if(t.substring(n+2,r).trim()===e&&(s--,0===s))return{tagContent:t.substring(i,n),i:r};n=r}else if("?"===t[n+1])n=W(t,"?>",n+1,"StopNode is not closed.");else if("!--"===t.substr(n+1,3))n=W(t,"--\x3e",n+3,"StopNode is not closed.");else if("!["===t.substr(n+1,2))n=W(t,"]]>",n,"StopNode is not closed.")-2;else{const i=z(t,n,">");i&&((i&&i.tagName)===e&&"/"!==i.tagExp[i.tagExp.length-1]&&s++,n=i.closeIndex)}}function H(t,e,n){if(e&&"string"==typeof t){const e=t.trim();return"true"===e||"false"!==e&&function(t,e={}){if(e=Object.assign({},V,e),!t||"string"!=typeof t)return t;let n=t.trim();if(void 0!==e.skipLike&&e.skipLike.test(n))return t;if("0"===t)return 0;if(e.hex&&j.test(n))return function(t){if(parseInt)return parseInt(t,16);if(Number.parseInt)return Number.parseInt(t,16);if(window&&window.parseInt)return window.parseInt(t,16);throw new Error("parseInt, Number.parseInt, window.parseInt are not supported")}(n);if(-1!==n.search(/.+[eE].+/))return function(t,e,n){if(!n.eNotation)return t;const i=e.match(M);if(i){let s=i[1]||"";const r=-1===i[3].indexOf("e")?"E":"e",o=i[2],a=s?t[o.length+1]===r:t[o.length]===r;return o.length>1&&a?t:1!==o.length||!i[3].startsWith(`.${r}`)&&i[3][0]!==r?n.leadingZeros&&!a?(e=(i[1]||"")+i[3],Number(e)):t:Number(e)}return t}(t,n,e);{const s=D.exec(n);if(s){const r=s[1]||"",o=s[2];let a=(i=s[3])&&-1!==i.indexOf(".")?("."===(i=i.replace(/0+$/,""))?i="0":"."===i[0]?i="0"+i:"."===i[i.length-1]&&(i=i.substring(0,i.length-1)),i):i;const l=r?"."===t[o.length+1]:"."===t[o.length];if(!e.leadingZeros&&(o.length>1||1===o.length&&!l))return t;{const i=Number(n),s=String(i);if(0===i||-0===i)return i;if(-1!==s.search(/[eE]/))return e.eNotation?i:t;if(-1!==n.indexOf("."))return"0"===s||s===a||s===`${r}${a}`?i:t;let l=o?a:n;return o?l===s||r+l===s?i:t:l===s||l===r+s?i:t}}return t}var i}(t,n)}return void 0!==t?t:""}const K=T.getMetaDataSymbol();function Q(t,e){return tt(t,e)}function tt(t,e,n){let i;const s={};for(let r=0;r<t.length;r++){const o=t[r],a=et(o);let l="";if(l=void 0===n?a:n+"."+a,a===e.textNodeName)void 0===i?i=o[a]:i+=""+o[a];else{if(void 0===a)continue;if(o[a]){let t=tt(o[a],e,l);const n=it(t,e);void 0!==o[K]&&(t[K]=o[K]),o[":@"]?nt(t,o[":@"],l,e):1!==Object.keys(t).length||void 0===t[e.textNodeName]||e.alwaysCreateTextNode?0===Object.keys(t).length&&(e.alwaysCreateTextNode?t[e.textNodeName]="":t=""):t=t[e.textNodeName],void 0!==s[a]&&s.hasOwnProperty(a)?(Array.isArray(s[a])||(s[a]=[s[a]]),s[a].push(t)):e.isArray(a,l,n)?s[a]=[t]:s[a]=t}}}return"string"==typeof i?i.length>0&&(s[e.textNodeName]=i):void 0!==i&&(s[e.textNodeName]=i),s}function et(t){const e=Object.keys(t);for(let t=0;t<e.length;t++){const n=e[t];if(":@"!==n)return n}}function nt(t,e,n,i){if(e){const s=Object.keys(e),r=s.length;for(let o=0;o<r;o++){const r=s[o];i.isArray(r,n+"."+r,!0,!0)?t[r]=[e[r]]:t[r]=e[r]}}}function it(t,e){const{textNodeName:n}=e,i=Object.keys(t).length;return 0===i||!(1!==i||!t[n]&&"boolean"!=typeof t[n]&&0!==t[n])}class st{constructor(t){this.externalEntities={},this.options=function(t){return Object.assign({},v,t)}(t)}parse(t,e){if("string"==typeof t);else{if(!t.toString)throw new Error("XML data is accepted in String or Bytes[] form.");t=t.toString()}if(e){!0===e&&(e={});const n=a(t,e);if(!0!==n)throw Error(`${n.err.msg}:${n.err.line}:${n.err.col}`)}const n=new k(this.options);n.addExternalEntities(this.externalEntities);const i=n.parseXml(t);return this.options.preserveOrder||void 0===i?i:Q(i,this.options)}addEntity(t,e){if(-1!==e.indexOf("&"))throw new Error("Entity value can't have '&'");if(-1!==t.indexOf("&")||-1!==t.indexOf(";"))throw new Error("An entity must be set without '&' and ';'. Eg. use '#xD' for '&#xD;'");if("&"===e)throw new Error("An entity with value '&' is not permitted");this.externalEntities[t]=e}static getMetaDataSymbol(){return T.getMetaDataSymbol()}}function rt(t,e){let n="";return e.format&&e.indentBy.length>0&&(n="\n"),ot(t,e,"",n)}function ot(t,e,n,i){let s="",r=!1;for(let o=0;o<t.length;o++){const a=t[o],l=at(a);if(void 0===l)continue;let u="";if(u=0===n.length?l:`${n}.${l}`,l===e.textNodeName){let t=a[l];ut(u,e)||(t=e.tagValueProcessor(l,t),t=ht(t,e)),r&&(s+=i),s+=t,r=!1;continue}if(l===e.cdataPropName){r&&(s+=i),s+=`<![CDATA[${a[l][0][e.textNodeName]}]]>`,r=!1;continue}if(l===e.commentPropName){s+=i+`\x3c!--${a[l][0][e.textNodeName]}--\x3e`,r=!0;continue}if("?"===l[0]){const t=lt(a[":@"],e),n="?xml"===l?"":i;let o=a[l][0][e.textNodeName];o=0!==o.length?" "+o:"",s+=n+`<${l}${o}${t}?>`,r=!0;continue}let h=i;""!==h&&(h+=e.indentBy);const d=i+`<${l}${lt(a[":@"],e)}`,f=ot(a[l],e,u,h);-1!==e.unpairedTags.indexOf(l)?e.suppressUnpairedNode?s+=d+">":s+=d+"/>":f&&0!==f.length||!e.suppressEmptyNode?f&&f.endsWith(">")?s+=d+`>${f}${i}</${l}>`:(s+=d+">",f&&""!==i&&(f.includes("/>")||f.includes("</"))?s+=i+e.indentBy+f+i:s+=f,s+=`</${l}>`):s+=d+"/>",r=!0}return s}function at(t){const e=Object.keys(t);for(let n=0;n<e.length;n++){const i=e[n];if(t.hasOwnProperty(i)&&":@"!==i)return i}}function lt(t,e){let n="";if(t&&!e.ignoreAttributes)for(let i in t){if(!t.hasOwnProperty(i))continue;let s=e.attributeValueProcessor(i,t[i]);s=ht(s,e),!0===s&&e.suppressBooleanAttributes?n+=` ${i.substr(e.attributeNamePrefix.length)}`:n+=` ${i.substr(e.attributeNamePrefix.length)}="${s}"`}return n}function ut(t,e){let n=(t=t.substr(0,t.length-e.textNodeName.length-1)).substr(t.lastIndexOf(".")+1);for(let i in e.stopNodes)if(e.stopNodes[i]===t||e.stopNodes[i]==="*."+n)return!0;return!1}function ht(t,e){if(t&&t.length>0&&e.processEntities)for(let n=0;n<e.entities.length;n++){const i=e.entities[n];t=t.replace(i.regex,i.val)}return t}const dt={attributeNamePrefix:"@_",attributesGroupName:!1,textNodeName:"#text",ignoreAttributes:!0,cdataPropName:!1,format:!1,indentBy:"  ",suppressEmptyNode:!1,suppressUnpairedNode:!0,suppressBooleanAttributes:!0,tagValueProcessor:function(t,e){return e},attributeValueProcessor:function(t,e){return e},preserveOrder:!1,commentPropName:!1,unpairedTags:[],entities:[{regex:new RegExp("&","g"),val:"&amp;"},{regex:new RegExp(">","g"),val:"&gt;"},{regex:new RegExp("<","g"),val:"&lt;"},{regex:new RegExp("'","g"),val:"&apos;"},{regex:new RegExp('"',"g"),val:"&quot;"}],processEntities:!0,stopNodes:[],oneListGroup:!1};function ft(t){this.options=Object.assign({},dt,t),!0===this.options.ignoreAttributes||this.options.attributesGroupName?this.isAttribute=function(){return!1}:(this.ignoreAttributesFn=_(this.options.ignoreAttributes),this.attrPrefixLen=this.options.attributeNamePrefix.length,this.isAttribute=gt),this.processTextOrObjNode=ct,this.options.format?(this.indentate=pt,this.tagEndChar=">\n",this.newLine="\n"):(this.indentate=function(){return""},this.tagEndChar=">",this.newLine="")}function ct(t,e,n,i){const s=this.j2x(t,n+1,i.concat(e));return void 0!==t[this.options.textNodeName]&&1===Object.keys(t).length?this.buildTextValNode(t[this.options.textNodeName],e,s.attrStr,n):this.buildObjectNode(s.val,e,s.attrStr,n)}function pt(t){return this.options.indentBy.repeat(t)}function gt(t){return!(!t.startsWith(this.options.attributeNamePrefix)||t===this.options.textNodeName)&&t.substr(this.attrPrefixLen)}ft.prototype.build=function(t){return this.options.preserveOrder?rt(t,this.options):(Array.isArray(t)&&this.options.arrayNodeName&&this.options.arrayNodeName.length>1&&(t={[this.options.arrayNodeName]:t}),this.j2x(t,0,[]).val)},ft.prototype.j2x=function(t,e,n){let i="",s="";const r=n.join(".");for(let o in t)if(Object.prototype.hasOwnProperty.call(t,o))if(void 0===t[o])this.isAttribute(o)&&(s+="");else if(null===t[o])this.isAttribute(o)||o===this.options.cdataPropName?s+="":"?"===o[0]?s+=this.indentate(e)+"<"+o+"?"+this.tagEndChar:s+=this.indentate(e)+"<"+o+"/"+this.tagEndChar;else if(t[o]instanceof Date)s+=this.buildTextValNode(t[o],o,"",e);else if("object"!=typeof t[o]){const n=this.isAttribute(o);if(n&&!this.ignoreAttributesFn(n,r))i+=this.buildAttrPairStr(n,""+t[o]);else if(!n)if(o===this.options.textNodeName){let e=this.options.tagValueProcessor(o,""+t[o]);s+=this.replaceEntitiesValue(e)}else s+=this.buildTextValNode(t[o],o,"",e)}else if(Array.isArray(t[o])){const i=t[o].length;let r="",a="";for(let l=0;l<i;l++){const i=t[o][l];if(void 0===i);else if(null===i)"?"===o[0]?s+=this.indentate(e)+"<"+o+"?"+this.tagEndChar:s+=this.indentate(e)+"<"+o+"/"+this.tagEndChar;else if("object"==typeof i)if(this.options.oneListGroup){const t=this.j2x(i,e+1,n.concat(o));r+=t.val,this.options.attributesGroupName&&i.hasOwnProperty(this.options.attributesGroupName)&&(a+=t.attrStr)}else r+=this.processTextOrObjNode(i,o,e,n);else if(this.options.oneListGroup){let t=this.options.tagValueProcessor(o,i);t=this.replaceEntitiesValue(t),r+=t}else r+=this.buildTextValNode(i,o,"",e)}this.options.oneListGroup&&(r=this.buildObjectNode(r,o,a,e)),s+=r}else if(this.options.attributesGroupName&&o===this.options.attributesGroupName){const e=Object.keys(t[o]),n=e.length;for(let s=0;s<n;s++)i+=this.buildAttrPairStr(e[s],""+t[o][e[s]])}else s+=this.processTextOrObjNode(t[o],o,e,n);return{attrStr:i,val:s}},ft.prototype.buildAttrPairStr=function(t,e){return e=this.options.attributeValueProcessor(t,""+e),e=this.replaceEntitiesValue(e),this.options.suppressBooleanAttributes&&"true"===e?" "+t:" "+t+'="'+e+'"'},ft.prototype.buildObjectNode=function(t,e,n,i){if(""===t)return"?"===e[0]?this.indentate(i)+"<"+e+n+"?"+this.tagEndChar:this.indentate(i)+"<"+e+n+this.closeTag(e)+this.tagEndChar;{let s="</"+e+this.tagEndChar,r="";return"?"===e[0]&&(r="?",s=""),!n&&""!==n||-1!==t.indexOf("<")?!1!==this.options.commentPropName&&e===this.options.commentPropName&&0===r.length?this.indentate(i)+`\x3c!--${t}--\x3e`+this.newLine:this.indentate(i)+"<"+e+n+r+this.tagEndChar+t+this.indentate(i)+s:this.indentate(i)+"<"+e+n+r+">"+t+s}},ft.prototype.closeTag=function(t){let e="";return-1!==this.options.unpairedTags.indexOf(t)?this.options.suppressUnpairedNode||(e="/"):e=this.options.suppressEmptyNode?"/":`></${t}`,e},ft.prototype.buildTextValNode=function(t,e,n,i){if(!1!==this.options.cdataPropName&&e===this.options.cdataPropName)return this.indentate(i)+`<![CDATA[${t}]]>`+this.newLine;if(!1!==this.options.commentPropName&&e===this.options.commentPropName)return this.indentate(i)+`\x3c!--${t}--\x3e`+this.newLine;if("?"===e[0])return this.indentate(i)+"<"+e+n+"?"+this.tagEndChar;{let s=this.options.tagValueProcessor(e,t);return s=this.replaceEntitiesValue(s),""===s?this.indentate(i)+"<"+e+n+this.closeTag(e)+this.tagEndChar:this.indentate(i)+"<"+e+n+">"+s+"</"+e+this.tagEndChar}},ft.prototype.replaceEntitiesValue=function(t){if(t&&t.length>0&&this.options.processEntities)for(let e=0;e<this.options.entities.length;e++){const n=this.options.entities[e];t=t.replace(n.regex,n.val)}return t};const mt={validate:a};module.exports=e})();
+
+/***/ }),
+
 /***/ 7413:
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/client-s3","description":"AWS SDK for JavaScript S3 Client for Node.js, Browser and React Native","version":"3.821.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"node ../../scripts/compilation/inline client-s3","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo s3","test":"yarn g:vitest run","test:browser":"node ./test/browser-build/esbuild && yarn g:vitest run -c vitest.config.browser.ts","test:browser:watch":"node ./test/browser-build/esbuild && yarn g:vitest watch -c vitest.config.browser.ts","test:e2e":"yarn g:vitest run -c vitest.config.e2e.ts && yarn test:browser","test:e2e:watch":"yarn g:vitest watch -c vitest.config.e2e.ts","test:integration":"yarn g:vitest run -c vitest.config.integ.ts","test:integration:watch":"yarn g:vitest watch -c vitest.config.integ.ts","test:watch":"yarn g:vitest watch"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha1-browser":"5.2.0","@aws-crypto/sha256-browser":"5.2.0","@aws-crypto/sha256-js":"5.2.0","@aws-sdk/core":"3.821.0","@aws-sdk/credential-provider-node":"3.821.0","@aws-sdk/middleware-bucket-endpoint":"3.821.0","@aws-sdk/middleware-expect-continue":"3.821.0","@aws-sdk/middleware-flexible-checksums":"3.821.0","@aws-sdk/middleware-host-header":"3.821.0","@aws-sdk/middleware-location-constraint":"3.821.0","@aws-sdk/middleware-logger":"3.821.0","@aws-sdk/middleware-recursion-detection":"3.821.0","@aws-sdk/middleware-sdk-s3":"3.821.0","@aws-sdk/middleware-ssec":"3.821.0","@aws-sdk/middleware-user-agent":"3.821.0","@aws-sdk/region-config-resolver":"3.821.0","@aws-sdk/signature-v4-multi-region":"3.821.0","@aws-sdk/types":"3.821.0","@aws-sdk/util-endpoints":"3.821.0","@aws-sdk/util-user-agent-browser":"3.821.0","@aws-sdk/util-user-agent-node":"3.821.0","@aws-sdk/xml-builder":"3.821.0","@smithy/config-resolver":"^4.1.4","@smithy/core":"^3.5.1","@smithy/eventstream-serde-browser":"^4.0.4","@smithy/eventstream-serde-config-resolver":"^4.1.2","@smithy/eventstream-serde-node":"^4.0.4","@smithy/fetch-http-handler":"^5.0.4","@smithy/hash-blob-browser":"^4.0.4","@smithy/hash-node":"^4.0.4","@smithy/hash-stream-node":"^4.0.4","@smithy/invalid-dependency":"^4.0.4","@smithy/md5-js":"^4.0.4","@smithy/middleware-content-length":"^4.0.4","@smithy/middleware-endpoint":"^4.1.9","@smithy/middleware-retry":"^4.1.10","@smithy/middleware-serde":"^4.0.8","@smithy/middleware-stack":"^4.0.4","@smithy/node-config-provider":"^4.1.3","@smithy/node-http-handler":"^4.0.6","@smithy/protocol-http":"^5.1.2","@smithy/smithy-client":"^4.4.1","@smithy/types":"^4.3.1","@smithy/url-parser":"^4.0.4","@smithy/util-base64":"^4.0.0","@smithy/util-body-length-browser":"^4.0.0","@smithy/util-body-length-node":"^4.0.0","@smithy/util-defaults-mode-browser":"^4.0.17","@smithy/util-defaults-mode-node":"^4.0.17","@smithy/util-endpoints":"^3.0.6","@smithy/util-middleware":"^4.0.4","@smithy/util-retry":"^4.0.5","@smithy/util-stream":"^4.2.2","@smithy/util-utf8":"^4.0.0","@smithy/util-waiter":"^4.0.5","tslib":"^2.6.2"},"devDependencies":{"@aws-sdk/signature-v4-crt":"3.821.0","@tsconfig/node18":"18.2.4","@types/node":"^18.19.69","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typescript":"~5.8.3"},"engines":{"node":">=18.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-s3","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-s3"}}');
+module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/client-s3","description":"AWS SDK for JavaScript S3 Client for Node.js, Browser and React Native","version":"3.844.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"node ../../scripts/compilation/inline client-s3","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo s3","test":"yarn g:vitest run","test:browser":"node ./test/browser-build/esbuild && yarn g:vitest run -c vitest.config.browser.ts","test:browser:watch":"node ./test/browser-build/esbuild && yarn g:vitest watch -c vitest.config.browser.ts","test:e2e":"yarn g:vitest run -c vitest.config.e2e.ts && yarn test:browser","test:e2e:watch":"yarn g:vitest watch -c vitest.config.e2e.ts","test:integration":"yarn g:vitest run -c vitest.config.integ.ts","test:integration:watch":"yarn g:vitest watch -c vitest.config.integ.ts","test:watch":"yarn g:vitest watch"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha1-browser":"5.2.0","@aws-crypto/sha256-browser":"5.2.0","@aws-crypto/sha256-js":"5.2.0","@aws-sdk/core":"3.844.0","@aws-sdk/credential-provider-node":"3.844.0","@aws-sdk/middleware-bucket-endpoint":"3.840.0","@aws-sdk/middleware-expect-continue":"3.840.0","@aws-sdk/middleware-flexible-checksums":"3.844.0","@aws-sdk/middleware-host-header":"3.840.0","@aws-sdk/middleware-location-constraint":"3.840.0","@aws-sdk/middleware-logger":"3.840.0","@aws-sdk/middleware-recursion-detection":"3.840.0","@aws-sdk/middleware-sdk-s3":"3.844.0","@aws-sdk/middleware-ssec":"3.840.0","@aws-sdk/middleware-user-agent":"3.844.0","@aws-sdk/region-config-resolver":"3.840.0","@aws-sdk/signature-v4-multi-region":"3.844.0","@aws-sdk/types":"3.840.0","@aws-sdk/util-endpoints":"3.844.0","@aws-sdk/util-user-agent-browser":"3.840.0","@aws-sdk/util-user-agent-node":"3.844.0","@aws-sdk/xml-builder":"3.821.0","@smithy/config-resolver":"^4.1.4","@smithy/core":"^3.7.0","@smithy/eventstream-serde-browser":"^4.0.4","@smithy/eventstream-serde-config-resolver":"^4.1.2","@smithy/eventstream-serde-node":"^4.0.4","@smithy/fetch-http-handler":"^5.1.0","@smithy/hash-blob-browser":"^4.0.4","@smithy/hash-node":"^4.0.4","@smithy/hash-stream-node":"^4.0.4","@smithy/invalid-dependency":"^4.0.4","@smithy/md5-js":"^4.0.4","@smithy/middleware-content-length":"^4.0.4","@smithy/middleware-endpoint":"^4.1.14","@smithy/middleware-retry":"^4.1.15","@smithy/middleware-serde":"^4.0.8","@smithy/middleware-stack":"^4.0.4","@smithy/node-config-provider":"^4.1.3","@smithy/node-http-handler":"^4.1.0","@smithy/protocol-http":"^5.1.2","@smithy/smithy-client":"^4.4.6","@smithy/types":"^4.3.1","@smithy/url-parser":"^4.0.4","@smithy/util-base64":"^4.0.0","@smithy/util-body-length-browser":"^4.0.0","@smithy/util-body-length-node":"^4.0.0","@smithy/util-defaults-mode-browser":"^4.0.22","@smithy/util-defaults-mode-node":"^4.0.22","@smithy/util-endpoints":"^3.0.6","@smithy/util-middleware":"^4.0.4","@smithy/util-retry":"^4.0.6","@smithy/util-stream":"^4.2.3","@smithy/util-utf8":"^4.0.0","@smithy/util-waiter":"^4.0.6","@types/uuid":"^9.0.1","tslib":"^2.6.2","uuid":"^9.0.1"},"devDependencies":{"@aws-sdk/signature-v4-crt":"3.844.0","@tsconfig/node18":"18.2.4","@types/node":"^18.19.69","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typescript":"~5.8.3"},"engines":{"node":">=18.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-s3","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-s3"}}');
 
 /***/ }),
 
@@ -71576,7 +70944,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/client-s3","descript
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/client-sso","description":"AWS SDK for JavaScript Sso Client for Node.js, Browser and React Native","version":"3.821.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"node ../../scripts/compilation/inline client-sso","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo sso"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"5.2.0","@aws-crypto/sha256-js":"5.2.0","@aws-sdk/core":"3.821.0","@aws-sdk/middleware-host-header":"3.821.0","@aws-sdk/middleware-logger":"3.821.0","@aws-sdk/middleware-recursion-detection":"3.821.0","@aws-sdk/middleware-user-agent":"3.821.0","@aws-sdk/region-config-resolver":"3.821.0","@aws-sdk/types":"3.821.0","@aws-sdk/util-endpoints":"3.821.0","@aws-sdk/util-user-agent-browser":"3.821.0","@aws-sdk/util-user-agent-node":"3.821.0","@smithy/config-resolver":"^4.1.4","@smithy/core":"^3.5.1","@smithy/fetch-http-handler":"^5.0.4","@smithy/hash-node":"^4.0.4","@smithy/invalid-dependency":"^4.0.4","@smithy/middleware-content-length":"^4.0.4","@smithy/middleware-endpoint":"^4.1.9","@smithy/middleware-retry":"^4.1.10","@smithy/middleware-serde":"^4.0.8","@smithy/middleware-stack":"^4.0.4","@smithy/node-config-provider":"^4.1.3","@smithy/node-http-handler":"^4.0.6","@smithy/protocol-http":"^5.1.2","@smithy/smithy-client":"^4.4.1","@smithy/types":"^4.3.1","@smithy/url-parser":"^4.0.4","@smithy/util-base64":"^4.0.0","@smithy/util-body-length-browser":"^4.0.0","@smithy/util-body-length-node":"^4.0.0","@smithy/util-defaults-mode-browser":"^4.0.17","@smithy/util-defaults-mode-node":"^4.0.17","@smithy/util-endpoints":"^3.0.6","@smithy/util-middleware":"^4.0.4","@smithy/util-retry":"^4.0.5","@smithy/util-utf8":"^4.0.0","tslib":"^2.6.2"},"devDependencies":{"@tsconfig/node18":"18.2.4","@types/node":"^18.19.69","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typescript":"~5.8.3"},"engines":{"node":">=18.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sso","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sso"}}');
+module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/client-sso","description":"AWS SDK for JavaScript Sso Client for Node.js, Browser and React Native","version":"3.844.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"node ../../scripts/compilation/inline client-sso","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo sso"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"5.2.0","@aws-crypto/sha256-js":"5.2.0","@aws-sdk/core":"3.844.0","@aws-sdk/middleware-host-header":"3.840.0","@aws-sdk/middleware-logger":"3.840.0","@aws-sdk/middleware-recursion-detection":"3.840.0","@aws-sdk/middleware-user-agent":"3.844.0","@aws-sdk/region-config-resolver":"3.840.0","@aws-sdk/types":"3.840.0","@aws-sdk/util-endpoints":"3.844.0","@aws-sdk/util-user-agent-browser":"3.840.0","@aws-sdk/util-user-agent-node":"3.844.0","@smithy/config-resolver":"^4.1.4","@smithy/core":"^3.7.0","@smithy/fetch-http-handler":"^5.1.0","@smithy/hash-node":"^4.0.4","@smithy/invalid-dependency":"^4.0.4","@smithy/middleware-content-length":"^4.0.4","@smithy/middleware-endpoint":"^4.1.14","@smithy/middleware-retry":"^4.1.15","@smithy/middleware-serde":"^4.0.8","@smithy/middleware-stack":"^4.0.4","@smithy/node-config-provider":"^4.1.3","@smithy/node-http-handler":"^4.1.0","@smithy/protocol-http":"^5.1.2","@smithy/smithy-client":"^4.4.6","@smithy/types":"^4.3.1","@smithy/url-parser":"^4.0.4","@smithy/util-base64":"^4.0.0","@smithy/util-body-length-browser":"^4.0.0","@smithy/util-body-length-node":"^4.0.0","@smithy/util-defaults-mode-browser":"^4.0.22","@smithy/util-defaults-mode-node":"^4.0.22","@smithy/util-endpoints":"^3.0.6","@smithy/util-middleware":"^4.0.4","@smithy/util-retry":"^4.0.6","@smithy/util-utf8":"^4.0.0","tslib":"^2.6.2"},"devDependencies":{"@tsconfig/node18":"18.2.4","@types/node":"^18.19.69","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typescript":"~5.8.3"},"engines":{"node":">=18.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sso","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sso"}}');
 
 /***/ }),
 
@@ -71584,7 +70952,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/client-sso","descrip
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/nested-clients","version":"3.821.0","description":"Nested clients for AWS SDK packages.","main":"./dist-cjs/index.js","module":"./dist-es/index.js","types":"./dist-types/index.d.ts","scripts":{"build":"yarn lint && concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"node ../../scripts/compilation/inline nested-clients","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","lint":"node ../../scripts/validation/submodules-linter.js --pkg nested-clients","test":"yarn g:vitest run","test:watch":"yarn g:vitest watch"},"engines":{"node":">=18.0.0"},"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","dependencies":{"@aws-crypto/sha256-browser":"5.2.0","@aws-crypto/sha256-js":"5.2.0","@aws-sdk/core":"3.821.0","@aws-sdk/middleware-host-header":"3.821.0","@aws-sdk/middleware-logger":"3.821.0","@aws-sdk/middleware-recursion-detection":"3.821.0","@aws-sdk/middleware-user-agent":"3.821.0","@aws-sdk/region-config-resolver":"3.821.0","@aws-sdk/types":"3.821.0","@aws-sdk/util-endpoints":"3.821.0","@aws-sdk/util-user-agent-browser":"3.821.0","@aws-sdk/util-user-agent-node":"3.821.0","@smithy/config-resolver":"^4.1.4","@smithy/core":"^3.5.1","@smithy/fetch-http-handler":"^5.0.4","@smithy/hash-node":"^4.0.4","@smithy/invalid-dependency":"^4.0.4","@smithy/middleware-content-length":"^4.0.4","@smithy/middleware-endpoint":"^4.1.9","@smithy/middleware-retry":"^4.1.10","@smithy/middleware-serde":"^4.0.8","@smithy/middleware-stack":"^4.0.4","@smithy/node-config-provider":"^4.1.3","@smithy/node-http-handler":"^4.0.6","@smithy/protocol-http":"^5.1.2","@smithy/smithy-client":"^4.4.1","@smithy/types":"^4.3.1","@smithy/url-parser":"^4.0.4","@smithy/util-base64":"^4.0.0","@smithy/util-body-length-browser":"^4.0.0","@smithy/util-body-length-node":"^4.0.0","@smithy/util-defaults-mode-browser":"^4.0.17","@smithy/util-defaults-mode-node":"^4.0.17","@smithy/util-endpoints":"^3.0.6","@smithy/util-middleware":"^4.0.4","@smithy/util-retry":"^4.0.5","@smithy/util-utf8":"^4.0.0","tslib":"^2.6.2"},"devDependencies":{"concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typescript":"~5.8.3"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["./sso-oidc.d.ts","./sso-oidc.js","./sts.d.ts","./sts.js","dist-*/**"],"browser":{"./dist-es/submodules/sso-oidc/runtimeConfig":"./dist-es/submodules/sso-oidc/runtimeConfig.browser","./dist-es/submodules/sts/runtimeConfig":"./dist-es/submodules/sts/runtimeConfig.browser"},"react-native":{},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/packages/nested-clients","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"packages/nested-clients"},"exports":{"./sso-oidc":{"types":"./dist-types/submodules/sso-oidc/index.d.ts","module":"./dist-es/submodules/sso-oidc/index.js","node":"./dist-cjs/submodules/sso-oidc/index.js","import":"./dist-es/submodules/sso-oidc/index.js","require":"./dist-cjs/submodules/sso-oidc/index.js"},"./sts":{"types":"./dist-types/submodules/sts/index.d.ts","module":"./dist-es/submodules/sts/index.js","node":"./dist-cjs/submodules/sts/index.js","import":"./dist-es/submodules/sts/index.js","require":"./dist-cjs/submodules/sts/index.js"}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/nested-clients","version":"3.844.0","description":"Nested clients for AWS SDK packages.","main":"./dist-cjs/index.js","module":"./dist-es/index.js","types":"./dist-types/index.d.ts","scripts":{"build":"yarn lint && concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"node ../../scripts/compilation/inline nested-clients","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","lint":"node ../../scripts/validation/submodules-linter.js --pkg nested-clients","test":"yarn g:vitest run","test:watch":"yarn g:vitest watch"},"engines":{"node":">=18.0.0"},"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","dependencies":{"@aws-crypto/sha256-browser":"5.2.0","@aws-crypto/sha256-js":"5.2.0","@aws-sdk/core":"3.844.0","@aws-sdk/middleware-host-header":"3.840.0","@aws-sdk/middleware-logger":"3.840.0","@aws-sdk/middleware-recursion-detection":"3.840.0","@aws-sdk/middleware-user-agent":"3.844.0","@aws-sdk/region-config-resolver":"3.840.0","@aws-sdk/types":"3.840.0","@aws-sdk/util-endpoints":"3.844.0","@aws-sdk/util-user-agent-browser":"3.840.0","@aws-sdk/util-user-agent-node":"3.844.0","@smithy/config-resolver":"^4.1.4","@smithy/core":"^3.7.0","@smithy/fetch-http-handler":"^5.1.0","@smithy/hash-node":"^4.0.4","@smithy/invalid-dependency":"^4.0.4","@smithy/middleware-content-length":"^4.0.4","@smithy/middleware-endpoint":"^4.1.14","@smithy/middleware-retry":"^4.1.15","@smithy/middleware-serde":"^4.0.8","@smithy/middleware-stack":"^4.0.4","@smithy/node-config-provider":"^4.1.3","@smithy/node-http-handler":"^4.1.0","@smithy/protocol-http":"^5.1.2","@smithy/smithy-client":"^4.4.6","@smithy/types":"^4.3.1","@smithy/url-parser":"^4.0.4","@smithy/util-base64":"^4.0.0","@smithy/util-body-length-browser":"^4.0.0","@smithy/util-body-length-node":"^4.0.0","@smithy/util-defaults-mode-browser":"^4.0.22","@smithy/util-defaults-mode-node":"^4.0.22","@smithy/util-endpoints":"^3.0.6","@smithy/util-middleware":"^4.0.4","@smithy/util-retry":"^4.0.6","@smithy/util-utf8":"^4.0.0","tslib":"^2.6.2"},"devDependencies":{"concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typescript":"~5.8.3"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["./sso-oidc.d.ts","./sso-oidc.js","./sts.d.ts","./sts.js","dist-*/**"],"browser":{"./dist-es/submodules/sso-oidc/runtimeConfig":"./dist-es/submodules/sso-oidc/runtimeConfig.browser","./dist-es/submodules/sts/runtimeConfig":"./dist-es/submodules/sts/runtimeConfig.browser"},"react-native":{},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/packages/nested-clients","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"packages/nested-clients"},"exports":{"./sso-oidc":{"types":"./dist-types/submodules/sso-oidc/index.d.ts","module":"./dist-es/submodules/sso-oidc/index.js","node":"./dist-cjs/submodules/sso-oidc/index.js","import":"./dist-es/submodules/sso-oidc/index.js","require":"./dist-cjs/submodules/sso-oidc/index.js"},"./sts":{"types":"./dist-types/submodules/sts/index.d.ts","module":"./dist-es/submodules/sts/index.js","node":"./dist-cjs/submodules/sts/index.js","import":"./dist-es/submodules/sts/index.js","require":"./dist-cjs/submodules/sts/index.js"}}}');
 
 /***/ })
 
