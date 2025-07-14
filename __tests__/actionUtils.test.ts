@@ -96,7 +96,7 @@ test("getInputAsArray returns empty array if not required and missing", () => {
 test("getInputAsArray throws error if required and missing", () => {
     expect(() =>
         actionUtils.getInputAsArray("foo", { required: true })
-    ).toThrowError();
+    ).toThrow();
 });
 
 test("getInputAsArray handles single line correctly", () => {
@@ -152,7 +152,7 @@ test("getInputAsInt returns undefined if input is invalid or NaN", () => {
 test("getInputAsInt throws if required and value missing", () => {
     expect(() =>
         actionUtils.getInputAsInt("undefined", { required: true })
-    ).toThrowError();
+    ).toThrow();
 });
 
 test("getInputAsBool returns false if input not set", () => {
@@ -172,5 +172,5 @@ test("getInputAsBool returns false if input is invalid or NaN", () => {
 test("getInputAsBool throws if required and value missing", () => {
     expect(() =>
         actionUtils.getInputAsBool("undefined2", { required: true })
-    ).toThrowError();
+    ).toThrow();
 });
