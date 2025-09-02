@@ -27,7 +27,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
     - name: Setup Node.js 22.x
       uses: actions/setup-node@v4
       with:
@@ -71,7 +71,7 @@ jobs:
         aws --no-cli-pager --endpoint-url=http://127.0.0.1:4566 s3api create-bucket --bucket tmp-cache-bucket
 
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
     - name: Generate files in working directory
       shell: bash
       run: __tests__/create-cache-files.sh ${{ runner.os }} test-cache
@@ -113,7 +113,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: create bucket
       env:
