@@ -1,6 +1,6 @@
 {
 	"name": "Node.js & TypeScript",
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:16-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:22-bookworm",
 	// Features to add to the dev container. More info: https://containers.dev/implementors/features.
 	// "features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
