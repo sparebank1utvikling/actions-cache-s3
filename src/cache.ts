@@ -132,6 +132,15 @@ async function restoreCacheS3(
             return undefined;
         }
 
+        const isExactMatch = cacheEntry.cacheKey === primaryKey;
+        if (isExactMatch) {
+            core.info(`Cache hit on primary key: ${primaryKey}`);
+        } else {
+            core.info(
+                `Primary key miss: ${primaryKey}. Restored from fallback key: ${cacheEntry.cacheKey}`
+            );
+        }
+
         if (options?.lookupOnly) {
             core.info("Lookup only - skipping download");
             return cacheEntry.cacheKey;
@@ -168,7 +177,7 @@ async function restoreCacheS3(
             return cacheEntry.cacheKey;
         } else {
             const info = await downloadAndExtractCacheFromS3Stream(
-                primaryKey,
+                cacheEntry.cacheKey!,
                 s3Options,
                 s3BucketName,
                 compressionMethod

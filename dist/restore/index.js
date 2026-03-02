@@ -66777,6 +66777,13 @@ function restoreCacheS3(paths, primaryKey, s3Options, s3BucketName, restoreKeys,
                 // Cache not found
                 return undefined;
             }
+            const isExactMatch = cacheEntry.cacheKey === primaryKey;
+            if (isExactMatch) {
+                core.info(`Cache hit on primary key: ${primaryKey}`);
+            }
+            else {
+                core.info(`Primary key miss: ${primaryKey}. Restored from fallback key: ${cacheEntry.cacheKey}`);
+            }
             if (options === null || options === void 0 ? void 0 : options.lookupOnly) {
                 core.info("Lookup only - skipping download");
                 return cacheEntry.cacheKey;
@@ -66796,7 +66803,7 @@ function restoreCacheS3(paths, primaryKey, s3Options, s3BucketName, restoreKeys,
                 return cacheEntry.cacheKey;
             }
             else {
-                const info = yield (0, downloadUtils_1.downloadAndExtractCacheFromS3Stream)(primaryKey, s3Options, s3BucketName, compressionMethod);
+                const info = yield (0, downloadUtils_1.downloadAndExtractCacheFromS3Stream)(cacheEntry.cacheKey, s3Options, s3BucketName, compressionMethod);
                 const size = Math.round(((_b = info.size) !== null && _b !== void 0 ? _b : 0) / (1024 * 1024));
                 core.info(`Cache restored successfully for key: ${info.key} of size: ${size} MB (${info.size} B) and last modified: ${(_c = info.lastModified) === null || _c === void 0 ? void 0 : _c.toISOString()}`);
                 return cacheEntry.cacheKey;
