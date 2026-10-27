@@ -1,4 +1,4 @@
-import { restoreCache } from "cache";
+import { restoreCache } from "./cache";
 import * as core from "@actions/core";
 
 import { Events, Inputs, Outputs, State } from "./constants";
