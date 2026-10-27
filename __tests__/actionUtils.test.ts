@@ -1,15 +1,20 @@
-import * as core from "@actions/core";
+import { jest } from "@jest/globals";
 
 import { Events, RefKey } from "../src/constants";
-import * as actionUtils from "../src/utils/actionUtils";
 import * as testUtils from "../src/utils/testUtils";
+import { automock } from "./mockModules";
 
-jest.mock("@actions/core");
-jest.mock("../src/cache");
+const actualCore = await import("@actions/core");
+jest.unstable_mockModule("@actions/core", () => automock(actualCore));
+const actualCache = await import("../src/cache");
+jest.unstable_mockModule("../src/cache", () => automock(actualCache));
+
+const core = await import("@actions/core");
+const actionUtils = await import("../src/utils/actionUtils");
 
 beforeAll(() => {
-    jest.spyOn(core, "getInput").mockImplementation((name, options) => {
-        return jest.requireActual("@actions/core").getInput(name, options);
+    jest.mocked(core.getInput).mockImplementation((name, options) => {
+        return actualCore.getInput(name, options);
     });
 });
 
@@ -63,7 +68,7 @@ test("isExactKeyMatch with same key and different casing returns true", () => {
 test("logWarning logs a message with a warning prefix", () => {
     const message = "A warning occurred.";
 
-    const infoMock = jest.spyOn(core, "info");
+    const infoMock = jest.mocked(core.info);
 
     actionUtils.logWarning(message);
 

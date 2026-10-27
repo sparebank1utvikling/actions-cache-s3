@@ -1,14 +1,16 @@
-require("nock").disableNetConnect();
+import nock from "nock";
 
-module.exports = {
+nock.disableNetConnect();
+
+export default {
     clearMocks: true,
+    extensionsToTreatAsEsm: [".ts"],
     moduleFileExtensions: ["js", "ts"],
-    modulePaths: ["<rootDir>/src"],
     testEnvironment: "node",
     testMatch: ["**/*.test.ts"],
     testRunner: "jest-circus/runner",
     transform: {
-        "^.+\\.ts$": "ts-jest"
+        "^.+\\.ts$": ["ts-jest", { useESM: true }]
     },
     verbose: true
 };

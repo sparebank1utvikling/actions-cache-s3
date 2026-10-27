@@ -1,14 +1,31 @@
-import { restoreCache } from "../src/cache";
-import * as cacheClient from "../src/cache/internal/cacheClient";
-import * as downloadUtils from "../src/cache/internal/downloadUtils";
-import * as cacheUtils from "../src/cache/internal/cacheUtils";
-import * as tar from "../src/cache/internal/tar";
-import { CompressionMethod } from "../src/cache/internal/constants";
-import { S3ClientConfig } from "@aws-sdk/client-s3";
+import { jest } from "@jest/globals";
+import type { S3ClientConfig } from "@aws-sdk/client-s3";
 
-jest.mock("../src/cache/internal/cacheClient");
-jest.mock("../src/cache/internal/downloadUtils");
-jest.mock("../src/cache/internal/cacheUtils");
+import { CompressionMethod } from "../src/cache/internal/constants";
+import { automock, callThrough, resetCallThrough } from "./mockModules";
+
+const actualCacheUtils = await import("../src/cache/internal/cacheUtils");
+jest.unstable_mockModule("../src/cache/internal/cacheUtils", () =>
+    automock(actualCacheUtils)
+);
+const actualDownloadUtils = await import("../src/cache/internal/downloadUtils");
+jest.unstable_mockModule("../src/cache/internal/downloadUtils", () =>
+    automock(actualDownloadUtils)
+);
+const actualCacheClient = await import("../src/cache/internal/cacheClient");
+jest.unstable_mockModule("../src/cache/internal/cacheClient", () =>
+    automock(actualCacheClient)
+);
+const actualTar = await import("../src/cache/internal/tar");
+jest.unstable_mockModule("../src/cache/internal/tar", () =>
+    callThrough(actualTar)
+);
+
+const cacheClient = await import("../src/cache/internal/cacheClient");
+const downloadUtils = await import("../src/cache/internal/downloadUtils");
+const cacheUtils = await import("../src/cache/internal/cacheUtils");
+const tar = await import("../src/cache/internal/tar");
+const { restoreCache } = await import("../src/cache");
 
 const s3Options: S3ClientConfig = {
     region: "eu-north-1",
@@ -29,7 +46,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-    jest.restoreAllMocks();
+    resetCallThrough();
 });
 
 test("streaming restore with fallback key uses matched key, not primary key", async () => {
@@ -131,8 +148,8 @@ test("non-streaming restore with fallback key uses matched key", async () => {
     jest.mocked(cacheClient.downloadCache).mockResolvedValue();
     jest.mocked(cacheUtils.getArchiveFileSizeInBytes).mockReturnValue(1024);
 
-    jest.spyOn(tar, "extractTar").mockResolvedValue(undefined as never);
-    jest.spyOn(tar, "listTar").mockResolvedValue(undefined as never);
+    jest.mocked(tar.extractTar).mockResolvedValue(undefined as never);
+    jest.mocked(tar.listTar).mockResolvedValue(undefined as never);
 
     const result = await restoreCache(
         ["node_modules"],
