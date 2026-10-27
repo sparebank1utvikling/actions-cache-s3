@@ -1,60 +1,59 @@
-import * as cache from "../src/cache";
-import * as core from "@actions/core";
+import { jest } from "@jest/globals";
 
 import { Events, Inputs, RefKey } from "../src/constants";
-import run from "../src/saveImpl";
-import { StateProvider } from "../src/stateProvider";
-import * as actionUtils from "../src/utils/actionUtils";
 import * as testUtils from "../src/utils/testUtils";
+import { automock } from "./mockModules";
 
-jest.mock("@actions/core");
-jest.mock("../src/cache");
-jest.mock("../src/utils/actionUtils");
+const actualCore = await import("@actions/core");
+jest.unstable_mockModule("@actions/core", () => automock(actualCore));
+const actualUtils = await import("../src/utils/actionUtils");
+jest.unstable_mockModule("../src/utils/actionUtils", () =>
+    automock(actualUtils)
+);
+const actualCache = await import("../src/cache");
+jest.unstable_mockModule("../src/cache", () => automock(actualCache));
 
-jest.spyOn(core, "info").mockImplementation(console.log);
-jest.spyOn(core, "warning").mockImplementation(console.warn);
-jest.spyOn(core, "error").mockImplementation(console.error);
-jest.spyOn(core, "debug").mockImplementation(console.debug);
+const core = await import("@actions/core");
+const cache = await import("../src/cache");
+const actionUtils = await import("../src/utils/actionUtils");
+const { default: run } = await import("../src/saveImpl");
+const { StateProvider } = await import("../src/stateProvider");
+
+jest.mocked(core.info).mockImplementation(console.log);
+jest.mocked(core.warning).mockImplementation(console.warn);
+jest.mocked(core.error).mockImplementation(console.error);
+jest.mocked(core.debug).mockImplementation(console.debug);
 
 beforeAll(() => {
-    jest.spyOn(core, "getInput").mockImplementation((name, options) => {
-        return jest.requireActual("@actions/core").getInput(name, options);
+    jest.mocked(core.getInput).mockImplementation((name, options) => {
+        return actualCore.getInput(name, options);
     });
 
-    jest.spyOn(actionUtils, "getInputAsArray").mockImplementation(
+    jest.mocked(actionUtils.getInputAsArray).mockImplementation(
         (name, options) => {
-            return jest
-                .requireActual("../src/utils/actionUtils")
-                .getInputAsArray(name, options);
+            return actualUtils.getInputAsArray(name, options);
         }
     );
 
-    jest.spyOn(actionUtils, "getInputAsInt").mockImplementation(
+    jest.mocked(actionUtils.getInputAsInt).mockImplementation(
         (name, options) => {
-            return jest
-                .requireActual("../src/utils/actionUtils")
-                .getInputAsInt(name, options);
+            return actualUtils.getInputAsInt(name, options);
         }
     );
 
-    jest.spyOn(actionUtils, "getInputAsBool").mockImplementation(
+    jest.mocked(actionUtils.getInputAsBool).mockImplementation(
         (name, options) => {
-            return jest
-                .requireActual("../src/utils/actionUtils")
-                .getInputAsBool(name, options);
+            return actualUtils.getInputAsBool(name, options);
         }
     );
 
-    jest.spyOn(actionUtils, "isExactKeyMatch").mockImplementation(
+    jest.mocked(actionUtils.isExactKeyMatch).mockImplementation(
         (key, cacheResult) => {
-            return jest
-                .requireActual("../src/utils/actionUtils")
-                .isExactKeyMatch(key, cacheResult);
+            return actualUtils.isExactKeyMatch(key, cacheResult);
         }
     );
 
-    jest.spyOn(actionUtils, "isValidEvent").mockImplementation(() => {
-        const actualUtils = jest.requireActual("../src/utils/actionUtils");
+    jest.mocked(actionUtils.isValidEvent).mockImplementation(() => {
         return actualUtils.isValidEvent();
     });
 });
@@ -72,8 +71,8 @@ afterEach(() => {
 });
 
 test("save with invalid event outputs warning", async () => {
-    const logWarningMock = jest.spyOn(actionUtils, "logWarning");
-    const failedMock = jest.spyOn(core, "setFailed");
+    const logWarningMock = jest.mocked(actionUtils.logWarning);
+    const failedMock = jest.mocked(core.setFailed);
     const invalidEvent = "commit_comment";
     process.env[Events.Key] = invalidEvent;
     delete process.env[RefKey];
@@ -85,13 +84,13 @@ test("save with invalid event outputs warning", async () => {
 });
 
 test("save with no primary key in state outputs warning", async () => {
-    const logWarningMock = jest.spyOn(actionUtils, "logWarning");
-    const failedMock = jest.spyOn(core, "setFailed");
+    const logWarningMock = jest.mocked(actionUtils.logWarning);
+    const failedMock = jest.mocked(core.setFailed);
 
     const savedCacheKey = "Linux-node-bb828da54c148048dd17899ba9fda624811cfb43";
     setupMockedState(savedCacheKey, "");
 
-    const saveCacheMock = jest.spyOn(cache, "saveCache");
+    const saveCacheMock = jest.mocked(cache.saveCache);
 
     await run(new StateProvider());
 
@@ -102,11 +101,11 @@ test("save with no primary key in state outputs warning", async () => {
 });
 
 test("save without AC available should no-op", async () => {
-    jest.spyOn(actionUtils, "isCacheFeatureAvailable").mockImplementation(
+    jest.mocked(actionUtils.isCacheFeatureAvailable).mockImplementation(
         () => false
     );
 
-    const saveCacheMock = jest.spyOn(cache, "saveCache");
+    const saveCacheMock = jest.mocked(cache.saveCache);
 
     await run(new StateProvider());
 
@@ -114,14 +113,14 @@ test("save without AC available should no-op", async () => {
 });
 
 test("save with exact match returns early", async () => {
-    const infoMock = jest.spyOn(core, "info");
-    const failedMock = jest.spyOn(core, "setFailed");
+    const infoMock = jest.mocked(core.info);
+    const failedMock = jest.mocked(core.setFailed);
 
     const primaryKey = "Linux-node-bb828da54c148048dd17899ba9fda624811cfb43";
     const savedCacheKey = primaryKey;
 
     setupMockedState(savedCacheKey, primaryKey);
-    const saveCacheMock = jest.spyOn(cache, "saveCache");
+    const saveCacheMock = jest.mocked(cache.saveCache);
 
     await run(new StateProvider());
 
@@ -133,14 +132,14 @@ test("save with exact match returns early", async () => {
 });
 
 test("save with missing input outputs warning", async () => {
-    const logWarningMock = jest.spyOn(actionUtils, "logWarning");
-    const failedMock = jest.spyOn(core, "setFailed");
+    const logWarningMock = jest.mocked(actionUtils.logWarning);
+    const failedMock = jest.mocked(core.setFailed);
 
     const primaryKey = "Linux-node-bb828da54c148048dd17899ba9fda624811cfb43";
     const savedCacheKey = "Linux-node-";
 
     setupMockedState(savedCacheKey, primaryKey);
-    const saveCacheMock = jest.spyOn(cache, "saveCache");
+    const saveCacheMock = jest.mocked(cache.saveCache);
 
     await run(new StateProvider());
 
@@ -153,8 +152,8 @@ test("save with missing input outputs warning", async () => {
 });
 
 test("save with large cache outputs warning", async () => {
-    const logWarningMock = jest.spyOn(actionUtils, "logWarning");
-    const failedMock = jest.spyOn(core, "setFailed");
+    const logWarningMock = jest.mocked(actionUtils.logWarning);
+    const failedMock = jest.mocked(core.setFailed);
 
     const primaryKey = "Linux-node-bb828da54c148048dd17899ba9fda624811cfb43";
     const savedCacheKey = "Linux-node-";
@@ -164,7 +163,7 @@ test("save with large cache outputs warning", async () => {
     testUtils.setInput(Inputs.Path, inputPath);
 
     const saveCacheMock = jest
-        .spyOn(cache, "saveCache")
+        .mocked(cache.saveCache)
         .mockImplementationOnce(() => {
             throw new Error(
                 "Cache size of ~6144 MB (6442450944 B) is over the 5GB limit, not saving cache."
@@ -194,8 +193,8 @@ test("save with large cache outputs warning", async () => {
 
 test.skip("save with reserve cache failure outputs warning", async () => {
     // TODO: Not implemented
-    const logWarningMock = jest.spyOn(actionUtils, "logWarning");
-    const failedMock = jest.spyOn(core, "setFailed");
+    const logWarningMock = jest.mocked(actionUtils.logWarning);
+    const failedMock = jest.mocked(core.setFailed);
 
     const primaryKey = "Linux-node-bb828da54c148048dd17899ba9fda624811cfb43";
     const savedCacheKey = "Linux-node-";
@@ -206,7 +205,7 @@ test.skip("save with reserve cache failure outputs warning", async () => {
     testUtils.setInput(Inputs.Path, inputPath);
 
     const saveCacheMock = jest
-        .spyOn(cache, "saveCache")
+        .mocked(cache.saveCache)
         .mockImplementationOnce(() => {
             const actualCache = jest.requireActual("@actions/cache");
             const error = new actualCache.ReserveCacheError(
@@ -237,8 +236,8 @@ test.skip("save with reserve cache failure outputs warning", async () => {
 });
 
 test("save with server error outputs warning", async () => {
-    const logWarningMock = jest.spyOn(actionUtils, "logWarning");
-    const failedMock = jest.spyOn(core, "setFailed");
+    const logWarningMock = jest.mocked(actionUtils.logWarning);
+    const failedMock = jest.mocked(core.setFailed);
 
     const primaryKey = "Linux-node-bb828da54c148048dd17899ba9fda624811cfb43";
     const savedCacheKey = "Linux-node-";
@@ -249,7 +248,7 @@ test("save with server error outputs warning", async () => {
     testUtils.setInput(Inputs.Path, inputPath);
 
     const saveCacheMock = jest
-        .spyOn(cache, "saveCache")
+        .mocked(cache.saveCache)
         .mockImplementationOnce(() => {
             throw new Error("HTTP Error Occurred");
         });
@@ -273,7 +272,7 @@ test("save with server error outputs warning", async () => {
 });
 
 test("save with valid inputs uploads a cache", async () => {
-    const failedMock = jest.spyOn(core, "setFailed");
+    const failedMock = jest.mocked(core.setFailed);
 
     const savedCacheKey = "Linux-node-";
     const primaryKey = "Linux-node-bb828da54c148048dd17899ba9fda624811cfb43";
@@ -286,7 +285,7 @@ test("save with valid inputs uploads a cache", async () => {
 
     const cacheId = 4;
     const saveCacheMock = jest
-        .spyOn(cache, "saveCache")
+        .mocked(cache.saveCache)
         .mockImplementationOnce(() => {
             return Promise.resolve(cacheId);
         });
@@ -308,7 +307,7 @@ test("save with valid inputs uploads a cache", async () => {
 });
 
 function setupMockedState(savedCacheKey: string, primaryKey: string) {
-    jest.spyOn(core, "getState")
+    jest.mocked(core.getState)
         // Cache Entry State
         .mockImplementation((key: string) => {
             if (key === "CACHE_RESULT") {

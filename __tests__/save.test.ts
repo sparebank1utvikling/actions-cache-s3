@@ -1,62 +1,62 @@
-import * as cache from "../src/cache";
-import * as core from "@actions/core";
+import { jest } from "@jest/globals";
 
 import { Events, Inputs, RefKey } from "../src/constants";
-import run from "../src/save";
-import * as actionUtils from "../src/utils/actionUtils";
 import * as testUtils from "../src/utils/testUtils";
+import { automock } from "./mockModules";
 
-jest.mock("@actions/core");
-jest.mock("../src/cache");
-jest.mock("../src/utils/actionUtils");
-jest.spyOn(core, "info").mockImplementation(console.log);
-jest.spyOn(core, "warning").mockImplementation(console.warn);
-jest.spyOn(core, "error").mockImplementation(console.error);
-jest.spyOn(core, "debug").mockImplementation(console.debug);
+const actualCore = await import("@actions/core");
+jest.unstable_mockModule("@actions/core", () => automock(actualCore));
+const actualUtils = await import("../src/utils/actionUtils");
+jest.unstable_mockModule("../src/utils/actionUtils", () =>
+    automock(actualUtils)
+);
+const actualCache = await import("../src/cache");
+jest.unstable_mockModule("../src/cache", () => automock(actualCache));
+
+const core = await import("@actions/core");
+const cache = await import("../src/cache");
+const actionUtils = await import("../src/utils/actionUtils");
+const { default: run } = await import("../src/save");
+
+jest.mocked(core.info).mockImplementation(console.log);
+jest.mocked(core.warning).mockImplementation(console.warn);
+jest.mocked(core.error).mockImplementation(console.error);
+jest.mocked(core.debug).mockImplementation(console.debug);
 
 beforeAll(() => {
-    jest.spyOn(core, "getInput").mockImplementation((name, options) => {
-        return jest.requireActual("@actions/core").getInput(name, options);
+    jest.mocked(core.getInput).mockImplementation((name, options) => {
+        return actualCore.getInput(name, options);
     });
 
-    jest.spyOn(core, "getState").mockImplementation(name => {
-        return jest.requireActual("@actions/core").getState(name);
+    jest.mocked(core.getState).mockImplementation(name => {
+        return actualCore.getState(name);
     });
 
-    jest.spyOn(actionUtils, "getInputAsArray").mockImplementation(
+    jest.mocked(actionUtils.getInputAsArray).mockImplementation(
         (name, options) => {
-            return jest
-                .requireActual("../src/utils/actionUtils")
-                .getInputAsArray(name, options);
+            return actualUtils.getInputAsArray(name, options);
         }
     );
 
-    jest.spyOn(actionUtils, "getInputAsInt").mockImplementation(
+    jest.mocked(actionUtils.getInputAsInt).mockImplementation(
         (name, options) => {
-            return jest
-                .requireActual("../src/utils/actionUtils")
-                .getInputAsInt(name, options);
+            return actualUtils.getInputAsInt(name, options);
         }
     );
 
-    jest.spyOn(actionUtils, "getInputAsBool").mockImplementation(
+    jest.mocked(actionUtils.getInputAsBool).mockImplementation(
         (name, options) => {
-            return jest
-                .requireActual("../src/utils/actionUtils")
-                .getInputAsBool(name, options);
+            return actualUtils.getInputAsBool(name, options);
         }
     );
 
-    jest.spyOn(actionUtils, "isExactKeyMatch").mockImplementation(
+    jest.mocked(actionUtils.isExactKeyMatch).mockImplementation(
         (key, cacheResult) => {
-            return jest
-                .requireActual("../src/utils/actionUtils")
-                .isExactKeyMatch(key, cacheResult);
+            return actualUtils.isExactKeyMatch(key, cacheResult);
         }
     );
 
-    jest.spyOn(actionUtils, "isValidEvent").mockImplementation(() => {
-        const actualUtils = jest.requireActual("../src/utils/actionUtils");
+    jest.mocked(actionUtils.isValidEvent).mockImplementation(() => {
         return actualUtils.isValidEvent();
     });
 });
@@ -73,12 +73,12 @@ afterEach(() => {
 });
 
 test("save with valid inputs uploads a cache", async () => {
-    const failedMock = jest.spyOn(core, "setFailed");
+    const failedMock = jest.mocked(core.setFailed);
 
     const primaryKey = "Linux-node-bb828da54c148048dd17899ba9fda624811cfb43";
     const savedCacheKey = "Linux-node-";
 
-    jest.spyOn(core, "getState")
+    jest.mocked(core.getState)
         // Cache Entry State
         .mockImplementation((key: string) => {
             if (key === "CACHE_RESULT") {
@@ -97,7 +97,7 @@ test("save with valid inputs uploads a cache", async () => {
 
     const cacheId = 4;
     const saveCacheMock = jest
-        .spyOn(cache, "saveCache")
+        .mocked(cache.saveCache)
         .mockImplementationOnce(() => {
             return Promise.resolve(cacheId);
         });

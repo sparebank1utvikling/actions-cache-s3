@@ -1,43 +1,24 @@
-import * as cache from "../src/cache";
-import * as core from "@actions/core";
+import { jest } from "@jest/globals";
 
 import { Events, RefKey } from "../src/constants";
-import { restoreRun } from "../src/restoreImpl";
-import * as actionUtils from "../src/utils/actionUtils";
 import * as testUtils from "../src/utils/testUtils";
+import { callThrough, resetCallThrough } from "./mockModules";
 
-//jest.mock("../src/utils/actionUtils");
+const actualCore = await import("@actions/core");
+jest.unstable_mockModule("@actions/core", () => callThrough(actualCore));
+const actualCache = await import("../src/cache");
+jest.unstable_mockModule("../src/cache", () => callThrough(actualCache));
+const actualUtils = await import("../src/utils/actionUtils");
+jest.unstable_mockModule("../src/utils/actionUtils", () =>
+    callThrough(actualUtils)
+);
 
-beforeAll(() => {
-    jest.spyOn(actionUtils, "isExactKeyMatch").mockImplementation(
-        (key, cacheResult) => {
-            const actualUtils = jest.requireActual("../src/utils/actionUtils");
-            return actualUtils.isExactKeyMatch(key, cacheResult);
-        }
-    );
-
-    jest.spyOn(actionUtils, "isValidEvent").mockImplementation(() => {
-        const actualUtils = jest.requireActual("../src/utils/actionUtils");
-        return actualUtils.isValidEvent();
-    });
-
-    jest.spyOn(actionUtils, "getInputAsArray").mockImplementation(
-        (name, options) => {
-            const actualUtils = jest.requireActual("../src/utils/actionUtils");
-            return actualUtils.getInputAsArray(name, options);
-        }
-    );
-
-    jest.spyOn(actionUtils, "getInputAsBool").mockImplementation(
-        (name, options) => {
-            const actualUtils = jest.requireActual("../src/utils/actionUtils");
-            return actualUtils.getInputAsBool(name, options);
-        }
-    );
-});
+const core = await import("@actions/core");
+const cache = await import("../src/cache");
+const { restoreRun } = await import("../src/restoreImpl");
 
 beforeEach(() => {
-    jest.restoreAllMocks();
+    resetCallThrough();
     process.env[Events.Key] = Events.Push;
     process.env[RefKey] = "refs/heads/feature-branch";
 });
@@ -57,11 +38,11 @@ test("restore with no cache found", async () => {
         enableCrossOsArchive: false
     });
 
-    const infoMock = jest.spyOn(core, "info");
-    const failedMock = jest.spyOn(core, "setFailed");
-    const stateMock = jest.spyOn(core, "saveState");
+    const infoMock = jest.mocked(core.info);
+    const failedMock = jest.mocked(core.setFailed);
+    const stateMock = jest.mocked(core.saveState);
     const restoreCacheMock = jest
-        .spyOn(cache, "restoreCache")
+        .mocked(cache.restoreCache)
         .mockImplementationOnce(() => {
             return Promise.resolve(undefined);
         });
@@ -102,11 +83,11 @@ test("restore with restore keys and no cache found", async () => {
         enableCrossOsArchive: false
     });
 
-    const infoMock = jest.spyOn(core, "info");
-    const failedMock = jest.spyOn(core, "setFailed");
-    const stateMock = jest.spyOn(core, "saveState");
+    const infoMock = jest.mocked(core.info);
+    const failedMock = jest.mocked(core.setFailed);
+    const stateMock = jest.mocked(core.saveState);
     const restoreCacheMock = jest
-        .spyOn(cache, "restoreCache")
+        .mocked(cache.restoreCache)
         .mockImplementationOnce(() => {
             return Promise.resolve(undefined);
         });
@@ -145,12 +126,12 @@ test("restore with cache found for key", async () => {
         enableCrossOsArchive: false
     });
 
-    const infoMock = jest.spyOn(core, "info");
-    const failedMock = jest.spyOn(core, "setFailed");
-    const stateMock = jest.spyOn(core, "saveState");
-    const setCacheHitOutputMock = jest.spyOn(core, "setOutput");
+    const infoMock = jest.mocked(core.info);
+    const failedMock = jest.mocked(core.setFailed);
+    const stateMock = jest.mocked(core.saveState);
+    const setCacheHitOutputMock = jest.mocked(core.setOutput);
     const restoreCacheMock = jest
-        .spyOn(cache, "restoreCache")
+        .mocked(cache.restoreCache)
         .mockImplementationOnce(() => {
             return Promise.resolve(key);
         });
@@ -192,12 +173,12 @@ test("restore with cache found for restore key", async () => {
         enableCrossOsArchive: false
     });
 
-    const infoMock = jest.spyOn(core, "info");
-    const failedMock = jest.spyOn(core, "setFailed");
-    const stateMock = jest.spyOn(core, "saveState");
-    const setCacheHitOutputMock = jest.spyOn(core, "setOutput");
+    const infoMock = jest.mocked(core.info);
+    const failedMock = jest.mocked(core.setFailed);
+    const stateMock = jest.mocked(core.saveState);
+    const setCacheHitOutputMock = jest.mocked(core.setOutput);
     const restoreCacheMock = jest
-        .spyOn(cache, "restoreCache")
+        .mocked(cache.restoreCache)
         .mockImplementation(() => {
             return Promise.resolve(restoreKey);
         });
@@ -240,11 +221,11 @@ test("Fail restore when fail on cache miss is enabled and primary + restore keys
         failOnCacheMiss: true
     });
 
-    const failedMock = jest.spyOn(core, "setFailed");
-    const stateMock = jest.spyOn(core, "saveState");
-    const setCacheHitOutputMock = jest.spyOn(core, "setOutput");
+    const failedMock = jest.mocked(core.setFailed);
+    const stateMock = jest.mocked(core.saveState);
+    const setCacheHitOutputMock = jest.mocked(core.setOutput);
     const restoreCacheMock = jest
-        .spyOn(cache, "restoreCache")
+        .mocked(cache.restoreCache)
         .mockImplementationOnce(() => {
             return Promise.resolve(undefined);
         });
@@ -284,12 +265,12 @@ test("restore when fail on cache miss is enabled and primary key doesn't match r
         failOnCacheMiss: true
     });
 
-    const infoMock = jest.spyOn(core, "info");
-    const failedMock = jest.spyOn(core, "setFailed");
-    const stateMock = jest.spyOn(core, "saveState");
-    const setCacheHitOutputMock = jest.spyOn(core, "setOutput");
+    const infoMock = jest.mocked(core.info);
+    const failedMock = jest.mocked(core.setFailed);
+    const stateMock = jest.mocked(core.saveState);
+    const setCacheHitOutputMock = jest.mocked(core.setOutput);
     const restoreCacheMock = jest
-        .spyOn(cache, "restoreCache")
+        .mocked(cache.restoreCache)
         .mockImplementationOnce(() => {
             return Promise.resolve(restoreKey);
         });
@@ -333,11 +314,11 @@ test("restore with fail on cache miss disabled and no cache found", async () => 
         failOnCacheMiss: false
     });
 
-    const infoMock = jest.spyOn(core, "info");
-    const failedMock = jest.spyOn(core, "setFailed");
-    const stateMock = jest.spyOn(core, "saveState");
+    const infoMock = jest.mocked(core.info);
+    const failedMock = jest.mocked(core.setFailed);
+    const stateMock = jest.mocked(core.saveState);
     const restoreCacheMock = jest
-        .spyOn(cache, "restoreCache")
+        .mocked(cache.restoreCache)
         .mockImplementationOnce(() => {
             return Promise.resolve(undefined);
         });
